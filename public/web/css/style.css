@@ -89,7 +89,9 @@ label {
 }
 
 /*-- header Lists --*/
-
+.header-right ul{
+    text-align: center;
+}
 .header-right ul li {
     display: inline-block;
     width: 19%;
@@ -207,7 +209,7 @@ input[type="submit"] {
 
 .agileits_search button {
     border-radius: 0;
-    background: #f62c1e;
+    background: #d92e23;
     color: #fff;
     width: 20%;
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.22);

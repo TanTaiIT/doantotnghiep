@@ -29,10 +29,10 @@
 										</div>
 										<div class="item-info-product text-center border-top mt-4">
 											<h4 class="pt-1">
-												<a href="single.html">Samsung Galaxy J7</a>
+												<a href="single.html">{{$p->product_name}}</a>
 											</h4>
 											<div class="info-product-price my-2">
-												<span class="item_price">$200.00</span>
+												<span class="item_price">${{$p->product_price}}</span>
 												<del>$280.00</del>
 											</div>
 											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
@@ -186,7 +186,7 @@
 								<h3 class="col-md-4 effect-bg">Summer Carnival</h3>
 								<p class="w3l-nut-middle">Get Extra 10% Off</p>
 								<div class="col-md-8 bg-right-nut">
-									<img src="images/image1.png" alt="">
+									<img src="{!! asset('web/images/image1.png')!!}" alt="">
 								</div>
 							</div>
 						</div>

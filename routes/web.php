@@ -50,4 +50,5 @@ Route::get('delete_all','BrandController@delete_all')->name('delete_all');
 Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
    Route::get('/','ClientController@index')->name('cli_index');
    Route::get('/detail/{id}','ClientController@detail')->name('cli_detail');
+   Route::post('/search','ClientController@search')->name('cli_search');
 });
