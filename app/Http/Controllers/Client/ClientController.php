@@ -31,4 +31,5 @@ class ClientController extends Controller
         }
         return view('client/search',compact('search','com','dem'));
     }
+
 }

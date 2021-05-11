@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('admin','Admin\AdminController@index')->name('admin_index');
+Route::get('dangnhap1','Admin\LoginController@dangnhap1')->name('dangnhap1');
+Route::get('login','Admin\LoginController@login')->name('log');
+Route::post('dangnhap','Admin\LoginController@postlogin')->name('post_log');
+Route::get('logout','Admin\LoginController@getLogout')->name('getLogout');
+// Route::group(['prefix' => 'admin', 'namespace' => 'admin'], function() {	
+// 	Route::get('login','LoginController@getLogin')->name('getLogin');
+// 	Route::post('login','LoginController@postLogin')->name('postLogin');
+// 	Route::get('logout','LoginController@getLogout')->name('getLogout');
+// });
 Route::group(['prefix'=>'product','namespace'=>'Admin'],function(){
 Route::get('index','ProductController@index')->name('pro_index');
 Route::get('addpro','ProductController@addpro')->name('pro_add');
@@ -51,4 +60,11 @@ Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
    Route::get('/','ClientController@index')->name('cli_index');
    Route::get('/detail/{id}','ClientController@detail')->name('cli_detail');
    Route::post('/search','ClientController@search')->name('cli_search');
+   Route::get('/cart','CartController@cart')->name('cart');
+   Route::post('/cart/{id}','CartController@addtocart')->name('addtocart');
 });
+ Route::patch('update-cart','CartController@update');
+ Route::delete('remove-from-cart','Client\CartController@remove');
+
+
+/* Cart */

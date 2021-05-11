@@ -2502,16 +2502,16 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  color: #171515bd;
+  background-color: #00ff9533;
+  border-color: #00ff72;
 }
 
-.btn-primary:hover {
+/*.btn-primary:hover {
   color: #fff;
   background-color: #0069d9;
   border-color: #0062cc;
-}
+}*/
 
 .btn-primary:focus, .btn-primary.focus {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
@@ -3169,6 +3169,9 @@ tbody.collapse.show {
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
+  width: 231px;
+  background: pink;
+  padding: 5px 3px;
 }
 
 .dropup .dropdown-menu {

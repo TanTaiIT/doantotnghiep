@@ -12,9 +12,7 @@
 				      	<div class="alert alert-primary" role="alert">
 						  Kết quả tìm kiếm: <?php echo $dem; ?> sản phẩm
 						</div>
-				     <?php }
-				?>
-
+				     <?php }?>
 			<!-- //tittle heading -->
 			<div class="row">
 				<!-- product left -->
