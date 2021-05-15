@@ -70,8 +70,9 @@
 									</div>
 								</td> -->
 								<td data-th="Quantity">
-			                        <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity" />
+			                        <input type="number" value="{{ $details['quantity'] }}" class="quantity" />
 			                    </td>
+			                    
 								<td class="invert">{{ $details['name'] }}</td>
 								<td class="invert">${{ $details['price'] }}</td>
 								<td class="actions" data-th="">

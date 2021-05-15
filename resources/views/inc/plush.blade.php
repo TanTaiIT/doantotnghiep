@@ -49,7 +49,7 @@
             $.ajax({
                url: '{{ url('update-cart') }}',
                method: "patch",
-               data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: ele.parent('tr').find('.quantity').val()},
+               data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: ele.parents('tr').find('.quantity').val()},
                success: function (response) {
                    window.location.reload();
                }
