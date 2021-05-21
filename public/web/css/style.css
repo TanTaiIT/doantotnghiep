@@ -92,6 +92,18 @@ label {
 .header-right ul{
     text-align: center;
 }
+.bao{
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+.form-vanchuyen{
+    margin-top: 100px;
+    border: 1px solid #8080804f;
+    /* padding: 20px 27px; */
+    width: 33%;
+}
 .header-right ul li {
     display: inline-block;
     width: 19%;
@@ -106,18 +118,59 @@ label {
 .header-right ul li i {
     font-size: 15px;
 }
+.continute{
 
+background: pink;
+
+padding: 10px 10px;
+
+border-radius: 7px;
+
+color: white;
+}
+.process{
+
+background: #5daec6;
+
+color: white;
+
+padding: 10px 10px;
+
+border-radius: 7px;
+}
+.tongtien p{
+    
+text-transform: uppercase;
+    
+margin: 17px 124px;
+}
+.tongtien{
+    
+max-width: 1200px;
+    
+margin: auto;
+    
+text-align: right;
+}
 /*-- modal login --*/
 
 .modal-title {
     font-size: 30px;
     color: #0879c9;
 }
-
+.quantity{
+    background: grey;
+    width: 40px;
+}
 .modal-content {
     border: 10px solid rgb(85 203 90);
 }
-
+.bao_checkout{
+    border: 1px solid #80808061;
+    /* padding: 21px 17px; */
+    margin-top: 100px;
+    width: 33.33%;
+}
 label.col-form-label {
     letter-spacing: 1px;
     font-size: 15px;
@@ -188,6 +241,7 @@ input[type="submit"] {
     font-family: 'Open Sans', sans-serif;
     letter-spacing: 1px;
 }
+.icon{ font-size:30px; color:green; }
 
 /*-- //location --*/
 
@@ -219,7 +273,10 @@ input[type="submit"] {
 /*-- //search --*/
 
 /*-- logo --*/
-
+ .bold{
+        font-weight: bold;
+        color: #000000b8;
+    }
 .logo_agile h1 a {
     color: #e45cf4e0;
     font-size: 38px;
@@ -227,7 +284,8 @@ input[type="submit"] {
     letter-spacing: 1px;
     position: relative;
 }
-
+.bang1{
+}
 .logo_agile h1 a:hover {
     text-decoration: none;
 }
@@ -241,9 +299,20 @@ input[type="submit"] {
 .logo_agile {
     padding: 26px 0 21px;
 }
-
+.bao-bang{
+    width: 33%;
+    margin-top: 101px;
+    border: 1px solid #80808047;
+}
 /*-- //logo --*/
-
+/*.payment1{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.infomation {
+    width: 32%;
+}*/
 /*-- header cart button --*/
 
 button.w3view-cart {
@@ -466,7 +535,11 @@ h3.tittle-w3l span {
 .btn-danger.my-cart-btn:focus {
     outline: none;
 }
-
+.checkout-title{
+    background:pink;
+    padding: 9px 0;
+    text-align: center;
+}
 .snipcart-details input.button {
     font-size: 13px;
     color: #fff;
@@ -579,7 +652,12 @@ h3.tittle-w3l span {
 .men-pro-item {
     position: relative;
 }
-
+.checkout-left{
+    padding:0 20px;
+}
+.form-vanchuyen form{
+    padding:49px 20px;
+}
 .men-thumb-item {
     position: relative;
     height: 311px;
@@ -612,7 +690,21 @@ h3.tittle-w3l span {
 .product-men:nth-child(3) .product-new-top {
     background: #FFC107;
 }
+.checkout-title p{
+    color:white;
+    text-transform: uppercase;
+}
 
+.bang1 .timetable_sub th{
+        background: #db58b3;
+    color: #fff;
+    font-size: 16px;
+    border-right: 1px solid #ded2d2;
+    text-align: center;
+    padding: 12px 0;
+    letter-spacing: 1px;
+    font-weight: normal;
+}
 .product-men:nth-child(4) .product-new-top {
     background: #219ff3;
 }
@@ -3129,6 +3221,7 @@ div#testimonials h4.m-title {
     .single-right-left h3 {
         font-size: 19px;
     }
+   
     /* cart */
     #PPminicarts form {
         width: 291px !important;
@@ -3178,6 +3271,7 @@ div#testimonials h4.m-title {
     .occasion-cart .snipcart-details {
         width: 45%;
     }
+
 }
 
 /*--//responsive--*/

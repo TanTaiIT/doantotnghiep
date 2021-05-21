@@ -5,11 +5,15 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\product;
+use App\Models\category;
+use App\Models\brand;
 class CartController extends Controller
 {
     public function cart(){
     	$com='cart';
-    	return view('Client.cart',compact('com'));
+        $cate=category::all();
+        $brand=brand::all();
+    	return view('Client.cart',compact('com','cate','brand'));
     }
     public function addtocart($id){
     	$product=product::find($id);
@@ -71,5 +75,9 @@ class CartController extends Controller
 
             session()->flash('success', 'Cart updated successfully');
         }
+    }
+    public function payment(){
+        $com='index';
+        return view('client/payment',compact('com'));
     }
 }

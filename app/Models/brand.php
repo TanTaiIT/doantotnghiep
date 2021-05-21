@@ -15,4 +15,7 @@ class brand extends Model
     	'brand_status'
     ];
     protected $primaryKey="brand_id";
+    public function brand(){
+    	return $this->hasMany('App\Models\product','brand_id');
+    }
 }

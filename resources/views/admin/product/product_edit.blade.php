@@ -7,13 +7,23 @@
     <input type="text" class="form-control" name="ten" value="{{$pro_edit->product_name}}" placeholder="Nhập tên sản phẩm">
   </div>
   <div class="form-group">
-    <label for="categoryid">Loại sản phẩm</label>
-    <input type="text" class="form-control" name="loai" value="{{$pro_edit->category_id}}"  placeholder="Nhập vào loại sản phẩm">
+  <label for="idcat">Loại sản phẩm:</label><br>
+  <select name="loai" class="form-select" aria-label="Default select example">
+  <option selected>-----------Chọn Loại sản phẩm--------------</option>
+  @foreach($cate as $c)
+  <option value="{{$c->category_id}}">{{$c->category_name}}</option>
+  @endforeach
+  </select>
   </div>
   <div class="form-group">
-    <label for="categoryid">Thương hiệu</label>
-    <input type="text" class="form-control" name="thuonghieu" value="{{$pro_edit->brand_id}}"  placeholder="Nhập tên thương hiệu">
-  </div>
+  <label for="idcat">Nhà cung cấp:</label><br>
+  <select name="thuonghieu" class="form-select" aria-label="Default select example">
+  <option selected>-----------Chọn nhà cung cấp-----------</option>
+  @foreach($brand as $b)
+  <option value="{{$b->brand_id}}">{{$b->brand_name}}</option>
+  @endforeach
+  </select>
+</div>
   <div class="form-group">
     <label for="categoryid">Mô tả sản phẩm</label>
     <input type="text" class="form-control" name="mota" value="{{$pro_edit->product_desc}}"  placeholder="Mô tả">
@@ -24,7 +34,10 @@
   </div>
   <div class="form-group">
     <label for="images">Hình ảnh</label>
-    <input type="file" name="hinh" class="form-control">
+    <input type="file" name="hinh" id="ful" name="ful" class="form-control">
+  </div>
+  <div class="form-group">
+      <img src="{!! asset('images/'.$pro_edit->product_image)!!}" id="imgPre" class="img-thumbnail" />
   </div>
   <div class="form-group">
     <label for="categoryid">Trạng thái</label>

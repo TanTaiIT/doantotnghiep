@@ -14,5 +14,8 @@ class category extends Model
     	'category_desc',
     	'category_status'
     ];
-    protected $primaryKey="category_id";
+    protected $primaryKey='category_id';
+    public function product(){
+    	return $this->hasMany('App\Models\product','category_id');
+    }
 }

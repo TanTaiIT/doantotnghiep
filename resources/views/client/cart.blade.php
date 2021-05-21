@@ -47,36 +47,44 @@
 						</thead>
 						
 						<tbody>
-							<?php $total=0;?>
+							<?php $total=0;
+							      // $totalitem=0;
+							      $i=0;?>
 						 @if(session('cart'))
                          @foreach(session('cart') as $id => $details)
-                         <?php $total += $details['price'] * $details['quantity'] ?>
+                         <?php $totalitem = $details['price'] * $details['quantity'];
+                               $total+=$totalitem;
+                              ?>
+                         
 							<tr class="rem1">
-								<td class="invert">1</td>
+								<td class="invert">{{$i++}}</td>
 								<td class="invert-image">
 									<a href="single.html">
 										<img src="{!!asset('images/'.$details['image'])!!}" alt=" " class="img-responsive">
 									</a>
 								</td>
-								<!-- <td class="invert">
-									<div class="quantity">
-										<div class="quantity-select">
-											<div class="entry value-minus">&nbsp;</div>
-											<div class="entry value">
-												<span class="quantity">1</span>
-											</div>
-											<div class="entry value-plus active">&nbsp;</div>
-										</div>
-									</div>
-								</td> -->
 								<td data-th="Quantity">
+									
+										<div class="quantity-select">
+											<!-- <div class="entry value-minus">&nbsp;</div>
+											<div class="entry value"> -->
+												<!-- <span class="quantity" value="{{$details['quantity']}}">{{$details['quantity'] }}</span> -->
+												<input type="number" class="quantity" value="{{$details['quantity']}}">
+
+											<!-- </div>
+											<div class="entry value-plus active">&nbsp;</div> -->
+										</div>
+									
+								</td>
+								<!-- <td data-th="Quantity">
 			                        <input type="number" value="{{ $details['quantity'] }}" class="quantity" />
-			                    </td>
+			                    </td> -->
 			                    
 								<td class="invert">{{ $details['name'] }}</td>
-								<td class="invert">${{ $details['price'] }}</td>
+								<td class="invert">${{$totalitem }}.000</td>
 								<td class="actions" data-th="">
 		                        <button class="btn btn-primary btn update-cart" data-id="{{ $id }}"><i class="fas fa-sync-alt"></i></button>
+		                        
 		                        <button class="btn btn-danger btn remove-from-cart" data-id="{{ $id }}"><i class="fas fa-trash"></i></button>
 		                    </td>
 								<!-- <td class="invert">
@@ -91,53 +99,19 @@
 						 
 					</table>
 				</div>
-			</div>
-			<div class="checkout-left">
-				<div class="address_form_agile mt-sm-5 mt-4">
-					<h4 class="mb-sm-4 mb-3">Add a new Details</h4>
-					<form action="payment.html" method="post" class="creditly-card-form agileinfo_form">
-						<div class="creditly-wrapper wthree, w3_agileits_wrapper">
-							<div class="information-wrapper">
-								<div class="first-row">
-									<div class="controls form-group">
-										<input class="billing-address-name form-control" type="text" name="name" placeholder="Full Name" required="">
-									</div>
-									<div class="w3_agileits_card_number_grids">
-										<div class="w3_agileits_card_number_grid_left form-group">
-											<div class="controls">
-												<input type="text" class="form-control" placeholder="Mobile Number" name="number" required="">
-											</div>
-										</div>
-										<div class="w3_agileits_card_number_grid_right form-group">
-											<div class="controls">
-												<input type="text" class="form-control" placeholder="Landmark" name="landmark" required="">
-											</div>
-										</div>
-									</div>
-									<div class="controls form-group">
-										<input type="text" class="form-control" placeholder="Town/City" name="city" required="">
-									</div>
-									<div class="controls form-group">
-										<select class="option-w3ls">
-											<option>Select Address type</option>
-											<option>Office</option>
-											<option>Home</option>
-											<option>Commercial</option>
 
-										</select>
-									</div>
-								</div>
-								<button class="submit check_out btn">Delivery to this Address</button>
-							</div>
-						</div>
-					</form>
-					<div class="checkout-right-basket">
-						<a href="payment.html">Make a Payment
-							<span class="far fa-hand-point-right"></span>
-						</a>
-					</div>
-				</div>
+
+				
 			</div>
+			
+
+
 		</div>
+	</div>
+
+	<div class="tongtien">
+		<p><span class="bold">Tổng tiền:</span>{{$total}}.000</p>
+		<a href="{{route('cli_index')}}" class="continute">Tiếp tục mua hàng</a>
+		<a href="{{route('payment')}}" class="process">Tiến hành thanh toán</a>
 	</div>
 	@stop

@@ -7,6 +7,7 @@
 				<span>O</span>ur
 				<span>N</span>ew
 				<span>P</span>roducts</h3>
+				
 			<!-- //tittle heading -->
 			<div class="row">
 				<!-- product left -->

@@ -30,6 +30,8 @@ Route::get('edit_pro/{id}','ProductController@edit')->name('product_edit');
 Route::post('update/{id}','ProductController@update')->name('pro_update');
 Route::get('delete/{id}','ProductController@delete')->name('delete_pro');
 Route::get('delete_all','ProductController@delete_all')->name('delete_all');
+Route::get('kichhoat/{id}','ProductController@kichhoat')->name('kichhoat');
+Route::get('huykichhoat/{id}','ProductController@huykichhoat')->name('huykichhoat');
 });
 
 /* Categoy */
@@ -62,9 +64,44 @@ Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
    Route::post('/search','ClientController@search')->name('cli_search');
    Route::get('/cart','CartController@cart')->name('cart');
    Route::post('/cart/{id}','CartController@addtocart')->name('addtocart');
-});
- Route::patch('update-cart','CartController@update');
- Route::delete('remove-from-cart','Client\CartController@remove');
+   Route::get('/dangxuat_kh','ClientController@dangxuatkh')->name('dangxuat_kh');
+   Route::get('/delivery','CheckoutController@delivery');
+   // Route::post('/select-delivery','DeliveryController@select_delivery');
+   Route::post('/select-delivery-home','CheckoutController@select_delivery_home');
+   Route::get('/checkout','CheckoutController@checkout')->name('checkout');
+   
 
+   
+});
+ Route::patch('update-cart','Client\CartController@update');
+ Route::delete('remove-from-cart','Client\CartController@remove');
+ Route::post('/select-delivery-home','Client\CheckoutController@delivery_home');
 
 /* Cart */
+
+
+/* Checkout */
+Route::group(['prefix'=>'cli_check','namespace'=>'Client'],function(){
+	Route::post('/dangky','CheckoutController@dangky')->name('dangky');
+	Route::post('/dangnhap','CheckoutController@dangnhap')->name('dangnhap');
+	Route::get('/payment','CheckoutController@payment')->name('payment');
+});
+
+
+/* Coupon */
+
+Route::get('/unset-coupon','Client\CouponController@unset_coupon');
+Route::get('/insert-coupon','Client\CouponController@insert_coupon')->name('insert_coupon');
+Route::get('/delete-coupon/{coupon_id}','Client\CouponController@delete_coupon')->name('delete_coupon');
+Route::get('/list-coupon','Client\CouponController@list_coupon')->name('list_coupon');
+Route::post('/insert-coupon-code','Client\CouponController@insert_coupon_code')->name('insert_coupon_code');
+
+
+/* Delivery */
+
+Route::get('/delivery','Client\DeliveryController@delivery');
+Route::post('/select-delivery','Client\DeliveryController@select_delivery');
+Route::post('/insert-delivery','Client\DeliveryController@insert_delivery');
+Route::post('/select-feeship','Client\DeliveryController@select_feeship');
+Route::post('/update-delivery','Client\DeliveryController@update_delivery');
+

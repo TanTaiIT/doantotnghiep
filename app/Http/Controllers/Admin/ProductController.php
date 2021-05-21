@@ -6,11 +6,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\product;
 use Session;
+use App\Models\category;
+use App\Models\brand;
+use DB;
 class ProductController extends Controller
 {
     public function index(){
+        $cate=category::all();
+        $brand=brand::all();
     	$pro=product::all();
-    	return view('admin/product/index',compact('pro'));
+    	return view('admin/product/index',compact('pro','brand','cate'));
     }
    public function imageUpload(Request $request)
     {
@@ -27,7 +32,9 @@ class ProductController extends Controller
         return "";
     } 
     public function addpro(){
-    	return view('admin/product/add_product');
+            $cate=category::all();
+            $brand=brand::all();
+    	return view('admin/product/add_product',compact('cate','brand'));
     }
     public function themsp(Request $req){
     	$product=new Product();
@@ -46,8 +53,10 @@ class ProductController extends Controller
     	return redirect()->route('pro_index');
     }
     public function edit($id){
+        $cate=category::all();
+        $brand=brand::all();
     	$pro_edit=product::FindOrFail($id);
-    	return view('admin/product/product_edit',compact('pro_edit'));
+    	return view('admin/product/product_edit',compact('pro_edit','cate','brand'));
     }
     public function update(Request $req,$id){
     	$pro=product::FindOrFail($id);
@@ -75,6 +84,15 @@ class ProductController extends Controller
     	}
     	return redirect()->route('pro_index');
     }
+    public function kichhoat($id){
+        $p=product::where('product_id',$id)->update(['product_status'=>1]);
+        return redirect()->route('pro_index');
+    }
+    public function huykichhoat($id){
+        $p=product::where('product_id',$id)->update(['product_status'=>0]);
+        return redirect()->route('pro_index');
+    }
+
     // public function delete_all(){
     // 	$pro=product::all();
     // 	if($pro->delete()){

@@ -1,4 +1,4 @@
-	<script src="{!! asset('web/js/jquery-2.2.3.min.js')!!}"></script>
+<script src="{!! asset('web/js/jquery-2.2.3.min.js')!!}"></script>
 	<!-- //jquery -->
 
 	<!-- nav smooth scroll -->
@@ -14,13 +14,6 @@
 					$(this).toggleClass('open');
 				}
 			);
-		});
-	</script>
-	<script>
-		$(document).ready(function(){
-			function thongbao(){
-				$.bootstrapGrowl("đã thêm sản phẩm vào giỏ hàng");
-			}
 		});
 	</script>
 	<!-- //nav smooth scroll -->
@@ -87,10 +80,77 @@
 		}
 	</script>
 	<!-- //password-script -->
-	
-	<!-- scroll seller -->
-	<script src="{!! asset('web/js/scroll.js')!!}"></script>
-	<!-- //scroll seller -->
+
+	<!-- easy-responsive-tabs -->
+	<link rel="stylesheet" type="text/css" href="{!! asset('web/css/easy-responsive-tabs.css')!!} " />
+	<script src="{!! asset('web/js/easyResponsiveTabs.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			//Horizontal Tab
+			$('#parentHorizontalTab').easyResponsiveTabs({
+				type: 'default', //Types: default, vertical, accordion
+				width: 'auto', //auto or any width like 600px
+				fit: true, // 100% fit in a container
+				tabidentify: 'hor_1', // The tab groups identifier
+				activate: function (event) { // Callback function if tab is switched
+					var $tab = $(this);
+					var $info = $('#nested-tabInfo');
+					var $name = $('span', $info);
+					$name.text($tab.text());
+					$info.show();
+				}
+			});
+		});
+	</script>
+	<!-- //easy-responsive-tabs -->
+
+	<!-- credit-card -->
+	<script src="{!! asset('web/js/creditly.js')!!}"></script>
+	<link rel="stylesheet" href="{!! asset('web/css/creditly.css')!!}" type="text/css" media="all" />
+	<script>
+		$(function () {
+			var creditly = Creditly.initialize(
+				'.creditly-wrapper .expiration-month-and-year',
+				'.creditly-wrapper .credit-card-number',
+				'.creditly-wrapper .security-code',
+				'.creditly-wrapper .card-type');
+
+
+			$(".creditly-card-form .submit").click(function (e) {
+				e.preventDefault();
+				var output = creditly.validate();
+				if (output) {
+					// Your validated credit card output
+					console.log(output);
+				}
+			});
+		});
+	</script>
+
+	<!-- creditly2 (for paypal) -->
+	<script src="{!! asset('web/js/creditly2.js')!!}"></script>
+	<script>
+		$(function () {
+			var creditly = Creditly2.initialize(
+				'.creditly-wrapper .expiration-month-and-year-2',
+				'.creditly-wrapper .credit-card-number-2',
+				'.creditly-wrapper .security-code-2',
+				'.creditly-wrapper .card-type');
+
+			$(".creditly-card-form-2 .submit").click(function (e) {
+				e.preventDefault();
+				var output = creditly.validate();
+				if (output) {
+					// Your validated credit card output
+					console.log(output);
+				}
+			});
+		});
+	</script>
+
+	<!-- //credit-card -->
+
 
 	<!-- smoothscroll -->
 	<script src="{!! asset('web/js/SmoothScroll.min.js')!!}"></script>
@@ -133,7 +193,7 @@
 
 	<!-- for bootstrap working -->
 	<script src="{!! asset('web/js/bootstrap.js')!!}"></script>
-	<script type="text/javascript">
+	 <script type="text/javascript">
         $(document).ready(function(){
             $('.choose').on('change',function(){
             var action = $(this).attr('id');
@@ -180,4 +240,3 @@
         });
     });
     </script>
-	
