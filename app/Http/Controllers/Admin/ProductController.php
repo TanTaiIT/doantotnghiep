@@ -8,6 +8,8 @@ use App\Models\product;
 use Session;
 use App\Models\category;
 use App\Models\brand;
+use App\Models\pro_img;
+use Intervention\Image\Facades\Image;
 use DB;
 class ProductController extends Controller
 {
@@ -92,16 +94,39 @@ class ProductController extends Controller
         $p=product::where('product_id',$id)->update(['product_status'=>0]);
         return redirect()->route('pro_index');
     }
+    public function add_img(Request $req,$id){
+        $img=pro_img::where('product_id',$id)->get();
+        $product_detail=product::Find($id);
+        return view('admin.product.add_img',compact('product_detail','img'));
+    }
+    public function add_img1(Request $req,$id){
+        $product_detail=product::Find($id);
+        $data=$req->all();
+        if($req->hasfile('image')){
+            $files=$req->file('image');
+            foreach($files as $file){
+                 $image=new pro_img;
+                 $extension=$file->getClientOriginalExtension();
+                 $filename=rand(111,9999).'.'.$extension;  
+                 $image_path='upload_img/'.$filename;
+                 Image::make($file)->save($image_path);
+                 $image->images=$filename;
+                 $image->product_id=$data['product_id'];
+                 $image->save();
+            }
 
-    // public function delete_all(){
-    // 	$pro=product::all();
-    // 	if($pro->delete()){
-    // 		Session::flash('message','bạn đã xóa tất cả dữ liệu');
-    // 	}else{
-    // 		Session::flash('message','xóa thất bại');
-    // 	}
-    // 	return redirect()->route('pro_index');
-
-    // }
+        }
+        
+        return redirect()->route('add_img',$id)->with('message','thêm hình ảnh thành công');
+    }
+    public function del_img(Request $req,$id){
+        $gallary=pro_img::where('image_id',$id);
+        if($gallary->delete()){
+            return redirect()->back()->with('message','xóa thành công');
+        }else{
+            return redirect()->route('add_img')->with('message','xóa không thành công');
+        }
+    }
+   
 
 }

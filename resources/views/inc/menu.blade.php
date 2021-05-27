@@ -32,11 +32,11 @@
 						
 						<li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
 							<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Electronics
+								menu
 							</a>
 							<div class="dropdown-menu">
 								<div class="agile_inner_drop_nav_info p-4">
-									<h5 class="mb-3">Mobiles, Computers</h5>
+									<h5 class="mb-3">Thức uống phổ biến</h5>
 									<div class="row">
 										<div class="col-sm-6 multi-gd-img">
 											<ul class="multi-column-dropdown">
@@ -76,7 +76,7 @@
 								</div>
 							</div>
 						</li>
-						<li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
+						<!-- <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
 							<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Appliances
 							</a>
@@ -93,7 +93,7 @@
 												@endforeach
 											</ul>
 										</div>
-										<!-- <div class="col-sm-6 multi-gd-img">
+										<div class="col-sm-6 multi-gd-img">
 											<ul class="multi-column-dropdown">
 												<li>
 													<a href="product2.html">Musical Instruments</a>
@@ -123,11 +123,11 @@
 													<a href="product2.html">All Appliances</a>
 												</li>
 											</ul>
-										</div> -->
+										</div>
 									</div>
 								</div>
 							</div>
-						</li>
+						</li> -->
 						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
 							<a class="nav-link" href="about.html">About Us</a>
 						</li>

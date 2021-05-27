@@ -81,7 +81,7 @@
 			                    </td> -->
 			                    
 								<td class="invert">{{ $details['name'] }}</td>
-								<td class="invert">${{$totalitem }}.000</td>
+								<td class="invert">${{number_format($totalitem) }} đ</td>
 								<td class="actions" data-th="">
 		                        <button class="btn btn-primary btn update-cart" data-id="{{ $id }}"><i class="fas fa-sync-alt"></i></button>
 		                        
@@ -110,8 +110,18 @@
 	</div>
 
 	<div class="tongtien">
-		<p><span class="bold">Tổng tiền:</span>{{$total}}.000</p>
-		<a href="{{route('cli_index')}}" class="continute">Tiếp tục mua hàng</a>
-		<a href="{{route('payment')}}" class="process">Tiến hành thanh toán</a>
+		<p><span class="bold">Tổng tiền:</span>{{number_format($total)}} đ</p>
+		
+		   <?php if(Session::has('customer_id')){ ?> 
+		    <a href="{{route('cli_index')}}" class="continute">Tiếp tục mua hàng</a>
+		   	<a href="{{route('payment')}}" class="process">Tiến hành thanh toán</a>
+		   <?php } else { ?> 
+            <a href="{{route('cli_index')}}" class="continute">Tiếp tục mua hàng</a>
+		   	<a href="{{route('payment')}}" data-toggle="modal" class="process" data-target="#exampleModal">Tiến hành thanh toán</a>
+		   
+		   <?php } ?>
+		
+		
+		
 	</div>
 	@stop

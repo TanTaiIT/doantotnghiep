@@ -195,6 +195,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        <li>
+                            <a href="#"><i class="fa fa-envelope nav_icon"></i>Quản lý đơn hàng<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{URL::to('/manage-order')}}">Đơn hàng<u></u></a>
+                                </li>
+                                
+                               
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
                         
 
                        
@@ -204,6 +215,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="forms.html">Thông tin Admin</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="widgets.html"><i class="fa fa-flask nav_icon"></i>Quản lý thuộc tính</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{route('add_attr')}}">thêm thuộc tính</a>
                                 </li>
                                 
                             </ul>

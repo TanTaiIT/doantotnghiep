@@ -68,8 +68,55 @@ body a{
   color: #fff;
   height: 32px;
 }
-.tai .dropdown-menu{
-  
+a.cach {
+    margin: 0 10px;
+}
+.icon1{
+  color:red;
+  font-size: 30px;
+  /*position: absolute;*/
+}
+.pos {
+    position: absolute;
+    top: 33px;
+    left: 25px;
+    z-index: 2;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.baoimg:hover .pos{
+  opacity: 1;
+}
+.baoimg{
+  position: relative;
+}
+.in{
+   /*   background: red;
+    color: white;
+    padding: 10px 17px;
+    border-radius: 7px;*/
+}
+a{
+  text-decoration: none;
+}
+.taiche {
+    /* position: relative; */
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+img.pro_img{
+  margin-right:30px;
+}
+input.nutanh {
+    display: inline;
+}
+input.subanh {
+    background: aquamarine;
+    padding: 5px 15px;
+    border: 1px solid greenyellow;
+    color: darkblue;
+    border-radius: 23px;
 }
 .navbar .navbar-nav li .dropdown-menu {
   margin-top: 3px;

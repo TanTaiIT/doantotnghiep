@@ -32,6 +32,9 @@ Route::get('delete/{id}','ProductController@delete')->name('delete_pro');
 Route::get('delete_all','ProductController@delete_all')->name('delete_all');
 Route::get('kichhoat/{id}','ProductController@kichhoat')->name('kichhoat');
 Route::get('huykichhoat/{id}','ProductController@huykichhoat')->name('huykichhoat');
+Route::get('add_images/{id}','ProductController@add_img')->name('add_img');
+Route::post('add_images1/{id}','ProductController@add_img1')->name('add_img1');
+Route::get('del_img/{id}','ProductController@del_img')->name('del_img');
 });
 
 /* Categoy */
@@ -89,7 +92,7 @@ Route::group(['prefix'=>'cli_check','namespace'=>'Client'],function(){
 
 
 /* Coupon */
-
+Route::post('/check-coupon','Client\CouponController@check_coupon');
 Route::get('/unset-coupon','Client\CouponController@unset_coupon');
 Route::get('/insert-coupon','Client\CouponController@insert_coupon')->name('insert_coupon');
 Route::get('/delete-coupon/{coupon_id}','Client\CouponController@delete_coupon')->name('delete_coupon');
@@ -104,4 +107,20 @@ Route::post('/select-delivery','Client\DeliveryController@select_delivery');
 Route::post('/insert-delivery','Client\DeliveryController@insert_delivery');
 Route::post('/select-feeship','Client\DeliveryController@select_feeship');
 Route::post('/update-delivery','Client\DeliveryController@update_delivery');
+Route::post('/calculate-fee','Client\CheckoutController@calculate_fee');
+Route::get('/del-fee','Client\CheckoutController@del_fee');
+Route::post('/confirm-order','Client\CheckoutController@confirm_order');
 
+Route::get('/thankyou','Client\ClientController@thankyou')->name('thank');
+Route::get('/manage-order','Admin\OrderController@manage_order');
+Route::get('/view-order/{order_code}','Admin\OrderController@view_order');
+Route::get('/print-order/{checkout_code}','Client\CheckoutController@print_order');
+
+
+/* attribute */
+Route::get('/attr','Admin\AttrController@add_attr')->name('add_attr');
+Route::post('/them_attr','Admin\AttrController@store_attr')->name('store_attr');
+
+
+Route::post('/tim-kiem','Client\ClientController@search');
+Route::post('/autocomplete-ajax','Client\ClientController@autocomplete_ajax');

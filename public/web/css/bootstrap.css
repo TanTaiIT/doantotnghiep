@@ -212,6 +212,7 @@ img {
 
 svg:not(:root) {
   overflow: hidden;
+  width: 13px;
 }
 
 table {
@@ -7822,7 +7823,7 @@ button.bg-dark:focus {
   }
   .mt-sm-5,
   .my-sm-5 {
-    margin-top: 3rem !important;
+    margin-top: 0rem !important;
   }
   .mr-sm-5,
   .mx-sm-5 {

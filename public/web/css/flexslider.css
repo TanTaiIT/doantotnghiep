@@ -108,7 +108,9 @@ html[xmlns] .flexslider .slides {
 }
 
 .flexslider .slides img {
+  width: 313px;
   height: auto;
+  margin: auto;
   -moz-user-select: none;
 }
 

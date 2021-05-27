@@ -10,10 +10,11 @@ use App\Models\brand;
 class CartController extends Controller
 {
     public function cart(){
+        $url_canonical = $request->url();  
     	$com='cart';
         $cate=category::all();
         $brand=brand::all();
-    	return view('Client.cart',compact('com','cate','brand'));
+    	return view('Client.cart',compact('com','cate','brand','url_canonical'));
     }
     public function addtocart($id){
     	$product=product::find($id);
@@ -76,8 +77,9 @@ class CartController extends Controller
             session()->flash('success', 'Cart updated successfully');
         }
     }
-    public function payment(){
-        $com='index';
-        return view('client/payment',compact('com'));
-    }
+    // public function payment(){
+    //     $com='index';
+    //     return view('client/payment',compact('com'));
+    // }
+    
 }

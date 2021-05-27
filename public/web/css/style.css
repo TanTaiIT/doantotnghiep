@@ -29,7 +29,9 @@ a {
     -o-transition: 0.5s all;
     -ms-transition: 0.5s all;
 }
-
+.scale-img{overflow:hidden;display:block;}
+.scale-img img{-webkit-transition:0.3s ease-out;-moz-transition:0.3s ease-out;-o-transition:0.3s ease-out;transition:0.3s ease-out;-moz-transform:scale(1,1);-webkit-transform:scale(1,1);-o-transform:scale(1,1);-ms-transform:scale(1,1);transform:scale(1,1);}
+.scale-img:hover > img{-webkit-transition:0.3s ease-out;-moz-transition:0.3s ease-out;-o-transition:0.3s ease-out;transition:0.3s ease-out;-moz-transform:scale(1.1,1.1);-webkit-transform:scale(1.1,1.1);-o-transform:scale(1.1,1.1);-ms-transform:scale(1.1,1.1);transform:scale(1.1,1.1);}
 a:hover {
     text-decoration: none;
     opacity: .8;
@@ -72,11 +74,33 @@ ul {
     margin: 0;
     padding: 0;
 }
-
+.sapxep{
+    margin-bottom: 20px;
+}
+ul.dropdown-menu.tai2 {
+    position: absolute;
+    left: 15px;
+    width: 75%;
+}
+ul.dropdown-menu.tai2 a{
+    color:grey;
+}
+select.boot.orderby{
+    border: 1px solid white;
+    color: #d74fc6;
+    text-transform: capitalize;
+    border-radius: 30px;
+    box-shadow: 1px 4px 20px 8px pink;
+}
 label {
     margin: 0;
 }
-
+@font-face{
+    font-family: 'oli';
+    font-style: normal;
+    font-display:block;
+    src:url(../webfonts/Olivia-Regular.otf);
+}
 /*-- top-header --*/
 
 .main-top-w3l {
@@ -87,7 +111,31 @@ label {
     letter-spacing: 1px;
     font-size: 15px;
 }
+.thank{
+    font-size: 200px;
+    font-family: 'oli';
+    color: saddlebrown;
+}
+.background{
+    background: url('../images/y8.jpg')center no-repeat;
+    width: 100%;
+    height: 752px;
+    display: flex;
+    align-items: center;
+    background-size: cover;
+}
+nav div:nth-child(1){
+    /* display: none; */
+}
+nav div:nth-child(2){
+    /* text-align: center; */
+    /* margin-top: 50px; */
+}
 
+/*.pagi{
+    width:50px;
+    height: 50px;
+}*/
 /*-- header Lists --*/
 .header-right ul{
     text-align: center;
@@ -97,6 +145,7 @@ label {
     margin: auto;
     display: flex;
     justify-content: space-between;
+    margin-top: -65px;
 }
 .form-vanchuyen{
     margin-top: 100px;
@@ -104,13 +153,27 @@ label {
     /* padding: 20px 27px; */
     width: 33%;
 }
+.magiamgia{
+    margin-right: 240px;
+}
+.giam2{
+    margin-right:190px;
+}
+.phivanchuyen{
+    margin-right:150px;
+}
+.nutgiamgia{
+    margin-left:180px;
+}
 .header-right ul li {
     display: inline-block;
     width: 19%;
     font-size: 13px;
     letter-spacing: 1px;
 }
-
+.thanh_tien span:nth-child(2){
+    margin-left: 183px;
+}
 .header-right ul li a {
     text-decoration: none;
 }
@@ -118,6 +181,7 @@ label {
 .header-right ul li i {
     font-size: 15px;
 }
+
 .continute{
 
 background: pink;
@@ -171,12 +235,24 @@ text-align: right;
     margin-top: 100px;
     width: 33.33%;
 }
+.tinhtien{
+    margin-top:86px;
+}
+.check_out{
+    background: #f1a2ff;
+    color: red;
+    padding: 4px 0px;
+    font-size: 12px;
+}
 label.col-form-label {
     letter-spacing: 1px;
     font-size: 15px;
     color: #000;
 }
-
+.mar{
+    
+margin-top: 64px;
+}
 p.dont-do a {
     color: #F45C5D;
 }
@@ -242,7 +318,11 @@ input[type="submit"] {
     letter-spacing: 1px;
 }
 .icon{ font-size:30px; color:green; }
-
+.send_order{
+    background: cornflowerblue;
+    color: white;
+    text-transform: uppercase;
+}
 /*-- //location --*/
 
 /*-- //header Lists --*/
@@ -284,8 +364,7 @@ input[type="submit"] {
     letter-spacing: 1px;
     position: relative;
 }
-.bang1{
-}
+.bang1{padding: 7px 14px;}
 .logo_agile h1 a:hover {
     text-decoration: none;
 }
@@ -303,6 +382,13 @@ input[type="submit"] {
     width: 33%;
     margin-top: 101px;
     border: 1px solid #80808047;
+}
+nav.flex.items-center.justify-between {
+    text-align: center;
+    margin-top:40px;
+}
+.flex.justify-between.flex-1.sm\:hidden{
+    display: none;
 }
 /*-- //logo --*/
 /*.payment1{
@@ -656,13 +742,34 @@ h3.tittle-w3l span {
     padding:0 20px;
 }
 .form-vanchuyen form{
-    padding:49px 20px;
+    padding: 1px 20px;
 }
 .men-thumb-item {
     position: relative;
     height: 311px;
 }
-
+.vanchuyen1{
+    margin:40px 0;
+    text-align: center;
+}
+input.vanchuyen{
+        background: cornflowerblue;
+    border-radius: 3px;
+    border: 1px solid white;
+    padding: 8px 6px;
+    text-transform: uppercase;
+    color: white;
+}
+.giam{
+        background: cornflowerblue;
+        text-transform: uppercase;
+        color: white;
+        padding: 11px 21px;
+        margin-top: 14px;
+}
+.giamgiatien{
+    text-align: center;
+}
 #PPminicarts .minicarts-submit img {
     vertical-align: middle;
     padding: 4px 0 0 2px;
@@ -694,9 +801,12 @@ h3.tittle-w3l span {
     color:white;
     text-transform: uppercase;
 }
+span.tongtien1{
+    margin-right:219px;
+}
 
 .bang1 .timetable_sub th{
-        background: #db58b3;
+    background: #db58b3;
     color: #fff;
     font-size: 16px;
     border-right: 1px solid #ded2d2;
@@ -760,7 +870,17 @@ h3.tittle-w3l span {
 .inner-men-cart-pro>ul>li {
     display: inline-block;
 }
-
+a.dathang1{
+        padding: 12px 31px;
+        background: cornflowerblue;
+        border-radius: 3px;
+        color: white;
+        text-transform: uppercase;
+}
+.dathang{
+        text-align: center;
+        margin-top: 30px;
+}
 .inner-men-cart-pro ul li a {
     color: #fff;
     transition: all 0.5s ease-out 0s;
@@ -925,16 +1045,19 @@ h3.tittle-w3l span {
     padding: 11px 10px 10px 10px;
     font-size: 13px;
     color: #c4c4c4;
+    border-radius: 7px;
+    box-shadow: 4px 4px 12px 5px pink;
 }
 
 .search-hotel form input[type="submit"] {
-    background: url(../images/search.png) no-repeat 13px 11px #bd08c9;
+    background: url(../images/search.png) no-repeat 13px 11px #dd46e7;
     width: 44px;
     height: 39px;
     border: none;
     padding: 0;
     margin-top: 0;
     cursor: pointer;
+    border-radius: 7px;
 }
 .search-hotel form input[type="submit"]:hover {
     background-color: #000;

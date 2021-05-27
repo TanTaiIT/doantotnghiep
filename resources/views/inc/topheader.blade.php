@@ -22,17 +22,17 @@
 						$cus_id=Session::get('customer_id');
 						 if(isset($cus_id)){?> 
 
-
-							<li class="text-center border-right text-white tai"><div class="dropdown">
-							  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-							    {{Session::get('customer_name')}}
-							  </a>
-
-							  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-							    <li><a class="dropdown-item" href="{{route('dangxuat_kh')}}">Đăng xuất</a></li>
-							  </ul>
+						<li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2 text-white">
+							<a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								{{Session::get('customer_name')}}
+							</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="{{route('dangxuat_kh')}}">Đăng xuất</a>
 							</div>
 						</li>
+
+
+						
 
 
 						 <!-- 	<li class="text-center text-white">

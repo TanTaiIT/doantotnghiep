@@ -1,6 +1,44 @@
-	<script src="{!! asset('web/js/jquery-2.2.3.min.js')!!}"></script>
-	<!-- //jquery -->
 
+	<script src="{!! asset('web/js/jquery-2.2.3.min.js')!!}"></script>
+	
+	
+	<!-- //jquery -->
+	<script type="text/javascript">
+    $('#keywords').keyup(function(){
+        var query = $(this).val();
+
+          if(query != '')
+            {
+             var _token = $('input[name="_token"]').val();
+
+             $.ajax({
+              url:"{{url('/autocomplete-ajax')}}",
+              method:"POST",
+              data:{query:query, _token:_token},
+              success:function(data){
+               $('#search_ajax').fadeIn();  
+                $('#search_ajax').html(data);
+              }
+             });
+
+            }else{
+
+                $('#search_ajax').fadeOut();  
+            }
+    });
+
+    $(document).on('click', '.li_search_ajax', function(){  
+        $('#keywords').val($(this).text());  
+        $('#search_ajax').fadeOut();  
+    }); 
+</script>
+	<script>
+		$(function(){
+			$('.orderby').change(function(){
+				$('#form_order').submit();
+			});
+		});
+	</script>
 	<!-- nav smooth scroll -->
 	<script>
 		$(document).ready(function () {
@@ -16,6 +54,8 @@
 			);
 		});
 	</script>
+	<script src="{!! asset('web/js/amazingslider.js')!!}"></script>
+	<script src="{!! asset('web/js/initslider-1.js')!!}"></script>
 	<script>
 		$(document).ready(function(){
 			function thongbao(){
@@ -46,6 +86,7 @@
 	<!-- //popup modal (for location)-->
 
 	<!-- cart-js -->
+	<script src="{!! asset('web/js/sweetalert.min.js')!!}"></script>
 	<script src="{!! asset('web/js/minicart.js')!!}"></script>
 	<script>
 		paypals.minicarts.render(); //use only unique class names other than paypals.minicarts.Also Replace same class name in css and minicart.min.js
@@ -129,6 +170,61 @@
 
 		});
 	</script>
+	<script src="{!! asset('web/js/sweetalert.min.js')!!}"></script>
+	<script type="text/javascript">
+
+          $(document).ready(function(){
+            $('.send_order').click(function(){
+                swal({
+                  title: "Xác nhận đơn hàng",
+                  text: "Đơn hàng sẽ không được hoàn trả khi đặt,bạn có muốn đặt không?",
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonClass: "btn-danger",
+                  confirmButtonText: "Cảm ơn, Mua hàng",
+
+                    cancelButtonText: "Đóng,chưa mua",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function(isConfirm){
+                     if (isConfirm) {
+                        var shipping_email = $('.shipping_email').val();
+                        var shipping_name = $('.shipping_name').val();
+                        var shipping_address = $('.shipping_address').val();
+                        var shipping_phone = $('.shipping_phone').val();
+                        var shipping_notes = $('.shipping_notes').val();
+                        var shipping_method = $('.payment_select').val();
+                        var order_fee = $('.order_fee').val();
+                        var order_coupon = $('.order_coupon').val();
+                        var _token = $('input[name="_token"]').val();
+
+                        $.ajax({
+                            url: '{{url('/confirm-order')}}',
+                            method: 'POST',
+                            data:{shipping_email:shipping_email,shipping_name:shipping_name,shipping_address:shipping_address,shipping_phone:shipping_phone,shipping_notes:shipping_notes,_token:_token,order_fee:order_fee,order_coupon:order_coupon,payment_select:payment_select},
+                            success:function(){
+                               // swal("Đơn hàng", "Đơn hàng của bạn đã được gửi thành công", "success");
+                            }
+                        });
+
+                        window.setTimeout(function(){ 
+                            location.reload();
+                        } ,3000);
+
+                      } else {
+                        swal("Đóng", "Đơn hàng chưa được gửi, làm ơn hoàn tất đơn hàng", "error");
+
+                      }
+              
+                });
+
+               
+            });
+        });
+    
+
+    </script>
 	<!-- //smooth-scrolling-of-move-up -->
 
 	<!-- for bootstrap working -->
