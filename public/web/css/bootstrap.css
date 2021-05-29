@@ -446,8 +446,9 @@ mark,
 }
 
 .list-inline {
-  padding-left: 0;
+  padding-left: 1px;
   list-style: none;
+  display: -webkit-inline-box;
 }
 
 .list-inline-item {

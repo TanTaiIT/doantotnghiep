@@ -12,6 +12,7 @@ use App\Models\province;
 use App\Models\wards;
 use App\Models\brand;
 use App\Models\Feeship;
+use App\Models\coupon;
 use DB;
 use App\Models\shipping;
 use App\Models\Order;
@@ -134,6 +135,8 @@ class CheckoutController extends Controller
         <tr>
         <th>Tên sản phẩm</th>
         <th>Mã giảm giá</th>
+        <th>Màu</th>
+        <th>Size</th>
         <th>Phí ship</th>
         <th>Số lượng</th>
         <th>Giá sản phẩm</th>
@@ -159,6 +162,8 @@ class CheckoutController extends Controller
             <tr>
             <td>'.$product->product_name.'</td>
             <td>'.$product_coupon.'</td>
+            <td>'.$product->product_color.'</td>
+            <td>'.$product->product_size.'</td>
             <td>'.number_format($product->product_feeship,0,',','.').'đ'.'</td>
             <td>'.$product->product_sales_quantity.'</td>
             <td>'.number_format($product->product_price,0,',','.').'đ'.'</td>
@@ -242,10 +247,12 @@ class CheckoutController extends Controller
             foreach(Session::get('cart') as $key => $cart){
                 $order_details = new OrderDetail();
                 $order_details->order_code = $checkout_code;
-                $order_details->product_id = 1; /*$cart['product_id']*/
+                $order_details->product_id = $cart['pro_id'];
                 $order_details->product_name = $cart['name'];
                 $order_details->product_price = $cart['price'];
                 $order_details->product_sales_quantity = $cart['quantity'];
+                $order_details->product_color=$cart['color'];
+                $order_details->product_size=$cart['size'];
                 $order_details->product_coupon =  $data['order_coupon'];
                 $order_details->product_feeship = $data['order_fee'];
                 $order_details->save();

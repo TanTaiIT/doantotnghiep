@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\product;
 use App\Models\category;
 use App\Models\brand;
+use App\Models\attribute;
 class CartController extends Controller
 {
     public function cart(){
@@ -16,37 +17,58 @@ class CartController extends Controller
         $brand=brand::all();
     	return view('Client.cart',compact('com','cate','brand','url_canonical'));
     }
-    public function addtocart($id){
+    public function addtocart(Request $req,$id){
     	$product=product::find($id);
+        $attr=attribute::all();
+        $quan=0;
+        if(isset($req->sl)){
+            $quan=$quan+$req->sl;
+        }else{
+            $quan=1;
+        }
+        $color=$req->color;
+        $size=$req->size;
     	if(!$product){
-    		abort(404);
-    	}
-    	$cart=session()->get('cart');
-    	if(!$cart){
-    		$cart=[
-    			$id=>[
-    				"name"=>$product->product_name,
-    				"quantity"=>1,
-    				"price"=>$product->product_price,
-    				"image"=>$product->product_image
-    			]
-    		];
-    		session()->put('cart',$cart);
-    		return redirect()->back()->with('success','đã thêm sản phẩm vào giỏ hàng');
-    	}
-    	if(isset($cart[$id])){
-    		$cart[$id]['quantity']++;
-    		session()->put('cart',$cart);
-    		return redirect()->back()->with('success','đã thêm sản phẩm vào giở hàng');
-    	}
-    	$cart[$id]=[
-    		"name"=>$product->product_name,
-    		"quantity"=>1,
-    		"price"=>$product->product_price,
-    		"image"=>$product->product_image
-    	];
-    	session()->put('cart',$cart);
-    	return redirect()->back()->with('success','đã thêm sản phẩm vào giỏ hàng');
+            abort(404);
+        }
+        $cart=session()->get('cart');
+        if(!$cart){
+            $cart=[
+                $id=>[
+                    "pro_id"=>$product->product_id,
+                    "name"=>$product->product_name,
+                    "quantity"=>$quan,
+                    "price"=>$product->product_price,
+                    "image"=>$product->product_image,
+                    "size"=>$req->size,
+                    "color"=>$req->color
+                ]
+            ];
+
+            session()->put('cart',$cart);
+            return redirect()->back()->with('success','đã thêm sản phẩm vào giỏ hàng');
+        }
+        
+        if(isset($cart[$id])){
+            if(isset($req->sl)){
+                $cart[$id]['quantity']=$cart[$id]['quantity']+$quan;
+                session()->put('cart',$cart);
+                return redirect()->back()->with('success','đã thêm sản phẩm vào giở hàng');
+            }
+            
+        
+        }
+        $cart[$id]=[
+            "pro_id"=>$product->product_id,
+            "name"=>$product->product_name,
+            "quantity"=>$quan,
+            "price"=>$product->product_price,
+            "image"=>$product->product_image,
+            "size"=>$req->size,
+            "color"=>$req->color
+        ];
+        session()->put('cart',$cart);
+        return redirect()->back()->with('success','đã thêm sản phẩm vào giỏ hàng');
     }
      public function remove(Request $request)
     {

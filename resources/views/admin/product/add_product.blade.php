@@ -44,16 +44,24 @@
       <img src="{!! asset('web/images/download.png')!!}" id="imgPre" class="img-thumbnail" />
   </div>
   <div class="form-group">
-    <label for="categoryid">Trạng thái</label>
-    <select name="status" id="">
-    	<option value="1">
-    		còn hàng
-    	</option>
-    	<option value="2">
-    		hết hàng
-    	</option>
-    </select>
+    <label for="categoryid">Trạng thái</label><br>
+    <input type="radio" value=1 name="status" checked>Hiện &nbsp;&nbsp;
+    <input type="radio" value=0 name="status">Ẩn
   </div>
+  <div class="form-group">
+    <label>Màu sắc</label>
+    @foreach($attr as $color)
+    <input type="checkbox" value="{{$color->attr_id}}" name="attr_id[]"><i class="
+glyphicon glyphicon-asterisk" style="color:{{$color->value}}"></i>
+    @endforeach
+  
+</div>
+<div class="form-group">
+  <label>Kích thước</label>
+  @foreach($attr1 as $size)
+  <input type="checkbox" value="{{$size->attr_id}}" name="attr_id[]">{{$size->value}}
+  @endforeach
+</div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 @stop

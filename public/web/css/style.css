@@ -41,7 +41,9 @@ a:hover {
     -o-transition: 0.5s all;
     -ms-transition: 0.5s all;
 }
-
+li{
+    list-style-type: none;
+}
 input[type="button"],
 input[type="submit"] {
     transition: 0.5s all;
@@ -94,6 +96,40 @@ select.boot.orderby{
 }
 label {
     margin: 0;
+}
+.bao1{
+    display: flex;  
+    align-items: center;
+}
+.check{
+    position: absolute;
+    left: 11px;
+    top: 3px;
+    border: none;
+    /*display: none;*/
+}
+.colo:hover .check{
+   /* display: block;*/
+    z-index: 2;
+
+}
+.bao3{
+    margin: 0 20px;
+}
+.bao2{
+    display: flex;
+    align-items: center;
+}
+.soluong{
+    width: 35px;
+}
+.colo{
+    position: relative;
+    margin: 0 20px;
+    z-index: 1;
+}
+.sl {
+    margin-bottom: 20px;
 }
 @font-face{
     font-family: 'oli';

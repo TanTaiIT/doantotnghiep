@@ -58,8 +58,8 @@
                                     <img width="50px" height="50px" src="{!! asset('images/'.$details['image'])!!}" />
                                 </div>
                                 <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
-                                    <p>{{ $details['name'] }}</p>
-                                    <span class="price text-info"></span> ${{ number_format($details['price']) }} đ <span class="count">Quantity:{{ $details['quantity'] }} </span>
+                                    <p>{{ $details['name'] }} </p>
+                                    <span class="price text-info"></span> ${{ number_format($details['price']) }} đ <span class="count">Quantity:{{ $details['quantity'] }} </span><br><span>Size:{{$details['size']}}</span><br><span>Color:<i class="fas fa-heart" style="color: {{$details['color']}}"></i></span>
                                 </div>
                             </div>
                         @endforeach

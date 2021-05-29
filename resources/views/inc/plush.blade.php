@@ -52,8 +52,9 @@
                method: "patch",
                data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: ele.parents('tr').find('.quantity').val()},
                success: function (response) {
-                   // window.location.reload();
-                   alert('cập nhật số lượng thành công');
+                   
+                   window.location.reload();
+                   // alert('cập nhật số lượng thành công');
 
                }
             });
@@ -64,17 +65,18 @@
 
             var ele = $(this);
 
-            if(confirm("bạn có chắc muốn xóa không")) {
+            // if(confirm("bạn có chắc muốn xóa không")) {
                 $.ajax({
                     url: '{{ url('remove-from-cart') }}',
                     method: "DELETE",
                     data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id")},
                     success: function (response) {
                         window.location.reload();
+
                         // alert('đã xóa sản phẩm ra khỏi giỏ hàng');
                     }
                 });
-            }
+            // }
         });
 
     </script>

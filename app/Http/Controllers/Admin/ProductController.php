@@ -9,6 +9,8 @@ use Session;
 use App\Models\category;
 use App\Models\brand;
 use App\Models\pro_img;
+use App\Models\product_attr;
+use App\Models\attribute;
 use Intervention\Image\Facades\Image;
 use DB;
 class ProductController extends Controller
@@ -36,7 +38,9 @@ class ProductController extends Controller
     public function addpro(){
             $cate=category::all();
             $brand=brand::all();
-    	return view('admin/product/add_product',compact('cate','brand'));
+            $attr=attribute::where('name','color')->get();
+            $attr1=attribute::where('name','size')->get();
+    	return view('admin/product/add_product',compact('cate','brand','attr','attr1'));
     }
     public function themsp(Request $req){
     	$product=new Product();
@@ -52,6 +56,12 @@ class ProductController extends Controller
     	}else{
     		Session::flash('message','thêm sản phẩm thất bại');
     	}
+        foreach($req->attr_id as $value){
+            product_attr::create([
+                'product_id'=>$product->product_id,
+                'attr_id'=>$value
+            ]);
+        }
     	return redirect()->route('pro_index');
     }
     public function edit($id){

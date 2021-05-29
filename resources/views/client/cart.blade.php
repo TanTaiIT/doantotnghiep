@@ -32,17 +32,18 @@
 					<span>{{count(session('cart'))}} sản phẩm</span>
 				</h4>
 
-				<div class="table-responsive">
+				<div class="table-responsive" id="review">
 					<table class="timetable_sub">
 						<thead>
 							<tr>
-								<th>SL No.</th>
-								<th>Product</th>
-								<th>Quality</th>
-								<th>Product Name</th>
-
-								<th>Price</th>
-								<th>Remove</th>
+								<th>STT</th>
+								<th>Sản phẩm</th>
+								<th>Số lượng</th>
+								<th>Tên sản phẩm</th>
+								<th>Giá</th>
+								<th>Màu</th>
+								<th>Loại</th>
+								<th>Điều chỉnh</th>
 							</tr>
 						</thead>
 						
@@ -66,22 +67,15 @@
 								<td data-th="Quantity">
 									
 										<div class="quantity-select">
-											<!-- <div class="entry value-minus">&nbsp;</div>
-											<div class="entry value"> -->
-												<!-- <span class="quantity" value="{{$details['quantity']}}">{{$details['quantity'] }}</span> -->
 												<input type="number" class="quantity" value="{{$details['quantity']}}">
 
-											<!-- </div>
-											<div class="entry value-plus active">&nbsp;</div> -->
 										</div>
 									
 								</td>
-								<!-- <td data-th="Quantity">
-			                        <input type="number" value="{{ $details['quantity'] }}" class="quantity" />
-			                    </td> -->
-			                    
 								<td class="invert">{{ $details['name'] }}</td>
 								<td class="invert">${{number_format($totalitem) }} đ</td>
+								<td class="invert"><i class="fas fa-heart" style="color:{{$details['color']}}"></i></td>
+								<td class="invert">{{$details['size']}}</td>
 								<td class="actions" data-th="">
 		                        <button class="btn btn-primary btn update-cart" data-id="{{ $id }}"><i class="fas fa-sync-alt"></i></button>
 		                        

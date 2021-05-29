@@ -30,6 +30,24 @@
 											<h4 class="pt-1">
 												<a href="single.html">{{$p->product_name}}</a>
 											</h4>
+
+											<?php /*<ul class="list-inline rating"  title="Average Rating">
+												@for($count=1; $count<=5; $count++)
+                                                		@php
+	                                                		if($count<=$rating){
+	                                                			$color = 'color:#ffcc00;';
+	                                                		}
+	                                                		else {
+	                                                			$color = 'color:#ccc;';
+	                                                		}
+	                                                	
+                                                		@endphp
+												<li title="star_rating" id="{{$p->product_id}}-{{$count}}" data-index="{{$count}}"  data-product_id="{{$p->product_id}}" data-rating="{{$rating}}" class="rating" style="cursor:pointer; {{$color}} font-size:30px;">&#9733;</li>
+												@endfor
+											</ul> */ ?>
+
+
+
 											<div class="info-product-price my-2">
 												<span class="item_price">${{number_format($p->product_price)}} đ</span>
 												<del>$280.00</del>
@@ -42,6 +60,7 @@
 														<input type="submit" name="submit" value="Add to cart" class="button btn" />
 													</fieldset>
 												</form>
+
 											</div>
 										</div>
 									</div>
@@ -114,10 +133,10 @@
 							</div>
 						</div>
 						<div class="customer-rev border-bottom left-side py-2">
-							<h3 class="agileits-sear-head mb-3">Customer Review</h3>
+							<h3 class="agileits-sear-head mb-3">Đánh giá của khách hàng</h3>
 							<ul>
 								<li>
-									<a href="#">
+									<a href="{{request()->fullUrlWithQuery(['review' => 5])}}">
 										<i class="fas fa-star"></i>
 										<i class="fas fa-star"></i>
 										<i class="fas fa-star"></i>
@@ -127,7 +146,7 @@
 									</a>
 								</li>
 								<li>
-									<a href="#">
+									<a href="{{request()->fullUrlWithQuery(['review' => 4])}}">
 										<i class="fas fa-star"></i>
 										<i class="fas fa-star"></i>
 										<i class="fas fa-star"></i>
@@ -135,7 +154,7 @@
 										<span>4.0</span>
 									</a>
 								</li>
-								<li>
+								<!-- <li>
 									<a href="#">
 										<i class="fas fa-star"></i>
 										<i class="fas fa-star"></i>
@@ -143,9 +162,9 @@
 										<i class="fas fa-star-half"></i>
 										<span>3.5</span>
 									</a>
-								</li>
+								</li> -->
 								<li>
-									<a href="#">
+									<a href="{{request()->fullUrlWithQuery(['review' => 3])}}">
 										<i class="fas fa-star"></i>
 										<i class="fas fa-star"></i>
 										<i class="fas fa-star"></i>
@@ -153,11 +172,19 @@
 									</a>
 								</li>
 								<li>
-									<a href="#">
+									<a href="{{request()->fullUrlWithQuery(['review' => 2])}}">
 										<i class="fas fa-star"></i>
 										<i class="fas fa-star"></i>
-										<i class="fas fa-star-half"></i>
-										<span>2.5</span>
+										<!-- <i class="fas fa-star-half"></i> -->
+										<span>2.0</span>
+									</a>
+								</li>
+								<li>
+									<a href="{{request()->fullUrlWithQuery(['review' => 1])}}">
+										<i class="fas fa-star"></i>
+										<!-- <i class="fas fa-star"></i> -->
+										<!-- <i class="fas fa-star-half"></i> -->
+										<span>1.0</span>
 									</a>
 								</li>
 							</ul>
@@ -223,7 +250,7 @@
 						</div>
 						<!-- //electronics -->
 						<!-- delivery -->
-						<div class="left-side border-bottom py-2">
+						<?php /*<div class="left-side border-bottom py-2">
 							<h3 class="agileits-sear-head mb-3">Cash On Delivery</h3>
 							<ul>
 								<li>
@@ -246,7 +273,7 @@
 									<span class="span">Last 90 days</span>
 								</li>
 							</ul>
-						</div>
+						</div> */ ?>
 						<!-- //arrivals -->
 						<!-- best seller -->
 						<div class="f-grid py-2">

@@ -72,6 +72,7 @@ Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
    // Route::post('/select-delivery','DeliveryController@select_delivery');
    Route::post('/select-delivery-home','CheckoutController@select_delivery_home');
    Route::get('/checkout','CheckoutController@checkout')->name('checkout');
+   Route::get('/list-pro/{id}','ClientController@list_pro')->name('list_pro');
    
 
    
@@ -124,3 +125,4 @@ Route::post('/them_attr','Admin\AttrController@store_attr')->name('store_attr');
 
 Route::post('/tim-kiem','Client\ClientController@search');
 Route::post('/autocomplete-ajax','Client\ClientController@autocomplete_ajax');
+Route::post('/insert-rating','Client\ClientController@insert_rating');

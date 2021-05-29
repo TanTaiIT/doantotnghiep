@@ -121,6 +121,8 @@
             </th>
             <th>Tên sản phẩm</th>
             <th>Mã giảm giá</th>
+            <th>Màu</th>
+            <th>Size</th>
             <th>Phí ship hàng</th>
             <th>Số lượng</th>
             <th>Giá sản phẩm</th>
@@ -151,6 +153,8 @@
                   Không mã
                 @endif
             </td>
+            <td>{{$details->product_color}}</td>
+            <td>{{$details->product_size}}</td>
             <td>{{number_format($details->product_feeship ,0,',','.')}}đ</td>
             <td>{{$details->product_sales_quantity}}</td>
             <td>{{number_format($details->product_price ,0,',','.')}}đ</td>

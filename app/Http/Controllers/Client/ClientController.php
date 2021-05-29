@@ -9,19 +9,26 @@ use Session;
 use App\Models\category;
 use App\Models\brand;
 use App\Models\pro_img;
+use App\Models\rating;
+use App\Models\attribute;
 use DB;
 class ClientController extends Controller
 {
     public function index(Request $request){
         $url_canonical = $request->url();   
-        // $product=new product();
         $cate=category::all();
         $brand=brand::all();
     	$com='index';
-        // $product=product::where('product_status',1)->paginate(6);
         $product=product::where([
             'product_status'=>1
         ]);
+        foreach($product as $p){
+            $pro_id=$p->product_id;
+            
+        }
+        // $rating=DB::table('tbl_product')->join('tbl_rating','tbl_product.product_id','=','tbl_rating.product_id')->avg('rating');
+        // $rating=round($rating);
+
         if($request->price){
             $price=$request->price;
             switch ($price) {
@@ -61,20 +68,32 @@ class ClientController extends Controller
             $key=$request->keyword;
             $product=product::where('product_name','like','%'.$key.'%');
         }
-
+        // if($request->review){
+        //     $re=$request->review;
+        //     switch($re){
+        //         case '1':
+        //         $product->rating(avg('rating'),'=','1.0');
+        //         break;
+        //     }
+        // }
         $product=$product->orderBy('product_id','DESC')->paginate(6);
     	return view('client/index',compact('product','com','cate','brand','url_canonical'));
 
     }
  
     public function detail(Request $request,$id){
+        $color=attribute::where('name','color')->get();
+        $size=attribute::where('name','size')->get();
         $url_canonical = $request->url();
     	$detail=product::FindOrFail($id);
+        $pro_id=$detail->product_id;
         $img_detail=pro_img::where('product_id',$id)->get();
         $cate=category::all();
         $brand=brand::all();
     	$com='detail';
-    	return view('client/detail',compact('detail','com','cate','brand','img_detail','url_canonical'));
+        $rating=rating::where('product_id','=',$pro_id)->avg('rating');
+        $rating=round($rating);
+    	return view('client/detail',compact('detail','com','cate','brand','img_detail','url_canonical','rating','color','size'));
     }
     public function search(Request $request){
         $url_canonical = $request->url();  
@@ -126,6 +145,22 @@ class ClientController extends Controller
         }
 
 
+    }
+     public function insert_rating(Request $request){
+        $data = $request->all();
+        $rating = new rating();
+        $rating->product_id = $data['product_id'];
+        $rating->rating = $data['index'];
+        $rating->save();
+        echo 'done';
+    }
+    public function list_pro(Request $request,$id){
+        $com='detail';
+        $url_canonical = $request->url(); 
+        $cate=category::all();
+        $brand=brand::all();
+        $product_list=product::where('category_id',$id)->get();
+        return view('client.list_pro',compact('product_list','brand','cate','url_canonical','com'));
     }
     
 }

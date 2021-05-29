@@ -7,12 +7,12 @@
 				<span>M</span>obiles
 				<span>&</span>
 				<span>C</span>omputers</h3>
-				<?php $message=Session::get('message');
+				<!-- <?php $message=Session::get('message');
 				      if(isset($message)){?>
 				      	<div class="alert alert-primary" role="alert">
 						  Kết quả tìm kiếm: <?php echo $dem; ?> sản phẩm
 						</div>
-				     <?php }?>
+				     <?php }?> -->
 			<!-- //tittle heading -->
 			<div class="row">
 				<!-- product left -->
@@ -21,29 +21,27 @@
 						<!-- first section -->
 						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
 							<div class="row">
-								@foreach($search as $s)
+								@foreach($product_list as $s1)
 								<div class="col-md-4 product-men">
 									<div class="men-pro-item simpleCart_shelfItem">
 										<div class="men-thumb-item text-center">
-											<div class="scale-img">
-											<a href="{{route('cli_detail',$s->product_id)}}"><img src="{!!asset('images/'.$s->product_image)!!}" alt=""></a>
-										</div>
-											<!-- <div class="men-cart-pro">
+											<img src="{!!asset('images/'.$s1->product_image)!!}" alt="">
+											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
-													<a href="{{route('cli_detail',$s->product_id)}}" class="link-product-add-cart">Quick View</a>
+													<a href="{{route('cli_detail',$s1->product_id)}}" class="link-product-add-cart">Quick View</a>
 												</div>
-											</div> -->
+											</div>
 										</div>
 										<div class="item-info-product text-center border-top mt-4">
 											<h4 class="pt-1">
-												<a href="single.html">{{$s->product_name}}</a>
+												<a href="single.html">{{$s1->product_name}}</a>
 											</h4>
 											<div class="info-product-price my-2">
-												<span class="item_price">${{$s->product_price}}</span>
+												<span class="item_price">${{$s1->product_price}}</span>
 												<!-- <del>$280.00</del> -->
 											</div>
 											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<a href="{{route('addtocart',$s->product_id)}}">Add to Cart</a>
+												<a href="{{route('addtocart',$s1->product_id)}}">Add to Cart</a>
 											</div>
 
 										</div>
@@ -272,4 +270,4 @@
 			</div>
 		</div>
 	</div>
-	@stop
+@stop

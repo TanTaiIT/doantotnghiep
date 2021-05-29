@@ -42,7 +42,7 @@
 											<ul class="multi-column-dropdown">
 												@foreach($cate as $c)
 												<li>
-													<a href="product.html">{{$c['category_name']}}</a>
+													<a href="{{route('list_pro',$c->category_id)}}">{{$c['category_name']}}</a>
 												</li>
 												@endforeach
 											</ul>
@@ -134,7 +134,7 @@
 						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
 							<a class="nav-link" href="product.html">New Arrivals</a>
 						</li>
-						<li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
+						<!-- <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
 							<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Pages
 							</a>
@@ -148,7 +148,7 @@
 								<a class="dropdown-item" href="checkout.html">Checkout Page</a>
 								<a class="dropdown-item" href="payment.html">Payment Page</a>
 							</div>
-						</li>
+						</li> -->
 						<li class="nav-item">
 							<a class="nav-link" href="contact.html">Contact Us</a>
 						</li>

@@ -43,12 +43,6 @@
 										<img src="{{asset('upload_img/'.$d->images)}}" data-imagezoom="true" class="img-fluid" alt=""> </div>
 								</li>
 								@endforeach
-							<!-- 	<li data-thumb="{{asset('images/'.$detail->product_image)}}">
-									<div class="thumb-image">
-										<img src="{{asset('images/'.$detail->product_image)}}" data-imagezoom="true" class="img-fluid" alt=""> </div>
-								</li> -->
-
-
 							</ul>
 							<div class="clearfix"></div>
 						</div>
@@ -67,53 +61,65 @@
 							<li class="mb-3">
 								{{$detail->product_desc}}
 							</li>
-							<!-- <li class="mb-3">
-								Shipping Speed to Delivery.
-							</li>
-							<li class="mb-3">
-								EMIs from $655/month.
-							</li>
-							<li class="mb-3">
-								Bank OfferExtra 5% off* with Axis Bank Buzz Credit CardT&C
-							</li> -->
+
+							
 						</ul>
 					</div>
-					<!-- <div class="product-single-w3l">
-						<p class="my-3">
-							<i class="far fa-hand-point-right mr-2"></i>
-							<label>1 Year</label>Manufacturer Warranty</p>
-						<ul>
-							<li class="mb-1">
-								3 GB RAM | 16 GB ROM | Expandable Upto 256 GB
-							</li>
-							<li class="mb-1">
-								5.5 inch Full HD Display
-							</li>
-							<li class="mb-1">
-								13MP Rear Camera | 8MP Front Camera
-							</li>
-							<li class="mb-1">
-								3300 mAh Battery
-							</li>
-							<li class="mb-1">
-								Exynos 7870 Octa Core 1.6GHz Processor
-							</li>
-						</ul>
-						<p class="my-sm-4 my-3">
-							<i class="fas fa-retweet mr-3"></i>Net banking & Credit/ Debit/ ATM card
-						</p>
-					</div> -->
 					<div class="occasion-cart">
 						<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
 							<form action="{{route('addtocart',$detail->product_id)}}" method="post">
 								@csrf
 								<fieldset>
-									
+									<ul>
+										<li class="mb-3">
+								<p><span>Chọn màu:</span></p>
+								<div class="bao1">
+								@foreach($color as $id=>$data1)
+								<div class="colo">
+								<input  type="radio" name="color" value="{{$data1->value}}" id="che" class="check"><i class="
+fas fa-heart check1"  style="color:{{$data1->value}}; font-size: 30px;"></i></div>
+								@endforeach
+							    </div>
+							</li>
+							<li class="mb-3">
+								<p><span>Chọn size</span></p>
+								<div class="bao2">
+								@foreach($size as $data)
+								<div class="bao3">
+								<input type="radio" name="size" value="{{$data->value}}">{{$data->value}}
+							    </div>
+								@endforeach
+							   </div>
+							</li>
+							<li>
+								<p><span>Số lượng</span></p>
+								<div class="sl">
+									<input class="soluong" type="number" min=1 value="1" name="sl">
+								</div>
+							</li>
+									</ul>
 									<input type="submit" name="submit" value="Add to cart" class="button btn" />
 								</fieldset>
 							</form>
 						</div>
 					</div>
+					<p>Đánh giá sản phẩm</p>
+					<ul class="list-inline rating"  title="Average Rating">
+                                                	@for($count=1; $count<=5; $count++)
+                                                		@php
+	                                                		if($count<=$rating){
+	                                                			$color = 'color:#ffcc00;';
+	                                                		}
+	                                                		else {
+	                                                			$color = 'color:#ccc;';
+	                                                		}
+	                                                	
+                                                		@endphp
+                                                	
+                                                    <li title="star_rating" id="{{$detail->product_id}}-{{$count}}" data-index="{{$count}}"  data-product_id="{{$detail->product_id}}" data-rating="{{$rating}}" class="rating" style="cursor:pointer; {{$color}} font-size:30px;">&#9733;</li>
+                                                    @endfor
+
+                                                </ul>
 					<div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0" nonce="fA9EUFES"></script>
     <div class="fb-comments" data-href="{{$url_canonical}}" data-width="" data-numposts="5"></div>

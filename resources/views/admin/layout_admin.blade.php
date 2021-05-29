@@ -262,6 +262,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
     <script src="{!! asset('layout_admin/js/bootstrap.min.js')!!}"></script>
     <script>
+        $('#inputName').change(function(event){
+           var _ip=$('#inputName').val();
+           if(_ip =='size'){
+             $('.value2').show();
+             $('#v2').attr({
+                name:'value',
+             });
+             $('.value1').hide();
+             $('#v1').attr({
+                name:'',
+             });
+            }else if(_ip=='color'){
+                $('.value1').show();
+                $('#v1').attr({
+                    name:'value',
+                });
+                $('.value2').hide();
+                $('#v2').attr({
+                    name:'',
+                });
+            }
+        });
+         
+    </script>
+    <script>
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
