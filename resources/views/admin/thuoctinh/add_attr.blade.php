@@ -18,6 +18,7 @@
   <select name="name" id="inputName" class="form-select" aria-label="Default select example">
   <option value="color" selected>Màu sắc</option>
   <option value="size" >kích thước</option>
+  <option value="hot">Đá lạnh</option>
   </select>
   </div>
 
@@ -30,6 +31,10 @@
   <div class="form-group value2" style="display:none"  >
   <label for="">Giá trị:</label><br>
   <input type="text" class="form-control" placeholder="Input Field" name="" id="v2">
+  </div>
+    <div class="form-group value3" style="display:none"  >
+  <label for="">Giá trị:</label><br>
+  <input type="text" class="form-control" placeholder="Input đá lạnh" name="" id="v3">
   </div> 
   
 

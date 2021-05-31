@@ -24,6 +24,7 @@ class CartController extends Controller
         $soluong=$req->soluong;
         $color=$req->color;
         $size=$req->size;
+        $hot=$req->hot;
         if(!$product){
             abort(404);
         }
@@ -37,7 +38,8 @@ class CartController extends Controller
                     "price"=>$product->product_price,
                     "image"=>$product->product_image,
                     "size"=>$size,
-                    "color"=>$color
+                    "color"=>$color,
+                    "hot"=>$hot
                 ]
             ];
             
@@ -59,7 +61,8 @@ class CartController extends Controller
             "price"=>$product->product_price,
             "image"=>$product->product_image,
             "size"=>$size,
-            "color"=>$color
+            "color"=>$color,
+            "hot"=>$hot
         ];
         session()->put('cart',$cart);
         return redirect()->back()->with('success','đã thêm sản phẩm vào giỏ hàng');

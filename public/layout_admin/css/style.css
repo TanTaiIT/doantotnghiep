@@ -144,8 +144,8 @@ input.subanh {
   border-left: 8px solid transparent;
   content: '';
 }
-.icon{ font-size:25px; color:green; }
-.icon2{ font-size:25px; color:red; }
+.icon{ font-size:15px; color:green; }
+.icon2{ font-size:15px; color:red; }
 .navbar .navbar-nav li .dropdown-menu li.dropdown-menu-header, .navbar .navbar-nav li .dropdown-menu li.dropdown-menu-footer {
   background:#f2f4f8;
 }

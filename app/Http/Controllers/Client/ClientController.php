@@ -18,6 +18,7 @@ class ClientController extends Controller
         $url_canonical = $request->url();  
         $size=attribute::where('name','size')->get();
         $color=attribute::where('name','color')->get();
+        $hot=attribute::where('name','hot')->get();
         $cate=category::all();
         $brand=brand::all();
     	$com='index';
@@ -79,13 +80,14 @@ class ClientController extends Controller
         //     }
         // }
         $product=$product->orderBy('product_id','DESC')->paginate(6);
-    	return view('client/index',compact('product','com','cate','brand','url_canonical','size','color'));
+    	return view('client/index',compact('product','com','cate','brand','url_canonical','size','color','hot'));
 
     }
  
     public function detail(Request $request,$id){
         $color=attribute::where('name','color')->get();
         $size=attribute::where('name','size')->get();
+        $hot=attribute::where('name','hot')->get();
         $url_canonical = $request->url();
     	$detail=product::FindOrFail($id);
         $pro_id=$detail->product_id;
@@ -95,7 +97,7 @@ class ClientController extends Controller
     	$com='detail';
         $rating=rating::where('product_id','=',$pro_id)->avg('rating');
         $rating=round($rating);
-    	return view('client/detail',compact('detail','com','cate','brand','img_detail','url_canonical','rating','color','size'));
+    	return view('client/detail',compact('detail','com','cate','brand','img_detail','url_canonical','rating','color','size','hot'));
     }
     public function search(Request $request){
         $url_canonical = $request->url();  

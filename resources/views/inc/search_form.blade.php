@@ -19,7 +19,7 @@
 								{{csrf_field()}}
 								<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword" id="keywords" required>
                                 <div id="search_ajax"></div>
-								<button class="btn my-2 my-sm-0" type="submit">Search</button>
+								<button class="btn my-2 my-sm-0" type="submit">Tìm kiếm</button>
 							</form>
 						</div>
 
@@ -44,7 +44,7 @@
                         @endforeach
 
                         <div class="col-lg-6 col-sm-6 col-6 total-section text-right">
-                            <p>Total: <span class="text-info">$ {{ number_format($total) }} đ</span></p>
+                            <p>Tổng tiền: <span class="text-info">{{ number_format($total) }}đ</span></p>
                         </div>
                     </div>
 
@@ -60,7 +60,8 @@
                                 </div>
                                 <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
                                     <p>{{ $details['name'] }} </p>
-                                    <span class="price text-info"></span> ${{ number_format($details['price']) }} đ <span class="count">Quantity:{{ $details['quantity'] }} </span><br><span>Size:{{$details['size']}}</span><br><span>Color:<i class="fas fa-heart" style="color: {{$details['color']}}"></i></span>
+                                    <span class="price text-info"></span> Giá:{{ number_format($details['price']) }} đ <span class="count">Số lượng:{{ $details['quantity'] }} </span><br><span>Size:{{$details['size']}}</span><br><span>Màu:<i class="fas fa-heart" style="color: {{$details['color']}}"></i></span>
+                                    <br><span>Loại:{{$details['hot']}}</span>
                                 </div>
 
                             </div>

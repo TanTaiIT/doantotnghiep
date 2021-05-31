@@ -97,6 +97,13 @@ select.boot.orderby{
 label {
     margin: 0;
 }
+input.btn.btn-default.xemnhanh {
+    background: #fabbbb;
+    color: aliceblue;
+    text-transform: uppercase;
+}
+
+
 .baotrum{
     display: flex;
     justify-content: space-around;
@@ -215,6 +222,9 @@ nav div:nth-child(2){
     border: 1px solid #8080804f;
     /* padding: 20px 27px; */
     width: 33%;
+}
+input.btn.btn-default.xemnhanh:hover{
+    background: #eca8f4;
 }
 .magiamgia{
     margin-right: 240px;
@@ -1245,6 +1255,7 @@ h3.heading-tittle {
     color: #000;
     font-size: 17px;
     letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 span.item_price {
@@ -3460,5 +3471,14 @@ div#testimonials h4.m-title {
     }
 
 }
+
+
+
+
+
+
+
+
+
 
 /*--//responsive--*/

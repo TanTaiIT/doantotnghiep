@@ -62,6 +62,16 @@ Route::get('delete/{id}','BrandController@delete')->name('delete_brand');
 Route::get('delete_all','BrandController@delete_all')->name('delete_all');
 });
 
+/*Sliser */
+Route::get('/manage-slider','Admin\SliderController@manage_slider')->name('manage_sli');
+Route::get('/add-slider','Admin\SliderController@add_slider')->name('add_sli');
+Route::get('/delete-slide/{slide_id}','Admin\SliderController@delete_slide');
+Route::post('/insert-slider','Admin\SliderController@insert_slider');
+Route::get('/unactive-slide/{slide_id}','Admin\SliderController@unactive_slide');
+Route::get('/active-slide/{slide_id}','Admin\SliderController@active_slide');
+
+
+
 /* Client */
 Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
    Route::get('/','ClientController@index')->name('cli_index');

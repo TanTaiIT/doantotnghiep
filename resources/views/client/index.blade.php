@@ -49,8 +49,8 @@
 
 
 											<div class="info-product-price my-2">
-												<span class="item_price">${{number_format($p->product_price)}} đ</span>
-												<del>$280.00</del>
+												<span class="item_price">{{number_format($p->product_price)}} đ</span>
+												<del>280.00</del>
 											</div>
 											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
 												<form>
@@ -127,16 +127,16 @@
 							<div class="w3l-range">
 								<ul>
 									<li>
-										<a href="{{request()->fullUrlWithQuery(['price' => 1])}}">Under $1,000</a>
+										<a href="{{request()->fullUrlWithQuery(['price' => 1])}}">Under 1,000đ</a>
 									</li>
 									<li class="my-1">
-										<a href="{{request()->fullUrlWithQuery(['price' => 2])}}">$1,000 - $5,000</a>
+										<a href="{{request()->fullUrlWithQuery(['price' => 2])}}">1,000đ - 5,000đ</a>
 									</li>
 									<li>
-										<a href="{{request()->fullUrlWithQuery(['price' => 3])}}">$5,000 - $10,000</a>
+										<a href="{{request()->fullUrlWithQuery(['price' => 3])}}">5,000đ - 10,000đ</a>
 									</li>
 									<li class="my-1">
-										<a href="{{request()->fullUrlWithQuery(['price' => 4])}}">$10,000 - $20,000</a>
+										<a href="{{request()->fullUrlWithQuery(['price' => 4])}}">10,000đ - 20,000đ</a>
 									</li>
 								</ul>
 							</div>
@@ -439,6 +439,14 @@ fas fa-heart check1"  style="color:{{$data1->value}}; font-size: 30px;"></i></di
 							    </div>
 								@endforeach
 							   </div>
+							   <p><span>Loại thức uống:</span></p>
+								<div class="bao2">
+								@foreach($hot as $id=>$data2)
+								<div class="bao3">
+								<input type="radio" class="cart_product_hot" name="hot" value="{{$data2->value}}">{{$data2->value}}
+							    </div>
+								@endforeach
+							   </div>
                                                             
 														    <div id="product_quickview_button"></div>
                                                             <div id="beforesend_quickview"></div>
@@ -454,7 +462,11 @@ fas fa-heart check1"  style="color:{{$data1->value}}; font-size: 30px;"></i></di
                                                   </div>
                                                 </div>
                                               </div>
-                                            </div> 	
+                                            </div> 
+
+
+
+
 
 
 	@stop

@@ -42,6 +42,7 @@
 								<th>Tên sản phẩm</th>
 								<th>Giá</th>
 								<th>Màu</th>
+								<th>Size</th>
 								<th>Loại</th>
 								<th>Điều chỉnh</th>
 							</tr>
@@ -76,6 +77,7 @@
 								<td class="invert">${{number_format($totalitem) }} đ</td>
 								<td class="invert"><i class="fas fa-heart" style="color:{{$details['color']}}"></i></td>
 								<td class="invert">{{$details['size']}}</td>
+								<td class="invert">{{$details['hot']}}</td>
 								<td class="actions" data-th="">
 		                        <button class="btn btn-primary btn update-cart" data-id="{{ $id }}"><i class="fas fa-sync-alt"></i></button>
 		                        

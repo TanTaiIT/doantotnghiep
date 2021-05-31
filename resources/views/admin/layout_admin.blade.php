@@ -170,6 +170,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+
+                        <li>
+                            <a href="#"><i class="fa fa-envelope nav_icon"></i>Slide show<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{URL::to('/manage-slider')}}">liệt kê slider<u></u></a>
+                                </li>
+                                <li>
+                                    <a href="{{URL::to('/add-slider')}}">Thêm slider<u></u></a>
+                                </li>
+                               
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
                          <li>
                             <a href="#"><i class="fa fa-envelope nav_icon"></i>Mã giảm giá<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -273,10 +288,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
              $('#v1').attr({
                 name:'',
              });
+             $('.value3').hide();
+             $('#v3').attr({
+                name:'',
+             });
             }else if(_ip=='color'){
                 $('.value1').show();
                 $('#v1').attr({
                     name:'value',
+                });
+                $('.value2').hide();
+                $('#v2').attr({
+                    name:'',
+                });
+                $('.value3').hide();
+                $('#v3').attr({
+                    name:'',
+                });
+            }else if(_ip=='hot'){
+                $('.value3').show();
+                $('#v3').attr({
+                    name:'value',
+                });
+                $('.value1').hide();
+                $('#v1').attr({
+                    name:'',
                 });
                 $('.value2').hide();
                 $('#v2').attr({

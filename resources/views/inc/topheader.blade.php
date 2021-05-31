@@ -12,11 +12,11 @@
 						</li>
 						<li class="text-center border-right text-white">
 							<a href="#" data-toggle="modal" data-target="#exampleModal" class="text-white">
-								<i class="fas fa-sign-in-alt mr-2"></i> Log In </a>
+								<i class="fas fa-sign-in-alt mr-2"></i> Đăng nhập </a>
 						</li>
 						<li class="text-center border-right text-white">
 							<a href="#" data-toggle="modal" data-target="#exampleModal2" class="text-white">
-								<i class="fas fa-sign-out-alt mr-2"></i>Register </a>
+								<i class="fas fa-sign-out-alt mr-2"></i>Đăng ký </a>
 						</li>
 						<?php
 						$cus_id=Session::get('customer_id');

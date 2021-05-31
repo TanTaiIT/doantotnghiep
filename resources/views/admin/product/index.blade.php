@@ -36,9 +36,9 @@
      <td>
        <?php 
           if($p->product_status==1){ ?>
-            <a href="{{route('huykichhoat',$p->product_id)}}"><span class="fa-thumb-styling fa fa-thumbs-up icon"></span></a>
+            <a href="{{route('huykichhoat',$p->product_id)}}"><span class="glyphicon glyphicon-eye-open icon"></span></a>
           <?php }else{ ?> 
-            <a href="{{route('kichhoat',$p->product_id)}}"><span class="fa-thumb-styling fa fa-thumbs-down icon2"></span></a>
+            <a href="{{route('kichhoat',$p->product_id)}}"><span class="glyphicon glyphicon-eye-close icon2"></span></a>
           <?php } ?>
 
      </td>
@@ -59,7 +59,7 @@
 	</td>
     </tr>
     @endforeach
- 
   </tbody>
 </table>
+ <div class="pagiantion" style="text-align: center;">{{$pro->links()}}</div>
 @stop

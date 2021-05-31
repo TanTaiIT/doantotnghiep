@@ -6,26 +6,31 @@
                 var id = $(this).data('id_product');
                 var color=$('input[name=color]:checked').val();
                 var size=$('input[name=size]:checked').val();
+                var hot=$('input[name=hot]:checked').val();
                 var soluong=$('.cart_product_sl').val();
                 var _token = $('input[name="_token"]').val();
                     $.ajax({
                         url: '{{url('/cart')}}',
                         method: 'POST',
-                        data:{id:id,_token:_token,color:color,size:size,soluong:soluong},
+                        data:{id:id,_token:_token,color:color,size:size,hot:hot,soluong:soluong},
+                        beforeSend: function(){
+                            $("#beforesend_quickview").html("<p class='text text-primary'>Đang thêm sản phẩm vào giỏ hàng</p>");
+                        },
                         success:function(){
-
-                            swal({
-                                    title: "Đã thêm sản phẩm vào giỏ hàng",
-                                    text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
-                                    showCancelButton: true,
-                                    cancelButtonText: "Xem tiếp",
-                                    confirmButtonClass: "btn-success",
-                                    confirmButtonText: "Đi đến giỏ hàng",
-                                    closeOnConfirm: false
-                                },
-                                function() {
-                                    window.location.href = "{{url('/gio-hang')}}";
-                                });
+                            $("#beforesend_quickview").html("<p class='text text-success'>Sản phẩm đã thêm vào giỏ hàng</p>");
+                            window.location.reload();
+                            // swal({
+                            //         title: "Đã thêm sản phẩm vào giỏ hàng",
+                            //         text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
+                            //         showCancelButton: true,
+                            //         cancelButtonText: "Xem tiếp",
+                            //         confirmButtonClass: "btn-success",
+                            //         confirmButtonText: "Đi đến giỏ hàng",
+                            //         closeOnConfirm: false
+                            //     },
+                            //     function() {
+                            //         window.location.href = "{{url('/gio-hang')}}";
+                            //     });
 
                         }
 

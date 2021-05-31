@@ -18,7 +18,7 @@ class ProductController extends Controller
     public function index(){
         $cate=category::all();
         $brand=brand::all();
-    	$pro=product::all();
+    	$pro=product::orderBy('product_id','DESC')->paginate(5);
     	return view('admin/product/index',compact('pro','brand','cate'));
     }
    public function imageUpload(Request $request)

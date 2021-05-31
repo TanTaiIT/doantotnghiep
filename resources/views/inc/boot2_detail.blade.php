@@ -122,16 +122,21 @@
                 var id = $(this).data('id_product');
                 var color=$('input[name=color]:checked').val();
                 var size=$('input[name=size]:checked').val();
+                var hot=$('input[name=hot]:checked').val();
                 var soluong=$('.cart_product_sl').val();
                 var _token = $('input[name="_token"]').val();
                     $.ajax({
                         url: '{{url('/cart')}}',
                         method: 'POST',
-                        data:{id:id,_token:_token,color:color,size:size,soluong:soluong},
+                        data:{id:id,_token:_token,color:color,size:size,hot:hot,soluong:soluong},
                        
-                        success:function(data){
+                        beforeSend: function(){
+                            $("#beforesend_quickview").html("<p class='text text-primary'>Đang thêm sản phẩm vào giỏ hàng</p>");
+                        },
+                        success:function(){
                             $("#beforesend_quickview").html("<p class='text text-success'>Sản phẩm đã thêm vào giỏ hàng</p>");
-                            
+                            window.location.reload();
+
                         }
 
                     });
