@@ -1,7 +1,60 @@
 	<script src="{!! asset('web/js/jquery-2.2.3.min.js')!!}"></script>
 	<!-- //jquery -->
+	<script type="text/javascript">
+        $(document).ready(function(){
+            $('.add-to-cart').click(function(){
+                var id = $(this).data('id_product');
+                var color=$('input[name=color]:checked').val();
+                var size=$('input[name=size]:checked').val();
+                var soluong=$('.cart_product_sl').val();
+                var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url: '{{url('/cart')}}',
+                        method: 'POST',
+                        data:{id:id,_token:_token,color:color,size:size,soluong:soluong},
+                        success:function(){
 
+                            swal({
+                                    title: "Đã thêm sản phẩm vào giỏ hàng",
+                                    text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
+                                    showCancelButton: true,
+                                    cancelButtonText: "Xem tiếp",
+                                    confirmButtonClass: "btn-success",
+                                    confirmButtonText: "Đi đến giỏ hàng",
+                                    closeOnConfirm: false
+                                },
+                                function() {
+                                    window.location.href = "{{url('/gio-hang')}}";
+                                });
 
+                        }
+
+                    });
+                // }
+
+                
+            });
+        });
+    </script>
+	<script type="text/javascript">
+	$(".remove-from-cart").click(function (e) {
+            e.preventDefault();
+
+            var ele = $(this);
+
+            // if(confirm("bạn có chắc muốn xóa không")) {
+                $.ajax({
+                    url: '{{ url('remove-from-cart') }}',
+                    method: "DELETE",
+                    data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id")},
+                    success: function (response) {
+                        window.location.reload();
+
+                        // alert('đã xóa sản phẩm ra khỏi giỏ hàng');
+                    }
+                });
+            // }
+        });</script>
 	<script type="text/javascript">
 	function remove_background(product_id)
      {

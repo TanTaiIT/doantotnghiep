@@ -35,7 +35,9 @@ Route::get('huykichhoat/{id}','ProductController@huykichhoat')->name('huykichhoa
 Route::get('add_images/{id}','ProductController@add_img')->name('add_img');
 Route::post('add_images1/{id}','ProductController@add_img1')->name('add_img1');
 Route::get('del_img/{id}','ProductController@del_img')->name('del_img');
+
 });
+Route::post('/quickview','Admin\ProductController@quickview');
 
 /* Categoy */
 
@@ -65,18 +67,20 @@ Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
    Route::get('/','ClientController@index')->name('cli_index');
    Route::get('/detail/{id}','ClientController@detail')->name('cli_detail');
    Route::post('/search','ClientController@search')->name('cli_search');
-   Route::get('/cart','CartController@cart')->name('cart');
-   Route::post('/cart/{id}','CartController@addtocart')->name('addtocart');
+   // Route::get('/cart','CartController@cart')->name('cart');
+   
    Route::get('/dangxuat_kh','ClientController@dangxuatkh')->name('dangxuat_kh');
    Route::get('/delivery','CheckoutController@delivery');
    // Route::post('/select-delivery','DeliveryController@select_delivery');
    Route::post('/select-delivery-home','CheckoutController@select_delivery_home');
    Route::get('/checkout','CheckoutController@checkout')->name('checkout');
    Route::get('/list-pro/{id}','ClientController@list_pro')->name('list_pro');
+   Route::post('/cart/{id}','CartController@addtocart1')->name('addtocart1');
    
 
    
 });
+Route::post('/cart','Client\CartController@addtocart')->name('addtocart');
  Route::patch('update-cart','Client\CartController@update');
  Route::delete('remove-from-cart','Client\CartController@remove');
  Route::post('/select-delivery-home','Client\CheckoutController@delivery_home');
@@ -126,3 +130,5 @@ Route::post('/them_attr','Admin\AttrController@store_attr')->name('store_attr');
 Route::post('/tim-kiem','Client\ClientController@search');
 Route::post('/autocomplete-ajax','Client\ClientController@autocomplete_ajax');
 Route::post('/insert-rating','Client\ClientController@insert_rating');
+
+Route::post('/add-cart-ajax','Client\CartController@add_cart_ajax');

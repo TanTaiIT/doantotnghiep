@@ -28,7 +28,7 @@
 										</div>
 										<div class="item-info-product text-center border-top mt-4">
 											<h4 class="pt-1">
-												<a href="single.html">{{$p->product_name}}</a>
+												<a href="{{route('cli_detail',$p->product_id)}}">{{$p->product_name}}</a>
 											</h4>
 
 											<?php /*<ul class="list-inline rating"  title="Average Rating">
@@ -53,18 +53,27 @@
 												<del>$280.00</del>
 											</div>
 											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="{{route('addtocart',$p->product_id)}}" method="post">
+												<form>
 													@csrf
-													<fieldset>
-														
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
+													<fieldset> 
+														<!-- <input type="button" value="Thêm giỏ hàng" class="btn btn-default add-to-cart" data-id_product="{{$p->product_id}}" name="add-to-cart"> -->
+
+
+														<input type="button" data-toggle="modal" data-target="#xemnhanh"  value="Xem nhanh" class="btn btn-default xemnhanh" data-id_product="{{$p->product_id}}" name="add-to-cart">
 													</fieldset>
-												</form>
+												</form> 
+
+
+
+
 
 											</div>
 										</div>
 									</div>
 								</div>
+
+
+								
 								@endforeach
 							</div>
 
@@ -352,6 +361,102 @@
 			</div>
 		</div>
 	</div>
+
+	
+
+
+	<div class="modal fade" id="xemnhanh" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                              <div class="modal-dialog modal-lg"  role="document">
+                                                <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    <h5 class="modal-title product_quickview_title" id="">
+
+                                                        <span id="product_quickview_title"></span>
+                                                        
+                                                    </h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                    <style type="text/css">
+                                                        span#product_quickview_content img {
+                                                            width: 100%;
+                                                        }
+
+                                                        @media screen and (min-width: 768px) {
+                                                            .modal-dialog {
+                                                              width: 700px; /* New width for default modal */
+                                                            }
+                                                            .modal-sm {
+                                                              width: 350px; /* New width for small modal */
+                                                            }
+                                                        }
+                                                        
+                                                        @media screen and (min-width: 992px) {
+                                                            .modal-lg {
+                                                              width: 1200px; /* New width for large modal */
+                                                            }
+                                                        }
+                                                    </style>
+                                                    <div class="baotrum">
+                                                        <div class="taice1">
+                                                            <span id="product_quickview_image"></span>
+                                                            <span id="product_quickview_gallery"></span>
+                                                        </div>
+                                                        <form>
+                                                            @csrf
+                                                            <div id="product_quickview_value"></div>
+                                                        <div class=" taice">
+                                                            <h2><span id="product_quickview_title"></span></h2>
+                                                            <p>Mã ID: <span id="product_quickview_id"></span></p>
+                                                            <p  >Giá sản phẩm : <span style="font-size: 20px; color: brown;font-weight: bold;" id="product_quickview_price"></span></p>
+                                
+                                                                <label >Số lượng:</label>
+
+                                                               
+                                                                <input type="number" class="soluong cart_product_sl" min=1 value="1" name="soluong">
+                                                             
+                                                            </span>
+                                                            <p >Mô tả sản phẩm:</p>
+                                                           <!--  <hr> -->
+                                                            <p><span id="product_quickview_desc"></span></p>
+                                                            <hr>
+                                                            <p><span id="product_quickview_content"></span></p>
+                                                            <p><span>Chọn màu:</span></p>
+                                                            <div class="bao1">
+								@foreach($color as $id=>$data1)
+								<div class="colo">
+								<input  type="radio"  name="color" value="{{$data1->value}}" class="check cart_product_color"><i class="
+fas fa-heart check1"  style="color:{{$data1->value}}; font-size: 30px;"></i></div>
+								@endforeach
+							    </div>
+								<p><span>Chọn size</span></p>
+								<div class="bao2">
+								@foreach($size as $id=>$data)
+								<div class="bao3">
+								<input type="radio" class="cart_product_size" name="size" value="{{$data->value}}">{{$data->value}}
+							    </div>
+								@endforeach
+							   </div>
+                                                            
+														    <div id="product_quickview_button"></div>
+                                                            <div id="beforesend_quickview"></div>
+                                                        </div>
+                                                        </form>
+
+                                                    </div>
+                                                   
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                                    <button type="button" class="btn btn-default redirect-cart">Đi tới giỏ hàng</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div> 	
+
+
 	@stop
 
 	

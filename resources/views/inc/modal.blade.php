@@ -49,6 +49,10 @@
 			</div>
 		</div>
 	</div>
+
+
+	
+
 	<!-- register -->
 	<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog" role="document">

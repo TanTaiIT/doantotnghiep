@@ -2,6 +2,25 @@
 	<!-- //jquery -->
 
 	<!-- nav smooth scroll -->
+	<script type="text/javascript">
+	$(".remove-from-cart").click(function (e) {
+            e.preventDefault();
+
+            var ele = $(this);
+
+            // if(confirm("bạn có chắc muốn xóa không")) {
+                $.ajax({
+                    url: '{{ url('remove-from-cart') }}',
+                    method: "DELETE",
+                    data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id")},
+                    success: function (response) {
+                        window.location.reload();
+
+                        // alert('đã xóa sản phẩm ra khỏi giỏ hàng');
+                    }
+                });
+            // }
+        });</script>
 	<script>
 		$(document).ready(function () {
 			$(".dropdown").hover(

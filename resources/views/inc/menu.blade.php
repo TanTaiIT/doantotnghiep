@@ -25,14 +25,14 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav ml-auto text-center mr-xl-5">
 						<li class="nav-item active mr-lg-2 mb-lg-0 mb-2">
-							<a class="nav-link" href="{{route('cli_index')}}">Home
+							<a class="nav-link" href="{{route('cli_index')}}">Trang chủ
 								<span class="sr-only">(current)</span>
 							</a>
 						</li>
 						
 						<li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
 							<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								menu
+								Menu
 							</a>
 							<div class="dropdown-menu">
 								<div class="agile_inner_drop_nav_info p-4">
@@ -47,110 +47,19 @@
 												@endforeach
 											</ul>
 										</div>
-										<!-- <div class="col-sm-6 multi-gd-img">
-											<ul class="multi-column-dropdown">
-												<li>
-													<a href="product.html">Laptops</a>
-												</li>
-												<li>
-													<a href="product.html">Drives & Storage</a>
-												</li>
-												<li>
-													<a href="product.html">Printers & Ink</a>
-												</li>
-												<li>
-													<a href="product.html">Networking Devices</a>
-												</li>
-												<li>
-													<a href="product.html">Computer Accessories</a>
-												</li>
-												<li>
-													<a href="product.html">Game Zone</a>
-												</li>
-												<li>
-													<a href="product.html">Software</a>
-												</li>
-											</ul>
-										</div> -->
 									</div>
 								</div>
 							</div>
 						</li>
-						<!-- <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
-							<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Appliances
-							</a>
-							<div class="dropdown-menu">
-								<div class="agile_inner_drop_nav_info p-4">
-									<h5 class="mb-3">TV, Appliances, Electronics</h5>
-									<div class="row">
-										<div class="col-sm-6 multi-gd-img">
-											<ul class="multi-column-dropdown">
-												@foreach($brand as $b)
-												<li>
-													<a href="product2.html">{{$b['brand_name']}}</a>
-												</li>
-												@endforeach
-											</ul>
-										</div>
-										<div class="col-sm-6 multi-gd-img">
-											<ul class="multi-column-dropdown">
-												<li>
-													<a href="product2.html">Musical Instruments</a>
-												</li>
-												<li>
-													<a href="product2.html">Gaming Consoles</a>
-												</li>
-												<li>
-													<a href="product2.html">All Electronics</a>
-												</li>
-												<li>
-													<a href="product2.html">Air Conditioners</a>
-												</li>
-												<li>
-													<a href="product2.html">Refrigerators</a>
-												</li>
-												<li>
-													<a href="product2.html">Washing Machines</a>
-												</li>
-												<li>
-													<a href="product2.html">Kitchen & Home Appliances</a>
-												</li>
-												<li>
-													<a href="product2.html">Heating & Cooling Appliances</a>
-												</li>
-												<li>
-													<a href="product2.html">All Appliances</a>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li> -->
+						
 						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-							<a class="nav-link" href="about.html">About Us</a>
+							<a class="nav-link" href="about.html">Về chúng tôi</a>
 						</li>
 						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-							<a class="nav-link" href="product.html">New Arrivals</a>
+							<a class="nav-link" href="product.html">Sản phẩm sắp ra mắt</a>
 						</li>
-						<!-- <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
-							<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Pages
-							</a>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" href="product.html">Product 1</a>
-								<a class="dropdown-item" href="product2.html">Product 2</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="single.html">Single Product 1</a>
-								<a class="dropdown-item" href="single2.html">Single Product 2</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="checkout.html">Checkout Page</a>
-								<a class="dropdown-item" href="payment.html">Payment Page</a>
-							</div>
-						</li> -->
 						<li class="nav-item">
-							<a class="nav-link" href="contact.html">Contact Us</a>
+							<a class="nav-link" href="contact.html">Liên hệ</a>
 						</li>
 						
 					</ul>

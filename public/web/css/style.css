@@ -97,9 +97,23 @@ select.boot.orderby{
 label {
     margin: 0;
 }
+.baotrum{
+    display: flex;
+    justify-content: space-around;
+}
+.taice{
+
+}
+.taice1{
+    width: 30%;
+}
 .bao1{
     display: flex;  
     align-items: center;
+}
+.tai3{
+        width: 136px;
+    height: 45px;
 }
 .check{
     position: absolute;
@@ -112,6 +126,14 @@ label {
    /* display: block;*/
     z-index: 2;
 
+}
+button.btn.btn-danger.btn.cart.remove-from-cart {
+    background: #ff0047;
+    padding: 1px 4px;
+    margin-left: 14px;
+}
+.add-to-cart{
+    background: #f337f6;
 }
 .bao3{
     margin: 0 20px;
@@ -130,6 +152,11 @@ label {
 }
 .sl {
     margin-bottom: 20px;
+}
+span.giohang {
+    font-family: 'oli';
+    font-size: 21px;
+    color: slategray;
 }
 @font-face{
     font-family: 'oli';
@@ -460,6 +487,7 @@ button.w3view-cart {
     letter-spacing: 1px;
     font-size: 15px;
     color: #000;
+    text-transform: uppercase;
 }
 
 .navbar-light .navbar-nav .show>.nav-link,
@@ -1783,7 +1811,7 @@ li.subitem1 p {
 }
 
 .occasion-cart .snipcart-details {
-    width: 38%;
+    width: 47%;
     margin: 0;
 }
 

@@ -67,7 +67,7 @@
 					</div>
 					<div class="occasion-cart">
 						<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-							<form action="{{route('addtocart',$detail->product_id)}}" method="post">
+							<form>
 								@csrf
 								<fieldset>
 									<ul>
@@ -76,7 +76,7 @@
 								<div class="bao1">
 								@foreach($color as $id=>$data1)
 								<div class="colo">
-								<input  type="radio" name="color" value="{{$data1->value}}" id="che" class="check"><i class="
+								<input  type="radio"  name="color" value="{{$data1->value}}" class="check cart_product_color"><i class="
 fas fa-heart check1"  style="color:{{$data1->value}}; font-size: 30px;"></i></div>
 								@endforeach
 							    </div>
@@ -84,9 +84,9 @@ fas fa-heart check1"  style="color:{{$data1->value}}; font-size: 30px;"></i></di
 							<li class="mb-3">
 								<p><span>Chọn size</span></p>
 								<div class="bao2">
-								@foreach($size as $data)
+								@foreach($size as $id=>$data)
 								<div class="bao3">
-								<input type="radio" name="size" value="{{$data->value}}">{{$data->value}}
+								<input type="radio" class="cart_product_size" name="size" value="{{$data->value}}">{{$data->value}}
 							    </div>
 								@endforeach
 							   </div>
@@ -94,11 +94,14 @@ fas fa-heart check1"  style="color:{{$data1->value}}; font-size: 30px;"></i></di
 							<li>
 								<p><span>Số lượng</span></p>
 								<div class="sl">
-									<input class="soluong" type="number" min=1 value="1" name="sl">
+									<input type="number" class="soluong cart_product_sl" min=1 value="1" name="soluong">
 								</div>
 							</li>
-									</ul>
-									<input type="submit" name="submit" value="Add to cart" class="button btn" />
+							<li>
+								<input type="button" value="Thêm giỏ hàng" class="btn btn-default add-to-cart" data-id_product="{{$detail->product_id}}" name="add-to-cart">
+							</li>
+							</ul>
+									
 								</fieldset>
 							</form>
 						</div>

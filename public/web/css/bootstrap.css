@@ -304,6 +304,8 @@ fieldset {
   padding: 0;
   margin: 0;
   border: 0;
+  display: flex;
+  justify-content: space-around;
 }
 
 legend {
@@ -2492,6 +2494,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
 
 .btn:not(:disabled):not(.disabled) {
   cursor: pointer;
+  border-radius: 30px;
 }
 
 .btn:not(:disabled):not(.disabled):active, .btn:not(:disabled):not(.disabled).active {

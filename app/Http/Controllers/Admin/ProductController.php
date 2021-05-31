@@ -137,6 +137,31 @@ class ProductController extends Controller
             return redirect()->route('add_img')->with('message','xóa không thành công');
         }
     }
+
+    public function quickview(Request $request){
+
+        $product_id = $request->product_id;
+        $product = Product::find($product_id);
+
+        // $gallery = Gallery::where('product_id',$product_id)->get();
+
+        // $output['product_gallery'] = '';
+        
+        // foreach($gallery as $key => $gal){
+        //     $output['product_gallery'].= '<p><img width="100%" src="public/uploads/gallery/'.$gal->gallery_image.'"></p>';
+        // }
+
+        $output['product_name'] = $product->product_name;
+        $output['product_id'] = $product->product_id;
+        $output['product_desc'] = $product->product_desc;
+        $output['product_price'] = number_format($product->product_price,0,',','.').'VNĐ';
+        $output['product_image'] = '<p><img width="100%" src="images/'.$product->product_image.'"></p>';
+
+        $output['product_button'] = '<input type="button" value="Mua ngay" class="btn btn-primary btn-sm add-to-cart-quickview" id="buy_quickview" data-id_product="'.$product->product_id.'"  name="add-to-cart">';
+        echo json_encode($output);
+       
+
+    }
    
 
 }

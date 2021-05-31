@@ -15,7 +15,9 @@ use DB;
 class ClientController extends Controller
 {
     public function index(Request $request){
-        $url_canonical = $request->url();   
+        $url_canonical = $request->url();  
+        $size=attribute::where('name','size')->get();
+        $color=attribute::where('name','color')->get();
         $cate=category::all();
         $brand=brand::all();
     	$com='index';
@@ -77,7 +79,7 @@ class ClientController extends Controller
         //     }
         // }
         $product=$product->orderBy('product_id','DESC')->paginate(6);
-    	return view('client/index',compact('product','com','cate','brand','url_canonical'));
+    	return view('client/index',compact('product','com','cate','brand','url_canonical','size','color'));
 
     }
  

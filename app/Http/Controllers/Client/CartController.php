@@ -8,6 +8,7 @@ use App\Models\product;
 use App\Models\category;
 use App\Models\brand;
 use App\Models\attribute;
+use Session;
 class CartController extends Controller
 {
     public function cart(){
@@ -17,18 +18,13 @@ class CartController extends Controller
         $brand=brand::all();
     	return view('Client.cart',compact('com','cate','brand','url_canonical'));
     }
-    public function addtocart(Request $req,$id){
-    	$product=product::find($id);
-        $attr=attribute::all();
-        $quan=0;
-        if(isset($req->sl)){
-            $quan=$quan+$req->sl;
-        }else{
-            $quan=1;
-        }
+    public function addtocart(Request $req){
+       $id=$req->id;
+        $product=product::find($id);
+        $soluong=$req->soluong;
         $color=$req->color;
         $size=$req->size;
-    	if(!$product){
+        if(!$product){
             abort(404);
         }
         $cart=session()->get('cart');
@@ -37,35 +33,33 @@ class CartController extends Controller
                 $id=>[
                     "pro_id"=>$product->product_id,
                     "name"=>$product->product_name,
-                    "quantity"=>$quan,
+                    "quantity"=>$soluong,
                     "price"=>$product->product_price,
                     "image"=>$product->product_image,
-                    "size"=>$req->size,
-                    "color"=>$req->color
+                    "size"=>$size,
+                    "color"=>$color
                 ]
             ];
-
+            
             session()->put('cart',$cart);
             return redirect()->back()->with('success','đã thêm sản phẩm vào giỏ hàng');
         }
-        
         if(isset($cart[$id])){
-            if(isset($req->sl)){
-                $cart[$id]['quantity']=$cart[$id]['quantity']+$quan;
+           if(isset($req->soluong)){
+                $cart[$id]['quantity']=$cart[$id]['quantity']+$soluong;
                 session()->put('cart',$cart);
                 return redirect()->back()->with('success','đã thêm sản phẩm vào giở hàng');
             }
-            
         
         }
         $cart[$id]=[
             "pro_id"=>$product->product_id,
             "name"=>$product->product_name,
-            "quantity"=>$quan,
+            "quantity"=>$soluong,
             "price"=>$product->product_price,
             "image"=>$product->product_image,
-            "size"=>$req->size,
-            "color"=>$req->color
+            "size"=>$size,
+            "color"=>$color
         ];
         session()->put('cart',$cart);
         return redirect()->back()->with('success','đã thêm sản phẩm vào giỏ hàng');
@@ -99,9 +93,53 @@ class CartController extends Controller
             session()->flash('success', 'Cart updated successfully');
         }
     }
-    // public function payment(){
-    //     $com='index';
-    //     return view('client/payment',compact('com'));
-    // }
+    public function add_cart_ajax(Request $request){
+    $data = $request->all();
+    $session_id = substr(md5(microtime()),rand(0,26),5);
+    $cart = Session::get('cart');
+    if($cart==true){
+        $is_avaiable = 0;
+        foreach($cart as $key => $val){
+            if($val['product_id']==$data['cart_product_id']){
+                $is_avaiable++;
+            }
+        }
+        if(!$cart){
+            $cart=[
+                $id=>[
+                    "pro_id"=>$product->product_id,
+                    "name"=>$product->product_name,
+                    "quantity"=>$quan,
+                    "price"=>$product->product_price,
+                    "image"=>$product->product_image,
+                    "size"=>$req->size,
+                    "color"=>$req->color
+                ]
+            ];
+
+            session()->put('cart',$cart);
+            return redirect()->back()->with('success','đã thêm sản phẩm vào giỏ hàng');
+        }
+    }else{
+        $cart[] = array(
+            'session_id' => $session_id,
+            'product_name' => $data['cart_product_name'],
+            'product_id' => $data['cart_product_id'],
+            'product_image' => $data['cart_product_image'],
+            'product_quantity' => $data['cart_product_quantity'],
+            'product_qty' => $data['cart_product_qty'],
+            'product_price' => $data['cart_product_price'],
+
+        );
+        Session::put('cart',$cart);
+    }
+
+    Session::save();
+}
+
+
+
     
+    
+
 }

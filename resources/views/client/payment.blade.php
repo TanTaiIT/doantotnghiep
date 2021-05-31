@@ -1,5 +1,8 @@
 @extends('client/layout_cli')
 @section('content')
+<div class="page-head_agile_info_w3l">
+
+	</div>
 	<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3 mar">
 				<span>P</span>aymnet
 			</h3>

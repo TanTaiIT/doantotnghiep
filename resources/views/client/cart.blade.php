@@ -60,7 +60,7 @@
 							<tr class="rem1">
 								<td class="invert">{{$i++}}</td>
 								<td class="invert-image">
-									<a href="single.html">
+									<a href="{{route('cli_detail',$details['pro_id'])}}">
 										<img src="{!!asset('images/'.$details['image'])!!}" alt=" " class="img-responsive">
 									</a>
 								</td>

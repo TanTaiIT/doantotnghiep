@@ -30,9 +30,9 @@
         <div class="col-lg-12 col-sm-12 col-12 main-section">
             <div class="dropdown">
                 <button type="button" class="btn btn-primary" data-toggle="dropdown">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Giỏ hàng <span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="giohang"> Giỏ hàng</span> <span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span>
                 </button>
-                <div class="dropdown-menu">
+               <div class="dropdown-menu">
                     <div class="row total-header-section">
                         <div class="col-lg-6 col-sm-6 col-6">
                             <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span>
@@ -56,12 +56,16 @@
                             <div class="row cart-detail">
                                 <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
                                     <img width="50px" height="50px" src="{!! asset('images/'.$details['image'])!!}" />
+                                     <button style="font-size: 10px" class="btn btn-danger btn cart remove-from-cart" data-id="{{ $id }}"><i class="fas fa-trash"></i></button> 
                                 </div>
                                 <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
                                     <p>{{ $details['name'] }} </p>
                                     <span class="price text-info"></span> ${{ number_format($details['price']) }} đ <span class="count">Quantity:{{ $details['quantity'] }} </span><br><span>Size:{{$details['size']}}</span><br><span>Color:<i class="fas fa-heart" style="color: {{$details['color']}}"></i></span>
                                 </div>
+
                             </div>
+
+
                         @endforeach
                     @endif
                     <div class="row">
