@@ -11,6 +11,7 @@ use App\Models\brand;
 use App\Models\pro_img;
 use App\Models\product_attr;
 use App\Models\attribute;
+use App\Models\OrderDetail;
 use Intervention\Image\Facades\Image;
 use DB;
 class ProductController extends Controller
@@ -50,6 +51,7 @@ class ProductController extends Controller
     	$product->product_desc=$req->mota;
     	$product->product_price=$req->gia;
     	$product->product_status=$req->status;
+        $product->soluong=$req->soluong;
     	$product->product_image=$this->imageUpload($req);
     	if($product->save()){
     		Session::flash('message','thêm sản phẩm thành công');
@@ -78,6 +80,7 @@ class ProductController extends Controller
     	$pro['product_desc']=$req->mota;
     	$pro['product_price']=$req->gia;
     	$pro['product_status']=$req->status;
+        $pro['soluong']=$req->soluong;
     	$pro['product_image']=$this->imageUpload($req);
     	if($pro->save()){
     		Session::flash("message","cập nhật sản phẩm thành công");

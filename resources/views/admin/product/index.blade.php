@@ -18,6 +18,7 @@
       <th scope="col">Giá tiền</th>
       <th scope="col">Hình ảnh</th>
       <th scope="col">Trạng thái</th>
+      <th scope="col">Số lượng</th>
       <th>Thao tác</th>
     </tr>
   </thead>
@@ -42,6 +43,7 @@
           <?php } ?>
 
      </td>
+     <td>{{$p->soluong}}</td>
      <td>
       <a class="cach" href="{{route('add_img',$p->product_id)}}" title="thêm ảnh"><i class="glyphicon glyphicon-folder-open lo"></i>
         </a>

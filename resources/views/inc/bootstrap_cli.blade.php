@@ -31,6 +31,7 @@
 	<link href="{!! asset('web/css/menu.css')!!}" rel="stylesheet" type="text/css" media="all" />
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
 	<!-- menu style -->
 	<!-- //Custom-Files -->
 

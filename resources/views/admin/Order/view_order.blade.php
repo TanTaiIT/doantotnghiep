@@ -120,6 +120,7 @@
               </label>
             </th>
             <th>Tên sản phẩm</th>
+            <th>Số lượng sp trong kho</th>
             <th>Mã giảm giá</th>
             <th>Màu</th>
             <th>Size</th>
@@ -147,6 +148,7 @@
            
             <td><i>{{$i}}</i></td>
             <td>{{$details->product_name}}</td>
+            <td>{{$details->product->soluong}}</td>
             <td>@if($details->product_coupon!='no')
                   {{$details->product_coupon}}
                 @else 
@@ -156,8 +158,20 @@
             <td>{{$details->product_color}}</td>
             <td>{{$details->product_size}}</td>
             <td>{{number_format($details->product_feeship ,0,',','.')}}đ</td>
-            <td>{{$details->product_sales_quantity}}</td>
-            <td>{{number_format($details->product_price ,0,',','.')}}đ</td>
+            <td><input type="number" min="1" {{$order_status==2 ? 'disabled' : ''}} class="order_qty_{{$details->product_id}}" value="{{$details->product_sales_quantity}}" name="product_sales_quantity">
+
+              <input type="hidden" name="order_qty_storage" class="order_qty_storage_{{$details->product_id}}" value="{{$details->product->product_quantity}}">
+
+              <input type="hidden" name="order_code" class="order_code" value="{{$details->order_code}}">
+
+              <input type="hidden" name="order_product_id" class="order_product_id" value="{{$details->product_id}}">
+
+              @if($order_status!=2) 
+
+              <button class="btn btn-default update_quantity_order" data-product_id="{{$details->product_id}}" name="update_quantity_order">Cập nhật</button>
+
+              @endif</td>
+            <td>{{$details->product_price}}</td>
             <td>{{number_format($subtotal ,0,',','.')}}đ</td>
           </tr>
         @endforeach
@@ -170,12 +184,12 @@
                   @php
                   $total_after_coupon = ($total*$coupon_number)/100;
                   echo 'Tổng giảm :'.number_format($total_after_coupon,0,',','.').'</br>';
-                  $total_coupon = $total - $total_after_coupon - $details->product_feeship;
+                  $total_coupon = $total + $total_after_coupon - $details->product_feeship;
                   @endphp
               @else 
                   @php
                   echo 'Tổng giảm :'.number_format($coupon_number,0,',','.').'k'.'</br>';
-                  $total_coupon = $total - $coupon_number - $details->product_feeship;
+                  $total_coupon = $total + $coupon_number - $details->product_feeship;
 
                   @endphp
               @endif
@@ -188,7 +202,38 @@
       </table>
       <a class="in" target="_blank" href="{{url('/print-order/'.$details->order_code)}}">In đơn hàng</a>
     </div>
-   
+   <td colspan="2">
+              @foreach($getorder as $key => $or)
+              @if($or->order_status==1)
+              <form>
+               @csrf
+               <select class="form-control order_details">
+                
+                <option id="{{$or->order_id}}" selected value="1">Chưa xử lý</option>
+                <option id="{{$or->order_id}}" value="2">Đã xử lý-Đã giao hàng</option>
+                
+              </select>
+            </form>
+            
+            @else
+
+            <form>
+              @csrf
+              <select class="form-control order_details">
+               
+                <option disabled id="{{$or->order_id}}" value="1">Chưa xử lý</option>
+                <option id="{{$or->order_id}}" selected value="2">Đã xử lý-Đã giao hàng</option>
+                
+              </select>
+            </form>
+
+            
+
+            @endif
+            @endforeach
+
+
+          </td>
   </div>
 </div>
 @stop

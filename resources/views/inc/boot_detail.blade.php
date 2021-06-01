@@ -1,24 +1,29 @@
 	<script src="{!! asset('web/js/jquery-2.2.3.min.js')!!}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript" charset="utf-8" async defer></script>
 	<!-- //jquery -->
 	<script type="text/javascript">
         $(document).ready(function(){
             $('.add-to-cart').click(function(){
+              
                 var id = $(this).data('id_product');
                 var color=$('input[name=color]:checked').val();
                 var size=$('input[name=size]:checked').val();
                 var hot=$('input[name=hot]:checked').val();
                 var soluong=$('.cart_product_sl').val();
                 var _token = $('input[name="_token"]').val();
+                if($("input:radio[name='color']").is(":checked") && $("input:radio[name='size']").is(":checked") && $("input:radio[name='hot']").is(":checked")) {
                     $.ajax({
                         url: '{{url('/cart')}}',
                         method: 'POST',
                         data:{id:id,_token:_token,color:color,size:size,hot:hot,soluong:soluong},
                         beforeSend: function(){
-                            $("#beforesend_quickview").html("<p class='text text-primary'>Đang thêm sản phẩm vào giỏ hàng</p>");
+                            $("#beforesend_quickview").html("<img width='30px' height='30px'src='../../web/images/Spinner-3.gif'>");
                         },
                         success:function(){
+                            // 
                             $("#beforesend_quickview").html("<p class='text text-success'>Sản phẩm đã thêm vào giỏ hàng</p>");
                             window.location.reload();
+                            
                             // swal({
                             //         title: "Đã thêm sản phẩm vào giỏ hàng",
                             //         text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
@@ -35,8 +40,10 @@
                         }
 
                     });
-                // }
-
+              }else{
+                // swal("Thông báo!", "bạn cần phải chọn đầy đủ thông tin trước khi mua hàng");
+                toastr.warning('bạn cần phải chọn đầy đủ thông tin trước khi mua hàng');
+              }
                 
             });
         });

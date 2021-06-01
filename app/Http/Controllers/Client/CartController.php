@@ -19,7 +19,8 @@ class CartController extends Controller
     	return view('Client.cart',compact('com','cate','brand','url_canonical'));
     }
     public function addtocart(Request $req){
-       $id=$req->id;
+        
+        $id=$req->id;
         $product=product::find($id);
         $soluong=$req->soluong;
         $color=$req->color;

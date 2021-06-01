@@ -125,21 +125,26 @@
                 var hot=$('input[name=hot]:checked').val();
                 var soluong=$('.cart_product_sl').val();
                 var _token = $('input[name="_token"]').val();
+                if($("input:radio[name='color']").is(":checked") && $("input:radio[name='size']").is(":checked") && $("input:radio[name='hot']").is(":checked")) {
                     $.ajax({
                         url: '{{url('/cart')}}',
                         method: 'POST',
                         data:{id:id,_token:_token,color:color,size:size,hot:hot,soluong:soluong},
                        
                         beforeSend: function(){
-                            $("#beforesend_quickview").html("<p class='text text-primary'>Đang thêm sản phẩm vào giỏ hàng</p>");
+                            $("#beforesend_quickview").html("<img width='30px' height='30px' src='../public/web/images/Spinner-3.gif'>");
                         },
                         success:function(){
                             $("#beforesend_quickview").html("<p class='text text-success'>Sản phẩm đã thêm vào giỏ hàng</p>");
                             window.location.reload();
+                            
 
                         }
 
                     });
+                }else{
+                     toastr.warning('bạn cần phải chọn đầy đủ thông tin trước khi mua hàng');
+                }
             });
         
     </script>

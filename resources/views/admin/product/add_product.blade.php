@@ -49,6 +49,10 @@
     <input type="radio" value=0 name="status">Ẩn
   </div>
   <div class="form-group">
+    <label for="categoryid">Số lượng</label>
+    <input type="text" class="form-control" name="soluong"  placeholder="Nhập số lượng">
+  </div>
+  <div class="form-group">
     <label>Màu sắc</label>
     @foreach($attr as $color)
     <input type="checkbox" value="{{$color->attr_id}}" name="attr_id[]"><i class="

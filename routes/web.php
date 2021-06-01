@@ -130,6 +130,8 @@ Route::get('/thankyou','Client\ClientController@thankyou')->name('thank');
 Route::get('/manage-order','Admin\OrderController@manage_order');
 Route::get('/view-order/{order_code}','Admin\OrderController@view_order');
 Route::get('/print-order/{checkout_code}','Client\CheckoutController@print_order');
+Route::post('/update-order-qty','Admin\OrderController@update_order_qty');
+Route::post('/update-qty','Admin\OrderController@update_qty');
 
 
 /* attribute */

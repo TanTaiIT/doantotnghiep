@@ -53,7 +53,7 @@
 					<h3 class="mb-3">{{$detail->product_name}}</h3>
 					<p class="mb-3">
 						<span class="item_price">{{number_format($detail->product_price)}}</span>
-						<del class="mx-2 font-weight-light">280.00</del>
+						<!-- <del class="mx-2 font-weight-light">280.00</del> -->
 						<!-- <label>Free delivery</label> -->
 					</p>
 					<div class="single-infoagile">
@@ -97,7 +97,7 @@ fas fa-heart check1"  style="color:{{$data1->value}}; font-size: 30px;"></i></di
 								<div class="bao2">
 								@foreach($hot as $id=>$data2)
 								<div class="bao3">
-								<input type="radio" class="cart_product_hot" name="hot" value="{{$data2->value}}">{{$data2->value}}
+								<input type="radio"  class="cart_product_hot" name="hot" value="{{$data2->value}}">{{$data2->value}}
 							    </div>
 								@endforeach
 							   </div>
@@ -111,10 +111,11 @@ fas fa-heart check1"  style="color:{{$data1->value}}; font-size: 30px;"></i></di
 							
 							<li>
 								<input type="button" value="Thêm giỏ hàng" class="btn btn-default add-to-cart" data-id_product="{{$detail->product_id}}" name="add-to-cart">
+								<span id="beforesend_quickview"></span>
 							</li>
 							<li>
 								<div id="product_quickview_button"></div>
-                                <div id="beforesend_quickview"></div>
+                                
 							</li>
 							</ul>
 									

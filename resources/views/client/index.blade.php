@@ -50,7 +50,7 @@
 
 											<div class="info-product-price my-2">
 												<span class="item_price">{{number_format($p->product_price)}} đ</span>
-												<del>280.00</del>
+												<!-- <del>280.00</del> -->
 											</div>
 											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
 												<form>
@@ -448,7 +448,7 @@ fas fa-heart check1"  style="color:{{$data1->value}}; font-size: 30px;"></i></di
 								@endforeach
 							   </div>
                                                             
-														    <div id="product_quickview_button"></div>
+														    <div style="margin-bottom: 10px" id="product_quickview_button"></div>
                                                             <div id="beforesend_quickview"></div>
                                                         </div>
                                                         </form>

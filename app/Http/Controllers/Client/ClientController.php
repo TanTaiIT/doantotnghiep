@@ -11,11 +11,13 @@ use App\Models\brand;
 use App\Models\pro_img;
 use App\Models\rating;
 use App\Models\attribute;
+use App\Models\slider;
 use DB;
 class ClientController extends Controller
 {
     public function index(Request $request){
-        $url_canonical = $request->url();  
+        $url_canonical = $request->url();
+        $slide=slider::limit(4)->get();  
         $size=attribute::where('name','size')->get();
         $color=attribute::where('name','color')->get();
         $hot=attribute::where('name','hot')->get();
@@ -80,7 +82,7 @@ class ClientController extends Controller
         //     }
         // }
         $product=$product->orderBy('product_id','DESC')->paginate(6);
-    	return view('client/index',compact('product','com','cate','brand','url_canonical','size','color','hot'));
+    	return view('client/index',compact('product','com','cate','brand','url_canonical','size','color','hot','slide'));
 
     }
  

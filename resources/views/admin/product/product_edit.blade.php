@@ -50,6 +50,10 @@
     	</option>
     </select>
   </div>
+   <div class="form-group">
+    <label for="categoryid">số lượng</label>
+    <input type="text" class="form-control" name="soluong" value="{{$pro_edit->soluong}}"  placeholder="Nhập số lượng">
+  </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 @stop
