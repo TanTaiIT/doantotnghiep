@@ -23,25 +23,10 @@
                             // 
                             $("#beforesend_quickview").html("<p class='text text-success'>Sản phẩm đã thêm vào giỏ hàng</p>");
                             window.location.reload();
-                            
-                            // swal({
-                            //         title: "Đã thêm sản phẩm vào giỏ hàng",
-                            //         text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
-                            //         showCancelButton: true,
-                            //         cancelButtonText: "Xem tiếp",
-                            //         confirmButtonClass: "btn-success",
-                            //         confirmButtonText: "Đi đến giỏ hàng",
-                            //         closeOnConfirm: false
-                            //     },
-                            //     function() {
-                            //         window.location.href = "{{url('/gio-hang')}}";
-                            //     });
-
                         }
 
                     });
               }else{
-                // swal("Thông báo!", "bạn cần phải chọn đầy đủ thông tin trước khi mua hàng");
                 toastr.warning('bạn cần phải chọn đầy đủ thông tin trước khi mua hàng');
               }
                 

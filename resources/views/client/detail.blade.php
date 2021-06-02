@@ -78,10 +78,14 @@
 								@foreach($color as $id=>$data1)
 								<div class="colo">
 								<input type="radio"  name="color" value="{{$data1->value}}" class="check cart_product_color"><i class="
-fas fa-heart check1"  style="color:{{$data1->value}}; font-size: 30px;"></i></div>
+ fas fa-coffee check1"  style="color:{{$data1->value}}; font-size: 30px;"></i>
+
+</div>
 								@endforeach
 							    </div>
 							</li>
+
+						
 							<li class="mb-3">
 								<p><span>Chọn size</span></p>
 								<div class="bao2">
@@ -148,5 +152,7 @@ fas fa-heart check1"  style="color:{{$data1->value}}; font-size: 30px;"></i></di
 		</div>
 
 	</div>
+
+
 
 	@endsection

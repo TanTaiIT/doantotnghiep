@@ -83,7 +83,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		
 		@include('inc.payment')
 	<?php } ?>
-	?>
+
 
 
 </body>

@@ -1,6 +1,33 @@
 
 	<script src="{!! asset('web/js/jquery-2.2.3.min.js')!!}"></script>
-	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript" charset="utf-8" async defer></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  
+
+<script>
+$('.add-to-cart').click(function() {
+   var cart = $('.shopping_bg');
+   var imgtofly = $(this).parents('li.cart_items').find('a.product-image img').eq(0);
+    if (imgtofly) {
+        var imgclone = imgtofly.clone()
+            .offset({ top:imgtofly.offset().top, left:imgtofly.offset().left })
+            .css({'opacity':'0.7', 'position':'absolute', 'height':'150px', 'width':'150px', 'z-index':'1000'})
+            .appendTo($('body'))
+            .animate({
+                'top':cart.offset().top + 10,
+                'left':cart.offset().left + 30,
+                'width':55,
+                'height':55
+            }, 1000, 'easeInElastic');
+        imgclone.animate({'width':0, 'height':0}, function(){ $(this).detach() });
+    }
+    return false;
+});
+</script>
+
+
+
 	<!-- <script type="text/javascript">
         $(document).ready(function(){
             $('.add-to-cart').click(function(){

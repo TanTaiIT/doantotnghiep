@@ -75,7 +75,7 @@
 								</td>
 								<td class="invert">{{ $details['name'] }}</td>
 								<td class="invert">${{number_format($totalitem) }} đ</td>
-								<td class="invert"><i class="fas fa-heart" style="color:{{$details['color']}}"></i></td>
+								<td class="invert"><i class="fas fa-coffee" style="color:{{$details['color']}}"></i></td>
 								<td class="invert">{{$details['size']}}</td>
 								<td class="invert">{{$details['hot']}}</td>
 								<td class="actions" data-th="">

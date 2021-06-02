@@ -8,7 +8,7 @@
 						
 						
 						<li class="text-center border-right text-white">
-							<i class="fas fa-phone mr-2"></i> 001 234 5678
+							<marquee><i class="fas fa-phone mr-2"></i> 001 234 5678</marquee>
 						</li>
 						<li class="text-center border-right text-white">
 							<a href="#" data-toggle="modal" data-target="#exampleModal" class="text-white">
@@ -20,7 +20,7 @@
 						</li>
 						<?php
 						$cus_id=Session::get('customer_id');
-						 if(isset($cus_id)){?> 
+						 if(isset($cus_id)){ ?> 
 
 						<li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2 text-white">
 							<a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -30,22 +30,8 @@
 								<a class="dropdown-item" href="{{route('dangxuat_kh')}}">Đăng xuất</a>
 							</div>
 						</li>
-
-
-						
-
-
-						 <!-- 	<li class="text-center text-white">
-							<a href="#" class="text-white">
-								<i class="fas fa-sign-out-alt mr-2"></i>{{Session::get('customer_name')}}</a>
-						    </li> -->
-						 	
-						 <?php }else { ?>
-						  <!-- <li class="text-center text-white">
-							    <a href="#" class="text-white">
-								<i class="fas fa-sign-out-alt mr-2"></i>Đăng nhập</a>
-						   </li> -->
 					     <?php } ?>
+
 					</ul>
 					<!-- //header lists -->
 				</div>
