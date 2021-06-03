@@ -1,5 +1,6 @@
 @extends('client/layout_cli')
 @section('content')
+
 	<div class="ads-grid py-sm-5 py-4">
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
@@ -428,7 +429,7 @@
 								@foreach($color as $id=>$data1)
 								<div class="colo">
 								<input  type="radio"  name="color" value="{{$data1->value}}" class="check cart_product_color"><i class="
-fas fa-heart check1"  style="color:{{$data1->value}}; font-size: 30px;"></i></div>
+fas fa-coffee check1"  style="color:{{$data1->value}}; font-size: 30px;"></i></div>
 								@endforeach
 							    </div>
 								<p><span>Chọn size</span></p>
@@ -463,6 +464,9 @@ fas fa-heart check1"  style="color:{{$data1->value}}; font-size: 30px;"></i></di
                                                 </div>
                                               </div>
                                             </div> 
+
+
+
 
 
 

@@ -24,7 +24,7 @@
 						</div>
 
 
-<div class="container1">
+<!-- <div class="container1">
 
     <div class="row">
         <div class="col-lg-12 col-sm-12 col-12 main-section">
@@ -78,7 +78,62 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
+
+<?php $total = 0 ?>
+@foreach((array) session('cart') as $id => $details)
+    <?php $total += $details['price'] * $details['quantity'] ?>
+@endforeach
+<div id="wrapper">
+  <div class="cart-tab visible">      
+    <a href="#" title="View your shopping cart" class="cart-link">
+      <span class="amount">{{ number_format($total) }}đ</span>
+      <span class="contents"><span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span> sản phẩm</span>
+    </a>
+    <div class="cart">
+      <h2>Giỏ hàng</h2>
+
+      <div class="cart-items">
+        <ul>
+@if(session('cart'))
+@foreach(session('cart') as $id => $details)
+<?php 
+    $sub=$details['price']*$details['quantity']
+?>
+          <li class="clearfix">
+            <div class="img-con">
+            <img width="70px" height="150px" class="productimg img-thumbnail" src="{!! asset('images/'.$details['image'])!!}" />
+            </div>
+            <div class="detail">
+            <h5>{{ $details['name'] }}</h5>
+            <span class="item-price">Giá: 11.00</span>
+            <span class="quantity1">Số lượng: {{ $details['quantity'] }}</span><br>
+            <span>Size:{{$details['size']}}</span><br><span>
+            <span>Màu:<i class="fas fa-coffee" style="color: {{$details['color']}}"></i></span><br>
+            <span>Loại:{{$details['hot']}}</span>
+
+            </div>
+            <div class="bu" style="margin-left:20px">
+                <button title="xóa khỏi giỏ hàng" style="font-size: 10px;" class="btn btn-danger btn remove-from-cart" data-id="{{ $id }}"><i class="fas fa-trash"></i></button> 
+            </div>
+
+          </li>
+  
+          
+@endforeach
+@endif
+        </ul>
+      </div><!-- @end .cart-items -->
+
+      <a href="{{route('checkout')}}" class="checkout">Đi tới giỏ hàng →</a>
+    </div><!-- @end .cart -->
+  </div><!-- @end .cart-tab -->
+
+
+
+<!-- <span class="b-cart">Cart (<span class="b-cart__count">0</span>)</span> -->
+
+
 						<!-- //cart details -->
 					</div>
 				</div>

@@ -58,7 +58,7 @@
 			                    </td> -->
 			                    
 								<td class="invert">{{ $details['name'] }}</td>
-								<td class="invert">${{ $details['price'] }}</td>
+								<td class="invert">{{ $details['price'] }} đ</td>
 								<!-- <td class="actions" data-th=""> -->
 		                        <?php /*<button class="btn btn-primary btn update-cart" data-id="{{ $id }}"><i class="fas fa-sync-alt"></i></button>
 		                        

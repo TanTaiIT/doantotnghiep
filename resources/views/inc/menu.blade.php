@@ -22,7 +22,45 @@
 				    aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+
+
+<div class="menu">
+    <div class="flex-menu">
+        <ul class="d-flex align-items-center justify-content-between wrap-content menu_desktop">
+            <li><a class="transition " href="{{route('cli_index')}}" title=""><h2>Trang chủ</h2></a>
+           </li>
+            <li class="line"></li>
+            <li><a class="" href="" title=""><h2>Loại sản phẩm</h2></a>
+            	 <ul>
+            	 	@foreach($cate as $c)
+                    <li><span></span><a href="">{{$c->category_name}}</a></li>
+                    @endforeach
+                </ul>
+            </li>
+            <li class="line"></li>
+            <li>
+                <a class="transition" href="" title=""><h2>về chúng tôi</h2></a>
+                
+            </li>
+            <li class="line"></li>
+            <li>
+                <a class="transition" href="" title=""><h2>giới thiệu</h2></a>
+                
+            </li>
+            <li class="line"></li>
+            <li><a class="transition" href="" title=""><h2>sản phẩm</h2></a></li>
+            <li class="line"></li>
+            <li><a class="transition" href="" title=""><h2>liên hệ</h2></a></li>
+            <li class="line"></li>
+           <!--  <li><a class="transition" href="" title="Video"><h2>Video</h2></a></li>
+            <li class="line"></li>
+            <li><a class="transition" href="" title=""><h2>Tành bành</h2></a></li>     -->   
+        </ul>
+       
+    </div>
+</div>
+				<!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav ml-auto text-center mr-xl-5">
 						<li class="nav-item active mr-lg-2 mb-lg-0 mb-2">
 							<a class="nav-link" href="{{route('cli_index')}}">Trang chủ
@@ -63,7 +101,7 @@
 						</li>
 						
 					</ul>
-				</div>
+				</div> -->
 			</nav>
 		</div>
 	</div>

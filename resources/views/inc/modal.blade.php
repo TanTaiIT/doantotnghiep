@@ -84,6 +84,7 @@
 			</div>
 		</div>
 	</div>
+<<<<<<< HEAD
 	<!-- Xác nhận mật khẩu -->
 	<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -110,3 +111,7 @@
 			</div>
 		</div>
 	</div>
+=======
+
+	
+>>>>>>> a84cd2a46563b5fd2afabada9ea66665815f7833
