@@ -8,11 +8,14 @@ use App\Models\category;
 use Session;
 class CategoryController extends Controller
 {
+	
     public function index(){
+		
     	$cate=category::all();
     	return view('admin/loaisp/index',compact('cate'));
     }
     public function addcate(){
+		
     	return view('admin/loaisp/add_category');
     }
     public function themcat(Request $req){
@@ -28,6 +31,7 @@ class CategoryController extends Controller
     	return redirect()->route('cate_index');
     }
     public function edit($id){
+		
     	$cate_edit=category::FindOrFail($id);
     	return view('admin/loaisp/category_edit',compact('cate_edit'));
     }

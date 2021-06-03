@@ -80,11 +80,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<?php } ?>
 	<?php
 	if($com=='payment'){ ?> 
-		
 		@include('inc.payment')
 	<?php } ?>
 	?>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/css/formValidation.min.css"></script>
+	<script type="text/javascript">
+	$.validate({
 
+	});
+	</script>
 
 </body>
 

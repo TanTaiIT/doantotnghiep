@@ -8,11 +8,14 @@ use App\Models\brand;
 use Session;
 class BrandController extends Controller
 {
+	
     public function index(){
+		
     	$brand=brand::all();
     	return view('admin/thuonghieu/index',compact('brand'));
     }
     public function addbrand(){
+		
     	return view('admin/thuonghieu/add_brand');
     }
     public function thembrand(Request $req){
@@ -28,6 +31,7 @@ class BrandController extends Controller
     	return redirect()->route('brand_index');
     }
      public function edit($id){
+		
     	$brand_edit=brand::FindOrFail($id);
     	return view('admin/thuonghieu/brand_edit',compact('brand_edit'));
     }
@@ -44,6 +48,7 @@ class BrandController extends Controller
     	return redirect()->route('brand_index');
     }
     public function delete($id){
+		
     	$brand=brand::FindOrFail($id);
     	if($brand->delete()){
     		Session::flash("message","Xóa thương hiệu thành công");
