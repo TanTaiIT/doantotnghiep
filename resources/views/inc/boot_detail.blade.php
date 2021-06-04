@@ -1,6 +1,67 @@
 	<script src="{!! asset('web/js/jquery-2.2.3.min.js')!!}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript" charset="utf-8" async defer></script>
 	<!-- //jquery -->
+        <script type="text/javascript">
+    
+        $('.xemnhanh').click(function(){
+            var product_id = $(this).data('id_product');
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+            url:"{{url('/quickview')}}",
+            method:"POST",
+            dataType:"JSON",
+            data:{product_id:product_id, _token:_token},
+              success:function(data){
+                $('#product_quickview_title').html(data.product_name);
+                $('#product_quickview_id').html(data.product_id);
+                $('#product_quickview_price').html(data.product_price);
+                $('#product_quickview_image').html(data.product_image);
+                $('#product_quickview_gallery').html(data.product_gallery);
+                $('#product_quickview_desc').html(data.product_desc);
+                $('#product_quickview_content').html(data.product_content);
+                $('#product_quickview_value').html(data.product_quickview_value);
+                $('#product_quickview_button').html(data.product_button);
+              }
+            });
+        });
+        $(document).on('click','.redirect-cart',function(){
+                window.location.href = "{{url('/cli/checkout')}}";
+            });
+   
+</script>
+
+  <script type="text/javascript">
+       
+            $(document).on('click','.add-to-cart-quickview',function(){
+                var id = $(this).data('id_product');
+                var color=$('input[name=color]:checked').val();
+                var size=$('input[name=size]:checked').val();
+                var hot=$('input[name=hot]:checked').val();
+                var soluong=$('.cart_product_sl').val();
+                var _token = $('input[name="_token"]').val();
+                if($("input:radio[name='color']").is(":checked") && $("input:radio[name='size']").is(":checked") && $("input:radio[name='hot']").is(":checked")) {
+                    $.ajax({
+                        url: '{{url('/cart')}}',
+                        method: 'POST',
+                        data:{id:id,_token:_token,color:color,size:size,hot:hot,soluong:soluong},
+                       
+                        beforeSend: function(){
+                            $("#beforesend_quickview").html("<img width='30px' height='30px' src='../public/web/images/Spinner-3.gif'>");
+                        },
+                        success:function(){
+                            $("#beforesend_quickview").html("<p class='text text-success'>Sản phẩm đã thêm vào giỏ hàng</p>");
+                            window.location.reload();
+                            
+
+                        }
+
+                    });
+                }else{
+                     toastr.warning('bạn cần phải chọn đầy đủ thông tin trước khi mua hàng');
+                }
+            });
+        
+    </script>
 	<script type="text/javascript">
         $(document).ready(function(){
             $('.add-to-cart').click(function(){
@@ -20,9 +81,14 @@
                             $("#beforesend_quickview").html("<img width='30px' height='30px'src='../../web/images/Spinner-3.gif'>");
                         },
                         success:function(){
-                            // 
+                            
                             $("#beforesend_quickview").html("<p class='text text-success'>Sản phẩm đã thêm vào giỏ hàng</p>");
                             window.location.reload();
+                           
+                           
+                            // document.write(response.data);
+                            // alert(response.data['0'].name);
+                            // $('tbody').prepend('<tr><td id="'+response.data.pro_id+'">'+response.name+'</td></tr>');
                         }
 
                     });
@@ -97,8 +163,7 @@
            {
             if(data == 'done')
             {
-             // alert("Bạn đã đánh giá "+index +" trên 5");
-             location.reload();
+                 window.location.reload();
             }
             else
             {

@@ -19,7 +19,7 @@
 		</div>
 	</div>
 	<!-- //page -->
-
+<div class="bao_detail">
 	<!-- Single Page -->
 	<div class="banner-bootom-w3-agileits py-5">
 		<div class="container py-xl-4 py-lg-2">
@@ -28,7 +28,8 @@
 				<span>C</span>hi <span>T</span>iết
 				<span>S</span>ản <span>P</span>hẩm</h3>
 			<!-- //tittle heading -->
-			<div class="row">
+			<div class="bao_card">
+			<div class="row ">
 				<div class="col-lg-5 col-md-8 single-right-left ">
 					<div class="grid images_3_of_2">
 						<div class="flexslider">
@@ -78,6 +79,7 @@
 								@foreach($color as $id=>$data1)
 								<div class="colo">
 								<input type="radio"  name="color" value="{{$data1->value}}" class="check cart_product_color"><i class="
+
  fas fa-coffee check1"  style="color:{{$data1->value}}; font-size: 30px;"></i>
 
 </div>
@@ -150,8 +152,14 @@
 				</div>
 			</div>
 		</div>
+		</div>
 
 	</div>
+</div>
+
+
+
+	
 
 
 

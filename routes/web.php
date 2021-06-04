@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('tai','Client\ClientController@tai');
 Route::get('admin','Admin\AdminController@index')->name('admin_index');
 Route::get('dangnhap1','Admin\LoginController@dangnhap1')->name('dangnhap1');
 Route::get('login','Admin\LoginController@login')->name('log');
@@ -84,16 +85,17 @@ Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
    // Route::post('/select-delivery','DeliveryController@select_delivery');
    Route::post('/select-delivery-home','CheckoutController@select_delivery_home');
    Route::get('/checkout','CheckoutController@checkout')->name('checkout');
-   Route::get('/list-pro/{id}','ClientController@list_pro')->name('list_pro');
+  
    Route::post('/cart/{id}','CartController@addtocart1')->name('addtocart1');
    
 
    
 });
+Route::get('/{id}','Client\ClientController@list_pro')->name('list_pro');
 Route::post('/cart','Client\CartController@addtocart')->name('addtocart');
- Route::patch('update-cart','Client\CartController@update');
- Route::delete('remove-from-cart','Client\CartController@remove');
- Route::post('/select-delivery-home','Client\CheckoutController@delivery_home');
+Route::patch('update-cart','Client\CartController@update');
+Route::delete('remove-from-cart','Client\CartController@remove');
+Route::post('/select-delivery-home','Client\CheckoutController@delivery_home');
 
 /* Cart */
 

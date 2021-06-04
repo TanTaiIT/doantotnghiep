@@ -24,34 +24,57 @@
 										<div class="men-thumb-item text-center">
 											
 											<a href="{{route('cli_detail',$p->product_id)}}"><div class="scale-img">
+												<?php 
+												  $gia=($p->gia_km *100)/$p->product_price;
+												?>
+												@if($p->gia_km < $p->product_price && $p->gia_km >0)
+												<span class="badge badge-pill badge-danger ban">-{{ROUND($gia,1)}}%</span>
+												@endif
 											<img  src="{!! asset('images/'.$p->product_image)!!}" alt="">
+
+										    <!--  -->
+										
 										    </div></a>
+
+						 <?php
+
+						   $tong=0;
+						   if($p->pro_rating){
+						   	 $tong=round(($p->pro_rating_number)/($p->pro_rating));
+						   }
+						  
+						 ?>
+							<ul class="marg">
+								<li>
+									
+										@for($i=1;$i<6;$i++)
+										@if($i<=$tong && $tong>0)
+											<i class="fas fa-star actise"></i>
+										@else
+											<i class="fas fa-star"></i>
+										@endif
+										
+										@endfor
+										
+
+										
+									
+								</li>
+							</ul>
+
 										</div>
 										<div class="item-info-product text-center border-top mt-4">
 											<h4 class="pt-1">
 												<a href="{{route('cli_detail',$p->product_id)}}">{{$p->product_name}}</a>
 											</h4>
-
-											<?php /*<ul class="list-inline rating"  title="Average Rating">
-												@for($count=1; $count<=5; $count++)
-                                                		@php
-	                                                		if($count<=$rating){
-	                                                			$color = 'color:#ffcc00;';
-	                                                		}
-	                                                		else {
-	                                                			$color = 'color:#ccc;';
-	                                                		}
-	                                                	
-                                                		@endphp
-												<li title="star_rating" id="{{$p->product_id}}-{{$count}}" data-index="{{$count}}"  data-product_id="{{$p->product_id}}" data-rating="{{$rating}}" class="rating" style="cursor:pointer; {{$color}} font-size:30px;">&#9733;</li>
-												@endfor
-											</ul> */ ?>
-
-
-
+											<?php 
+											  $giatien=$p->product_price-$p->gia_km
+											?>
 											<div class="info-product-price my-2">
-												<span class="item_price">{{number_format($p->product_price)}} đ</span>
-												<!-- <del>280.00</del> -->
+												<span class="item_price">{{number_format($giatien)}} đ</span>
+												@if($p->gia_km < $p->product_price && $p->gia_km > 0)
+												<del>{{$p->product_price}}đ</del>
+												@endif
 											</div>
 											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
 												<form>
@@ -94,6 +117,128 @@
 								</div>
 							</div>
 						</div>
+
+
+
+						<!-- <div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mt-4">
+							<h3 class="heading-tittle text-center font-italic">Large Appliances</h3>
+							<div class="row">
+								<div class="col-md-4 product-men mt-5">
+									<div class="men-pro-item simpleCart_shelfItem">
+										<div class="men-thumb-item text-center">
+											<img src="images/m7.jpg" alt="">
+											<div class="men-cart-pro">
+												<div class="inner-men-cart-pro">
+													<a href="single.html" class="link-product-add-cart">Quick View</a>
+												</div>
+											</div>
+										</div>
+										<span class="product-new-top">New</span>
+										<div class="item-info-product text-center border-top mt-4">
+											<h4 class="pt-1">
+												<a href="single.html">Whirlpool 245</a>
+											</h4>
+											<div class="info-product-price my-2">
+												<span class="item_price">$230.00</span>
+												<del>$280.00</del>
+											</div>
+											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+												<form action="#" method="post">
+													<fieldset>
+														<input type="hidden" name="cmd" value="_cart" />
+														<input type="hidden" name="add" value="1" />
+														<input type="hidden" name="business" value=" " />
+														<input type="hidden" name="item_name" value="Whirlpool 245" />
+														<input type="hidden" name="amount" value="230.00" />
+														<input type="hidden" name="discount_amount" value="1.00" />
+														<input type="hidden" name="currency_code" value="USD" />
+														<input type="hidden" name="return" value=" " />
+														<input type="hidden" name="cancel_return" value=" " />
+														<input type="submit" name="submit" value="Add to cart" class="button btn" />
+													</fieldset>
+												</form>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 product-men mt-5">
+									<div class="men-pro-item simpleCart_shelfItem">
+										<div class="men-thumb-item text-center">
+											<img src="images/m8.jpg" alt="">
+											<div class="men-cart-pro">
+												<div class="inner-men-cart-pro">
+													<a href="single.html" class="link-product-add-cart">Quick View</a>
+												</div>
+											</div>
+										</div>
+										<div class="item-info-product text-center border-top mt-4">
+											<h4 class="pt-1">
+												<a href="single.html">BPL Washing Machine</a>
+											</h4>
+											<div class="info-product-price my-2">
+												<span class="item_price">$180.00</span>
+												<del>$200.00</del>
+											</div>
+											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+												<form action="#" method="post">
+													<fieldset>
+														<input type="hidden" name="cmd" value="_cart" />
+														<input type="hidden" name="add" value="1" />
+														<input type="hidden" name="business" value=" " />
+														<input type="hidden" name="item_name" value="BPL Washing Machine" />
+														<input type="hidden" name="amount" value="180.00" />
+														<input type="hidden" name="discount_amount" value="1.00" />
+														<input type="hidden" name="currency_code" value="USD" />
+														<input type="hidden" name="return" value=" " />
+														<input type="hidden" name="cancel_return" value=" " />
+														<input type="submit" name="submit" value="Add to cart" class="button btn" />
+													</fieldset>
+												</form>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 product-men mt-5">
+									<div class="men-pro-item simpleCart_shelfItem">
+										<div class="men-thumb-item text-center">
+											<img src="images/m9.jpg" alt="">
+											<div class="men-cart-pro">
+												<div class="inner-men-cart-pro">
+													<a href="single.html" class="link-product-add-cart">Quick View</a>
+												</div>
+											</div>
+										</div>
+										<div class="item-info-product text-center border-top mt-4">
+											<h4 class="pt-1">
+												<a href="single.html">Microwave Oven</a>
+											</h4>
+											<div class="info-product-price my-2">
+												<span class="item_price">$199.00</span>
+												<del>$299.00</del>
+											</div>
+											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+												<form action="#" method="post">
+													<fieldset>
+														<input type="hidden" name="cmd" value="_cart" />
+														<input type="hidden" name="add" value="1" />
+														<input type="hidden" name="business" value=" " />
+														<input type="hidden" name="item_name" value="Microwave Oven" />
+														<input type="hidden" name="amount" value="199.00" />
+														<input type="hidden" name="discount_amount" value="1.00" />
+														<input type="hidden" name="currency_code" value="USD" />
+														<input type="hidden" name="return" value=" " />
+														<input type="hidden" name="cancel_return" value=" " />
+														<input type="submit" name="submit" value="Add to cart" class="button btn" />
+													</fieldset>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div> -->
 						
 					</div>
 				</div>
@@ -173,6 +318,7 @@
 										<span>3.5</span>
 									</a>
 								</li> -->
+
 								<li>
 									<a href="{{request()->fullUrlWithQuery(['review' => 3])}}">
 										<i class="fas fa-star"></i>
@@ -190,7 +336,7 @@
 									</a>
 								</li>
 								<li>
-									<a href="{{request()->fullUrlWithQuery(['review' => 1])}}">
+									<a href="{{request()->fullUrlWithQuery(['review' =>1 ])}}">
 										<i class="fas fa-star"></i>
 										<!-- <i class="fas fa-star"></i> -->
 										<!-- <i class="fas fa-star-half"></i> -->
@@ -201,7 +347,7 @@
 						</div>
 						<!-- //reviews -->
 						<!-- electronics -->
-						<div class="left-side border-bottom py-2">
+						<!-- <div class="left-side border-bottom py-2">
 							<h3 class="agileits-sear-head mb-3">Electronics</h3>
 							<ul>
 								<li>
@@ -257,7 +403,7 @@
 									<span class="span">Wearable Technology</span>
 								</li>
 							</ul>
-						</div>
+						</div> -->
 						<!-- //electronics -->
 						<!-- delivery -->
 						<?php /*<div class="left-side border-bottom py-2">
@@ -287,36 +433,23 @@
 						<!-- //arrivals -->
 						<!-- best seller -->
 						<div class="f-grid py-2">
-							<h3 class="agileits-sear-head mb-3">Best Seller</h3>
+							<h3 class="agileits-sear-head mb-3">sản phẩm bán chạy</h3>
 							<div class="box-scroll">
 								<div class="scroll">
 									<div class="row">
+										@foreach($bestsell as $b)
 										<div class="col-lg-3 col-sm-2 col-3 left-mar">
-											<img src="images/k1.jpg" alt="" class="img-fluid">
+											<a href="{{route('cli_detail',$b->product_id)}}">
+											<img src="{!! asset('images/'.$b->product_image)!!}" alt="" class="img-fluid">
+										    </a>
 										</div>
 										<div class="col-lg-9 col-sm-10 col-9 w3_mvd">
-											<a href="">Samsung Galaxy On7 Prime (Gold, 4GB RAM + 64GB Memory)</a>
-											<a href="" class="price-mar mt-2">$12,990.00</a>
+											<a href="{{route('cli_detail',$b->product_id)}}">{{$b->product_name}} (Gold, 4GB RAM + 64GB Memory)</a>
+											<a href="{{route('cli_detail',$b->product_id)}}" class="price-mar mt-2">{{number_format($b->product_price)}} đ</a>
 										</div>
+										@endforeach
 									</div>
-									<div class="row my-4">
-										<div class="col-lg-3 col-sm-2 col-3 left-mar">
-											<img src="images/k2.jpg" alt="" class="img-fluid">
-										</div>
-										<div class="col-lg-9 col-sm-10 col-9 w3_mvd">
-											<a href="">Haier 195 L 4 Star Direct-Cool Single Door Refrigerator</a>
-											<a href="" class="price-mar mt-2">$12,499.00</a>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-lg-3 col-sm-2 col-3 left-mar">
-											<img src="images/k3.jpg" alt="" class="img-fluid">
-										</div>
-										<div class="col-lg-9 col-sm-10 col-9 w3_mvd">
-											<a href="">Ambrane 13000 mAh Power Bank (P-1310 Premium)</a>
-											<a href="" class="price-mar mt-2">$1,199.00 </a>
-										</div>
-									</div>
+									
 								</div>
 							</div>
 						</div>

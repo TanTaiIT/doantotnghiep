@@ -4,7 +4,9 @@
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
   
+<script type="text/javascript">
 
+</script>
 <script>
 $('.add-to-cart').click(function() {
    var cart = $('.shopping_bg');
@@ -25,56 +27,6 @@ $('.add-to-cart').click(function() {
     return false;
 });
 </script>
-
-
-
-	<!-- <script type="text/javascript">
-        $(document).ready(function(){
-            $('.add-to-cart').click(function(){
-
-                var id = $(this).data('id_product');
-                // alert(id);
-                var cart_product_id = $('.cart_product_id_' + id).val();
-                var cart_product_name = $('.cart_product_name_' + id).val();
-                var cart_product_image = $('.cart_product_image_' + id).val();
-                var cart_product_quantity = $('.cart_product_quantity_' + id).val();
-                var cart_product_price = $('.cart_product_price_' + id).val();
-                var cart_product_qty = $('.cart_product_qty_' + id).val();
-                var _token = $('input[name="_token"]').val();
-               
-                // if(parseInt(cart_product_qty)>parseInt(cart_product_quantity)){
-                //     alert('Làm ơn đặt nhỏ hơn ' + cart_product_quantity);
-                // }else{
-
-                    $.ajax({
-                        url: '{{url('/add-cart-ajax')}}',
-                        method: 'POST',
-                        data:{cart_product_id:cart_product_id,cart_product_name:cart_product_name,cart_product_image:cart_product_image,cart_product_price:cart_product_price,cart_product_qty:cart_product_qty,_token:_token,cart_product_quantity:cart_product_quantity},
-                        success:function(){
-
-                            swal({
-                                    title: "Đã thêm sản phẩm vào giỏ hàng",
-                                    text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
-                                    showCancelButton: true,
-                                    cancelButtonText: "Xem tiếp",
-                                    confirmButtonClass: "btn-success",
-                                    confirmButtonText: "Đi đến giỏ hàng",
-                                    closeOnConfirm: false
-                                },
-                                function() {
-                                    window.location.href = "{{url('/gio-hang')}}";
-                                });
-
-                        }
-
-                    });
-                // }
-
-                
-            });
-        });
-    </script> -->
-
    <script type="text/javascript">
         $(document).ready(function(){
             $('.add-to-cart').click(function(){

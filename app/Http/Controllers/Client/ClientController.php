@@ -15,6 +15,17 @@ use App\Models\slider;
 use DB;
 class ClientController extends Controller
 {
+    public function tai(Request $request){
+        $url_canonical = $request->url();
+        $slide=slider::limit(4)->get();  
+        $size=attribute::where('name','size')->get();
+        $color=attribute::where('name','color')->get();
+        $hot=attribute::where('name','hot')->get();
+        $cate=category::all();
+        $brand=brand::all();
+        $com='index';
+        return view('client.tai',compact('com','cate','brand','url_canonical','size','color','hot','slide'));
+    }
     public function index(Request $request){
         $url_canonical = $request->url();
         $slide=slider::limit(4)->get();  
@@ -23,6 +34,7 @@ class ClientController extends Controller
         $hot=attribute::where('name','hot')->get();
         $cate=category::all();
         $brand=brand::all();
+        $bestsell=product::orderBy('product_sold','DESC')->limit(3)->get();
     	$com='index';
         $product=product::where([
             'product_status'=>1
@@ -31,8 +43,10 @@ class ClientController extends Controller
             $pro_id=$p->product_id;
             
         }
-        // $rating=DB::table('tbl_product')->join('tbl_rating','tbl_product.product_id','=','tbl_rating.product_id')->avg('rating');
-        // $rating=round($rating);
+        // $avg=$rating->pro_rating_number/$rating->pro_rating;
+        // $sao=DB::table('tbl_product')->join('tbl_rating','tbl_product.product_id','=','tbl_rating.product_id')->avg('rating');
+
+        // $rating=round($sao);
 
         if($request->price){
             $price=$request->price;
@@ -73,16 +87,21 @@ class ClientController extends Controller
             $key=$request->keyword;
             $product=product::where('product_name','like','%'.$key.'%');
         }
+
+        
+        
+        // $rating=product::where($tong,'=',10);
+        // $tong=$product->pro_rating_number;
         // if($request->review){
         //     $re=$request->review;
         //     switch($re){
         //         case '1':
-        //         $product->rating(avg('rating'),'=','1.0');
+        //         $product->where('pro_rating_number','>',10)->get();
         //         break;
         //     }
         // }
         $product=$product->orderBy('product_id','DESC')->paginate(6);
-    	return view('client/index',compact('product','com','cate','brand','url_canonical','size','color','hot','slide'));
+    	return view('client/index',compact('product','com','cate','brand','url_canonical','size','color','hot','slide','bestsell'));
 
     }
  
@@ -158,15 +177,23 @@ class ClientController extends Controller
         $rating->product_id = $data['product_id'];
         $rating->rating = $data['index'];
         $rating->save();
+        $product=product::find($request->product_id);
+        $product->pro_rating+=1;
+        $product->pro_rating_number+=$data['index'];
+        $product->save();
         echo 'done';
     }
     public function list_pro(Request $request,$id){
         $com='detail';
+        $slide=slider::limit(4)->get();  
+        $size=attribute::where('name','size')->get();
+        $color=attribute::where('name','color')->get();
+        $hot=attribute::where('name','hot')->get();
         $url_canonical = $request->url(); 
         $cate=category::all();
         $brand=brand::all();
         $product_list=product::where('category_id',$id)->get();
-        return view('client.list_pro',compact('product_list','brand','cate','url_canonical','com'));
+        return view('client.list_pro',compact('product_list','brand','cate','url_canonical','com','size','color','hot','slide'));
     }
     
 }

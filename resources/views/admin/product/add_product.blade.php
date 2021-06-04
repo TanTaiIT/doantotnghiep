@@ -37,6 +37,10 @@
     <input type="text" class="form-control" name="gia"  placeholder="Nhập giá">
   </div>
   <div class="form-group">
+    <label for="categoryid">Giá khuyễn mãi</label>
+    <input type="text" class="form-control" name="gia_km"  placeholder="Nhập giá khuyến mãi">
+  </div>
+  <div class="form-group">
     <label for="images">Hình ảnh</label>
     <input type="file" name="hinh" id="ful" name="ful" class="form-control">
   </div>

@@ -50,6 +50,7 @@ class ProductController extends Controller
     	$product->brand_id=$req->thuonghieu;
     	$product->product_desc=$req->mota;
     	$product->product_price=$req->gia;
+        $product->gia_km=$req->gia_km;
     	$product->product_status=$req->status;
         $product->soluong=$req->soluong;
     	$product->product_image=$this->imageUpload($req);
@@ -79,6 +80,7 @@ class ProductController extends Controller
     	$pro['brand_id']=$req->thuonghieu;
     	$pro['product_desc']=$req->mota;
     	$pro['product_price']=$req->gia;
+        $pro['gia_km']=$req->gia_km;
     	$pro['product_status']=$req->status;
         $pro['soluong']=$req->soluong;
     	$pro['product_image']=$this->imageUpload($req);
@@ -153,7 +155,7 @@ class ProductController extends Controller
         // foreach($gallery as $key => $gal){
         //     $output['product_gallery'].= '<p><img width="100%" src="public/uploads/gallery/'.$gal->gallery_image.'"></p>';
         // }
-
+        $com='';
         $output['product_name'] = $product->product_name;
         $output['product_id'] = $product->product_id;
         $output['product_desc'] = $product->product_desc;

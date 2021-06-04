@@ -20,37 +20,98 @@
 					<div class="wrapper">
 						<!-- first section -->
 						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
+							<h3 class="heading-tittle text-center font-italic">Trà Sữa trân châu</h3>
 							<div class="row">
 								@foreach($product_list as $s1)
-								<div class="col-md-4 product-men">
+								<div class="col-md-4 product-men mt-5">
 									<div class="men-pro-item simpleCart_shelfItem">
 										<div class="men-thumb-item text-center">
-											<img src="{!!asset('images/'.$s1->product_image)!!}" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{{route('cli_detail',$s1->product_id)}}" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
+											
+											<a href="{{route('cli_detail',$s1->product_id)}}"><div class="scale-img">
+												<?php 
+												  $gia=($s1->gia_km *100)/$s1->product_price;
+												?>
+												@if($s1->gia_km < $s1->product_price && $s1->gia_km >0)
+												<span class="badge badge-pill badge-danger ban">-{{ROUND($gia,1)}}%</span>
+												@endif
+											<img  src="{!! asset('images/'.$s1->product_image)!!}" alt="">
+
+										    <!--  -->
+										
+										    </div></a>
+
+						 <?php
+
+						   $tong=0;
+						   if($s1->pro_rating){
+						   	 $tong=round(($s1->pro_rating_number)/($s1->pro_rating));
+						   }
+						  
+						 ?>
+							<ul class="marg">
+								<li>
+									
+										@for($i=1;$i<6;$i++)
+										@if($i<=$tong && $tong>0)
+											<i class="fas fa-star actise"></i>
+										@else
+											<i class="fas fa-star"></i>
+										@endif
+										
+										@endfor
+										
+
+										
+									
+								</li>
+							</ul>
+
 										</div>
 										<div class="item-info-product text-center border-top mt-4">
 											<h4 class="pt-1">
-												<a href="single.html">{{$s1->product_name}}</a>
+												<a href="{{route('cli_detail',$s1->product_id)}}">{{$s1->product_name}}</a>
 											</h4>
+											<?php 
+											  $giatien=$s1->product_price-$s1->gia_km
+											?>
 											<div class="info-product-price my-2">
-												<span class="item_price">${{$s1->product_price}}</span>
-												<!-- <del>$280.00</del> -->
+												<span class="item_price">{{number_format($giatien)}} đ</span>
+												@if($s1->gia_km < $s1->product_price && $s1->gia_km > 0)
+												<del>{{$s1->product_price}}đ</del>
+												@endif
 											</div>
 											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<a href="{{route('addtocart',$s1->product_id)}}">Add to Cart</a>
-											</div>
+												<form>
+													@csrf
+													<fieldset> 
+														
 
+
+														<input type="button" data-toggle="modal" data-target="#xemnhanh"  value="Xem nhanh" class="btn btn-default xemnhanh" data-id_product="{{$s1->product_id}}" name="add-to-cart">
+													</fieldset>
+												</form> 
+
+
+
+
+
+											</div>
 										</div>
 									</div>
 								</div>
-								@endforeach
+
+
 								
+								@endforeach
 							</div>
+
+
+
+
+						
+							
 						</div>
+						
 						<!-- //fourth section -->
 					</div>
 				</div>
@@ -270,4 +331,107 @@
 			</div>
 		</div>
 	</div>
+
+
+
+
+	<div class="modal fade" id="xemnhanh" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                              <div class="modal-dialog modal-lg"  role="document">
+                                                <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    <h5 class="modal-title product_quickview_title" id="">
+
+                                                        <span id="product_quickview_title"></span>
+                                                        
+                                                    </h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                    <style type="text/css">
+                                                        span#product_quickview_content img {
+                                                            width: 100%;
+                                                        }
+
+                                                        @media screen and (min-width: 768px) {
+                                                            .modal-dialog {
+                                                              width: 700px; /* New width for default modal */
+                                                            }
+                                                            .modal-sm {
+                                                              width: 350px; /* New width for small modal */
+                                                            }
+                                                        }
+                                                        
+                                                        @media screen and (min-width: 992px) {
+                                                            .modal-lg {
+                                                              width: 1200px; /* New width for large modal */
+                                                            }
+                                                        }
+                                                    </style>
+                                                    <div class="baotrum">
+                                                        <div class="taice1">
+                                                            <span id="product_quickview_image"></span>
+                                                            <span id="product_quickview_gallery"></span>
+                                                        </div>
+                                                        <form>
+                                                            @csrf
+                                                            <div id="product_quickview_value"></div>
+                                                        <div class=" taice">
+                                                            <h2><span id="product_quickview_title"></span></h2>
+                                                            <p>Mã ID: <span id="product_quickview_id"></span></p>
+                                                            <p  >Giá sản phẩm : <span style="font-size: 20px; color: brown;font-weight: bold;" id="product_quickview_price"></span></p>
+                                
+                                                                <label >Số lượng:</label>
+
+                                                               
+                                                                <input type="number" class="soluong cart_product_sl" min=1 value="1" name="soluong">
+                                                             
+                                                            </span>
+                                                            <p >Mô tả sản phẩm:</p>
+                                                           <!--  <hr> -->
+                                                            <p><span id="product_quickview_desc"></span></p>
+                                                            <hr>
+                                                            <p><span id="product_quickview_content"></span></p>
+                                                            <p><span>Chọn màu:</span></p>
+                                                            <div class="bao1">
+								@foreach($color as $id=>$data1)
+								<div class="colo">
+								<input  type="radio"  name="color" value="{{$data1->value}}" class="check cart_product_color"><i class="
+fas fa-coffee check1"  style="color:{{$data1->value}}; font-size: 30px;"></i></div>
+								@endforeach
+							    </div>
+								<p><span>Chọn size</span></p>
+								<div class="bao2">
+								@foreach($size as $id=>$data)
+								<div class="bao3">
+								<input type="radio" class="cart_product_size" name="size" value="{{$data->value}}">{{$data->value}}
+							    </div>
+								@endforeach
+							   </div>
+							   <p><span>Loại thức uống:</span></p>
+								<div class="bao2">
+								@foreach($hot as $id=>$data2)
+								<div class="bao3">
+								<input type="radio" class="cart_product_hot" name="hot" value="{{$data2->value}}">{{$data2->value}}
+							    </div>
+								@endforeach
+							   </div>
+                                                            
+														    <div style="margin-bottom: 10px" id="product_quickview_button"></div>
+                                                            <div id="beforesend_quickview"></div>
+                                                        </div>
+                                                        </form>
+
+                                                    </div>
+                                                   
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                                    <button type="button" class="btn btn-default redirect-cart">Đi tới giỏ hàng</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div> 
+
 @stop

@@ -43,7 +43,7 @@ body a {
 .menu ul li{position:relative;z-index:99;}
 .menu ul li.line{width:1px;height:15px;background-color:rgba(255,255,255,0.5);}
 .menu ul li a{display:block;position:relative;z-index:1;text-align:center;text-decoration:none!important;}
-.menu ul li a h2{font-size:14px;color:#5c4b4b;margin:0px;padding: 8px 8px;text-transform:uppercase;}
+.menu ul li a h2{font-size:14px;color:#5c4b4b;margin:0px;padding: 17px 8px;text-transform:uppercase;}
 .menu ul li a.active,.menu ul li:hover > a{background:grey;}
 .menu ul li ul{position:absolute;min-width:200px;background:white;box-shadow:0 3px 11px 0 rgba(0,0,0,0.1);-webkit-transform:perspective(600px) rotateX(-90deg);transform:perspective(600px) rotateX(-90deg);-webkit-transform-origin:0 0 0;transform-origin:0 0 0;opacity:0;visibility:hidden;transition:all .5s;}
 .menu ul li:hover > ul{-webkit-transform:perspective(600px) rotateX(0);transform:perspective(600px) rotateX(0);-webkit-transform-origin:0 0 0;opacity:1;visibility:visible;transition:all .7s;color: red;}
@@ -78,8 +78,18 @@ body a {
 
 
 
-
-
+.bao_card{
+    
+}
+.ban{
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    border-radius: 5px;
+}
+.bao_detail{
+    background: white;
+}
 .cart-tab { 
   width: 22em;
   position: fixed;
@@ -195,7 +205,7 @@ a {
     -o-transition: 0.5s all;
     -ms-transition: 0.5s all;
 }
-.scale-img{overflow:hidden;display:block;}
+.scale-img{overflow:hidden;display:block;position: relative;}
 .scale-img img{-webkit-transition:0.3s ease-out;-moz-transition:0.3s ease-out;-o-transition:0.3s ease-out;transition:0.3s ease-out;-moz-transform:scale(1,1);-webkit-transform:scale(1,1);-o-transform:scale(1,1);-ms-transform:scale(1,1);transform:scale(1,1);}
 .scale-img:hover > img{-webkit-transition:0.3s ease-out;-moz-transition:0.3s ease-out;-o-transition:0.3s ease-out;transition:0.3s ease-out;-moz-transform:scale(1.1,1.1);-webkit-transform:scale(1.1,1.1);-o-transform:scale(1.1,1.1);-ms-transform:scale(1.1,1.1);transform:scale(1.1,1.1);}
 a:hover {
@@ -280,6 +290,13 @@ input.btn.btn-default.xemnhanh {
 }
 .taice1{
     width: 30%;
+}
+.actise{
+ color: #FFC107;
+
+}
+.marg{
+margin-top: 20px;
 }
 .bao1{
     display: flex;  

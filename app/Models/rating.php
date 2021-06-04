@@ -15,7 +15,7 @@ class rating extends Model
     ];
     protected $primaryKey='rating_id';
     public function product(){
-    	return $this->belongTo('App\Models\product','product_id','rating_id');
+    	return $this->belongsTo('App\Models\product','rating_id','product_id');
     }
     
 }

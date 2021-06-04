@@ -16,6 +16,7 @@
       <th scope="col">Thương hiệu</th>
       <th scope="col">Mô tả</th>	
       <th scope="col">Giá tiền</th>
+      <th scope="col">Giá khuyến mãi</th>
       <th scope="col">Hình ảnh</th>
       <th scope="col">Trạng thái</th>
       <th scope="col">Số lượng</th>
@@ -33,6 +34,7 @@
      <td>{{$p->brand_id}}</td>
      <td>{{$p->product_desc}}</td>
      <td>{{$p->product_price}}</td>
+     <td>{{$p->gia_km}}</td>
      <td><img src="{!! asset('images/'.$p->product_image)!!}" alt="" width="50px" height="50px"></td>
      <td>
        <?php 

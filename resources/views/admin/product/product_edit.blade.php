@@ -32,6 +32,10 @@
     <label for="categoryid">Giá</label>
     <input type="text" class="form-control" name="gia" value="{{$pro_edit->product_price}}"  placeholder="Nhập giá">
   </div>
+   <div class="form-group">
+    <label for="categoryid">Giá khuyễn mãi</label>
+    <input type="text" class="form-control" name="gia_km" value="{{$pro_edit->gia_km}}"  placeholder="Nhập giá khuyến mãi">
+  </div>
   <div class="form-group">
     <label for="images">Hình ảnh</label>
     <input type="file" name="hinh" id="ful" name="ful" class="form-control">

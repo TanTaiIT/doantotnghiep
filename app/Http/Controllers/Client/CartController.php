@@ -45,13 +45,11 @@ class CartController extends Controller
             ];
             
             session()->put('cart',$cart);
-            return redirect()->back()->with('success','đã thêm sản phẩm vào giỏ hàng');
         }
         if(isset($cart[$id])){
            if(isset($req->soluong)){
                 $cart[$id]['quantity']=$cart[$id]['quantity']+$soluong;
                 session()->put('cart',$cart);
-                return redirect()->back()->with('success','đã thêm sản phẩm vào giở hàng');
             }
         
         }
@@ -66,8 +64,8 @@ class CartController extends Controller
             "hot"=>$hot
         ];
         session()->put('cart',$cart);
-        return redirect()->back()->with('success','đã thêm sản phẩm vào giỏ hàng');
     }
+
      public function remove(Request $request)
     {
         if($request->id) {

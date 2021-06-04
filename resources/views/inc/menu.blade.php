@@ -34,7 +34,7 @@
             <li><a class="" href="" title=""><h2>Loại sản phẩm</h2></a>
             	 <ul>
             	 	@foreach($cate as $c)
-                    <li><span></span><a href="">{{$c->category_name}}</a></li>
+                    <li><span></span><a href="{{route('list_pro',$c->category_id)}}">{{$c->category_name}}</a></li>
                     @endforeach
                 </ul>
             </li>
