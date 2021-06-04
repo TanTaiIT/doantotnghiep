@@ -13,7 +13,9 @@ class custommer extends Model
     	'customer_name',
     	'customer_password',
     	'customer_phone',
-    	'customer_email'
+    	'customer_email',
+        'code',
+        'code_time'
     ];
     protected $primaryKey="custommer_id";
 }

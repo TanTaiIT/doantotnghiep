@@ -18,6 +18,10 @@ use App\Models\shipping;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use PDF;
+use Mail;
+use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+
 class CheckoutController extends Controller
 {
     public function print_order($checkout_code){
@@ -264,17 +268,74 @@ class CheckoutController extends Controller
          return view('client/thankyou',compact('cate','brand','com','url_canonical'));
     }
     public function dangky(Request $req){
-    	$cus=array();
-    	$cus['customer_name']=$req->name;
-    	$cus['customer_email']=$req->email;
-    	$cus['customer_password']=md5($req->password);
-    	$cus['customer_phone']=$req->sdt;
+        $this->validate($req, [
+            'name'=>'required',
+            'email'=>'required|email|unique:tbl_customers,customer_email',
+            'sdt' => 'required|regex:/(07)[0-9]{9}/|unique:tbl_customers,customer_phone',
+            'password'=>'required|min:8|max:32',
+            're_password'=>'required|same:password'
+        ],[
+            'name.required'=>'+Ban chưa nhập tên',
+            'email.required'=>'+Ban chưa nhập email',
+            'email.email'=>'+Email chưa đúng định dạng',
+            'email.unique'=>'+Email đã tồn tại',
+            'password.required'=>'+Bạn chưa nhập password',
+            'phone.required'=>'+Bạn chưa nhập số điện thoạt',
+            'phone.regex'=>'+Số Điện thoại chưa đúng định dạng',
+            'phone.unique'=>'+Số điện thoại đã tồn tại',
+            're_password.required'=>'+Bạn chưa nhập lại password',
+            'password.min'=>'+password lớn hơn 8',
+            'password.max'=>'+Password lớn hơn 32',
+            're_password.same'=>'+Password chưa đúng'
+        ]);
+
+    	// $cus=array();
+    	// $cus['customer_name']=$req->name;
+    	// $cus['customer_email']=$req->email;
+    	// $cus['customer_password']=md5($req->password);
+    	// $cus['customer_phone']=$req->sdt;
+    	// $cus_id=DB::table('tbl_customers')->insertGetId($cus);
+    	// Session::put('customer_id',$cus_id);
+    	// Session::put('customer_name',$req->customer_name);
+    	// return redirect()->route('cli_index');
+        $email = $req->email;
+        $code = bcrypt(md5(time().$email));
+        $url = route('xacnhanTK',['name'=>$req->name,'email'=>$req->email,'phone'=>$req->sdt,'password'=>Hash::make($req->password),'code_active'=>$code]);
+        $data =[
+            'route' =>$url
+        ];
+        Mail::send('email.xacnhantk',$data, function($message) use ($email){
+            $message->to($email, 'Verify password')->subject('Xác nhận mậy khẩu!!');
+            $message->from($email);
+        });
+        return redirect()->route('cli_index');
+    }
+    public function xacnhanTK(Request $req){
+        //dd($req->name);
+        //dd($req->all());
+        $email = $req->email;
+        $name = $req->name;
+        $phone = $req->phone;
+        $password = $req->password;
+        $code_active = $req->code_active;
+        //$time_active = $req->time_active;
+        //dd($email);
+
+        $cus=array();
+    	$cus['customer_name']=$name;
+    	$cus['customer_email']=$email;
+    	$cus['customer_password']=$password;
+    	$cus['customer_phone']=$phone;
+        $cus['code_active']=$code_active;
     	$cus_id=DB::table('tbl_customers')->insertGetId($cus);
     	Session::put('customer_id',$cus_id);
-    	Session::put('customer_name',$req->customer_name);
-    	return redirect()->route('cli_index');
-
+    	Session::put('customer_name',$name);
+    	return redirect()->route('cli_index')->with('thongbao','Xac nhan tai khoan thanh cong!!');
+        
     }
+    // public function getdoimk(){
+    //     return view('email.layout_doimk');
+    // }
     public function dangnhap(Request $req){
     	$email=$req->email;
     	$password=md5($req->password);
@@ -286,11 +347,83 @@ class CheckoutController extends Controller
     		return redirect()->route('cli_index');
     		
     	}else{
-    		return redirect()->route('cart');
+    		return redirect()->route('cli_index');
     		
     	}
 
     }
+    //lấy lại mật khẩu
+    public function postSendcoderesetpassowrd(Request $req){
+        $email = $req->email;
+        $checkUser = DB::table('tbl_customers')->Where('customer_email', $email)->first();
+
+        if(!$checkUser){
+            return redirect()->back()->with('thongbao','Không có email này');
+            //return dd("khp6g tồn tại");
+        }
+        $code = bcrypt(md5(time().$email));
+        $checkUser->code = $code;
+        $checkUser->code_time = Carbon::now();
+        DB::table('tbl_customers')->where('customer_email', $email)->update(['code'=> $code]);
+        //$checkUser->save();
+
+        $url = route('getdoimk',['code'=>$checkUser->code, 'email'=>$email]);
+
+        $data =[
+            'route' =>$url
+        ];
+        //dd($data);
+        Mail::send('email.reset_password',$data, function($message) use ($email){
+	        $message->to($email, 'Reset password')->subject('lấy lại mậy khẩu!!');
+            $message->from($email);
+	    });
+
+        return redirect()->route('cli_index')->with('thongbao1','Vào email để lấy lại mậy khẩu' );
+    }
+
+    public function getdoimk(Request $req){
+        $code = $req->code;
+        $email = $req->email;
+        $checkUser = DB::table('tbl_customers')->where([
+           'code' => $code,
+           'customer_email' => $email
+        ])->first();
+        if(!$checkUser){
+            return redirect('cli_index')->with('danger','Xin lổi, đường dẩn không dúng, bạn vui lòng thử lại sao');
+        }
+        return view("email.layout_doimk");
+    }
+
+    public function postdoimk(Request $req){
+        $this->validate($req, [
+            'password'=>'required|min:8|max:32',
+            're_password'=>'required|same:password'
+        ],[
+            'password.required'=>'+Bạn chưa nhập password',
+            're_password.required'=>'+Bạn chưa nhập lại password',
+            'password.min'=>'+password lớn hơn 8',
+            'password.max'=>'+Password lớn hơn 32',
+            're_password.same'=>'+Password chưa đúng'
+        ]);
+        $data = $req->all();
+        $code = $req->code;
+        $email = $req->email;
+        //dd($data);
+        $checkUser = DB::table('tbl_customers')->where([
+            'code' => $code,
+            'customer_email' => $email
+         ])->first();
+         
+         if(!$checkUser){
+            return redirect('cli_index')->with('danger','Xin lổi, đường dẩn không dúng, bạn vui lòng thử lại sao');
+        }
+
+        DB::table('tbl_customers')->where('customer_email', $email)->update(['customer_password'=> md5($req->password)]);
+        return redirect()->route('cli_index')->with('thanhcong','Mật khẩu đăng nhập thành công, đăng nhập đi thằng mặt lồn');
+    }
+
+    //end doi may khau
+
     public function del_fee(){
         Session::forget('fee');
         return redirect()->back();

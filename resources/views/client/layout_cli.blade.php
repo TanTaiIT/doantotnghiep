@@ -80,11 +80,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<?php } ?>
 	<?php
 	if($com=='payment'){ ?> 
-		
 		@include('inc.payment')
 	<?php } ?>
-
-
+    
 
 </body>
 

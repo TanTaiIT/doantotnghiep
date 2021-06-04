@@ -98,7 +98,11 @@
 @if(session('cart'))
 @foreach(session('cart') as $id => $details)
 <?php 
-    $sub=$details['price']*$details['quantity']
+    $gia=$details['price']-$details['price_pro'];
+    $sub=$details['price']*$details['quantity'];
+
+    
+                                                
 ?>
           <li class="clearfix">
             <div class="img-con">
@@ -106,7 +110,7 @@
             </div>
             <div class="detail">
             <h5>{{ $details['name'] }}</h5>
-            <span class="item-price">Giá: 11.00</span>
+            <span class="item-price">Giá:{{number_format($gia)}} đ</span>
             <span class="quantity1">Số lượng: {{ $details['quantity'] }}</span><br>
             <span>Size:{{$details['size']}}</span><br><span>
             <span>Màu:<i class="fas fa-coffee" style="color: {{$details['color']}}"></i></span><br>

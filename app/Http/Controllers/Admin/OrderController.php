@@ -20,6 +20,7 @@ class OrderController extends Controller
 {
 	
     public function view_order($order_code){
+		
 		$order_details = OrderDetail::with('product')->where('order_code',$order_code)->get();
 		$getorder = Order::where('order_code',$order_code)->get();
 		foreach($getorder as $key => $ord){
@@ -49,6 +50,7 @@ class OrderController extends Controller
 
 	}
 	public function manage_order(){
+		
     	$order = Order::orderby('created_at','DESC')->get();
     	return view('admin.Order.manage_order')->with(compact('order'));
     }

@@ -157,6 +157,7 @@
                             data:{shipping_email:shipping_email,shipping_name:shipping_name,shipping_address:shipping_address,shipping_phone:shipping_phone,shipping_notes:shipping_notes,_token:_token,order_fee:order_fee,order_coupon:order_coupon,shipping_method:shipping_method,payment_select:payment_select},
                             success:function(){
                                // swal("Đơn hàng", "Đơn hàng của bạn đã được gửi thành công", "success");
+                               
                             }
                         });
 

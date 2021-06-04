@@ -3,7 +3,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript" charset="utf-8" async defer></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/css/formValidation.min.css"></script>
+    <script type="text/javascript">
+    $.validate({
+
+    });
+    </script>
 <script type="text/javascript">
 
 </script>

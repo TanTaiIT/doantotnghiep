@@ -32,7 +32,10 @@
 							      $i=0;?>
 						 @if(session('cart'))
                          @foreach(session('cart') as $id => $details)
-                         <?php $total += $details['price'] * $details['quantity'] ?>
+                         <?php 
+                         $gia=$details['price']-$details['price_pro'];
+                         $sub=$gia*$details['quantity'];
+                         $total += $gia * $details['quantity'] ?>
 							<tr class="rem1">
 								<td class="invert">{{$i++}}</td>
 								<td class="invert-image">
@@ -58,7 +61,7 @@
 			                    </td> -->
 			                    
 								<td class="invert">{{ $details['name'] }}</td>
-								<td class="invert">{{ $details['price'] }} đ</td>
+								<td class="invert">{{ $sub }} đ</td>
 								<!-- <td class="actions" data-th=""> -->
 		                        <?php /*<button class="btn btn-primary btn update-cart" data-id="{{ $id }}"><i class="fas fa-sync-alt"></i></button>
 		                        

@@ -54,7 +54,9 @@
 							      $i=0;?>
 						 @if(session('cart'))
                          @foreach(session('cart') as $id => $details)
-                         <?php $totalitem = $details['price'] * $details['quantity'];
+                         <?php 
+                         $gia=$details['price']-$details['price_pro'];
+                         $totalitem = $gia * $details['quantity'];
                                $total+=$totalitem;
                               ?>
                          
@@ -68,14 +70,19 @@
 								<td data-th="Quantity">
 									
 										<div class="quantity-select">
-												<input type="number" class="quantity" value="{{$details['quantity']}}">
+												<input type="number" min="1" class="quantity" value="{{$details['quantity']}}">
 
 										</div>
 									
 								</td>
 								<td class="invert">{{ $details['name'] }}</td>
-								<td class="invert">${{number_format($totalitem) }} đ</td>
+
+								<td class="invert">{{number_format($totalitem) }} đ</td>
 								<td class="invert"><i class="fas fa-coffee" style="color:{{$details['color']}}"></i></td>
+
+								
+								
+
 								<td class="invert">{{$details['size']}}</td>
 								<td class="invert">{{$details['hot']}}</td>
 								<td class="actions" data-th="">

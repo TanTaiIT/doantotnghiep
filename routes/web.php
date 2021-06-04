@@ -12,16 +12,21 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('tai','Client\ClientController@tai');
-Route::get('admin','Admin\AdminController@index')->name('admin_index');
-Route::get('dangnhap1','Admin\LoginController@dangnhap1')->name('dangnhap1');
-Route::get('login','Admin\LoginController@login')->name('log');
-Route::post('dangnhap','Admin\LoginController@postlogin')->name('post_log');
-Route::get('logout','Admin\LoginController@getLogout')->name('getLogout');
-// Route::group(['prefix' => 'admin', 'namespace' => 'admin'], function() {	
-// 	Route::get('login','LoginController@getLogin')->name('getLogin');
-// 	Route::post('login','LoginController@postLogin')->name('postLogin');
-// 	Route::get('logout','LoginController@getLogout')->name('getLogout');
+//Route::get('admin','Admin\AdminController@index')->name('admin_index')->middleware('CheckUser');;
+Route::group(['prefix'=>'login','namespace'=>'Admin'],function(){
+   Route::get('login','loginController@getdangnhap')->name('login');
+   Route::post('postlogin','loginController@postdangnhap')->name('postlogin');
+
+   Route::get('singup','loginController@getdangky')->name('singup');
+   Route::post('postsingup','loginController@postdangky')->name('postsingup');
+   //Route::get('xacnhantaikhoan','loginController@xacnhanTK')->name('xacnhanTK');
+
+   Route::get('singout','loginController@dangxuat')->name('singout');
+});
+// Route::group(['prefix' => 'admin', 'namespace' => 'admin'], function() {   
+//    Route::get('login','LoginController@getLogin')->name('getLogin');
+//    Route::post('login','LoginController@postLogin')->name('postLogin');
+//    Route::get('logout','LoginController@getLogout')->name('getLogout');
 // });
 Route::group(['prefix'=>'product','namespace'=>'Admin'],function(){
 Route::get('index','ProductController@index')->name('pro_index');
@@ -85,26 +90,32 @@ Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
    // Route::post('/select-delivery','DeliveryController@select_delivery');
    Route::post('/select-delivery-home','CheckoutController@select_delivery_home');
    Route::get('/checkout','CheckoutController@checkout')->name('checkout');
-  
+   Route::get('/list-pro/{id}','ClientController@list_pro')->name('list_pro');
    Route::post('/cart/{id}','CartController@addtocart1')->name('addtocart1');
    
 
    
 });
-Route::get('/{id}','Client\ClientController@list_pro')->name('list_pro');
 Route::post('/cart','Client\CartController@addtocart')->name('addtocart');
-Route::patch('update-cart','Client\CartController@update');
-Route::delete('remove-from-cart','Client\CartController@remove');
-Route::post('/select-delivery-home','Client\CheckoutController@delivery_home');
+ Route::patch('update-cart','Client\CartController@update');
+ Route::delete('remove-from-cart','Client\CartController@remove');
+ Route::post('/select-delivery-home','Client\CheckoutController@delivery_home');
 
 /* Cart */
 
 
 /* Checkout */
 Route::group(['prefix'=>'cli_check','namespace'=>'Client'],function(){
-	Route::post('/dangky','CheckoutController@dangky')->name('dangky');
-	Route::post('/dangnhap','CheckoutController@dangnhap')->name('dangnhap');
-	Route::get('/payment','CheckoutController@payment')->name('payment');
+   Route::post('/dangky','CheckoutController@dangky')->name('dangky');
+   Route::get('xacnhantaikhoan','CheckoutController@xacnhanTK')->name('xacnhanTK');
+   Route::post('/dangnhap','CheckoutController@dangnhap')->name('dangnhap');
+   Route::get('/payment','CheckoutController@payment')->name('payment');
+
+   //Tìm lại mật khẩu
+   
+   Route::post('/postlaymk','CheckoutController@postSendcoderesetpassowrd')->name('postlaymk');
+   Route::get('/getdoimk','CheckoutController@getdoimk')->name('getdoimk');
+   Route::post('/postdoimk','CheckoutController@postdoimk')->name('postdoimk');
 });
 
 
@@ -139,10 +150,7 @@ Route::post('/update-qty','Admin\OrderController@update_qty');
 /* attribute */
 Route::get('/attr','Admin\AttrController@add_attr')->name('add_attr');
 Route::post('/them_attr','Admin\AttrController@store_attr')->name('store_attr');
-
-
 Route::post('/tim-kiem','Client\ClientController@search');
 Route::post('/autocomplete-ajax','Client\ClientController@autocomplete_ajax');
 Route::post('/insert-rating','Client\ClientController@insert_rating');
-
 Route::post('/add-cart-ajax','Client\CartController@add_cart_ajax');
