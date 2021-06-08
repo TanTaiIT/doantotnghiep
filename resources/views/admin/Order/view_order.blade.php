@@ -122,7 +122,6 @@
             <th>Tên sản phẩm</th>
             <th>Số lượng sp trong kho</th>
             <th>Mã giảm giá</th>
-            <th>Màu</th>
             <th>Size</th>
             <th>Phí ship hàng</th>
             <th>Số lượng</th>
@@ -155,7 +154,6 @@
                   Không mã
                 @endif
             </td>
-            <td>{{$details->product_color}}</td>
             <td>{{$details->product_size}}</td>
             <td>{{number_format($details->product_feeship ,0,',','.')}}đ</td>
             <td><input type="number" min="1" {{$order_status==2 ? 'disabled' : ''}} class="order_qty_{{$details->product_id}}" value="{{$details->product_sales_quantity}}" name="product_sales_quantity">

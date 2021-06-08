@@ -80,10 +80,9 @@
 												<form>
 													@csrf
 													<fieldset> 
-														<!-- <input type="button" value="Thêm giỏ hàng" class="btn btn-default add-to-cart" data-id_product="{{$p->product_id}}" name="add-to-cart"> -->
+													    
+														<input type="button" data-toggle="modal" data-target="#xemnhanh"  value="Xem nhanh" class="btn btn-default xemnhanh" data-id_soluong="{{$p->soluong}}" data-id_product="{{$p->product_id}}">
 
-
-														<input type="button" data-toggle="modal" data-target="#xemnhanh"  value="Xem nhanh" class="btn btn-default xemnhanh" data-id_product="{{$p->product_id}}" name="add-to-cart">
 													</fieldset>
 												</form> 
 
@@ -100,8 +99,11 @@
 								
 								@endforeach
 							</div>
+							
+								{{ $product->links()}}
+							
 
-  {{ $product->links()}}
+
 
 
 						
@@ -119,126 +121,6 @@
 						</div>
 
 
-
-						<!-- <div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mt-4">
-							<h3 class="heading-tittle text-center font-italic">Large Appliances</h3>
-							<div class="row">
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="images/m7.jpg" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-										</div>
-										<span class="product-new-top">New</span>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="single.html">Whirlpool 245</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$230.00</span>
-												<del>$280.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Whirlpool 245" />
-														<input type="hidden" name="amount" value="230.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="images/m8.jpg" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="single.html">BPL Washing Machine</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$180.00</span>
-												<del>$200.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="BPL Washing Machine" />
-														<input type="hidden" name="amount" value="180.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="images/m9.jpg" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="single.html">Microwave Oven</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$199.00</span>
-												<del>$299.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Microwave Oven" />
-														<input type="hidden" name="amount" value="199.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div> -->
 						
 					</div>
 				</div>
@@ -273,16 +155,16 @@
 							<div class="w3l-range">
 								<ul>
 									<li>
-										<a href="{{request()->fullUrlWithQuery(['price' => 1])}}">Under 1,000đ</a>
+										<a href="{{request()->fullUrlWithQuery(['price' => 1])}}">dưới 1.000đ</a>
 									</li>
 									<li class="my-1">
-										<a href="{{request()->fullUrlWithQuery(['price' => 2])}}">1,000đ - 5,000đ</a>
+										<a href="{{request()->fullUrlWithQuery(['price' => 2])}}">1.000đ - 5.000đ</a>
 									</li>
 									<li>
-										<a href="{{request()->fullUrlWithQuery(['price' => 3])}}">5,000đ - 10,000đ</a>
+										<a href="{{request()->fullUrlWithQuery(['price' => 3])}}">5.000đ - 10.000đ</a>
 									</li>
 									<li class="my-1">
-										<a href="{{request()->fullUrlWithQuery(['price' => 4])}}">10,000đ - 20,000đ</a>
+										<a href="{{request()->fullUrlWithQuery(['price' => 4])}}">10.000đ - 20.000đ</a>
 									</li>
 								</ul>
 							</div>
@@ -444,7 +326,7 @@
 										    </a>
 										</div>
 										<div class="col-lg-9 col-sm-10 col-9 w3_mvd">
-											<a href="{{route('cli_detail',$b->product_id)}}">{{$b->product_name}} (Gold, 4GB RAM + 64GB Memory)</a>
+											<a href="{{route('cli_detail',$b->product_id)}}">{{$b->product_name}}</a>
 											<a href="{{route('cli_detail',$b->product_id)}}" class="price-mar mt-2">{{number_format($b->product_price)}} đ</a>
 										</div>
 										@endforeach
@@ -535,8 +417,10 @@
                                                     </style>
                                                     <div class="baotrum">
                                                         <div class="taice1">
+                                                        	
                                                             <span id="product_quickview_image"></span>
                                                             <span id="product_quickview_gallery"></span>
+															
                                                         </div>
                                                         <form>
                                                             @csrf
@@ -547,8 +431,6 @@
                                                             <p  >Giá sản phẩm : <span style="font-size: 20px; color: brown;font-weight: bold;" id="product_quickview_price"></span></p>
                                 
                                                                 <label >Số lượng:</label>
-
-                                                               
                                                                 <input type="number" class="soluong cart_product_sl" min=1 value="1" name="soluong">
                                                              
                                                             </span>
@@ -557,14 +439,7 @@
                                                             <p><span id="product_quickview_desc"></span></p>
                                                             <hr>
                                                             <p><span id="product_quickview_content"></span></p>
-                                                            <p><span>Chọn màu:</span></p>
-                                                            <div class="bao1">
-								@foreach($color as $id=>$data1)
-								<div class="colo">
-								<input  type="radio"  name="color" value="{{$data1->value}}" class="check cart_product_color"><i class="
-fas fa-coffee check1"  style="color:{{$data1->value}}; font-size: 30px;"></i></div>
-								@endforeach
-							    </div>
+                                                           
 								<p><span>Chọn size</span></p>
 								<div class="bao2">
 								@foreach($size as $id=>$data)
@@ -581,6 +456,7 @@ fas fa-coffee check1"  style="color:{{$data1->value}}; font-size: 30px;"></i></d
 							    </div>
 								@endforeach
 							   </div>
+							   <!-- <span id="product_soluong"></span> -->
                                                             
 														    <div style="margin-bottom: 10px" id="product_quickview_button"></div>
                                                             <div id="beforesend_quickview"></div>
@@ -599,13 +475,7 @@ fas fa-coffee check1"  style="color:{{$data1->value}}; font-size: 30px;"></i></d
                                             </div> 
 
 
-
-
-
-
-
-
-
+                                           
 	@stop
 
 	

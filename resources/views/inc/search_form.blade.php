@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
                                     <p>{{ $details['name'] }} </p>
-                                    <span class="price text-info"></span> Giá:{{ number_format($details['price']) }} đ <span class="count">Số lượng:{{ $details['quantity'] }} </span><br><span>Size:{{$details['size']}}</span><br><span>Màu:<i class="fas fa-heart" style="color: {{$details['color']}}"></i></span>
+                                    <span class="price text-info"></span> Giá:{{ number_format($details['price']) }} đ <span class="count">Số lượng:{{ $details['quantity'] }} </span><br><span>Size:{{$details['size']}}</span><br><span></span>
                                     <br><span>Loại:{{$details['hot']}}</span>
                                 </div>
 
@@ -113,7 +113,7 @@
             <span class="item-price">Giá:{{number_format($gia)}} đ</span>
             <span class="quantity1">Số lượng: {{ $details['quantity'] }}</span><br>
             <span>Size:{{$details['size']}}</span><br><span>
-            <span>Màu:<i class="fas fa-coffee" style="color: {{$details['color']}}"></i></span><br>
+            
             <span>Loại:{{$details['hot']}}</span>
 
             </div>

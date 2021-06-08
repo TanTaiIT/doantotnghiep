@@ -15,18 +15,6 @@
 	<div class="table-responsive bang1">
 
 					<table class="timetable_sub">
-						<!-- <thead>
-							<tr>
-								<th>SL No.</th>
-								<th>Product</th>
-								<th>Quality</th>
-								<th>Product Name</th>
-
-								<th>Price</th>
-								<th>Remove</th>
-							</tr>
-						</thead> -->
-						
 						<tbody>
 							<?php $total=0;
 							      $i=0;?>
@@ -46,20 +34,10 @@
 								<td data-th="Quantity">
 									
 										<div class="quantity-select">
-											<!-- <div class="entry value-minus">&nbsp;</div>
-											<div class="entry value"> -->
-												<!-- <span class="quantity" value="{{$details['quantity']}}">{{$details['quantity'] }}</span> -->
 												<input style="color:white;" type="number" class="quantity" disabled="true" value="{{$details['quantity']}}">
-
-											<!-- </div>
-											<div class="entry value-plus active">&nbsp;</div> -->
 										</div>
 									
 								</td>
-								<!-- <td data-th="Quantity">
-			                        <input type="number" value="{{ $details['quantity'] }}" class="quantity" />
-			                    </td> -->
-			                    
 								<td class="invert">{{ $details['name'] }}</td>
 								<td class="invert">{{ $sub }} đ</td>
 								<!-- <td class="actions" data-th=""> -->
@@ -91,6 +69,7 @@
 													@if($cou['coupon_condition']==1)
 														<span class="magiamgia">Mã giảm : </span>{{$cou['coupon_number']}} % @if(Session::get('coupon'))
 				                          	<a class="btn btn-default check_out" href="{{url('/unset-coupon')}}" class="nutgiamgia">Xóa mã khuyến mãi</a>
+				                          	<hr>
 											@endif
 														<p>
 															@php 
@@ -107,6 +86,7 @@
 														<span class="giam2">Mã giảm :</span> {{number_format($cou['coupon_number'],0,',','.')}} k
 
 														<p>
+															<hr>
 															@php 
 															$total_coupon = $total - $cou['coupon_number'];
 														
@@ -118,7 +98,7 @@
 													@endif
 												@endforeach
 												@endif
-												<hr>
+												
 									    <div class="phi">
 										@if(Session::get('fee'))
 										
@@ -126,9 +106,10 @@
 
 											<span class="phivanchuyen">Phí vận chuyển</span> <span>{{number_format(Session::get('fee'),0,',','.')}}đ</span> 
 											<?php $total_after_fee = $total + Session::get('fee'); ?>
+											 <hr>
 										@endif 
 									    </div>
-									    <hr>
+									   
 										<span class="tongtien1">Tổng tiền:</span>
 										@php 
 											if(Session::get('fee') && !Session::get('coupon')){

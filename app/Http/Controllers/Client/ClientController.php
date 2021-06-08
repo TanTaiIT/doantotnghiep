@@ -15,8 +15,15 @@ use App\Models\slider;
 use DB;
 class ClientController extends Controller
 {
+    public function error_page(){
+        return view('errors.404');
+    }
     public function tai(Request $request){
+        $meta_desc = $detail->product_desc;
+        // $meta_keywords = $value->product_slug;
+        $meta_title = $detail->product_name;
         $url_canonical = $request->url();
+        $share_images = url('images/'.$detail->product_image);
         $slide=slider::limit(4)->get();  
         $size=attribute::where('name','size')->get();
         $color=attribute::where('name','color')->get();
@@ -24,9 +31,10 @@ class ClientController extends Controller
         $cate=category::all();
         $brand=brand::all();
         $com='index';
-        return view('client.tai',compact('com','cate','brand','url_canonical','size','color','hot','slide'));
+        return view('client.tai',compact('com','cate','brand','url_canonical','size','color','hot','slide','meta_title','meta_desc','share_images'));
     }
     public function index(Request $request){
+
         $url_canonical = $request->url();
         $slide=slider::limit(4)->get();  
         $size=attribute::where('name','size')->get();
@@ -39,6 +47,10 @@ class ClientController extends Controller
         $product=product::where([
             'product_status'=>1
         ]);
+        $meta_desc = 'cửa hàng bán trà sữa online';
+        // $meta_keywords = $value->product_slug;
+        $meta_title = 'các loại trà sữa ngon';
+        // $share_images = url('images/'.$product->product_image);
         foreach($product as $p){
             $pro_id=$p->product_id;
             
@@ -101,16 +113,15 @@ class ClientController extends Controller
         //     }
         // }
         $product=$product->orderBy('product_id','DESC')->paginate(6);
-    	return view('client/index',compact('product','com','cate','brand','url_canonical','size','color','hot','slide','bestsell'));
+    	return view('client/index',compact('product','com','cate','brand','url_canonical','size','color','hot','slide','bestsell','meta_title','meta_desc'));
 
     }
  
     public function detail(Request $request,$id){
-        $color=attribute::where('name','color')->get();
         $size=attribute::where('name','size')->get();
         $hot=attribute::where('name','hot')->get();
-        $url_canonical = $request->url();
-    	$detail=product::FindOrFail($id);
+        // $url_canonical = $request->url();
+        $detail=product::FindOrFail($id);
         $pro_id=$detail->product_id;
         $img_detail=pro_img::where('product_id',$id)->get();
         $cate=category::all();
@@ -118,7 +129,14 @@ class ClientController extends Controller
     	$com='detail';
         $rating=rating::where('product_id','=',$pro_id)->avg('rating');
         $rating=round($rating);
-    	return view('client/detail',compact('detail','com','cate','brand','img_detail','url_canonical','rating','color','size','hot'));
+        $meta_desc = $detail->product_desc;
+        // $meta_keywords = $value->product_slug;
+        $meta_title = $detail->product_name;
+        $url_canonical = $request->url();
+        $share_images = url('images/'.$detail->product_image);
+       
+    	return view('client/detail',compact('detail','com','cate','brand','img_detail','url_canonical','rating','size','hot','meta_desc'
+        ,'meta_title','url_canonical','share_images'));
     }
     public function search(Request $request){
         $url_canonical = $request->url();  
@@ -195,5 +213,7 @@ class ClientController extends Controller
         $product_list=product::where('category_id',$id)->get();
         return view('client.list_pro',compact('product_list','brand','cate','url_canonical','com','size','color','hot','slide'));
     }
+
+  
     
 }

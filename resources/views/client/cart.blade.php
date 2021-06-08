@@ -31,7 +31,12 @@
 				<h4 class="mb-sm-4 mb-3">giở hàng của bạn:
 					<span>{{count(session('cart'))}} sản phẩm</span>
 				</h4>
-
+                <?php
+				   $message=Session::get('message');
+				   if(isset($message)){
+					   echo $message;
+				   }
+				?>
 				<div class="table-responsive" id="review">
 					<table class="timetable_sub">
 						<thead>
@@ -41,7 +46,6 @@
 								<th>Số lượng</th>
 								<th>Tên sản phẩm</th>
 								<th>Giá</th>
-								<th>Màu</th>
 								<th>Size</th>
 								<th>Loại</th>
 								<th>Điều chỉnh</th>
@@ -75,12 +79,12 @@
 										</div>
 									
 								</td>
+
 								<td class="invert">{{ $details['name'] }}</td>
 
 								<td class="invert">{{number_format($totalitem) }} đ</td>
-								<td class="invert"><i class="fas fa-coffee" style="color:{{$details['color']}}"></i></td>
-
 								
+								<!-- <td id="soluong"></td> -->
 								
 
 								<td class="invert">{{$details['size']}}</td>

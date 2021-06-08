@@ -73,21 +73,6 @@
 								@csrf
 								<fieldset>
 									<ul>
-										<li class="mb-3">
-								<p><span>Chọn màu:</span></p>
-								<div class="bao1">
-								@foreach($color as $id=>$data1)
-								<div class="colo">
-								<input type="radio"  name="color" value="{{$data1->value}}" class="check cart_product_color"><i class="
-
- fas fa-coffee check1"  style="color:{{$data1->value}}; font-size: 30px;"></i>
-
-</div>
-								@endforeach
-							    </div>
-							</li>
-
-						
 							<li class="mb-3">
 								<p><span>Chọn size</span></p>
 								<div class="bao2">
@@ -124,6 +109,7 @@
                                 
 							</li>
 							</ul>
+							<input type="hidden" value="{{$detail->soluong}}" class="cart_soluong">
 									
 								</fieldset>
 							</form>
@@ -146,7 +132,9 @@
                                                     @endfor
 
                                                 </ul>
-					<div id="fb-root"></div>
+												<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0" nonce="n4eIiG1A"></script>
+<div class="fb-share-button" data-href="{{$url_canonical}}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{$url_canonical}}" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0" nonce="fA9EUFES"></script>
     <div class="fb-comments" data-href="{{$url_canonical}}" data-width="" data-numposts="5"></div>
 				</div>
@@ -156,11 +144,5 @@
 
 	</div>
 </div>
-
-
-
-	
-
-
 
 	@endsection

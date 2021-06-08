@@ -40,12 +40,11 @@
        
             $(document).on('click','.add-to-cart-quickview',function(){
                 var id = $(this).data('id_product');
-                var color=$('input[name=color]:checked').val();
                 var size=$('input[name=size]:checked').val();
                 var hot=$('input[name=hot]:checked').val();
                 var soluong=$('.cart_product_sl').val();
                 var _token = $('input[name="_token"]').val();
-                if($("input:radio[name='color']").is(":checked") && $("input:radio[name='size']").is(":checked") && $("input:radio[name='hot']").is(":checked")) {
+                if($("input:radio[name='size']").is(":checked") && $("input:radio[name='hot']").is(":checked")) {
                     $.ajax({
                         url: '{{url('/cart')}}',
                         method: 'POST',
@@ -73,12 +72,11 @@
             $('.add-to-cart').click(function(){
               
                 var id = $(this).data('id_product');
-                var color=$('input[name=color]:checked').val();
                 var size=$('input[name=size]:checked').val();
                 var hot=$('input[name=hot]:checked').val();
                 var soluong=$('.cart_product_sl').val();
                 var _token = $('input[name="_token"]').val();
-                if($("input:radio[name='color']").is(":checked") && $("input:radio[name='size']").is(":checked") && $("input:radio[name='hot']").is(":checked")) {
+                if($("input:radio[name='size']").is(":checked") && $("input:radio[name='hot']").is(":checked")) {
                     $.ajax({
                         url: '{{url('/cart')}}',
                         method: 'POST',
@@ -353,11 +351,7 @@
 
 	<!-- imagezoom -->
 	<script src="{!! asset('web/js/imagezoom.js')!!}"></script>
-	<!-- //imagezoom -->
-
-	<!-- flexslider -->
 	<link rel="stylesheet" href="{!! asset('web/css/flexslider.css')!!}" type="text/css" media="screen" />
-
 	<script src="{!! asset('web/js/jquery.flexslider.js')!!}"></script>
 	<script>
 		// Can also be used with $(document).ready()

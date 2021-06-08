@@ -13,22 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Route::get('admin','Admin\AdminController@index')->name('admin_index')->middleware('CheckUser');;
+
+Route::get('/404','Client\ClientController@error_page')->name('404_page');
 Route::group(['prefix'=>'login','namespace'=>'Admin'],function(){
    Route::get('login','loginController@getdangnhap')->name('login');
    Route::post('postlogin','loginController@postdangnhap')->name('postlogin');
-
    Route::get('singup','loginController@getdangky')->name('singup');
    Route::post('postsingup','loginController@postdangky')->name('postsingup');
    //Route::get('xacnhantaikhoan','loginController@xacnhanTK')->name('xacnhanTK');
 
    Route::get('singout','loginController@dangxuat')->name('singout');
 });
+Route::get('home','Client\ClientController@get_home')->name('home');
 // Route::group(['prefix' => 'admin', 'namespace' => 'admin'], function() {   
 //    Route::get('login','LoginController@getLogin')->name('getLogin');
 //    Route::post('login','LoginController@postLogin')->name('postLogin');
 //    Route::get('logout','LoginController@getLogout')->name('getLogout');
 // });
-Route::group(['prefix'=>'product','namespace'=>'Admin'],function(){
+Route::group(['middleware'=>'roles','prefix'=>'product','namespace'=>'Admin'],function(){
 Route::get('index','ProductController@index')->name('pro_index');
 Route::get('addpro','ProductController@addpro')->name('pro_add');
 Route::post('them','ProductController@themsp')->name('themsp');
@@ -47,7 +49,7 @@ Route::post('/quickview','Admin\ProductController@quickview');
 
 /* Categoy */
 
-Route::group(['prefix'=>'category','namespace'=>'Admin'],function(){
+Route::group(['middleware'=>'roles','prefix'=>'category','namespace'=>'Admin'],function(){
 Route::get('index','CategoryController@index')->name('cate_index');
 Route::get('addcat','CategoryController@addcate')->name('cate_add');
 Route::post('themcat','CategoryController@themcat')->name('themcat');
@@ -58,7 +60,7 @@ Route::get('delete_all','ProductController@delete_all')->name('delete_all');
 });
 
 /* Brand */ 
-Route::group(['prefix'=>'brand','namespace'=>'Admin'],function(){
+Route::group(['middleware'=>'roles','prefix'=>'brand','namespace'=>'Admin'],function(){
 Route::get('index','BrandController@index')->name('brand_index');
 Route::get('addcat','BrandController@addbrand')->name('brand_add');
 Route::post('themcat','BrandController@thembrand')->name('thembrand');
@@ -83,7 +85,6 @@ Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
    Route::get('/','ClientController@index')->name('cli_index');
    Route::get('/detail/{id}','ClientController@detail')->name('cli_detail');
    Route::post('/search','ClientController@search')->name('cli_search');
-   // Route::get('/cart','CartController@cart')->name('cart');
    
    Route::get('/dangxuat_kh','ClientController@dangxuatkh')->name('dangxuat_kh');
    Route::get('/delivery','CheckoutController@delivery');
@@ -91,9 +92,7 @@ Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
    Route::post('/select-delivery-home','CheckoutController@select_delivery_home');
    Route::get('/checkout','CheckoutController@checkout')->name('checkout');
    Route::get('/list-pro/{id}','ClientController@list_pro')->name('list_pro');
-   Route::post('/cart/{id}','CartController@addtocart1')->name('addtocart1');
-   
-
+   Route::get('/tai','ClientController@tai')->name('tai');
    
 });
 Route::post('/cart','Client\CartController@addtocart')->name('addtocart');
@@ -154,3 +153,36 @@ Route::post('/tim-kiem','Client\ClientController@search');
 Route::post('/autocomplete-ajax','Client\ClientController@autocomplete_ajax');
 Route::post('/insert-rating','Client\ClientController@insert_rating');
 Route::post('/add-cart-ajax','Client\CartController@add_cart_ajax');
+
+Route::get('/add-category-post','Admin\CategoryPost@add_category_post');
+Route::get('/all-category-post','Admin\CategoryPost@all_category_post');
+Route::get('/edit-category-post/{category_post_id}','Admin\CategoryPost@edit_category_post');
+Route::post('/save-category-post','Admin\CategoryPost@save_category_post');
+Route::post('/update-category-post/{cate_id}','Admin\CategoryPost@update_category_post');
+Route::get('/delete-category-post/{cate_id}','Admin\CategoryPost@delete_category_post');
+
+Route::get('/add-post','Admin\PostController@add_post');
+Route::get('/all-post','Admin\PostController@all_post');
+Route::get('/delete-post/{post_id}','Admin\PostController@delete_post');
+Route::get('/edit-post/{post_id}','Admin\PostController@edit_post');
+Route::post('/save-post','Admin\PostController@save_post');
+Route::post('/update-post/{post_id}','Admin\PostController@update_post');
+Route::get('/danh-muc-bai-viet/{post_slug}','Admin\PostController@danh_muc_bai_viet');
+Route::get('/bai-viet/{post_slug}','Admin\PostController@bai_viet');
+
+Route::get('/register-auth','Admin\AuthController@register_auth')->name('regis');
+Route::get('/login-auth','Admin\AuthController@login_auth')->name('login_auth');
+Route::get('/logout-auth','Admin\AuthController@logout_auth')->name('logout_auth');
+
+Route::post('/register','Admin\AuthController@register');
+Route::post('/login1','Admin\AuthController@login1');
+
+
+
+Route::get('users','Admin\UserController@index')->name('user');
+Route::get('add-users','Admin\UserController@add_users');
+Route::get('delete-user-roles/{admin_id}','Admin\UserController@delete_user_roles');
+Route::post('store-users','Admin\UserController@store_users');
+Route::post('assign-roles','Admin\UserController@assign_roles');
+Route::get('impersonate/{admin_id}','Admin\UserController@impersonate');
+Route::get('impersonate-destroy','Admin\UserController@impersonate_destroy');

@@ -139,7 +139,6 @@ class CheckoutController extends Controller
         <tr>
         <th>Tên sản phẩm</th>
         <th>Mã giảm giá</th>
-        <th>Màu</th>
         <th>Size</th>
         <th>Phí ship</th>
         <th>Số lượng</th>
@@ -166,7 +165,6 @@ class CheckoutController extends Controller
             <tr>
             <td>'.$product->product_name.'</td>
             <td>'.$product_coupon.'</td>
-            <td>'.$product->product_color.'</td>
             <td>'.$product->product_size.'</td>
             <td>'.number_format($product->product_feeship,0,',','.').'đ'.'</td>
             <td>'.$product->product_sales_quantity.'</td>
@@ -255,7 +253,6 @@ class CheckoutController extends Controller
                 $order_details->product_name = $cart['name'];
                 $order_details->product_price = $cart['price'];
                 $order_details->product_sales_quantity = $cart['quantity'];
-                $order_details->product_color=$cart['color'];
                 $order_details->product_size=$cart['size'];
                 $order_details->product_coupon =  $data['order_coupon'];
                 $order_details->product_feeship = $data['order_fee'];

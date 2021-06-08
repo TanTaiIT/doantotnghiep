@@ -393,14 +393,7 @@
                                                             <p><span id="product_quickview_desc"></span></p>
                                                             <hr>
                                                             <p><span id="product_quickview_content"></span></p>
-                                                            <p><span>Chọn màu:</span></p>
-                                                            <div class="bao1">
-								@foreach($color as $id=>$data1)
-								<div class="colo">
-								<input  type="radio"  name="color" value="{{$data1->value}}" class="check cart_product_color"><i class="
-fas fa-coffee check1"  style="color:{{$data1->value}}; font-size: 30px;"></i></div>
-								@endforeach
-							    </div>
+                                                           
 								<p><span>Chọn size</span></p>
 								<div class="bao2">
 								@foreach($size as $id=>$data)

@@ -4,10 +4,11 @@
 	<meta charset="UTF-8" />
 	<meta name="keywords" content="Electro Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"
 	/>
-	<link  rel="canonical" href="{{$url_canonical}}" />
-	{{--   
-      <meta property="og:url" content="{{$url_canonical}}" />
-       --}}
+	<meta name="description" content="{{$meta_desc}}">
+	<link  rel="icon" type="image/x-icon" href="" />
+    <meta name="robots" content="INDEX,FOLLOW"/>
+    <link  rel="canonical" href="{{$url_canonical}}" />
+    <meta name="author" content="">
 	<script>
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
@@ -39,5 +40,15 @@
 	<link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&amp;subset=latin-ext" rel="stylesheet">
 	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese"
 	    rel="stylesheet">
+	<?php 
+	  if($com=='detail'){ ?>
+	  	<meta property="og:url"                content="{{$url_canonical}}" />
+    <meta property="og:type"               content="articles" />
+    <meta property="og:title"              content="{{$meta_title}}" />
+    <meta property="og:site_name" content="{{$meta_title}}"/>
+    <meta property="og:description"        content="{{$meta_desc}}" />
+    <meta property="og:image"              content="{{$share_images}}" />
+	  <?php }
+	?>
 	
 	<!-- //web fonts -->

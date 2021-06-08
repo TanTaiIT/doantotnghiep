@@ -1,13 +1,8 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Modern an Admin Panel Category Flat Bootstarp Resposive Website Template | Home :: w3layouts</title>
+<title>Trang quản lý</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Modern Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
@@ -60,7 +55,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							  </div>
 							</div>
 						</li>
-						<li class="avatar">
+						<!-- <li class="avatar">
 							<a href="#">
 								<img src="images/1.png" alt=""/>
 								<div>New message</div>
@@ -106,16 +101,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</li>
 						<li class="dropdown-menu-footer text-center">
 							<a href="#">View all messages</a>
-						</li>	
+						</li> -->	
 	        		</ul>
 	      		</li>
 			    <li class="dropdown">
 	        		<a href="#" class="dropdown-toggle avatar" data-toggle="dropdown"><img src="{!! asset('layout_admin/images/1.png')!!}"><span class="badge">9</span></a>
 	        		<ul class="dropdown-menu">
 						<li class="dropdown-menu-header text-center">
-							<strong>Account</strong>
+							<strong>{{Auth::User()->name}}</strong>
 						</li>
-						<li class="m_2"><a href="#"><i class="fa fa-bell-o"></i> Updates <span class="label label-info">42</span></a></li>
+						<!-- <li class="m_2"><a href="#"><i class="fa fa-bell-o"></i> Updates <span class="label label-info">42</span></a></li>
 						<li class="m_2"><a href="#"><i class="fa fa-envelope-o"></i> Messages <span class="label label-success">42</span></a></li>
 						<li class="m_2"><a href="#"><i class="fa fa-tasks"></i> Tasks <span class="label label-danger">42</span></a></li>
 						<li><a href="#"><i class="fa fa-comments"></i> Comments <span class="label label-warning">42</span></a></li>
@@ -126,9 +121,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li class="m_2"><a href="#"><i class="fa fa-wrench"></i> Settings</a></li>
 						<li class="m_2"><a href="#"><i class="fa fa-usd"></i> Payments <span class="label label-default">42</span></a></li>
 						<li class="m_2"><a href="#"><i class="fa fa-file"></i> Projects <span class="label label-primary">42</span></a></li>
-						<li class="divider"></li>
+						<li class="divider"></li> -->
 						<li class="m_2"><a href="#"><i class="fa fa-shield"></i> Lock Profile</a></li>
-						<li class="m_2"><a href="{{route('singout')}}"><i class="fa fa-lock"></i> Logout</a></li>	
+						<li class="m_2"><a href="{{route('logout_auth')}}"><i class="fa fa-lock"></i> Logout</a></li>	
 	        		</ul>
 	      		</li>
 			</ul>
@@ -210,6 +205,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+
+                         <li>
+                            <a href="#"><i class="fa fa-envelope nav_icon"></i>quản lý bài viết<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="{{URL::to('/add-category-post')}}">Thêm danh mục bài viết</a></li>
+                                <li><a href="{{URL::to('/all-category-post')}}">Liệt kê danh mục bài viết</a></li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-envelope nav_icon"></i>quản lý danh mục bài viết<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                 <li><a href="{{URL::to('/add-category-post')}}">Thêm danh mục bài viết</a></li>
+                        <li><a href="{{URL::to('/all-category-post')}}">Liệt kê danh mục bài viết</a></li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        
+
+                        
+                        
                         <li>
                             <a href="#"><i class="fa fa-envelope nav_icon"></i>Quản lý đơn hàng<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -244,7 +261,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 
                             </ul>
                         </li>
-                         
+                        @hasrole(['admin','author'])
+                        <li>
+                            <a href="widgets.html"><i class="fa fa-flask nav_icon"></i>Quản lý User</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{url('/add-users')}}">thêm User</a>
+                                    <a href="{{url('/users')}}">liệt kê User</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                       @endhasrole
+
+                       @chuyen
+                        <li>
+                                    <a href="{{URL::to('impersonate-destroy')}}">ngừng chuyển quyền<u></u></a>
+                                </li>
+                       @endchuyen
                         
                     </ul>
                 </div>

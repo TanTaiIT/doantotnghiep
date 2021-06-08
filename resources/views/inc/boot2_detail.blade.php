@@ -1,78 +1,10 @@
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/css/formValidation.min.css"></script>
 	<script src="{!! asset('web/js/jquery-2.2.3.min.js')!!}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript" charset="utf-8" async defer></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/css/formValidation.min.css"></script>
-    <script type="text/javascript">
-    $.validate({
-
-    });
-    </script>
-<script type="text/javascript">
-
-</script>
-<script>
-$('.add-to-cart').click(function() {
-   var cart = $('.shopping_bg');
-   var imgtofly = $(this).parents('li.cart_items').find('a.product-image img').eq(0);
-    if (imgtofly) {
-        var imgclone = imgtofly.clone()
-            .offset({ top:imgtofly.offset().top, left:imgtofly.offset().left })
-            .css({'opacity':'0.7', 'position':'absolute', 'height':'150px', 'width':'150px', 'z-index':'1000'})
-            .appendTo($('body'))
-            .animate({
-                'top':cart.offset().top + 10,
-                'left':cart.offset().left + 30,
-                'width':55,
-                'height':55
-            }, 1000, 'easeInElastic');
-        imgclone.animate({'width':0, 'height':0}, function(){ $(this).detach() });
-    }
-    return false;
-});
-</script>
-   <script type="text/javascript">
-        $(document).ready(function(){
-            $('.add-to-cart').click(function(){
-
-                var id = $(this).data('id_product');
-                var color=$('input[name=color]:checked').val();
-                var size=$('input[name=size]:checked').val();
-                var soluong=$('.cart_product_sl').val();
-                var _token = $('input[name="_token"]').val();
-                    $.ajax({
-                        url: '{{url('/cart')}}',
-                        method: 'POST',
-                        data:{id:id,_token:_token,color:color,size:size,soluong:soluong},
-                        success:function(){
-
-                            swal({
-                                    title: "Đã thêm sản phẩm vào giỏ hàng",
-                                    text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
-                                    showCancelButton: true,
-                                    cancelButtonText: "Xem tiếp",
-                                    confirmButtonClass: "btn-success",
-                                    confirmButtonText: "Đi đến giỏ hàng",
-                                    closeOnConfirm: false
-                                },
-                                function() {
-                                    window.location.href = "{{url('/gio-hang')}}";
-                                });
-
-                        }
-
-                    });
-                // }
-
-                
-            });
-        });
-    </script>
-	
-	<!-- //jquery -->
+   
 	<script type="text/javascript">
-    
         $('.xemnhanh').click(function(){
             var product_id = $(this).data('id_product');
             var _token = $('input[name="_token"]').val();
@@ -91,6 +23,8 @@ $('.add-to-cart').click(function() {
                 $('#product_quickview_content').html(data.product_content);
                 $('#product_quickview_value').html(data.product_quickview_value);
                 $('#product_quickview_button').html(data.product_button);
+                $('#product_soluong').html(data.product_soluong);
+                
               }
             });
         });
@@ -100,30 +34,102 @@ $('.add-to-cart').click(function() {
    
 </script>
 
-  <script type="text/javascript">
-       
-            $(document).on('click','.add-to-cart-quickview',function(){
+<script src="{!! asset('web/js/imagezoom.js')!!}"></script>
+    <link rel="stylesheet" href="{!! asset('web/css/flexslider.css')!!}" type="text/css" media="screen" />
+    <script src="{!! asset('web/js/jquery.flexslider.js')!!}"></script>
+    <script>
+        // Can also be used with $(document).ready()
+        $(window).load(function () {
+            $('.flexslider').flexslider({
+                animation: "slide",
+                controlNav: "thumbnails"
+            });
+        });
+    </script>
+<script src="{!! asset('web/js/jquery.magnific-popup.js')!!}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.popup-with-zoom-anim').magnificPopup({
+                type: 'inline',
+                fixedContentPos: false,
+                fixedBgPos: true,
+                overflowY: 'auto',
+                closeBtnInside: true,
+                preloader: false,
+                midClick: true,
+                removalDelay: 300,
+                mainClass: 'my-mfp-zoom-in'
+            });
+
+        });
+    </script>
+
+ <script type="text/javascript">
+        $(document).ready(function(){
+            $('.add-to-cart').click(function(){
+              
                 var id = $(this).data('id_product');
-                var color=$('input[name=color]:checked').val();
                 var size=$('input[name=size]:checked').val();
                 var hot=$('input[name=hot]:checked').val();
                 var soluong=$('.cart_product_sl').val();
                 var _token = $('input[name="_token"]').val();
-                if($("input:radio[name='color']").is(":checked") && $("input:radio[name='size']").is(":checked") && $("input:radio[name='hot']").is(":checked")) {
+                var sl=$('.cart_soluong').val();
+                if(parseInt(soluong) > parseInt(sl)){
+                    toastr.warning("số lượng bạn đặt lớn hơn số sản phẩm mà chúng tôi có, làm ơn đặt số lượng nhỏ hơn" + " "+ sl);
+                }else{
+                if($("input:radio[name='size']").is(":checked") && $("input:radio[name='hot']").is(":checked")) {
                     $.ajax({
                         url: '{{url('/cart')}}',
                         method: 'POST',
-                        data:{id:id,_token:_token,color:color,size:size,hot:hot,soluong:soluong},
-                       
+                        data:{id:id,_token:_token,size:size,hot:hot,soluong:soluong},
                         beforeSend: function(){
-                            $("#beforesend_quickview").html("<img width='30px' height='30px' src='../public/web/images/Spinner-3.gif'>");
+                            $("#beforesend_quickview").html("<img width='30px' height='30px'src='../../web/images/Spinner-3.gif'>");
                         },
                         success:function(){
+                            
                             $("#beforesend_quickview").html("<p class='text text-success'>Sản phẩm đã thêm vào giỏ hàng</p>");
                             window.location.reload();
+                           
+                           
+                           
+                        }
+
+                    });
+              }else{
+                toastr.warning('bạn cần phải chọn đầy đủ thông tin trước khi mua hàng');
+              }
+                }
+                
+            });
+        });
+    </script>
+  <script type="text/javascript">
+       
+            $(document).on('click','.add-to-cart-quickview',function(){
+                var id = $(this).data('id_product');
+                var size=$('input[name=size]:checked').val();
+                var hot=$('input[name=hot]:checked').val();
+                var soluong=$('.cart_product_sl').val();
+                var _token = $('input[name="_token"]').val();
+                if($("input:radio[name='size']").is(":checked") && $("input:radio[name='hot']").is(":checked")) {
+                    $.ajax({
+                        url: '{{url('/cart')}}',
+                        method: 'POST',
+                        data:{id:id,_token:_token,size:size,hot:hot,soluong:soluong},
+                            success:function(error){
+                                // toastr.warning('sản phẩm bạn đặt quá lớn, vui lòng đặt với số lượng nhỏ hơn');
+                                window.location.reload();
+                        // beforeSend: function(){
+                        //     $("#beforesend_quickview").html("<img width='30px' height='30px' src='../public/web/images/Spinner-3.gif'>");
+                        // },
+                        // success:function(){
+                        //     $("#beforesend_quickview").html("<p class='text text-success'>Sản phẩm đã thêm vào giỏ hàng</p>");
+                        //     window.location.reload();
+
                             
 
                         }
+                        
 
                     });
                 }else{
@@ -150,9 +156,47 @@ $('.add-to-cart').click(function() {
                     }
                 });
             // }
-        });</script>
-	<script type="text/javascript">
-	function remove_background(id)
+        });
+        </script>
+        <script type="text/javascript">
+
+        $(".update-cart").click(function (e) {
+           e.preventDefault();
+
+           var ele = $(this);
+
+            $.ajax({
+               url: '{{ url('update-cart') }}',
+               method: "patch",
+               data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: ele.parents('tr').find('.quantity').val()},
+               success: function (data) {
+                 window.location.reload();
+               }
+            });
+        });
+
+        $(".remove-from-cart").click(function (e) {
+            e.preventDefault();
+
+            var ele = $(this);
+
+            // if(confirm("bạn có chắc muốn xóa không")) {
+                $.ajax({
+                    url: '{{ url('remove-from-cart') }}',
+                    method: "DELETE",
+                    data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id")},
+                    success: function (response) {
+                        window.location.reload();
+
+                        // alert('đã xóa sản phẩm ra khỏi giỏ hàng');
+                    }
+                });
+            // }
+        });
+
+    </script>
+	   <script type="text/javascript">
+    function remove_background(product_id)
      {
       for(var count = 1; count <= 5; count++)
       {
@@ -196,8 +240,7 @@ $('.add-to-cart').click(function() {
            {
             if(data == 'done')
             {
-             // alert("Bạn đã đánh giá "+index +" trên 5");
-             location.reload();
+                 window.location.reload();
             }
             else
             {
@@ -207,7 +250,7 @@ $('.add-to-cart').click(function() {
     });
           
     });
-	</script>
+    </script>
 	<script type="text/javascript">
     $('#keywords').keyup(function(){
         var query = $(this).val();
@@ -271,23 +314,7 @@ $('.add-to-cart').click(function() {
 	<!-- //nav smooth scroll -->
 
 	<!-- popup modal (for location)-->
-	<script src="{!! asset('web/js/jquery.magnific-popup.js')!!}"></script>
-	<script>
-		$(document).ready(function () {
-			$('.popup-with-zoom-anim').magnificPopup({
-				type: 'inline',
-				fixedContentPos: false,
-				fixedBgPos: true,
-				overflowY: 'auto',
-				closeBtnInside: true,
-				preloader: false,
-				midClick: true,
-				removalDelay: 300,
-				mainClass: 'my-mfp-zoom-in'
-			});
-
-		});
-	</script>
+	
 	<!-- //popup modal (for location)-->
 
 	<!-- cart-js -->
@@ -316,22 +343,7 @@ $('.add-to-cart').click(function() {
 	<!-- //cart-js -->
 
 	<!-- password-script -->
-	<script>
-		window.onload = function () {
-			document.getElementById("password1").onchange = validatePassword;
-			document.getElementById("password2").onchange = validatePassword;
-		}
-
-		function validatePassword() {
-			var pass2 = document.getElementById("password2").value;
-			var pass1 = document.getElementById("password1").value;
-			if (pass1 != pass2)
-				document.getElementById("password2").setCustomValidity("Passwords Don't Match");
-			else
-				document.getElementById("password2").setCustomValidity('');
-			//empty string means no validation error
-		}
-	</script>
+	
 	<!-- //password-script -->
 	
 	<!-- scroll seller -->
@@ -361,14 +373,14 @@ $('.add-to-cart').click(function() {
 	<!-- smooth-scrolling-of-move-up -->
 	<script>
 		$(document).ready(function () {
-			/*
+			
 			var defaults = {
 				containerID: 'toTop', // fading element id
 				containerHoverID: 'toTopHover', // fading element hover id
 				scrollSpeed: 1200,
 				easingType: 'linear' 
 			};
-			*/
+			
 			$().UItoTop({
 				easingType: 'easeOutQuart'
 			});
@@ -376,7 +388,7 @@ $('.add-to-cart').click(function() {
 		});
 	</script>
 	<script src="{!! asset('web/js/sweetalert.min.js')!!}"></script>
-	<script type="text/javascript">
+<script type="text/javascript">
 
           $(document).ready(function(){
             $('.send_order').click(function(){
@@ -407,9 +419,10 @@ $('.add-to-cart').click(function() {
                         $.ajax({
                             url: '{{url('/confirm-order')}}',
                             method: 'POST',
-                            data:{shipping_email:shipping_email,shipping_name:shipping_name,shipping_address:shipping_address,shipping_phone:shipping_phone,shipping_notes:shipping_notes,_token:_token,order_fee:order_fee,order_coupon:order_coupon,payment_select:payment_select},
+                            data:{shipping_email:shipping_email,shipping_name:shipping_name,shipping_address:shipping_address,shipping_phone:shipping_phone,shipping_notes:shipping_notes,_token:_token,order_fee:order_fee,order_coupon:order_coupon,shipping_method:shipping_method},
                             success:function(){
                                // swal("Đơn hàng", "Đơn hàng của bạn đã được gửi thành công", "success");
+                               window.location='{{url('/thankyou')}}';
                             }
                         });
 
@@ -481,4 +494,29 @@ $('.add-to-cart').click(function() {
         });
     });
     </script>
+
+    <link rel="stylesheet" type="text/css" href="{!! asset('web/css/easy-responsive-tabs.css')!!} " />
+    <script src="{!! asset('web/js/easyResponsiveTabs.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            //Horizontal Tab
+            $('#parentHorizontalTab').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true, // 100% fit in a container
+                tabidentify: 'hor_1', // The tab groups identifier
+                activate: function (event) { // Callback function if tab is switched
+                    var $tab = $(this);
+                    var $info = $('#nested-tabInfo');
+                    var $name = $('span', $info);
+                    $name.text($tab.text());
+                    $info.show();
+                }
+            });
+        });
+    </script>
+
+
+
 	

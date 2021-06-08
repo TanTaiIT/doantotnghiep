@@ -48,6 +48,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                            <div class="col-md-12 text-center ">
                               <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Login</button>
                            </div>
+                           <div>
+                              <a href="{{url('/register-auth')}}">Đăng ký authentication</a>
+                              <a href="{{url('/login-auth')}}">Đăng nhập authentication</a>
+                           </div>
                         </form>
 				</div>
 			</div>
