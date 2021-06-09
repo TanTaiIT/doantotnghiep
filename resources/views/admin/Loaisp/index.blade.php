@@ -5,7 +5,7 @@
 </div>
 <div class="function">
   <a href="{{route('cate_add')}}" class="but">Thêm Loại sản phẩm</a>
-  <a href="" class="but1">Xóa tất cả</a>
+
 </div>
 <table class="table table-striped">
   <thead>

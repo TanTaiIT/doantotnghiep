@@ -5,7 +5,6 @@
 </div>
 <div class="function">
 	<a href="{{route('pro_add')}}" class="but">Thêm sản phẩm</a>
-	<a href="" class="but1">Xóa tất cả</a>
 </div>
 <table class="table table-striped">
   <thead>

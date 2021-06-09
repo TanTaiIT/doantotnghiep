@@ -1,8 +1,6 @@
 @extends('client/layout_cli')
 @section('content')
-<div class="page-head_agile_info_w3l">
 
-	</div>
 	<!-- //banner-2 -->
 	<!-- page -->
 	<div class="services-breadcrumb">
@@ -53,7 +51,7 @@
 				<div class="col-lg-7 single-right-left simpleCart_shelfItem">
 					<h3 class="mb-3">{{$detail->product_name}}</h3>
 					<p class="mb-3">
-						<span class="item_price">{{number_format($detail->product_price)}}</span>
+						<span class="item_price">{{number_format($detail->product_price)}} đ</span>
 						<!-- <del class="mx-2 font-weight-light">280.00</del> -->
 						<!-- <label>Free delivery</label> -->
 					</p>

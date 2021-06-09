@@ -87,11 +87,12 @@
 <div id="wrapper">
   <div class="cart-tab visible">      
     <a href="#" title="View your shopping cart" class="cart-link">
+<!--     <i style="font-size: 20px"class="fas fa-shopping-cart"></i> -->
       <span class="amount">{{ number_format($total) }}đ</span>
       <span class="contents"><span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span> sản phẩm</span>
     </a>
     <div class="cart">
-      <h2>Giỏ hàng</h2>
+      <h2>GIỎ HÀNG</h2>
 
       <div class="cart-items">
         <ul>

@@ -13,6 +13,7 @@ use App\Models\wards;
 use App\Models\brand;
 use App\Models\Feeship;
 use App\Models\coupon;
+use App\Models\CatePost;
 use DB;
 use App\Models\shipping;
 use App\Models\Order;
@@ -426,12 +427,17 @@ class CheckoutController extends Controller
         return redirect()->back();
     }
     public function payment(Request $request){
-        $url_canonical = $request->url();  
+        $url_canonical = $request->url();
+        $meta_desc = "thanh toán";
+        // $meta_keywords = $value->product_slug;
+        $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
+        $meta_title ="thanh toán";
+        $share_images = url('images/'.$request->product_image);   
     	 $cate=category::all();
     	 $com='cart';
          $brand=brand::all();
          $city = city::orderby('matp','ASC')->get();
-    	 return view('client.payment',compact('cate','brand','city','com','url_canonical'));
+    	 return view('client.payment',compact('cate','brand','city','com','url_canonical','meta_title','meta_desc','share_images','cate_post1'));
     }
 
 
@@ -481,14 +487,19 @@ class CheckoutController extends Controller
         }
     }
     public function checkout(Request $request){
-        $url_canonical = $request->url();  
+        $url_canonical = $request->url();
+        $meta_desc = "giỏ hàng";
+        $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
+        // $meta_keywords = $value->product_slug;
+        $meta_title ="giỏ hàng";
+        $share_images = url('images/'.$request->product_image);  
         $brand=brand::all();
         $cate=category::all();
         $com='cart';
         // $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
      //    $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get(); 
         $city = city::orderby('matp','ASC')->get();
-        return view('client/cart',compact('cate','brand','com','url_canonical'))->with('city',$city);
+        return view('client/cart',compact('cate','brand','com','url_canonical','meta_desc','meta_title','share_images','cate_post1'))->with('city',$city);
     }
     public function calculate_fee(Request $request){
         $data = $request->all();

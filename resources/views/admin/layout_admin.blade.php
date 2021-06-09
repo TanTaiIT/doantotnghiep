@@ -28,6 +28,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- Graph JavaScript -->
 <script src="{!! asset('layout_admin/js/d3.v3.js')!!}"></script>
 <script src="{!! asset('layout_admin/js/rickshaw.js')!!}"></script>
+<script src="{!!asset('layout_admin/ckeditor/ckeditor.js')!!}"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -209,8 +210,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                          <li>
                             <a href="#"><i class="fa fa-envelope nav_icon"></i>quản lý bài viết<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li><a href="{{URL::to('/add-category-post')}}">Thêm danh mục bài viết</a></li>
-                                <li><a href="{{URL::to('/all-category-post')}}">Liệt kê danh mục bài viết</a></li>
+                                <li><a href="{{URL::to('/add-post')}}">Thêm bài viết</a></li>
+                                <li><a href="{{URL::to('/all-post')}}">Liệt kê bài viết</a></li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -239,18 +240,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <!-- /.nav-second-level -->
                         </li>
                         
-
-                       
-
-                        <li>
-                            <a href="widgets.html"><i class="fa fa-flask nav_icon"></i>Quản lý User</a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="forms.html">Thông tin Admin</a>
-                                </li>
-                                
-                            </ul>
-                        </li>
 
                         <li>
                             <a href="widgets.html"><i class="fa fa-flask nav_icon"></i>Quản lý thuộc tính</a>
@@ -529,6 +518,40 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     })
 
 
+</script>
+
+
+ <script  type="text/javascript">
+       // Replace the <textarea id="editor1"> with a CKEditor
+       // instance, using default configuration.
+  
+        CKEDITOR.replace('ckeditor');
+        CKEDITOR.replace('ckeditor1',{
+
+            filebrowserImageUploadUrl : "{{ url('uploads-ckeditor?_token='.csrf_token()) }}",
+            filebrowserBrowseUrl : "{{ url('file-browser?_token='.csrf_token()) }}",
+            filebrowserUploadMethod: 'form'
+
+        });
+
+        CKEDITOR.replace('ckeditor2', {
+
+            filebrowserImageUploadUrl : "{{ url('uploads-ckeditor?_token='.csrf_token()) }}",
+            filebrowserBrowseUrl : "{{ url('file-browser?_token='.csrf_token()) }}",
+            filebrowserUploadMethod: 'form'
+
+        });
+
+        CKEDITOR.replace('ckeditor3',{
+
+            filebrowserImageUploadUrl : "{{ url('uploads-ckeditor?_token='.csrf_token()) }}",
+            filebrowserBrowseUrl : "{{ url('file-browser?_token='.csrf_token()) }}",
+            filebrowserUploadMethod: 'form'
+        });
+        CKEDITOR.replace('id4');
+
+     
+    
 </script>
 </body>
 </html>

@@ -35,7 +35,7 @@
                                     <input type="text" name="admin_password" class="form-control" id="exampleInputEmail1" placeholder="nhập password">
                                 </div>
                              
-                                <button type="submit" name="add_category_product" class="btn btn-info">Thêm users</button>
+                                <button type="submit" class="btn btn-info">Thêm users</button>
                                 </form>
                             </div>
 

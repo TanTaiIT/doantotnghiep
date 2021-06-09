@@ -167,7 +167,7 @@ Route::get('/delete-post/{post_id}','Admin\PostController@delete_post');
 Route::get('/edit-post/{post_id}','Admin\PostController@edit_post');
 Route::post('/save-post','Admin\PostController@save_post');
 Route::post('/update-post/{post_id}','Admin\PostController@update_post');
-Route::get('/danh-muc-bai-viet/{post_slug}','Admin\PostController@danh_muc_bai_viet');
+Route::get('/danh-muc-bai-viet/{id}','Admin\PostController@danh_muc_bai_viet')->name('dm_baiviet');
 Route::get('/bai-viet/{post_slug}','Admin\PostController@bai_viet');
 
 Route::get('/register-auth','Admin\AuthController@register_auth')->name('regis');

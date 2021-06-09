@@ -88,6 +88,32 @@ body a {
 .bao_detail{
     background: white;
 }
+.baiviet-title{
+    
+}
+.flex{
+    display: flex;
+    margin-bottom: 20px;
+}
+.title_baiviet {
+    color: black;
+    font-family: auto;
+    font-size: 19px;
+}
+.btn-sm{
+    color: #e65252;
+}
+li .dau{
+
+}
+.content{
+    margin-left:30px;
+    width: 80%;
+
+}
+.baiviet_xemthem{
+    color: black;
+}
 .cart-tab { 
   width: 22em;
   position: fixed;
@@ -242,8 +268,8 @@ p {
     letter-spacing: 1px;
     font-size: 15px;
     line-height: 1.9;
-    color: #999;
-    font-family: 'Open Sans', sans-serif;
+    /* color: #999; */
+    font-family: 'Lato';
 }
 
 ul {

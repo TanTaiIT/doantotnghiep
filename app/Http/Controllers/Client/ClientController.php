@@ -12,6 +12,7 @@ use App\Models\pro_img;
 use App\Models\rating;
 use App\Models\attribute;
 use App\Models\slider;
+use App\Models\CatePost;
 use DB;
 class ClientController extends Controller
 {
@@ -21,6 +22,7 @@ class ClientController extends Controller
     public function tai(Request $request){
         $meta_desc = $detail->product_desc;
         // $meta_keywords = $value->product_slug;
+        $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
         $meta_title = $detail->product_name;
         $url_canonical = $request->url();
         $share_images = url('images/'.$detail->product_image);
@@ -31,10 +33,10 @@ class ClientController extends Controller
         $cate=category::all();
         $brand=brand::all();
         $com='index';
-        return view('client.tai',compact('com','cate','brand','url_canonical','size','color','hot','slide','meta_title','meta_desc','share_images'));
+        return view('client.tai',compact('com','cate','brand','url_canonical','size','color','hot','slide','meta_title','meta_desc','share_images','cate_post1'));
     }
     public function index(Request $request){
-
+        $cate_post1=CatePost::all();
         $url_canonical = $request->url();
         $slide=slider::limit(4)->get();  
         $size=attribute::where('name','size')->get();
@@ -113,7 +115,7 @@ class ClientController extends Controller
         //     }
         // }
         $product=$product->orderBy('product_id','DESC')->paginate(6);
-    	return view('client/index',compact('product','com','cate','brand','url_canonical','size','color','hot','slide','bestsell','meta_title','meta_desc'));
+    	return view('client/index',compact('product','com','cate','brand','url_canonical','size','color','hot','slide','bestsell','meta_title','meta_desc','cate_post1'));
 
     }
  
@@ -121,6 +123,7 @@ class ClientController extends Controller
         $size=attribute::where('name','size')->get();
         $hot=attribute::where('name','hot')->get();
         // $url_canonical = $request->url();
+        $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
         $detail=product::FindOrFail($id);
         $pro_id=$detail->product_id;
         $img_detail=pro_img::where('product_id',$id)->get();
@@ -136,7 +139,7 @@ class ClientController extends Controller
         $share_images = url('images/'.$detail->product_image);
        
     	return view('client/detail',compact('detail','com','cate','brand','img_detail','url_canonical','rating','size','hot','meta_desc'
-        ,'meta_title','url_canonical','share_images'));
+        ,'meta_title','url_canonical','share_images','cate_post1'));
     }
     public function search(Request $request){
         $url_canonical = $request->url();  
@@ -160,11 +163,16 @@ class ClientController extends Controller
         return redirect()->route('cli_index');
     }
     public function thankyou(Request $request ){
-        $url_canonical = $request->url();  
+        $meta_desc = "Cảm ơn";
+        // $meta_keywords = $value->product_slug;
+        $meta_title = "Cảm ơn";
+        $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
+        $url_canonical = $request->url();
+        $share_images = url('images/'.$request->product_image);
         $cate=category::all();
         $brand=brand::all();
         $com='detail';
-        return view('Client/thankyou',compact('cate','brand','com','url_canonical'));
+        return view('Client/thankyou',compact('cate','brand','com','url_canonical','meta_desc','meta_title','share_images','cate_post1'));
     } 
     public function autocomplete_ajax(Request $request){
         $data = $request->all();
@@ -202,16 +210,22 @@ class ClientController extends Controller
         echo 'done';
     }
     public function list_pro(Request $request,$id){
-        $com='detail';
+        $com='';
+        // $meta_keywords = $value->product_slug;
+        $meta_desc = $request->product_desc;
+        $meta_title = "danh sách sản phẩm";
+        $url_canonical = $request->url();
+        $share_images = url('images/'.$request->product_image);
         $slide=slider::limit(4)->get();  
         $size=attribute::where('name','size')->get();
         $color=attribute::where('name','color')->get();
         $hot=attribute::where('name','hot')->get();
         $url_canonical = $request->url(); 
         $cate=category::all();
+        $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
         $brand=brand::all();
         $product_list=product::where('category_id',$id)->get();
-        return view('client.list_pro',compact('product_list','brand','cate','url_canonical','com','size','color','hot','slide'));
+        return view('client.list_pro',compact('product_list','brand','cate','cate_post1','url_canonical','com','size','color','hot','slide','share_images','meta_title','meta_desc'));
     }
 
   

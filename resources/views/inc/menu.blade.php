@@ -3,20 +3,7 @@
 		<div class="container">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<div class="agileits-navi_search">
-					<!-- <form action="" method="post">
-						<select id="agileinfo-nav_search" name="agileinfo_search" class="border" required="">
-							<option value="">All Categories</option>
-							<option value="Televisions">Televisions</option>
-							<option value="Headphones">Headphones</option>
-							<option value="Computers">Computers</option>
-							<option value="Appliances">Appliances</option>
-							<option value="Mobiles">Mobiles</option>
-							<option value="Fruits &amp; Vegetables">Tv &amp; Video</option>
-							<option value="iPad & Tablets">iPad & Tablets</option>
-							<option value="Cameras & Camcorders">Cameras & Camcorders</option>
-							<option value="Home Audio & Theater">Home Audio & Theater</option>
-						</select>
-					</form> -->
+				
 				</div>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
 				    aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +27,12 @@
             </li>
             <li class="line"></li>
             <li>
-                <a class="transition" href="" title=""><h2>về chúng tôi</h2></a>
+                <a class="transition" href="" title=""><h2>Bài viết</h2></a>
+                <ul>
+                	@foreach($cate_post1 as $p)
+                	<li><span></span><a href="{{route('dm_baiviet',$p->cate_post_slug)}}">{{$p->cate_post_name}}</a></li>
+                	@endforeach
+                </ul>
                 
             </li>
             <li class="line"></li>
