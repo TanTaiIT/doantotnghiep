@@ -19,22 +19,7 @@ class ClientController extends Controller
     public function error_page(){
         return view('errors.404');
     }
-    public function tai(Request $request){
-        $meta_desc = $detail->product_desc;
-        // $meta_keywords = $value->product_slug;
-        $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
-        $meta_title = $detail->product_name;
-        $url_canonical = $request->url();
-        $share_images = url('images/'.$detail->product_image);
-        $slide=slider::limit(4)->get();  
-        $size=attribute::where('name','size')->get();
-        $color=attribute::where('name','color')->get();
-        $hot=attribute::where('name','hot')->get();
-        $cate=category::all();
-        $brand=brand::all();
-        $com='index';
-        return view('client.tai',compact('com','cate','brand','url_canonical','size','color','hot','slide','meta_title','meta_desc','share_images','cate_post1'));
-    }
+   
     public function index(Request $request){
         $cate_post1=CatePost::all();
         $url_canonical = $request->url();
@@ -137,26 +122,38 @@ class ClientController extends Controller
         $meta_title = $detail->product_name;
         $url_canonical = $request->url();
         $share_images = url('images/'.$detail->product_image);
-       
+        
     	return view('client/detail',compact('detail','com','cate','brand','img_detail','url_canonical','rating','size','hot','meta_desc'
         ,'meta_title','url_canonical','share_images','cate_post1'));
     }
+   
     public function search(Request $request){
+        $size=attribute::where('name','size')->get();
+        $hot=attribute::where('name','hot')->get();
         $url_canonical = $request->url();  
-
-        // $detail=product::FindOrFail($id);
         $brand=brand::all();
         $cate=category::all();
         $key=$request->keyword;
-        $com='detail';
+        $bestsell=product::orderBy('product_sold','DESC')->limit(3)->get();
+        $cate_post1=CatePost::orderBy('cate_post_id','desc')->get();
+        $com='';
         $search=product::where('product_name','like','%'.$key.'%')->get();
+        foreach($search as $s){
+        $meta_desc = $s->product_desc;
+        // $meta_keywords = $value->product_slug;
+        $meta_title = $s->product_name;
+        $share_images = url('images/'.$s->product_image);
+        }
+
+
+        
         $dem=count($search);
         if(count($search)>0){
             Session::flash('message','thành công');
         }else{
             Session::flash('message','thất bại');
         }
-        return view('client/search',compact('search','com','dem','cate','brand','url_canonical'));
+        return view('client/search',compact('search','com','dem','cate','brand','url_canonical','meta_title','meta_desc','share_images','cate_post1','size','hot','bestsell'));
     }
     public function dangxuatkh(){
         Session::forget('customer_id');

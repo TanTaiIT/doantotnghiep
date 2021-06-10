@@ -18,9 +18,7 @@
         <thead>
           <tr>
             <th style="width:20px;">
-              <label class="i-checks m-b-none">
-                <input type="checkbox"><i></i>
-              </label>
+             
             </th>
             <th>Tên slide</th>
             <th>Hình ảnh</th>
@@ -33,7 +31,7 @@
         <tbody>
           @foreach($all_slide as $key => $slide)
           <tr>
-            <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+            <td></td>
             <td>{{ $slide->slider_name }}</td>
             <td><img src="uploads/slider/{{ $slide->slider_image }}" height="120" width="300"></td>
             <td>{{ $slide->slider_desc }}</td>

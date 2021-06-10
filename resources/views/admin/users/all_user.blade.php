@@ -18,16 +18,14 @@
         <thead>
           <tr>
             <th style="width:20px;">
-              <label class="i-checks m-b-none">
-                <input type="checkbox"><i></i>
-              </label>
+              
             </th>
           
             <th>Tên user</th>
             <th>Email</th>
             <th>Phone</th>
             <th>Password</th>
-            <th>Author</th>
+            <!-- <th>Author</th> -->
             <th>Admin</th>
             <th>User</th>
             <th>Chức năng</th>
@@ -41,7 +39,7 @@
               @csrf
               <tr>
                
-                <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+                <td></td>
                 <td>{{ $user->name }}</td>
                 <td>
                   {{ $user->email }} 
@@ -51,7 +49,7 @@
                 <td>{{ $user->phone }}</td>
                 <td>{{ $user->password }}</td>
 
-                <td><input type="checkbox" name="author_role" {{$user->hasRole('author') ? 'checked' : ''}}></td>
+                <!-- <td><input type="checkbox" name="author_role" {{$user->hasRole('author') ? 'checked' : ''}}></td> -->
                 <td><input type="checkbox" name="admin_role"  {{$user->hasRole('admin') ? 'checked' : ''}}></td>
                 <td><input type="checkbox" name="user_role"  {{$user->hasRole('user') ? 'checked' : ''}}></td>
               

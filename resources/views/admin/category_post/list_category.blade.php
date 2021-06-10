@@ -18,9 +18,7 @@
         <thead>
           <tr>
             <th style="width:20px;">
-              <label class="i-checks m-b-none">
-                <input type="checkbox"><i></i>
-              </label>
+              
             </th>
             <th>Tên danh mục bài viết</th>
             <th>Mô tả danh mục</th>
@@ -33,7 +31,7 @@
         <tbody>
           @foreach($category_post as $key => $cate_post)
           <tr>
-            <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+            <td></td>
             <td>{{ $cate_post->cate_post_name }}</td>
             <td>{{ $cate_post->cate_post_desc }}</td>
             <td>{{ $cate_post->cate_post_slug }}</td>

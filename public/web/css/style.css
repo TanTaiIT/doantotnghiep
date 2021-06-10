@@ -91,14 +91,26 @@ body a {
 .baiviet-title{
     
 }
+.left1{
+    margin-bottom: 20px;
+}
 .flex{
     display: flex;
     margin-bottom: 20px;
 }
 .title_baiviet {
-    color: black;
-    font-family: auto;
+    color: red;
+    font-family: monospace;
     font-size: 19px;
+    text-transform: uppercase;
+}
+a.btn.btn-default.btn-sm.xem {
+    background: #fffffff0;
+    border: 1px solid grey;
+    border-radius: none;
+}
+.giohang{
+    
 }
 .btn-sm{
     color: #e65252;
@@ -110,6 +122,10 @@ li .dau{
     margin-left:30px;
     width: 80%;
 
+}
+.pro_img {
+    height: 277px;
+    width: 205px;
 }
 .baiviet_xemthem{
     color: black;
@@ -271,10 +287,15 @@ p {
     /* color: #999; */
     font-family: 'Lato';
 }
-
+.ads-grid.py-sm-5.py-4 {
+    background: #e8e8e8f7;
+}
 ul {
     margin: 0;
     padding: 0;
+}
+.footer-top-first {
+    background: #e8e8e8f7;
 }
 .sapxep{
     margin-bottom: 20px;
@@ -679,8 +700,9 @@ input[type="submit"] {
     border: 1px solid #80808047;
 }
 nav.flex.items-center.justify-between {
-    text-align: center;
+    /* text-align: center; */
     margin-top:40px;
+    justify-content: center;
 }
 .flex.justify-between.flex-1.sm\:hidden{
     display: none;
@@ -1374,7 +1396,7 @@ h3.agileits-sear-head {
     background-color: mistyrose;
     height: fit-content;
     border-radius: 26px;
-    
+    box-shadow: 5px 1px 12px grey;
 }
 .taichodien{
     height: 500px;

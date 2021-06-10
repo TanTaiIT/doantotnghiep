@@ -23,63 +23,6 @@
 							</form>
 						</div>
 
-
-<!-- <div class="container1">
-
-    <div class="row">
-        <div class="col-lg-12 col-sm-12 col-12 main-section">
-            <div class="dropdown">
-                <button type="button" class="btn btn-primary" data-toggle="dropdown">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="giohang"> Giỏ hàng</span> <span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span>
-                </button>
-               <div class="dropdown-menu">
-                    <div class="row total-header-section">
-                        <div class="col-lg-6 col-sm-6 col-6">
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span>
-                        </div>
-
-                        <?php $total = 0 ?>
-                        @foreach((array) session('cart') as $id => $details)
-                            <?php $total += $details['price'] * $details['quantity'] ?>
-                        @endforeach
-
-                        <div class="col-lg-6 col-sm-6 col-6 total-section text-right">
-                            <p>Tổng tiền: <span class="text-info">{{ number_format($total) }}đ</span></p>
-                        </div>
-                    </div>
-
-                    @if(session('cart'))
-                        @foreach(session('cart') as $id => $details)
-                        <?php 
-                           $sub=$details['price']*$details['quantity']
-                        ?>
-                            <div class="row cart-detail">
-                                <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
-                                    <img width="50px" height="50px" src="{!! asset('images/'.$details['image'])!!}" />
-                                     <button style="font-size: 10px" class="btn btn-danger btn cart remove-from-cart" data-id="{{ $id }}"><i class="fas fa-trash"></i></button> 
-                                </div>
-                                <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
-                                    <p>{{ $details['name'] }} </p>
-                                    <span class="price text-info"></span> Giá:{{ number_format($details['price']) }} đ <span class="count">Số lượng:{{ $details['quantity'] }} </span><br><span>Size:{{$details['size']}}</span><br><span></span>
-                                    <br><span>Loại:{{$details['hot']}}</span>
-                                </div>
-
-                            </div>
-
-
-                        @endforeach
-                    @endif
-                    <div class="row">
-                        <div class="col-lg-12 col-sm-12 col-12 text-center checkout">
-                            <a href="{{route('checkout')}}" class="btn btn-primary btn-block">View all</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <?php $total = 0 ?>
 @foreach((array) session('cart') as $id => $details)
     <?php $total += $details['price'] * $details['quantity'] ?>
@@ -92,7 +35,7 @@
       <span class="contents"><span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span> sản phẩm</span>
     </a>
     <div class="cart">
-      <h2>GIỎ HÀNG</h2>
+      <img class="img-thumbnail left1" width="60px" height="60px" src="../web/images/cart.jpg" alt="">
 
       <div class="cart-items">
         <ul>
@@ -133,13 +76,6 @@
       <a href="{{route('checkout')}}" class="checkout">Đi tới giỏ hàng →</a>
     </div><!-- @end .cart -->
   </div><!-- @end .cart-tab -->
-
-
-
-<!-- <span class="b-cart">Cart (<span class="b-cart__count">0</span>)</span> -->
-
-
-						<!-- //cart details -->
 					</div>
 				</div>
 			</div>
