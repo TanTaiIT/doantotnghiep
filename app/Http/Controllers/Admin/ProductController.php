@@ -160,7 +160,7 @@ class ProductController extends Controller
         $output['product_id'] = $product->product_id;
         $output['product_desc'] = $product->product_desc;
         $output['product_price'] = number_format($product->product_price,0,',','.').'VNĐ';
-        $output['product_image'] = '<p><img width="100%" src="images/'.$product->product_image.'"></p>';
+        $output['product_image'] = '<p><img width="100%" src="../images/'.$product->product_image.'"></p>';
         $output['product_soluong']=$product->soluong;
         $output['product_button'] = '<input type="button" value="Mua ngay" class="btn btn-primary btn-sm add-to-cart-quickview" id="buy_quickview" data-id_product="'.$product->product_id.'"  name="add-to-cart">';
         echo json_encode($output);

@@ -9,7 +9,7 @@
                </h3>
             <div class="row">
                 <!-- product left -->
-                <div class="col-lg-12 text-center">
+                <div class="col-lg-12">
                     <div class="wrapper">
                         <!-- first section -->
                         <div class="taideptrai">

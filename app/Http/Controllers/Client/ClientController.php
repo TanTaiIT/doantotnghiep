@@ -171,7 +171,7 @@ class ClientController extends Controller
         $share_images = url('images/'.$request->product_image);
         $cate=category::all();
         $brand=brand::all();
-        $com='detail';
+        $com='';
         return view('Client/thankyou',compact('cate','brand','com','url_canonical','meta_desc','meta_title','share_images','cate_post1'));
     } 
     public function autocomplete_ajax(Request $request){

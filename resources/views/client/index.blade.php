@@ -5,9 +5,7 @@
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				<span>S</span>ản
-				<span>P</span>hẩm
-				<span>C</span>ủa<span>C</span>húng<span>T</span>ôi</h3>
+				SẢN PHẨM CỦA CHÚNG TÔI</h3>
 				
 			<!-- //tittle heading -->
 			<div class="row">
@@ -16,7 +14,7 @@
 					<div class="wrapper">
 						<!-- first section -->
 						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
-							<h3 class="heading-tittle text-center font-italic">Trà Sữa trân châu</h3>
+							
 							<div class="row">
 								@foreach($product as $p)
 								<div class="col-md-4 product-men mt-5">
@@ -112,10 +110,10 @@
 
 						<div class="product-sec1 product-sec2 px-sm-5 px-3">
 							<div class="row">
-								<h3 class="col-md-4 effect-bg">Summer Carnival</h3>
-								<p class="w3l-nut-middle">Get Extra 10% Off</p>
+								<h3 class="col-md-4 effect-bg" >Summer Carnival</h3>
+								<p class="w3l-nut-middle" style="z-index: 99;">Get Extra 10% Off</p>
 								<div class="col-md-8 bg-right-nut">
-									<img src="{!! asset('web/images/image1.png')!!}" alt="">
+									<!-- <img style="padding:20px;border-radius:20px"width="100%" src="{!!asset('web/images/y1.jpg')!!}" alt=""> -->
 								</div>
 							</div>
 						</div>

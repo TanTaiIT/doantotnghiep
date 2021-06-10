@@ -31,7 +31,7 @@
                                     <h4 class="pt-1">
                                         <a class="title_baiviet" href="">{{$p->post_title}}</a>
                                     </h4>
-                                    <p >{{$p->post_desc}}</p>
+                                    <p ><?=htmlspecialchars_decode($p->post_desc)?></p>
                                     <a   href="{{url('/bai-viet/'.$p->post_slug)}}" class="btn btn-default btn-sm">Xem bài viết</a>
                                 </div>
                                 </div>
@@ -61,7 +61,7 @@
                 <!-- //product left -->
                 <!-- product right -->
                 <div class="col-lg-3 mt-lg-0 mt-4 p-lg-0">
-                    <div class="side-bar p-sm-4 p-3">
+                    <div class="side-bar p-sm-4 p-3 taichodien">
                         <div class="search-hotel border-bottom py-2">
                             <h3 class="agileits-sear-head mb-3">Danh mục bài viết</h3>
                            

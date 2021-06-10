@@ -893,8 +893,9 @@ ul.multi-column-dropdown li a:hover {
 /*-- heading style --*/
 
 h3.tittle-w3l {
-    color: #000;
+    color: #ec1c1cb0;
     font-size: 38px;
+    font-family: revert;
     letter-spacing: 1px;
     text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.19);
 }
@@ -1373,6 +1374,10 @@ h3.agileits-sear-head {
     background-color: mistyrose;
     height: fit-content;
     border-radius: 26px;
+    
+}
+.taichodien{
+    height: 500px;
 }
 
 /*-- price --*/
@@ -1493,11 +1498,14 @@ span.item_price {
 
 .product-sec1.product-sec2 {
     background: #F45C5D;
+    background: url('../images/y1.jpg')no-repeat;
     position: relative;
+    background-size: cover;
+    height: 300px;
 }
 
 h3.effect-bg {
-    color: #fff;
+    color: #350202b3;
     font-size: 45px;
     letter-spacing: 3px;
     font-weight: 600;

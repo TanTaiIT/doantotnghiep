@@ -11,8 +11,8 @@
 								<i class="fas fa-dolly"></i>
 							</div>
 							<div class="col-8 text-form-footer">
-								<h3>Free Shipping</h3>
-								<p>on orders over $100</p>
+								<h3>Phí ship rẻ</h3>
+								<p>chỉ từ 25.000 VNĐ trở xuống</p>
 							</div>
 						</div>
 					</div>
@@ -22,8 +22,8 @@
 								<i class="fas fa-shipping-fast"></i>
 							</div>
 							<div class="col-8 text-form-footer">
-								<h3>Fast Delivery</h3>
-								<p>World Wide</p>
+								<h3>Giao hàng nhanh chóng</h3>
+								<p>khắp Việt Nam</p>
 							</div>
 						</div>
 					</div>
@@ -33,8 +33,8 @@
 								<i class="far fa-thumbs-up"></i>
 							</div>
 							<div class="col-8 text-form-footer">
-								<h3>Big Choice</h3>
-								<p>of Products</p>
+								<h3>Nhiều lựa chọn</h3>
+								<p>kích thước,giá cả</p>
 							</div>
 						</div>
 					</div>

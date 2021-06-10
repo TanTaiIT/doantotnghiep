@@ -82,7 +82,7 @@ Route::get('/active-slide/{slide_id}','Admin\SliderController@active_slide');
 
 /* Client */
 Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
-   Route::get('/','ClientController@index')->name('cli_index');
+   Route::get('/index','ClientController@index')->name('cli_index');
    Route::get('/detail/{id}','ClientController@detail')->name('cli_detail');
    Route::post('/search','ClientController@search')->name('cli_search');
    
@@ -91,10 +91,11 @@ Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
    // Route::post('/select-delivery','DeliveryController@select_delivery');
    Route::post('/select-delivery-home','CheckoutController@select_delivery_home');
    Route::get('/checkout','CheckoutController@checkout')->name('checkout');
-   Route::get('/list-pro/{id}','ClientController@list_pro')->name('list_pro');
+   
    Route::get('/tai','ClientController@tai')->name('tai');
    
 });
+Route::get('/list-pro/{id}','Client\ClientController@list_pro')->name('list_pro');
 Route::post('/cart','Client\CartController@addtocart')->name('addtocart');
  Route::patch('update-cart','Client\CartController@update');
  Route::delete('remove-from-cart','Client\CartController@remove');

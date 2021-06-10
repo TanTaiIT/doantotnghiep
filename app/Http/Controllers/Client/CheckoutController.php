@@ -217,7 +217,7 @@ class CheckoutController extends Controller
 
     }
     public function confirm_order(Request $request){
-        $url_canonical = $request->url();  
+         $url_canonical = $request->url();  
          $cate=category::all();
          $brand=brand::all();
          $com='detail';
@@ -263,7 +263,7 @@ class CheckoutController extends Controller
          Session::forget('coupon');
          Session::forget('fee');
          Session::forget('cart');
-         return view('client/thankyou',compact('cate','brand','com','url_canonical'));
+         // return view('client/thankyou');
     }
     public function dangky(Request $req){
         $this->validate($req, [
