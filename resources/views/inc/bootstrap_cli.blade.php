@@ -37,7 +37,13 @@
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
 	<!-- menu style -->
 	<!-- //Custom-Files -->
-    
+    <link href="{!! asset('web/css/bootstrap.min.css')!!}" rel="stylesheet">
+    <link href="{!! asset('web/css/font-awesome.min.css')!!}" rel="stylesheet">
+    <link href="{!! asset('web/css/prettyPhoto.css')!!}" rel="stylesheet">
+    <link href="{!! asset('web/css/price-range.css')!!}" rel="stylesheet">
+    <link href="{!! asset('web/css/animate.css')!!}" rel="stylesheet">
+	<link href="{!! asset('web/css/main.css')!!}" rel="stylesheet">
+	<link href="{!! asset('web/css/responsive.css')!!}" rel="stylesheet">
 	<!-- web fonts -->
 	<link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&amp;subset=latin-ext" rel="stylesheet">
 	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese"
@@ -54,3 +60,4 @@
 	?>
 	
 	<!-- //web fonts -->
+	

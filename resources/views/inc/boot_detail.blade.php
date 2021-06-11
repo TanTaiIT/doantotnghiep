@@ -1,7 +1,7 @@
 	<script src="{!! asset('web/js/jquery-2.2.3.min.js')!!}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript" charset="utf-8" async defer></script>
 	<!-- //jquery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/css/formValidation.min.css"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/css/formValidation.min.css" defer></script>
     <script type="text/javascript">
     $.validate({
 
@@ -454,4 +454,4 @@
     });
     </script>
 
-
+   

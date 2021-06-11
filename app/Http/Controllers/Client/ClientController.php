@@ -13,9 +13,45 @@ use App\Models\rating;
 use App\Models\attribute;
 use App\Models\slider;
 use App\Models\CatePost;
+use App\Models\binhluan;
 use DB;
 class ClientController extends Controller
 {
+    public function load_comment(Request $req){
+        $product_id = $req->product_id;
+        $binhluan = binhluan::where('binhluan_product_id',$product_id)->where('status',0)->get();
+       
+        $output='';
+        foreach($binhluan as $key => $comm){
+            $output.= '	
+            <div class = "row style_comment">
+               <div class ="col-md-2">
+              
+               <img width="80%" src="'.url('/avatar.png').'" class="img img-responsive img-thumbnail">
+            </div>
+            <div class ="col-md-10">
+            <p style="color:green;">@'.$comm->binhluan_name.'</P>
+            <p style="color:#000;">'.$comm->binhluan_date.'</P>
+            <p>'.$comm->binhluan.'</p>
+            </div>
+        </div><p></p>
+        
+        ';
+        }
+        echo $output;
+    }
+    public function send_comment(Request $req){
+        $product_id = $req->product_id;
+        $comment_name = $req->comment_name;
+        $comment = $req->comment;
+        $binhluan = new binhluan();
+        $binhluan->binhluan_name =  $comment_name;
+        $binhluan->binhluan =  $comment;
+        $binhluan->binhluan_product_id =  $product_id;
+        $binhluan->status =  1;
+        $binhluan->save();
+    }
+
     public function error_page(){
         return view('errors.404');
     }
@@ -224,6 +260,7 @@ class ClientController extends Controller
         $product_list=product::where('category_id',$id)->get();
         return view('client.list_pro',compact('product_list','brand','cate','cate_post1','url_canonical','com','size','color','hot','slide','share_images','meta_title','meta_desc'));
     }
+    
 
   
     

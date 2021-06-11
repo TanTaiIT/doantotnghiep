@@ -86,6 +86,10 @@ Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
    
    Route::post('/search','ClientController@search')->name('cli_search');
    
+   //comment
+   Route::post('/load_comment','ClientController@load_comment')->name('load_comment');
+   Route::post('/send_comment','ClientController@send_comment')->name('send_comment');
+   
    Route::get('/dangxuat_kh','ClientController@dangxuatkh')->name('dangxuat_kh');
    Route::get('/delivery','CheckoutController@delivery');
    // Route::post('/select-delivery','DeliveryController@select_delivery');

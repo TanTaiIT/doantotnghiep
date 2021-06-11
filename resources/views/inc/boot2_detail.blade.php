@@ -495,7 +495,7 @@
     });
     </script>
 
-    <link rel="stylesheet" type="text/css" href="{!! asset('web/css/easy-responsive-tabs.css')!!} " />
+    <!-- <link rel="stylesheet" type="text/css" href="{!! asset('web/css/easy-responsive-tabs.css')!!} " />
     <script src="{!! asset('web/js/easyResponsiveTabs.js"></script>
 
     <script>
@@ -515,7 +515,44 @@
                 }
             });
         });
-    </script>
+    </script> -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            load_comment();
+            function load_comment(){
+                var product_id = $('.comment_product_id').val();
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+					url:'{{url('cli/load_comment')}}',
+					method:"POST",
+					data:{product_id:product_id,_token:_token},
+					success:function(data){
+						$('#comment_show').html(data);
+					}
+				});
+			 }
+             $('.send-comment').click(function(){
+                var product_id = $('.comment_product_id').val();
+                var comment_name = $('.comment_name').val();
+                var comment = $('.comment').val();
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+					url:'{{url('cli/send_comment')}}',
+					method:"POST",
+					data:{product_id:product_id,comment_name:comment_name,comment:comment,_token:_token},
+					success:function(data){
+						
+                        $('#notify_comment').html('<span class="text text-success">Thêm bình luận thành công, bình luận đang chờ duyệt</span>');
+                        load_comment();
+                        $('#notify_comment').fadeOut(10000);
+                        $('.comment_name').val('');
+                        $('.comment').val('');
+					}
+				});
+             });
+    });
+    </script> 
+   
 
 
 
