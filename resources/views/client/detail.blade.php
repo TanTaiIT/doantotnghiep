@@ -23,8 +23,7 @@
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				<span>C</span>hi <span>T</span>iết
-				<span>S</span>ản <span>P</span>hẩm</h3>
+				CHI TIẾT SẢN PHẨM</h3>
 			<!-- //tittle heading -->
 			<div class="bao_card">
 			<div class="row ">

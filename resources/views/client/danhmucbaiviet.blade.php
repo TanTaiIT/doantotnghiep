@@ -6,18 +6,9 @@
             <h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
                 BÀI VIẾT
                </h3>
-                <!-- <?php $message=Session::get('message');
-                      if(isset($message)){?>
-                        <div class="alert alert-primary" role="alert">
-                          Kết quả tìm kiếm: <?php echo $dem; ?> sản phẩm
-                        </div>
-                     <?php }?> -->
-            <!-- //tittle heading -->
             <div class="row">
-                <!-- product left -->
                 <div class="agileinfo-ads-display col-lg-9">
                     <div class="wrapper">
-                        <!-- first section -->
                         <div class="">
                             <div class="baophi">
                                  @foreach($post_cate as $key => $p)
@@ -32,14 +23,9 @@
                                         <a class="title_baiviet" href="">{{$p->post_title}}</a>
                                     </h4>
                                     <p ><?=htmlspecialchars_decode($p->post_desc)?></p>
-                                    <a   href="{{url('/bai-viet/'.$p->post_slug)}}" class="btn btn-default btn-sm">Xem bài viết</a>
+                                    <a   href="{{url('/bai-viet/'.$p->post_slug)}}" class="btn btn-default btn-sm xem">Xem bài viết</a>
                                 </div>
                                 </div>
-                                
-                               
-
-
-                                
                                 @endforeach
                             </div>
                             <ul class="pagination pagination-sm m-t-none m-b-none">

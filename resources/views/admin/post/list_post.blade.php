@@ -18,9 +18,7 @@
         <thead>
           <tr>
             <th style="width:20px;">
-              <label class="i-checks m-b-none">
-                <input type="checkbox"><i></i>
-              </label>
+              
             </th>
             <th>Tên bài viết</th>
             <th>Hình ảnh</th>
@@ -36,7 +34,7 @@
         <tbody>
           @foreach($all_post as $key => $post)
           <tr>
-            <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+            <td></td>
             <td>{{ $post->post_title }}</td>
             <td><img src="{{asset('public/uploads/post/'.$post->post_image)}}" height="100" width="100"></td>
             <td>{{ $post->post_slug }}</td>

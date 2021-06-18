@@ -28,7 +28,7 @@
 												@if($p->gia_km < $p->product_price && $p->gia_km >0)
 												<span class="badge badge-pill badge-danger ban">-{{ROUND($gia,1)}}%</span>
 												@endif
-											<img  src="{!! asset('images/'.$p->product_image)!!}" alt="">
+											<img class="pro_img" src="{!! asset('images/'.$p->product_image)!!}" alt="">
 
 										    <!--  -->
 										
@@ -425,20 +425,20 @@
                                                             <div id="product_quickview_value"></div>
                                                         <div class=" taice">
                                                             <h2><span id="product_quickview_title"></span></h2>
-                                                            <p>Mã ID: <span id="product_quickview_id"></span></p>
-                                                            <p  >Giá sản phẩm : <span style="font-size: 20px; color: brown;font-weight: bold;" id="product_quickview_price"></span></p>
+                                                            <p style="color:#287b45;font-size:15px">Mã ID: <span id="product_quickview_id"></span></p>
+                                                            <p style="color:#287b45;font-size:15px" >GIÁ SẢN PHẨM : <span style="font-size: 20px; color: brown;font-weight: bold;" id="product_quickview_price"></span></p>
                                 
-                                                                <label >Số lượng:</label>
+                                                                <label style="color:#287b45;font-size:15px">SỐ LƯỢNG:</label>
                                                                 <input type="number" class="soluong cart_product_sl" min=1 value="1" name="soluong">
                                                              
                                                             </span>
-                                                            <p >Mô tả sản phẩm:</p>
+                                                            <p style="color:#287b45;font-size:15px">MÔ TẢ SẢN PHẨM:</p>
                                                            <!--  <hr> -->
                                                             <p><span id="product_quickview_desc"></span></p>
                                                             <hr>
                                                             <p><span id="product_quickview_content"></span></p>
                                                            
-								<p><span>Chọn size</span></p>
+								<p><span style="color:#287b45;font-size:15px">CHỌN SIZE:</span></p>
 								<div class="bao2">
 								@foreach($size as $id=>$data)
 								<div class="bao3">
@@ -446,7 +446,7 @@
 							    </div>
 								@endforeach
 							   </div>
-							   <p><span>Loại thức uống:</span></p>
+							   <p><span style="color:#287b45;font-size:15px">Loại THỨC UỐNG:</span></p>
 								<div class="bao2">
 								@foreach($hot as $id=>$data2)
 								<div class="bao3">

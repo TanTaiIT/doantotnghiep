@@ -43,15 +43,16 @@ body a {
 .menu ul li{position:relative;z-index:99;}
 .menu ul li.line{width:1px;height:15px;background-color:rgba(255,255,255,0.5);}
 .menu ul li a{display:block;position:relative;z-index:1;text-align:center;text-decoration:none!important;}
-.menu ul li a h2{font-size:14px;color:#5c4b4b;margin:0px;padding: 17px 8px;text-transform:uppercase;}
-.menu ul li a.active,.menu ul li:hover > a{background:grey;}
+.menu ul li a h2{font-size:14px;color: #f05c5c;margin:0px;padding: 17px 8px;text-transform:uppercase;}
+.menu ul li a.active,.menu ul li:hover > a{background:pink;}
 .menu ul li ul{position:absolute;min-width:200px;background:white;box-shadow:0 3px 11px 0 rgba(0,0,0,0.1);-webkit-transform:perspective(600px) rotateX(-90deg);transform:perspective(600px) rotateX(-90deg);-webkit-transform-origin:0 0 0;transform-origin:0 0 0;opacity:0;visibility:hidden;transition:all .5s;}
 .menu ul li:hover > ul{-webkit-transform:perspective(600px) rotateX(0);transform:perspective(600px) rotateX(0);-webkit-transform-origin:0 0 0;opacity:1;visibility:visible;transition:all .7s;color: red;}
 .menu ul li ul li a {
     text-align: left;
     border-bottom: 1px solid #8b7e7e38;
-    color: black;
+    color: #f05c5c;
     padding: 10px 10px;
+    text-transform: uppercase;
 }
 .menu ul li ul li:last-child > a{border-bottom:0px;}
 .menu ul li ul li a h2{font-size:14px;padding:12px 15px;}
@@ -91,14 +92,37 @@ body a {
 .baiviet-title{
     
 }
+.wrap-1200{
+    max-width: 1200px;
+    margin: auto;
+}
+.taicho{
+    padding-top: 50px;
+}
+h2.title{
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+.left1{
+    margin-bottom: 20px;
+}
 .flex{
     display: flex;
     margin-bottom: 20px;
 }
 .title_baiviet {
-    color: black;
-    font-family: auto;
+    color: red;
+    font-family: monospace;
     font-size: 19px;
+    text-transform: uppercase;
+}
+a.btn.btn-default.btn-sm.xem {
+    background: #fffffff0;
+    border: 1px solid grey;
+    border-radius: none;
+}
+.giohang{
+    
 }
 .btn-sm{
     color: #e65252;
@@ -110,6 +134,10 @@ li .dau{
     margin-left:30px;
     width: 80%;
 
+}
+.pro_img {
+    height: 277px;
+    width: 205px;
 }
 .baiviet_xemthem{
     color: black;
@@ -271,10 +299,15 @@ p {
     /* color: #999; */
     font-family: 'Lato';
 }
-
+.ads-grid.py-sm-5.py-4 {
+    background: #e8e8e8f7;
+}
 ul {
     margin: 0;
     padding: 0;
+}
+.footer-top-first {
+    background: #e8e8e8f7;
 }
 .sapxep{
     margin-bottom: 20px;
@@ -382,7 +415,9 @@ span.giohang {
 /*-- top-header --*/
 
 .main-top-w3l {
-    background: #ee7373;
+    /*background: #ee7373;*/
+    background: url('../images/header.png') no-repeat;
+    background-size: cover;
 }
 
 .header-most-top p {
@@ -679,8 +714,9 @@ input[type="submit"] {
     border: 1px solid #80808047;
 }
 nav.flex.items-center.justify-between {
-    text-align: center;
+    /* text-align: center; */
     margin-top:40px;
+    justify-content: center;
 }
 .flex.justify-between.flex-1.sm\:hidden{
     display: none;
@@ -711,8 +747,8 @@ button.w3view-cart {
 /*-- navigation --*/
 
 .navbar-inner {
-    background: #e7e7e7;
     box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.13);
+    background: mistyrose;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -1374,7 +1410,7 @@ h3.agileits-sear-head {
     background-color: mistyrose;
     height: fit-content;
     border-radius: 26px;
-    
+    box-shadow: 5px 1px 12px grey;
 }
 .taichodien{
     height: 500px;

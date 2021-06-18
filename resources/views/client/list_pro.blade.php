@@ -4,23 +4,15 @@
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				<span>M</span>obiles
-				<span>&</span>
-				<span>C</span>omputers</h3>
-				<!-- <?php $message=Session::get('message');
-				      if(isset($message)){?>
-				      	<div class="alert alert-primary" role="alert">
-						  Kết quả tìm kiếm: <?php echo $dem; ?> sản phẩm
-						</div>
-				     <?php }?> -->
-			<!-- //tittle heading -->
+				Danh sách sản phẩm</h3>
+				
 			<div class="row">
 				<!-- product left -->
 				<div class="agileinfo-ads-display col-lg-9">
 					<div class="wrapper">
 						<!-- first section -->
 						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
-							<h3 class="heading-tittle text-center font-italic">Trà Sữa trân châu</h3>
+							
 							<div class="row">
 								@foreach($product_list as $s1)
 								<div class="col-md-4 product-men mt-5">
@@ -34,7 +26,7 @@
 												@if($s1->gia_km < $s1->product_price && $s1->gia_km >0)
 												<span class="badge badge-pill badge-danger ban">-{{ROUND($gia,1)}}%</span>
 												@endif
-											<img  src="{!! asset('images/'.$s1->product_image)!!}" alt="">
+											<img  class="pro_img" src="{!! asset('images/'.$s1->product_image)!!}" alt="">
 
 										    <!--  -->
 										

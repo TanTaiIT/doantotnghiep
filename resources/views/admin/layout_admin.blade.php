@@ -138,6 +138,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <a href="{{route('pro_index')}}"><i class="fa fa-dashboard fa-fw nav_icon"></i>Bảng điều khiển</a>
                         </li>
                         <li>
+                            <a href="{{URL::to('/information')}}">
+                                <i class="fa fa-dashboard"></i>
+                                <span>Thông tin website</span>
+                            </a>
+                        </li>
+                        @hasrole(['admin'])
+                        <li>
                             <a href="#"><i class="fa fa-laptop nav_icon"></i>Quản lý sản phẩm<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -146,6 +153,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        @endhasrole
                         <li>
                             <a href="#"><i class="fa fa-indent nav_icon"></i>Quản lý loại sản phẩm<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -250,7 +258,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 
                             </ul>
                         </li>
-                        @hasrole(['admin','author'])
+                        @hasrole(['admin'])
                         <li>
                             <a href="widgets.html"><i class="fa fa-flask nav_icon"></i>Quản lý User</a>
                             <ul class="nav nav-second-level">

@@ -29,7 +29,7 @@
                
             </div>
             <div class="post-relate">
-            	<h2 class="text-center" style="margin-top:40px">Bài viết liên quan</h2>
+            	<h2 class="text-center" style="margin-top:40px;color:#ec1c1cb0">BÀI VIẾT LIÊN QUAN</h2>
             	 <ul>
                     @foreach($related as $key => $post_relate)
                     <li style="list-style-type: circle;"><a style="color: black;"href="{{url('/bai-viet/'.$post_relate->post_slug)}}">{{$post_relate->post_title}}</a></li>

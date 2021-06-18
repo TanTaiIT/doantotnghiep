@@ -9,16 +9,16 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">STT</th>
-      <th scope="col">Tên sản phẩm</th>
-      <th scope="col">Loại sản phẩm</th>
-      <th scope="col">Thương hiệu</th>
-      <th scope="col">Mô tả</th>	
-      <th scope="col">Giá tiền</th>
-      <th scope="col">Giá khuyến mãi</th>
-      <th scope="col">Hình ảnh</th>
-      <th scope="col">Trạng thái</th>
-      <th scope="col">Số lượng</th>
+      <th scope="col" class="text-center">STT</th>
+      <th scope="col" class="text-center">Tên sản phẩm</th>
+      <th scope="col" class="text-center">Loại sản phẩm</th>
+      <th scope="col" class="text-center">Thương hiệu</th>
+      <th scope="col" class="text-center">Mô tả</th>	
+      <th scope="col" class="text-center">Giá tiền</th>
+      <th scope="col" class="text-center">Giá khuyến mãi</th>
+      <th scope="col" class="text-center">Hình ảnh</th>
+      <th scope="col" class="text-center">Trạng thái</th>
+      <th scope="col" class="text-center">Số lượng</th>
       <th>Thao tác</th>
     </tr>
   </thead>
@@ -27,15 +27,15 @@
   	@foreach($pro as $p)
     <?php $i++ ?>
     <tr>
-     <td>{{$i}}</td>
-     <td>{{$p->product_name}}</td>
-     <td>{{$p->category_id}}</td>
-     <td>{{$p->brand_id}}</td>
-     <td>{{$p->product_desc}}</td>
-     <td>{{$p->product_price}}</td>
-     <td>{{$p->gia_km}}</td>
-     <td><img src="{!! asset('images/'.$p->product_image)!!}" alt="" width="50px" height="50px"></td>
-     <td>
+     <td class="text-center">{{$i}}</td>
+     <td class="text-center">{{$p->product_name}}</td>
+     <td class="text-center">{{$p->category_id}}</td>
+     <td class="text-center">{{$p->brand_id}}</td>
+     <td class="text-center">{{$p->product_desc}}</td>
+     <td class="text-center">{{$p->product_price}}</td>
+     <td class="text-center">{{$p->gia_km}}</td>
+     <td class="text-center"><img src="{!! asset('images/'.$p->product_image)!!}" alt="" width="50px" height="50px"></td>
+     <td class="text-center">
        <?php 
           if($p->product_status==1){ ?>
             <a href="{{route('huykichhoat',$p->product_id)}}"><span class="glyphicon glyphicon-eye-open icon"></span></a>
@@ -44,8 +44,8 @@
           <?php } ?>
 
      </td>
-     <td>{{$p->soluong}}</td>
-     <td>
+     <td class="text-center">{{$p->soluong}}</td>
+     <td class="text">
       <a class="cach" href="{{route('add_img',$p->product_id)}}" title="thêm ảnh"><i class="glyphicon glyphicon-folder-open lo"></i>
         </a>
       <a class="cach" href="{{route('product_edit',$p->product_id)}}" title="sửa sản phẩm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16" style="color:blue">

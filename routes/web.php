@@ -83,7 +83,7 @@ Route::get('/active-slide/{slide_id}','Admin\SliderController@active_slide');
 /* Client */
 Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
    Route::get('/index','ClientController@index')->name('cli_index');
-   Route::get('/detail/{id}','ClientController@detail')->name('cli_detail');
+   
    Route::post('/search','ClientController@search')->name('cli_search');
    
    Route::get('/dangxuat_kh','ClientController@dangxuatkh')->name('dangxuat_kh');
@@ -91,10 +91,8 @@ Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
    // Route::post('/select-delivery','DeliveryController@select_delivery');
    Route::post('/select-delivery-home','CheckoutController@select_delivery_home');
    Route::get('/checkout','CheckoutController@checkout')->name('checkout');
-   
-   Route::get('/tai','ClientController@tai')->name('tai');
-   
 });
+Route::get('/detail/{id}','Client\ClientController@detail')->name('cli_detail');
 Route::get('/list-pro/{id}','Client\ClientController@list_pro')->name('list_pro');
 Route::post('/cart','Client\CartController@addtocart')->name('addtocart');
  Route::patch('update-cart','Client\CartController@update');
@@ -187,3 +185,8 @@ Route::post('store-users','Admin\UserController@store_users');
 Route::post('assign-roles','Admin\UserController@assign_roles');
 Route::get('impersonate/{admin_id}','Admin\UserController@impersonate');
 Route::get('impersonate-destroy','Admin\UserController@impersonate_destroy');
+
+Route::get('/lien-he','Client\ContactController@lien_he');
+Route::get('/information','Client\ContactController@information' );
+Route::post('/save-info','Client\ContactController@save_info' );
+Route::post('/update-info/{info_id}','Client\ContactController@update_info' );

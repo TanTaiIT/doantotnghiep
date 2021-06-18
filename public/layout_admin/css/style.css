@@ -70,11 +70,19 @@ body a{
 }
 a.cach {
     margin: 0 10px;
+    width: 33.33%;
 }
 .icon1{
   color:red;
   font-size: 30px;
   /*position: absolute;*/
+}
+tbody tr td{
+  color: black;
+}
+thead tr th{
+  text-transform: uppercase;
+ 
 }
 .pos {
     position: absolute;
@@ -96,6 +104,10 @@ a.cach {
     color: white;
     padding: 10px 17px;
     border-radius: 7px;*/
+}
+td.text{
+  display: flex;
+  
 }
 .mau{
   width: 100px;
@@ -651,6 +663,12 @@ span.date-on {
   float: right;
   font-size: 1.2em;
   color: #fff;
+}
+thead tr th{
+  text-align: center;
+}
+tbody tr td{
+  text-align: center;
 }
 .grid-date h4 {
   color: #fff;
@@ -1556,7 +1574,7 @@ div.checker input {
 }
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
   font-size: 0.85em;
-  color: #999;
+  color: #5a5757;
 } 
 .mailbox-content table tbody tr:hover {
   background: #FAFAFA;
