@@ -3,19 +3,15 @@
 
 	<!-- //banner-2 -->
 	<!-- page -->
-	<div class="services-breadcrumb">
-		<div class="agile_inner_breadcrumb">
-			<div class="container">
-				<ul class="w3_short">
-					<li>
-						<a href="{{route('cli_index')}}">Home</a>
-						<i>|</i>
-					</li>
-					<li>chi tiết sản phẩm</li>
-				</ul>
-			</div>
-		</div>
-	</div>
+<div class="services-breadcrumb">
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{route('cli_index')}}">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">Library</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Data</li>
+  </ol>
+</nav>
+</div>
 	<!-- //page -->
 <div class="bao_detail">
 	<!-- Single Page -->
@@ -129,11 +125,41 @@
                                                     @endfor
 
                                                 </ul>
-												<div id="fb-root"></div>
+
+                    <div class="col-sm-12">
+								
+								<div style="text-align: center;background: #919191;width: 20%;color:white" class="active"><p>BÌNH LUẬN</p></div>
+							</ul>
+						</div>
+							<div class="comment" id="reviews" >
+								<div class="col-sm-12">
+									<form>
+									   @csrf
+									   <input type="hidden" name="comment_product_id" value="{{$detail->product_id}}" class="comment_product_id">
+									<p></p>
+									</form>
+									<p><b>Viết đánh giá của bạn</b></p>
+								<div class="comment-form">
+									<form action="#">
+									@csrf
+									  
+											<input style="width:100%;margin-left:0" class="comment_name" type="text" placeholder="Tên bình luận"/>
+										<textarea name="comment" class="comment_content" placeholder="Nội dung"></textarea>
+										<b>Đáng giá sao: </b> <img src="images/product-details/rating.png" alt="" />
+										<button type="button" class="btn btn-default pull-right send-comment">
+											Gởi bình luận
+										</button>
+										<div id="notify_comment"></div>
+									</form>
+									<div id="comment_show"></div>
+								</div>
+								</div>
+							</div>
+												<!-- <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0" nonce="n4eIiG1A"></script>
 <div class="fb-share-button" data-href="{{$url_canonical}}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{$url_canonical}}" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0" nonce="fA9EUFES"></script>
-    <div class="fb-comments" data-href="{{$url_canonical}}" data-width="" data-numposts="5"></div>
+    <div class="fb-comments" data-href="{{$url_canonical}}" data-width="" data-numposts="5"></div> -->
 				</div>
 			</div>
 		</div>

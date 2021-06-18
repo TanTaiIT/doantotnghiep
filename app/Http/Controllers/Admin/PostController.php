@@ -44,7 +44,7 @@ class PostController extends Controller
 
             $new_image =  $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
 
-            $get_image->move('public/uploads/post',$new_image);
+            $get_image->move('uploads/post',$new_image);
 
             $post->post_image = $new_image;
 
@@ -72,7 +72,7 @@ class PostController extends Controller
         $post_image = $post->post_image;
 
         if($post_image){
-            $path ='public/uploads/post/'.$post_image;
+            $path ='uploads/post/'.$post_image;
             unlink($path);
         }
         $post->delete();
@@ -106,7 +106,7 @@ class PostController extends Controller
         if($get_image){
             //xoa anh cu
             $post_image_old = $post->post_image;
-            $path ='public/uploads/post/'.$post_image_old;
+            $path ='uploads/post/'.$post_image_old;
             unlink($path);
             //cap nhat anh moi
             $get_name_image = $get_image->getClientOriginalName(); //lay ten của hình ảnh
@@ -178,7 +178,7 @@ class PostController extends Controller
             //--seo
         }
         //update views 
-        $post = Post::where('post_id',$post_id)->first();
+        $post = Post::where('post_slug',$post_slug)->first();
         $post->post_views = $post->post_views + 1;
         $post->save();
         

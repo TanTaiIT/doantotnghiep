@@ -12,10 +12,10 @@ class product extends Model
     protected $fillable=['product_name','category_id','brand_id','product_desc','product_price','product_image','product_status','pro_rating_number','pro_rating','gia_km'];
     protected $primaryKey="product_id";
     public function category(){
-    	return $this->belongTo('App\Models\category','category_id','product_id');
+    	return $this->belongsTo('App\Models\category','category_id','product_id');
     }
     public function brand(){
-    	return $this->belongTo('App\Models\brand','brand_id','product_id');
+    	return $this->belongsTo('App\Models\brand','brand_id','product_id');
     }
     public function rating(){
         return $this->hasMany('App\Models\rating','product_id');

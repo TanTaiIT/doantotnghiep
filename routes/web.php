@@ -13,17 +13,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Route::get('admin','Admin\AdminController@index')->name('admin_index')->middleware('CheckUser');;
-
+Route::get('/dashboard','Admin\AdminController@show_dashboard')->name('trangchu');
+Route::post('/dashboard-filter','Admin\AdminController@dashboard_filter');
+Route::post('/filter-by-date','Admin\AdminController@filter_by_date');
+Route::get('/order-date','Admin\AdminController@order_date');
+Route::post('/days-order','Admin\AdminController@days_order');
 Route::get('/404','Client\ClientController@error_page')->name('404_page');
+Route::get('/trangchu','Admin\AdminController@show_dashboard')->name('cli_trangchu')->middleware('roles');
 Route::group(['prefix'=>'login','namespace'=>'Admin'],function(){
    Route::get('login','loginController@getdangnhap')->name('login');
    Route::post('postlogin','loginController@postdangnhap')->name('postlogin');
    Route::get('singup','loginController@getdangky')->name('singup');
    Route::post('postsingup','loginController@postdangky')->name('postsingup');
    //Route::get('xacnhantaikhoan','loginController@xacnhanTK')->name('xacnhanTK');
-
    Route::get('singout','loginController@dangxuat')->name('singout');
 });
+
+
+Route::get('/introduce','Admin\IntroController@intro_index')->name('intro');
+Route::post('/store_intro','Admin\IntroController@store_intro')->name('store_intro');
+Route::post('/update_intro/{id}','Admin\IntroController@update_intro')->name('update_intro');
 Route::get('home','Client\ClientController@get_home')->name('home');
 // Route::group(['prefix' => 'admin', 'namespace' => 'admin'], function() {   
 //    Route::get('login','LoginController@getLogin')->name('getLogin');
@@ -57,6 +66,9 @@ Route::get('edit_cat/{id}','CategoryController@edit')->name('cat_edit');
 Route::post('update/{id}','CategoryController@update')->name('cate_update');
 Route::get('delete/{id}','CategoryController@delete')->name('delete_cate');
 Route::get('delete_all','ProductController@delete_all')->name('delete_all');
+
+Route::post('/export-csv','CategoryController@export_csv');
+Route::post('/import-csv','CategoryController@import_csv');
 });
 
 /* Brand */ 
@@ -91,7 +103,13 @@ Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
    // Route::post('/select-delivery','DeliveryController@select_delivery');
    Route::post('/select-delivery-home','CheckoutController@select_delivery_home');
    Route::get('/checkout','CheckoutController@checkout')->name('checkout');
+   Route::post('/load-comment','ClientController@load_comment');
+   Route::post('/send-comment','ClientController@send_comment');
+   
 });
+Route::post('/allow-comment','Client\ClientController@allow_comment');
+Route::post('/reply-comment','Client\ClientController@reply_comment');
+Route::get('/comment','Client\ClientController@list_comment');
 Route::get('/detail/{id}','Client\ClientController@detail')->name('cli_detail');
 Route::get('/list-pro/{id}','Client\ClientController@list_pro')->name('list_pro');
 Route::post('/cart','Client\CartController@addtocart')->name('addtocart');
@@ -190,3 +208,10 @@ Route::get('/lien-he','Client\ContactController@lien_he');
 Route::get('/information','Client\ContactController@information' );
 Route::post('/save-info','Client\ContactController@save_info' );
 Route::post('/update-info/{info_id}','Client\ContactController@update_info' );
+
+
+Route::get('/quangcao','Admin\AddvertisedController@addver')->name('list_addvertised');
+Route::get('/add_addvertised','Admin\AddvertisedController@add_addver')->name('add_addvertised');
+Route::post('/store','Admin\AddvertisedController@store')->name('store_addvertised');
+Route::get('/delete_addver/{id}','Admin\AddvertisedController@destroy')->name('del_addver');
+Route::post('/update_addver','Admin\AddvertisedController@update')->name('update_addver');

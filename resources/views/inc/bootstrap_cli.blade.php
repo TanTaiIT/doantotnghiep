@@ -32,7 +32,14 @@
 	<link href="{!! asset('web/css/popuo-box.css')!!}" rel="stylesheet" type="text/css" media="all" />
 	<!-- pop-up-box -->
 	<link href="{!! asset('web/css/menu.css')!!}" rel="stylesheet" type="text/css" media="all" />
+	<link href="{!! asset('web/css/slick-theme.css')!!}" rel="stylesheet" type="text/css" media="all" />
+	<link href="{!! asset('web/css/slick.css')!!}" rel="stylesheet" type="text/css" media="all" />
+	
+	
+	<link href="{!! asset('web/css/jquery.simplyscroll-style.css')!!}" rel="stylesheet" type="text/css" media="all" />
+	<link href="{!! asset('web/css/jquery.simplyscroll.css')!!}" rel="stylesheet" type="text/css" media="all" />
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
 	<!-- menu style -->
@@ -49,7 +56,7 @@
     <meta property="og:title"              content="{{$meta_title}}" />
     <meta property="og:site_name" content="{{$meta_title}}"/>
     <meta property="og:description"        content="{{$meta_desc}}" />
-    <meta property="og:image"              content="{{$share_images}}" />
+  
 	  <?php }
 	?>
 	

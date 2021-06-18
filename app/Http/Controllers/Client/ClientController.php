@@ -13,6 +13,9 @@ use App\Models\rating;
 use App\Models\attribute;
 use App\Models\slider;
 use App\Models\CatePost;
+use App\Models\binhluan;
+use App\Models\Post;
+use App\Models\quangcao;
 use DB;
 class ClientController extends Controller
 {
@@ -29,14 +32,17 @@ class ClientController extends Controller
         $hot=attribute::where('name','hot')->get();
         $cate=category::all();
         $brand=brand::all();
-        $bestsell=product::orderBy('product_sold','DESC')->limit(3)->get();
+        $quangcao=quangcao::orderBy('quangcao_id','desc')->get();
+        $bestsell=product::orderBy('product_sold','DESC')->paginate(3);
     	$com='index';
+
         $product=product::where([
             'product_status'=>1
         ]);
-        $meta_desc = 'cửa hàng bán trà sữa online';
-        // $meta_keywords = $value->product_slug;
-        $meta_title = 'các loại trà sữa ngon';
+        $meta_title="trang chủ";
+        $meta_desc="trang chủ";
+
+       
         // $share_images = url('images/'.$product->product_image);
         foreach($product as $p){
             $pro_id=$p->product_id;
@@ -87,20 +93,9 @@ class ClientController extends Controller
             $product=product::where('product_name','like','%'.$key.'%');
         }
 
-        
-        
-        // $rating=product::where($tong,'=',10);
-        // $tong=$product->pro_rating_number;
-        // if($request->review){
-        //     $re=$request->review;
-        //     switch($re){
-        //         case '1':
-        //         $product->where('pro_rating_number','>',10)->get();
-        //         break;
-        //     }
-        // }
+        $post=Post::orderBy('post_id','desc')->get();
         $product=$product->orderBy('product_id','DESC')->paginate(6);
-    	return view('client/index',compact('product','com','cate','brand','url_canonical','size','color','hot','slide','bestsell','meta_title','meta_desc','cate_post1'));
+    	return view('client/index',compact('product','com','cate','brand','url_canonical','size','color','hot','slide','bestsell','meta_title','meta_desc','cate_post1','post','quangcao'));
 
     }
  
@@ -109,20 +104,26 @@ class ClientController extends Controller
         $hot=attribute::where('name','hot')->get();
         // $url_canonical = $request->url();
         $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
-        $detail=product::FindOrFail($id);
-        $pro_id=$detail->product_id;
         $img_detail=pro_img::where('product_id',$id)->get();
         $cate=category::all();
         $brand=brand::all();
     	$com='detail';
-        $rating=rating::where('product_id','=',$pro_id)->avg('rating');
+        $rating=rating::where('product_id','=',$id)->avg('rating');
         $rating=round($rating);
-        $meta_desc = $detail->product_desc;
+        //  $detail = DB::table('tbl_product')
+        // ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
+        // ->join('tbl_brand','tbl_brand.brand_id','=','tbl_product.brand_id')
+        // ->where('tbl_product.product_id',$id)->get();
+        $detail=product::FindOrFail($id);
+        $detail->product_view=$detail->product_view + 1;
+        $detail->save();
+        $cate_id=$detail->category_id;
+        $meta_desc =$detail->product_desc;
         // $meta_keywords = $value->product_slug;
-        $meta_title = $detail->product_name;
-        $url_canonical = $request->url();
-        $share_images = url('images/'.$detail->product_image);
-        
+         $meta_title = $detail->product_name;
+         $url_canonical = $request->url();
+         $share_images=url('images/'.$detail->product_name);
+       
     	return view('client/detail',compact('detail','com','cate','brand','img_detail','url_canonical','rating','size','hot','meta_desc'
         ,'meta_title','url_canonical','share_images','cate_post1'));
     }
@@ -221,8 +222,144 @@ class ClientController extends Controller
         $cate=category::all();
         $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
         $brand=brand::all();
-        $product_list=product::where('category_id',$id)->get();
-        return view('client.list_pro',compact('product_list','brand','cate','cate_post1','url_canonical','com','size','color','hot','slide','share_images','meta_title','meta_desc'));
+        $bestsell=product::orderBy('product_sold','DESC')->limit(3)->get();
+
+       
+        
+
+         $product=product::where('category_id',$id)->paginate(9);
+        if($request->price){
+            $price=$request->price;
+            switch ($price) {
+                case '1':
+                    $product_list=product::where('product_price','<',15000)->where('category_id',$id)->paginate(6)->appends(request()->query());  
+                   
+                    break;
+                case '2':
+                    $product_list=product::whereBetween('product_price',[10000,15000])->where('category_id',$id)->paginate(6)->appends(request()->query());
+                    break;
+                case '3':
+                    $product_list=product::whereBetween('product_price',[15000,20000])->where('category_id',$id)->paginate(6)->appends(request()->query());
+                    break; 
+                case '4':
+                    $product_list=product::whereBetween('product_price',[20000,30000])->where('category_id',$id)->paginate(6)->appends(request()->query());
+                    break;
+                
+            }
+        }else{
+            $product_list=product::where('category_id',$id)->get();
+        }
+
+
+
+        if($request->orderby){
+            $orderby=$request->orderby;
+            switch ($orderby) {
+                case 'desc':
+                    $product_list=product::where('category_id',$id)->orderBy('product_id','DESC')->paginate(6)->appends(request()->query()); 
+                    break;
+                case 'asc':
+                    $product_list=product::where('category_id',$id)->orderBy('product_id','ASC')->paginate(6)->appends(request()->query()); 
+                    break;
+                case 'primax':
+                   $product_list=product::where('category_id',$id)->orderBy('product_price','DESC')->paginate(6)->appends(request()->query()); 
+                    break;
+                case 'primin':
+                   $product_list=product::where('category_id',$id)->orderBy('product_price','ASC')->paginate(6)->appends(request()->query()); 
+                    break;    
+            }
+        }
+
+        if($request->keyword){
+            $key=$request->keyword;
+            $product_list=product::where('product_name','like','%'.$key.'%')->where('category_id',$id)->get();
+        }
+
+
+      
+
+        return view('client.list_pro',compact('product_list','brand','cate','cate_post1','url_canonical','com','size','color','hot','slide','share_images','meta_title','meta_desc','bestsell'));
+    }
+
+
+
+
+
+    public function reply_comment(Request $request){
+        $data = $request->all();
+        $comment = new binhluan();
+        $comment->comment = $data['comment'];
+        $comment->comment_product_id = $data['comment_product_id'];
+        $comment->comment_parent_comment = $data['comment_id'];
+        $comment->comment_status = 0;
+        $comment->comment_name = 'HiếuStore';
+        $comment->save();
+
+    }
+    public function allow_comment(Request $request){
+        $data = $request->all();
+        $comment = binhluan::find($data['comment_id']);
+        $comment->comment_status = $data['comment_status'];
+        $comment->save();
+    }
+
+
+
+    public function list_comment(){
+        $comment = binhluan::with('product')->where('comment_parent_comment','=',0)->orderBy('comment_id','DESC')->get();
+        $comment_rep = binhluan::with('product')->where('comment_parent_comment','>',0)->get();
+        return view('admin.binhluan.list_comment')->with(compact('comment','comment_rep'));
+    }
+    public function send_comment(Request $request){
+        $product_id = $request->product_id;
+        $comment_name = $request->comment_name;
+        $comment_content = $request->comment;
+        $comment = new binhluan();
+        $comment->comment = $comment_content;
+        $comment->comment_name = $comment_name;
+        $comment->comment_product_id = $product_id;
+        $comment->comment_status = 1;
+        $comment->comment_parent_comment = 0;
+        $comment->save();
+    }
+    public function load_comment(Request $request){
+        $product_id = $request->product_id;
+        $comment = binhluan::where('comment_product_id',$product_id)->where('comment_parent_comment','=',0)->where('comment_status',0)->get();
+        $comment_rep = binhluan::with('product')->where('comment_parent_comment','>',0)->get();
+        $output = '';
+        foreach($comment as $key => $comm){
+            $output.= ' 
+            <div class="row style_comment">
+
+                                        <div class="col-md-2">
+                                            <img width="50%"style="margin-top:10px" src="'.url('web/images/avatar.png').'" class="img img-responsive img-thumbnail">
+                                        </div>
+                                        <div class="col-md-10 back">
+                                            <p style="color:green;">@'.$comm->comment_name.'</p>
+                                            <p style="color:#000;">'.$comm->comment_date.'</p>
+                                            <p>'.$comm->comment.'</p>
+                                        </div>
+                                    </div><p></p>
+                                    ';
+
+                                    foreach($comment_rep as $key => $rep_comment)  {
+                                        if($rep_comment->comment_parent_comment==$comm->comment_id)  {
+                                     $output.= ' <div class="row style_comment" >
+
+                                        <div class="col-md-2 phai">
+                                            <img width="50%" src="'.url('web/images/76729750.jpg').'" class="img img-responsive ">
+                                        </div>
+                                        <div class="col-md-8 rep">
+                                            <p style="color:blue;">@Admin</p>
+                                            <p style="color:#000;">'.$rep_comment->comment.'</p>
+                                            <p></p>
+                                        </div>
+                                    </div><p></p>';
+                                        }
+                                    }
+        }
+        echo $output;
+
     }
 
   

@@ -18,7 +18,7 @@
             <li><a class="transition " href="{{route('cli_index')}}" title=""><h2>Trang chủ</h2></a>
            </li>
             <li class="line"></li>
-            <li><a class="" href="" title=""><h2>sản phẩm</h2></a>
+            <li><a class="" href="" title=""><h2>menu</h2></a>
             	 <ul>
             	 	@foreach($cate as $c)
                     <li><span></span><a href="{{route('list_pro',$c->category_id)}}">{{$c->category_name}}</a></li>

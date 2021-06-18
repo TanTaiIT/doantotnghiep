@@ -20,8 +20,9 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use PDF;
 use Mail;
-use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
+
 
 class CheckoutController extends Controller
 {
@@ -243,7 +244,10 @@ class CheckoutController extends Controller
          $order->order_code = $checkout_code;
 
          date_default_timezone_set('Asia/Ho_Chi_Minh');
-         $order->created_at = now();
+         $today=Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+         $order_date=Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+         $order->order_date=$order_date;
+         $order->created_at = $today;
          $order->save();
 
          if(Session::get('cart')==true){
