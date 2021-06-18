@@ -1,9 +1,69 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/css/formValidation.min.css"></script>
 	<script src="{!! asset('web/js/jquery-2.2.3.min.js')!!}"></script>
+  
+    <script src="{!! asset('web/js/jquery.simplyscroll.js')!!}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript" charset="utf-8" async defer></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-   
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <script src="{!! asset('web/js/slick.js')!!}"></script>
+     <script>
+        $('.run1').slick({
+            lazyLoad: 'progressive', infinite: true, accessibility:false, vertical:false, slidesToShow: 3,  
+            slidesToScroll: 1, autoplay:true,  autoplaySpeed:3000, speed:1000, arrows:true, 
+            centerMode:false,  dots:false,  draggable:true, variableWidth:false,
+        });
+
+    </script>
+    <script>
+        $('.rundt').slick({
+            lazyLoad: 'progressive', infinite: true, accessibility:false, vertical:false, slidesToShow: 1,  
+            slidesToScroll: 1, autoplay:true,  autoplaySpeed:3000, speed:1000, arrows:true, 
+            centerMode:false,  dots:false,  draggable:true, variableWidth:true,
+        });
+
+    </script>
+    
+      <script type="text/javascript">
+        $(document).ready(function(){
+            load_comment();
+            function load_comment(){
+                var product_id = $('.comment_product_id').val();
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url:'{{url("cli/load-comment")}}',
+                    method:"POST",
+                    data:{product_id:product_id,_token:_token},
+                    success:function(data){
+                        $('#comment_show').html(data);
+                    }
+                });
+             }
+             $('.send-comment').click(function(){
+                var product_id = $('.comment_product_id').val();
+                var comment_name = $('.comment_name').val();
+                var comment = $('.comment_content').val();
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url:'{{url("cli/send-comment")}}',
+                    method:"POST",
+                    data:{product_id:product_id,comment_name:comment_name,comment:comment,_token:_token},
+                    success:function(data){
+                        
+                        $('#notify_comment').html('<span class="text text-success">Thêm bình luận thành công, bình luận đang chờ duyệt</span>');
+                        load_comment();
+                        $('#notify_comment').fadeOut(10000);
+                        $('.comment_name').val('');
+                        $('.comment').val('');
+                    }
+                });
+             });
+    });
+    </script> 
+
+
+    
 	<script type="text/javascript">
         $('.xemnhanh').click(function(){
             var product_id = $(this).data('id_product');
@@ -495,7 +555,7 @@
     });
     </script>
 
-    <!-- <link rel="stylesheet" type="text/css" href="{!! asset('web/css/easy-responsive-tabs.css')!!} " />
+    <link rel="stylesheet" type="text/css" href="{!! asset('web/css/easy-responsive-tabs.css')!!} " />
     <script src="{!! asset('web/js/easyResponsiveTabs.js"></script>
 
     <script>
@@ -515,44 +575,31 @@
                 }
             });
         });
-    </script> -->
-    <script type="text/javascript">
-        $(document).ready(function(){
-            load_comment();
-            function load_comment(){
-                var product_id = $('.comment_product_id').val();
-                var _token = $('input[name="_token"]').val();
-                $.ajax({
-					url:'{{url('cli/load_comment')}}',
-					method:"POST",
-					data:{product_id:product_id,_token:_token},
-					success:function(data){
-						$('#comment_show').html(data);
-					}
-				});
-			 }
-             $('.send-comment').click(function(){
-                var product_id = $('.comment_product_id').val();
-                var comment_name = $('.comment_name').val();
-                var comment = $('.comment').val();
-                var _token = $('input[name="_token"]').val();
-                $.ajax({
-					url:'{{url('cli/send_comment')}}',
-					method:"POST",
-					data:{product_id:product_id,comment_name:comment_name,comment:comment,_token:_token},
-					success:function(data){
-						
-                        $('#notify_comment').html('<span class="text text-success">Thêm bình luận thành công, bình luận đang chờ duyệt</span>');
-                        load_comment();
-                        $('#notify_comment').fadeOut(10000);
-                        $('.comment_name').val('');
-                        $('.comment').val('');
-					}
-				});
-             });
-    });
-    </script> 
-   
+    </script>
+
+    <script>
+$(document).ready(function(){
+    if($(".newshome-scroll ul").exists())
+    {
+        $(".newshome-scroll ul").simplyScroll({
+            customClass: 'vert',
+            orientation: 'vertical',
+            // orientation: 'horizontal',
+            auto: true,
+            manualMode: 'auto',
+            pauseOnHover: 1,
+            speed: 1,
+            loop: 0
+        });
+    }
+
+});
+    
+    
+
+    </script>
+
+ 
 
 
 
