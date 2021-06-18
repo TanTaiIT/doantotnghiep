@@ -131,55 +131,8 @@
                                                 </ul>
 												<div id="fb-root"></div>
 												
-									</style>
-						<div class="category-tab shop-details-tab"><!--category-tab-->
-						<div class="col-sm-12">
-							<ul class="nav nav-tabs">
-								
-								<li class="active"><a href="#reviews" data-toggle="tab">BÌNH LUẬN</a></li>
-							</ul>
-						</div>
-							<div class="tab-pane fade active in" id="reviews" >
-								<div class="col-sm-12">
-									<!-- <ul>
-										<li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
-										<li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
-										<li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
-									</ul> -->
-									<style type="text/css">
-                                       .style_comment{
-										   border: 1px solid #ddd;
-										   border-radius: 10px;
-										   background: #F0F0E9;
-										   
-									   }
-									</style>
-									<form>
-									   @csrf
-									   <input type="hidden" name="comment_product_id" value="{{$detail->product_id}}" class="comment_product_id">
-									   <div id="comment_show"> </div>
-									<p></p>
-									</form>
-									<p><b>Viết đánh giá của bạn</b></p>
 									
-									<form action="#">
-									@csrf
-									   <input type="hidden" name="comment_product_id" value="{{$detail->product_id}}" class="comment_product_id">
-										<span>
-											<input style="width:100%;margin-left:0" class="comment_name" type="text" placeholder="Tên bình luận"/>
-										</span>
-										<textarea name="comment" class="comment" placeholder="Nội dung"></textarea>
-										<b>Đáng giá sao: </b> <img src="images/product-details/rating.png" alt="" />
-										<button type="button" class="btn btn-default pull-right send-comment">
-											Gởi bình luận
-										</button>
-										<div id="notify_comment"></div>
-									</form>
-								</div>
-							</div>
-							
-						</div>
-					</div><!--/category-tab-->
+						
 
 				</div>
 			</div>
