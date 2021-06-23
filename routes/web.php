@@ -105,6 +105,7 @@ Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
    Route::get('/checkout','CheckoutController@checkout')->name('checkout');
    Route::post('/load-comment','ClientController@load_comment');
    Route::post('/send-comment','ClientController@send_comment');
+   Route::get('/gioithieu','ClientController@gioithieu')->name('gioithieu');
    
 });
 Route::post('/allow-comment','Client\ClientController@allow_comment');
@@ -215,3 +216,11 @@ Route::get('/add_addvertised','Admin\AddvertisedController@add_addver')->name('a
 Route::post('/store','Admin\AddvertisedController@store')->name('store_addvertised');
 Route::get('/delete_addver/{id}','Admin\AddvertisedController@destroy')->name('del_addver');
 Route::post('/update_addver','Admin\AddvertisedController@update')->name('update_addver');
+
+
+Route::get('/send-coupon/{condition}/{number}/{code}/{time}','Admin\MailController@send_mail')->name('send_mail');
+Route::get('/send-coupon-vip/{condition}/{number}/{code}/{time}','Admin\MailController@send_mail_vip')->name('send_mail_vip');
+Route::get('/mail-example','Admin\MailController@mail_example');
+
+
+Route::get('/send-mail','Admin\MailController@send')->name('send');

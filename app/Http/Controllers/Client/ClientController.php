@@ -16,6 +16,8 @@ use App\Models\CatePost;
 use App\Models\binhluan;
 use App\Models\Post;
 use App\Models\quangcao;
+use App\Models\intro;
+use App\Models\thuoctinh;
 use DB;
 class ClientController extends Controller
 {
@@ -35,24 +37,17 @@ class ClientController extends Controller
         $quangcao=quangcao::orderBy('quangcao_id','desc')->get();
         $bestsell=product::orderBy('product_sold','DESC')->paginate(3);
     	$com='index';
-
         $product=product::where([
             'product_status'=>1
         ]);
         $meta_title="trang chủ";
         $meta_desc="trang chủ";
-
-       
-        // $share_images = url('images/'.$product->product_image);
         foreach($product as $p){
             $pro_id=$p->product_id;
             
         }
-        // $avg=$rating->pro_rating_number/$rating->pro_rating;
-        // $sao=DB::table('tbl_product')->join('tbl_rating','tbl_product.product_id','=','tbl_rating.product_id')->avg('rating');
-
-        // $rating=round($sao);
-
+        $product_id = $request->product_id;
+        $size1=DB::table('tbl_product')->join('tbl_attribute_product','tbl_attribute_product.product_id','=','tbl_product.product_id')->where('tbl_product.product_id',$request->product_id)->get();
         if($request->price){
             $price=$request->price;
             switch ($price) {
@@ -95,12 +90,23 @@ class ClientController extends Controller
 
         $post=Post::orderBy('post_id','desc')->get();
         $product=$product->orderBy('product_id','DESC')->paginate(6);
-    	return view('client/index',compact('product','com','cate','brand','url_canonical','size','color','hot','slide','bestsell','meta_title','meta_desc','cate_post1','post','quangcao'));
+    	return view('client/index',compact('product','com','cate','brand','url_canonical','size','color','hot','slide','bestsell','meta_title','meta_desc','cate_post1','post','quangcao','size1'));
 
     }
- 
+    public function gioithieu(Request $request){
+        $com='';
+        $gioithieu=intro::all();
+        $cate=category::orderby('category_id','desc')->get();
+        $cate_post1=CatePost::orderBy('cate_post_id','desc')->get();
+        $meta_title="giới thiệu";
+        $meta_desc="về chúng tôi";
+        $url_canonical=$request->url();
+        return view('client.gioithieu',compact('meta_title','meta_desc','url_canonical','com','cate','cate_post1','gioithieu'));
+    }
     public function detail(Request $request,$id){
         $size=attribute::where('name','size')->get();
+        // $size1=DB::table('tbl_product')->join('tbl_attribute_product','tbl_attribute_product.product_id','=','tbl_product.product_id')->where('tbl_product.product_id',$id)->get();
+
         $hot=attribute::where('name','hot')->get();
         // $url_canonical = $request->url();
         $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();

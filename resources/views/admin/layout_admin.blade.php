@@ -38,6 +38,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{!! asset('layout_admin/js/rickshaw.js')!!}"></script>
 <script src="{!!asset('layout_admin/ckeditor/ckeditor.js')!!}"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="{!! asset('layout_admin/js/simple.money.format.js')!!}"></script>
 
 </head>
 <body>
@@ -188,7 +189,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </li>
 
 
-                         <li>
+                         <!-- <li>
                             <a href="#"><i class="fa fa-envelope nav_icon"></i>Vận chuyển<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -197,8 +198,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 
                                
                             </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                            
+                        </li> -->
 
                          <li>
                             <a href="#"><i class="fa fa-envelope nav_icon"></i>quản lý bài viết<span class="fa arrow"></span></a>
@@ -292,7 +293,46 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
        <div class="clearfix"> </div>
     </div>
 
+    <script type="text/javascript">
+    $('.price_format').simpleMoneyFormat();
 
+</script>
+
+
+<script type="text/javascript">
+ 
+    function ChangeToSlug()
+        {
+            var slug;
+         
+            //Lấy text từ thẻ input title 
+            slug = document.getElementById("slug").value;
+            slug = slug.toLowerCase();
+            //Đổi ký tự có dấu thành không dấu
+                slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+                slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+                slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+                slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+                slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+                slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+                slug = slug.replace(/đ/gi, 'd');
+                //Xóa các ký tự đặt biệt
+                slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+                //Đổi khoảng trắng thành ký tự gạch ngang
+                slug = slug.replace(/ /gi, "-");
+                //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
+                //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
+                slug = slug.replace(/\-\-\-\-\-/gi, '-');
+                slug = slug.replace(/\-\-\-\-/gi, '-');
+                slug = slug.replace(/\-\-\-/gi, '-');
+                slug = slug.replace(/\-\-/gi, '-');
+                //Xóa các ký tự gạch ngang ở đầu và cuối
+                slug = '@' + slug + '@';
+                slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+                //In slug ra textbox có id “slug”
+            document.getElementById('convert_slug').value = slug;
+        }
+</script>
     <script src="{!! asset('layout_admin/js/bootstrap.min.js')!!}"></script>
     <script>
         $('#inputName').change(function(event){
@@ -372,6 +412,9 @@ $(document).ready(function(){
 });
 </script>
 
+
+
+
 <script type="text/javascript">
 $(document).ready(function(){
 
@@ -447,7 +490,13 @@ $(document).ready(function(){
     });
 
 });
-    
+</script>
+<script src="{!! asset('layout_admin/js/validate.js')!!}"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script> -->
+<script>
+    $.validate({
+
+    });
 </script>
 
     <script type="text/javascript">
@@ -663,10 +712,6 @@ $(document).ready(function(){
            var wards = $('.wards').val();
            var fee_ship = $('.fee_ship').val();
             var _token = $('input[name="_token"]').val();
-           // alert(city);
-           // alert(province);
-           // alert(wards);
-           // alert(fee_ship);
             $.ajax({
                 url : '{{url('/insert-delivery')}}',
                 method: 'POST',
@@ -683,9 +728,6 @@ $(document).ready(function(){
             var ma_id = $(this).val();
             var _token = $('input[name="_token"]').val();
             var result = '';
-            // alert(action);
-            //  alert(matp);
-            //   alert(_token);
 
             if(action=='city'){
                 result = 'province';

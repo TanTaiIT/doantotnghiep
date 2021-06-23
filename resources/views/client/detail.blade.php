@@ -82,10 +82,13 @@
 								@foreach($hot as $id=>$data2)
 								<div class="bao3">
 								<input type="radio"  class="cart_product_hot" name="hot" value="{{$data2->value}}">{{$data2->value}}
-							    </div>
+								
+								
+							  </div>
 								@endforeach
 							   </div>
 							</li>
+							
 							<li>
 								<p><span>Số lượng</span></p>
 								<div class="sl">
@@ -145,7 +148,7 @@
 									  
 											<input style="width:100%;margin-left:0" class="comment_name" type="text" placeholder="Tên bình luận"/>
 										<textarea name="comment" class="comment_content" placeholder="Nội dung"></textarea>
-										<b>Đáng giá sao: </b> <img src="images/product-details/rating.png" alt="" />
+										
 										<button type="button" class="btn btn-default pull-right send-comment">
 											Gởi bình luận
 										</button>

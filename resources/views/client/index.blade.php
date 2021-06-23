@@ -80,9 +80,10 @@
 											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
 												<form>
 													@csrf
-													<fieldset> 
-													    
-														<input type="button" data-toggle="modal" data-target="#xemnhanh"  value="Xem nhanh" class="btn btn-default xemnhanh" data-id_soluong="{{$p->soluong}}" data-id_product="{{$p->product_id}}">
+													<fieldset>
+													<input type="hidden" value="{{$p->product_id}}" class="cart_product_id_{{$p->product_id}}"> 
+													   
+														<input  type="button" data-toggle="modal" value="xem nhanh" data-target="#xemnhanh"   class="btn btn-default xemnhanh" data-id_soluong="{{$p->soluong}}" data-id_product="{{$p->product_id}}">
 
 													</fieldset>
 												</form>
@@ -332,8 +333,6 @@
 							    </div>
 								@endforeach
 							   </div>
-							   <!-- <span id="product_soluong"></span> -->
-                                                            
 														    <div style="margin-bottom: 10px" id="product_quickview_button"></div>
                                                             <div id="beforesend_quickview"></div>
                                                         </div>

@@ -163,7 +163,9 @@
                 @endif
             </td>
             <td>{{$details->product_size}}</td>
+           
             <td>{{number_format($details->product_feeship ,0,',','.')}}đ</td>
+          
             <td><input type="number" min="1" {{$order_status==2 ? 'disabled' : ''}} class="order_qty_{{$details->product_id}}" value="{{$details->product_sales_quantity}}" name="product_sales_quantity">
 
               <input type="hidden" name="order_qty_storage" class="order_qty_storage_{{$details->product_id}}" value="{{$details->product->product_quantity}}">
@@ -190,17 +192,32 @@
                   @php
                   $total_after_coupon = ($total*$coupon_number)/100;
                   echo 'Tổng giảm :'.number_format($total_after_coupon,0,',','.').'</br>';
+                  
+
+
+
+                  echo 'tai:$subtotal';
                   $total_coupon = $total + $total_after_coupon - $details->product_feeship;
+                 
                   @endphp
               @else 
                   @php
                   echo 'Tổng giảm :'.number_format($coupon_number,0,',','.').'k'.'</br>';
-                  $total_coupon = $total + $coupon_number - $details->product_feeship;
+                  if($subtotal > 200000){
+                  $total_coupon = $total + $coupon_number ;
+                  }else{
+                  $total_coupon=$total+$coupon_number- $details->product_feeship;
+                  }
+                 
 
                   @endphp
               @endif
+              @if($total_coupon > 200000)
+              Phí ship : 0đ (đơn hàng trên 200.000 đ);
+              @else
+              Phí ship : {{number_format($details->product_feeship,0,',','.')}}đ
+              @endif</br> 
 
-              Phí ship : {{number_format($details->product_feeship,0,',','.')}}đ</br> 
              Thanh toán: {{number_format($total_coupon,0,',','.')}}đ 
             </td>
           </tr>

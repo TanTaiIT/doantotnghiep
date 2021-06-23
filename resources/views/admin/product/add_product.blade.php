@@ -4,7 +4,7 @@
 	@csrf
   <div class="form-group">
     <label for="name">Tên sản phẩm</label>
-    <input type="text" class="form-control" name="ten" placeholder="Nhập tên sản phẩm">
+    <input type="text" data-validation="length" data-validation-length="min10" data-validation-error-msg="Làm ơn điền ít nhất 10 ký tự" class="form-control" name="ten" placeholder="Nhập tên sản phẩm">
   </div>
   <!-- <div class="form-group">
     <label for="categoryid">Loại sản phẩm</label>
@@ -33,12 +33,16 @@
     <input type="text" class="form-control" name="mota"  placeholder="Mô tả">
   </div>
   <div class="form-group">
-    <label for="categoryid">Giá</label>
-    <input type="text" class="form-control" name="gia"  placeholder="Nhập giá">
+    <label for="categoryid">Giá bán</label>
+    <input type="text" data-validation="length" data-validation-length="min5" data-validation-error-msg="Làm ơn điền số tiền" class="form-control " name="gia"  placeholder="Nhập giá">
+  </div>
+  <div class="form-group">
+    <label for="categoryid">Giá gốc</label>
+    <input type="text" data-validation="length" data-validation-length="min5" data-validation-error-msg="Làm ơn điền số tiền" class="form-control " name="gia_goc"  placeholder="Nhập giá">
   </div>
   <div class="form-group">
     <label for="categoryid">Giá khuyễn mãi</label>
-    <input type="text" class="form-control" name="gia_km"  placeholder="Nhập giá khuyến mãi">
+    <input type="text" data-validation="length" data-validation-length="min5" data-validation-error-msg="Làm ơn điền số tiền" class="form-control " name="gia_km"  placeholder="Nhập giá khuyến mãi">
   </div>
   <div class="form-group">
     <label for="images">Hình ảnh</label>
@@ -56,12 +60,18 @@
     <label for="categoryid">Số lượng</label>
     <input type="text" class="form-control" name="soluong"  placeholder="Nhập số lượng">
   </div>
-<div class="form-group">
+<!-- <div class="form-group">
   <label>Kích thước</label>
   @foreach($attr1 as $size)
   <input type="checkbox" value="{{$size->attr_id}}" name="attr_id[]">{{$size->value}}
   @endforeach
 </div>
+<div class="form-group">
+  <label for="Loại thức uống"></label>
+  @foreach($attr as $hot)
+  <input type="checkbox" value="{{$hot->attr_id}}" name="attr_id[]">{{$hot->value}}
+  @endforeach
+</div> -->
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 @stop

@@ -28,7 +28,7 @@
 			</h3>
 			<!-- //tittle heading -->
 			<div class="checkout-right">
-				<h4 class="mb-sm-4 mb-3">giở hàng của bạn:
+				<h4 class="mb-sm-4 mb-3">giỏ hàng của bạn:
 					<span>{{count(session('cart'))}} sản phẩm</span>
 				</h4>
                 <?php
@@ -48,6 +48,7 @@
 								<th>Giá</th>
 								<th>Size</th>
 								<th>Loại</th>
+								
 								<th>Điều chỉnh</th>
 							</tr>
 						</thead>
@@ -89,7 +90,9 @@
 
 								<td class="invert">{{$details['size']}}</td>
 								<td class="invert">{{$details['hot']}}</td>
+								
 								<td class="actions" data-th="">
+
 		                        <button class="btn btn-primary btn update-cart" data-id="{{ $id }}"><i class="fas fa-sync-alt"></i></button>
 		                        
 		                        <button class="btn btn-danger btn remove-from-cart" data-id="{{ $id }}"><i class="fas fa-trash"></i></button>

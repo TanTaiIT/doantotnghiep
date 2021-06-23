@@ -37,7 +37,7 @@
             </li>
             <li class="line"></li>
             <li>
-                <a class="transition" href="" title=""><h2>giới thiệu</h2></a>
+                <a class="transition" href="{{Route('gioithieu')}}" title="Gioi thieu"><h2>giới thiệu</h2></a>
                 
             </li>
             <li class="line"></li>

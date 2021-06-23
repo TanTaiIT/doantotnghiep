@@ -24,7 +24,47 @@
         });
 
     </script>
-    
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script>
+        var usd=document.getElementById('vnd_to_usd').value;
+  paypal.Button.render({
+    // Configure environment
+    env: 'sandbox',
+    client: {
+      sandbox: 'Ab8KqcPUUPbWQ56VrEdNTx6lG9LBFIbGluG_YbAZyAwwCyR0jN0mxEgdyOYPPz2Hot-BCCh31HvpxpJu',
+      production: 'demo_production_client_id'
+    },
+    // Customize button (optional)
+    locale: 'en_US',
+    style: {
+      size: 'small',
+      color: 'gold',
+      shape: 'pill',
+    },
+
+    // Enable Pay Now checkout flow (optional)
+    commit: true,
+
+    // Set up a payment
+    payment: function(data, actions) {
+      return actions.payment.create({
+        transactions: [{
+          amount: {
+            total: `${usd}`,
+            currency: 'USD'
+          }
+        }]
+      });
+    },
+    // Execute the payment
+    onAuthorize: function(data, actions) {
+      return actions.payment.execute().then(function() {
+        // Show a confirmation message to the buyer
+        window.alert('Thank you for your purchase!');
+      });
+    }
+  }, '#paypal-button');
+</script>
       <script type="text/javascript">
         $(document).ready(function(){
             load_comment();
@@ -68,6 +108,8 @@
         $('.xemnhanh').click(function(){
             var product_id = $(this).data('id_product');
             var _token = $('input[name="_token"]').val();
+            var cart_product_id = $('.cart_product_id_' + product_id).val();
+           
             $.ajax({
             url:"{{url('/quickview')}}",
             method:"POST",
@@ -133,7 +175,9 @@
                 var hot=$('input[name=hot]:checked').val();
                 var soluong=$('.cart_product_sl').val();
                 var _token = $('input[name="_token"]').val();
+                var top=$('.cart_product_top:checked').map(function() {return this.value;}).get().join(',');
                 var sl=$('.cart_soluong').val();
+
                 if(parseInt(soluong) > parseInt(sl)){
                     toastr.warning("số lượng bạn đặt lớn hơn số sản phẩm mà chúng tôi có, làm ơn đặt số lượng nhỏ hơn" + " "+ sl);
                 }else{
@@ -141,7 +185,7 @@
                     $.ajax({
                         url: '{{url('/cart')}}',
                         method: 'POST',
-                        data:{id:id,_token:_token,size:size,hot:hot,soluong:soluong},
+                        data:{id:id,_token:_token,size:size,hot:hot,soluong:soluong,top:top},
                         beforeSend: function(){
                             $("#beforesend_quickview").html("<img width='30px' height='30px'src='../../web/images/Spinner-3.gif'>");
                         },
@@ -171,11 +215,12 @@
                 var hot=$('input[name=hot]:checked').val();
                 var soluong=$('.cart_product_sl').val();
                 var _token = $('input[name="_token"]').val();
+                var top=$('.cart_product_top:checked').map(function() {return this.value;}).get().join(',');
                 if($("input:radio[name='size']").is(":checked") && $("input:radio[name='hot']").is(":checked")) {
                     $.ajax({
                         url: '{{url('/cart')}}',
                         method: 'POST',
-                        data:{id:id,_token:_token,size:size,hot:hot,soluong:soluong},
+                        data:{id:id,_token:_token,size:size,hot:hot,soluong:soluong,top:top},
                             success:function(error){
                                 // toastr.warning('sản phẩm bạn đặt quá lớn, vui lòng đặt với số lượng nhỏ hơn');
                                 window.location.reload();

@@ -12,6 +12,7 @@ use App\Models\pro_img;
 use App\Models\product_attr;
 use App\Models\attribute;
 use App\Models\OrderDetail;
+// use App\Models\thuoctinh;
 use Intervention\Image\Facades\Image;
 use DB;
 class ProductController extends Controller
@@ -39,7 +40,7 @@ class ProductController extends Controller
     public function addpro(){
             $cate=category::all();
             $brand=brand::all();
-            $attr=attribute::where('name','color')->get();
+            $attr=attribute::where('name','hot')->get();
             $attr1=attribute::where('name','size')->get();
     	return view('admin/product/add_product',compact('cate','brand','attr','attr1'));
     }
@@ -50,6 +51,7 @@ class ProductController extends Controller
     	$product->brand_id=$req->thuonghieu;
     	$product->product_desc=$req->mota;
     	$product->product_price=$req->gia;
+        $product->price_cost=$req->gia_goc;
         $product->gia_km=$req->gia_km;
     	$product->product_status=$req->status;
         $product->soluong=$req->soluong;
@@ -80,6 +82,7 @@ class ProductController extends Controller
     	$pro['brand_id']=$req->thuonghieu;
     	$pro['product_desc']=$req->mota;
     	$pro['product_price']=$req->gia;
+        $pro['price_cost']=$req->gia_goc;
         $pro['gia_km']=$req->gia_km;
     	$pro['product_status']=$req->status;
         $pro['soluong']=$req->soluong;
@@ -147,14 +150,6 @@ class ProductController extends Controller
 
         $product_id = $request->product_id;
         $product = Product::find($product_id);
-
-        // $gallery = Gallery::where('product_id',$product_id)->get();
-
-        // $output['product_gallery'] = '';
-        
-        // foreach($gallery as $key => $gal){
-        //     $output['product_gallery'].= '<p><img width="100%" src="public/uploads/gallery/'.$gal->gallery_image.'"></p>';
-        // }
         $com='';
         $output['product_name'] = $product->product_name;
         $output['product_id'] = $product->product_id;
@@ -164,6 +159,7 @@ class ProductController extends Controller
         $output['product_soluong']=$product->soluong;
         $output['product_button'] = '<input type="button" value="THÊM VÀO GIỎ HÀNG" class="btn btn-primary btn-sm add-to-cart-quickview" id="buy_quickview" data-id_product="'.$product->product_id.'"  name="add-to-cart">';
         echo json_encode($output);
+
        
 
     }

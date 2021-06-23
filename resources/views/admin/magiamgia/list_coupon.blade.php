@@ -5,35 +5,17 @@
     <div class="panel-heading">
       Liệt kê mã giảm giá
     </div>
-   <!--  <div class="row w3-res-tb">
-      <div class="col-sm-5 m-b-xs">
-        <select class="input-sm form-control w-sm inline v-middle">
-          <option value="0">Bulk action</option>
-          <option value="1">Delete selected</option>
-          <option value="2">Bulk edit</option>
-          <option value="3">Export</option>
-        </select>
-        <button class="btn btn-sm btn-default">Apply</button>                
-      </div>
-      <div class="col-sm-4">
-      </div>
-      <div class="col-sm-3">
-        <div class="input-group">
-          <input type="text" class="input-sm form-control" placeholder="Search">
-          <span class="input-group-btn">
-            <button class="btn btn-sm btn-default" type="button">Go!</button>
-          </span>
-        </div>
-      </div>
-    </div> -->
+    
     <div class="table-responsive">
+    
                       <?php
                             $message = Session::get('message');
                             if($message){
                                 echo '<span class="text-alert">'.$message.'</span>';
                                 Session::put('message',null);
                             }
-                            ?>
+                       ?>
+     
       <table class="table table-striped b-t b-light">
         <thead>
           <tr>
@@ -44,9 +26,11 @@
             <th>Số lượng giảm giá</th>
             <th>Điều kiện giảm giá</th>
             <th>Số giảm</th>
-          
-            
+            <th>ngày bắt đầu</th>
+            <th>Ngày kết thúc</th>
+            <th>Quản lý</th>
            
+            <th>Gửi mã</th>
           </tr>
         </thead>
         <tbody>
@@ -70,6 +54,8 @@
               ?>
             </span>
           </td>
+            <td>{{ $cou->start_day }}</td>
+            <td>{{ $cou->end_day }}</td>
              <td><span class="text-ellipsis">
               <?php
                if($cou->coupon_condition==1){
@@ -90,6 +76,25 @@
                 <i class="fa fa-times text-danger text"></i>
               </a>
             </td>
+            <td>
+              <p><a href="{{URL::to('/send-coupon-vip',[
+              
+              'condition'=>$cou->coupon_condition,
+              'number'=>$cou->coupon_number,
+              'code'=>$cou->coupon_code,
+              'time'=>$cou->coupon_time
+
+              ])}}" class="btn btn-primary" style="margin:5px 0;">Gửi mã giảm giá cho khách vip</a></p>
+              
+              <p><a href="{{URL::to('/send-coupon',[
+                
+              'condition'=>$cou->coupon_condition,
+              'number'=>$cou->coupon_number,
+              'code'=>$cou->coupon_code,
+              'time'=>$cou->coupon_time
+              ])}}" class="btn btn-default">Gửi mã giảm giá khách thường</a></p>
+            </td>
+
           </tr>
           @endforeach
         </tbody>

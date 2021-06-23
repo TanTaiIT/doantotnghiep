@@ -60,6 +60,7 @@
             
             <span>Loại:{{$details['hot']}}</span>
 
+            
             </div>
             <div class="bu" style="margin-left:20px">
                 <button title="xóa khỏi giỏ hàng" style="font-size: 10px;" class="btn btn-danger btn remove-from-cart" data-id="{{ $id }}"><i class="fas fa-trash"></i></button> 
