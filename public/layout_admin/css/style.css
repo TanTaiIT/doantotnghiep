@@ -68,6 +68,12 @@ body a{
   color: #fff;
   height: 32px;
 }
+.cot_12{
+  width: 100%;
+}
+.row .giua{
+  text-align: center;
+}
 a.cach {
     margin: 0 10px;
     width: 33.33%;
@@ -84,6 +90,7 @@ thead tr th{
   text-transform: uppercase;
  
 }
+
 .pos {
     position: absolute;
     top: 33px;

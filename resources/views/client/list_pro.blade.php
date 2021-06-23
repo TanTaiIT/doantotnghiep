@@ -4,8 +4,9 @@
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				Danh sách sản phẩm</h3>
-				
+
+				Danh sách sản phẩm</h3>	
+
 			<div class="row">
 				<!-- product left -->
 				<div class="agileinfo-ads-display col-lg-9">
@@ -15,7 +16,7 @@
 							
 							<div class="row">
 								@foreach($product_list as $s1)
-								<div class="col-md-4 product-men mt-5">
+								<div class="col-md-4 product-men mt-5" id="home">
 									<div class="men-pro-item simpleCart_shelfItem">
 										<div class="men-thumb-item text-center">
 											
@@ -96,6 +97,7 @@
 								
 								@endforeach
 							</div>
+						
 
 
 
@@ -110,180 +112,192 @@
 				<!-- //product left -->
 				<!-- product right -->
 				<div class="col-lg-3 mt-lg-0 mt-4 p-lg-0">
+
 					<div class="side-bar p-sm-4 p-3">
+						<div class="sapxep">
+					<form class="tree-most" id="form_order" method="get">
+					<select name="orderby" class="boot orderby">
+						<option value="md" selected="selected" disabled="true">--------------sắp xếp--------------</option>
+						<option value="desc">Sản phẩm mới nhất</option>
+						<option value="asc">sản phẩm cũ nhất</option>
+					    <option value="primax">sắp xếp theo giá giảm dần</option>
+					    <option value="primin">sắp xếp theo giá tăng dần</option>
+					</select>
+				    </form>
+				    </div>
 						<div class="search-hotel border-bottom py-2">
-							<h3 class="agileits-sear-head mb-3">Brand</h3>
-							<form action="#" method="post">
-								<input type="search" placeholder="Search Brand..." name="search" required="">
+							<h3 class="agileits-sear-head mb-3">Tìm kiếm loại trà sữa bạn yêu thích..</h3>
+							<form method="get" action="">
+								{{csrf_field()}}
+								<input type="search" placeholder="Product name..." name="keyword" required="">
 								<input type="submit" value=" ">
 							</form>
-							<div class="left-side py-2">
-								<ul>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">Samsung</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">Red Mi</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">Apple</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">Nexus</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">Motorola</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">Micromax</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">Lenovo</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">Oppo</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">Sony</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">LG</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">One Plus</span>
-									</li>
-								</ul>
-							</div>
 						</div>
-						<!-- ram -->
-						<div class="left-side border-bottom py-2">
-							<h3 class="agileits-sear-head mb-3">Ram</h3>
-							<ul>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Less than 512 MB</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">512 MB - 1 GB</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">1 GB</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">2 GB</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">3 GB</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">5 GB</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">6 GB</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">6 GB & Above</span>
-								</li>
-							</ul>
-						</div>
-						<!-- //ram -->
 						<!-- price -->
 						<div class="range border-bottom py-2">
-							<h3 class="agileits-sear-head mb-3">Price</h3>
+							<h3 class="agileits-sear-head mb-3">Giá</h3>
 							<div class="w3l-range">
 								<ul>
 									<li>
-										<a href="#">Under $1,000</a>
+										<a href="?price=1">dưới 15.000đ</a>
 									</li>
 									<li class="my-1">
-										<a href="#">$1,000 - $5,000</a>
+										<a href="?price=2">10.000đ - 15.000đ</a>
 									</li>
 									<li>
-										<a href="#">$5,000 - $10,000</a>
+										<a href="?price=3">15.000đ - 20.000đ</a>
 									</li>
 									<li class="my-1">
-										<a href="#">$10,000 - $20,000</a>
-									</li>
-									<li>
-										<a href="#">$20,000 $30,000</a>
-									</li>
-									<li class="mt-1">
-										<a href="#">Over $30,000</a>
+										<a href="?price=4">20.000đ - 30.000đ</a>
 									</li>
 								</ul>
 							</div>
 						</div>
-						<!-- //price -->
-						<!-- discounts -->
-						<div class="left-side border-bottom py-2">
-							<h3 class="agileits-sear-head mb-3">Discount</h3>
+						<div class="customer-rev border-bottom left-side py-2">
+							<h3 class="agileits-sear-head mb-3">Đánh giá của khách hàng</h3>
 							<ul>
 								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">5% or More</span>
+									<a href="{{request()->fullUrlWithQuery(['review' => 5])}}">
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<span>5.0</span>
+									</a>
 								</li>
 								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">10% or More</span>
+									<a href="{{request()->fullUrlWithQuery(['review' => 4])}}">
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<span>4.0</span>
+									</a>
+								</li>
+								<!-- <li>
+									<a href="#">
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star-half"></i>
+										<span>3.5</span>
+									</a>
+								</li> -->
+
+								<li>
+									<a href="{{request()->fullUrlWithQuery(['review' => 3])}}">
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<span>3.0</span>
+									</a>
 								</li>
 								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">20% or More</span>
+									<a href="{{request()->fullUrlWithQuery(['review' => 2])}}">
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<!-- <i class="fas fa-star-half"></i> -->
+										<span>2.0</span>
+									</a>
 								</li>
 								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">30% or More</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">50% or More</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">60% or More</span>
+									<a href="{{request()->fullUrlWithQuery(['review' =>1 ])}}">
+										<i class="fas fa-star"></i>
+										<!-- <i class="fas fa-star"></i> -->
+										<!-- <i class="fas fa-star-half"></i> -->
+										<span>1.0</span>
+									</a>
 								</li>
 							</ul>
 						</div>
-						<!-- //discounts -->
-						<!-- offers -->
-						<div class="left-side border-bottom py-2">
-							<h3 class="agileits-sear-head mb-3">Offers</h3>
+
+						<div class="f-grid py-2">
+							<h3 class="agileits-sear-head mb-3">sản phẩm bán chạy</h3>
+							<div class="box-scroll">
+								<div class="scroll">
+									<div class="row">
+										@foreach($bestsell as $b)
+										<div class="col-lg-3 col-sm-2 col-3 left-mar">
+											<a href="{{route('cli_detail',$b->product_id)}}">
+											<img src="{!! asset('images/'.$b->product_image)!!}" alt="" class="img-fluid">
+										    </a>
+										</div>
+										<div class="col-lg-9 col-sm-10 col-9 w3_mvd">
+											<a href="{{route('cli_detail',$b->product_id)}}">{{$b->product_name}}</a>
+											<a href="{{route('cli_detail',$b->product_id)}}" class="price-mar mt-2">{{number_format($b->product_price)}} đ</a>
+										</div>
+										@endforeach
+									</div>
+									
+								</div>
+							</div>
+						</div>
+
+
+						
+						<!-- //reviews -->
+						<!-- electronics -->
+						<!-- <div class="left-side border-bottom py-2">
+							<h3 class="agileits-sear-head mb-3">Electronics</h3>
 							<ul>
 								<li>
 									<input type="checkbox" class="checked">
-									<span class="span">Exchange Offer</span>
+									<span class="span">Accessories</span>
 								</li>
 								<li>
 									<input type="checkbox" class="checked">
-									<span class="span">No Cost EMI</span>
+									<span class="span">Cameras & Photography</span>
 								</li>
 								<li>
 									<input type="checkbox" class="checked">
-									<span class="span">Special Price</span>
+									<span class="span">Car & Vehicle Electronics</span>
+								</li>
+								<li>
+									<input type="checkbox" class="checked">
+									<span class="span">Computers & Accessories</span>
+								</li>
+								<li>
+									<input type="checkbox" class="checked">
+									<span class="span">GPS & Accessories</span>
+								</li>
+								<li>
+									<input type="checkbox" class="checked">
+									<span class="span">Headphones</span>
+								</li>
+								<li>
+									<input type="checkbox" class="checked">
+									<span class="span">Home Audio</span>
+								</li>
+								<li>
+									<input type="checkbox" class="checked">
+									<span class="span">Home Theater, TV & Video</span>
+								</li>
+								<li>
+									<input type="checkbox" class="checked">
+									<span class="span">Mobiles & Accessories</span>
+								</li>
+								<li>
+									<input type="checkbox" class="checked">
+									<span class="span">Portable Media Players</span>
+								</li>
+								<li>
+									<input type="checkbox" class="checked">
+									<span class="span">Tablets</span>
+								</li>
+								<li>
+									<input type="checkbox" class="checked">
+									<span class="span">Telephones & Accessories</span>
+								</li>
+								<li>
+									<input type="checkbox" class="checked">
+									<span class="span">Wearable Technology</span>
 								</li>
 							</ul>
-						</div>
-						<!-- //offers -->
+						</div> -->
+						<!-- //electronics -->
 						<!-- delivery -->
-						<div class="left-side border-bottom py-2">
+						<?php /*<div class="left-side border-bottom py-2">
 							<h3 class="agileits-sear-head mb-3">Cash On Delivery</h3>
 							<ul>
 								<li>
@@ -306,17 +320,11 @@
 									<span class="span">Last 90 days</span>
 								</li>
 							</ul>
-						</div>
-						<div class="left-side py-2">
-							<h3 class="agileits-sear-head mb-3">Availability</h3>
-							<ul>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Exclude Out of Stock</span>
-								</li>
-							</ul>
-						</div>
+						</div> */ ?>
 						<!-- //arrivals -->
+						<!-- best seller -->
+						
+						<!-- //best seller -->
 					</div>
 					<!-- //product right -->
 				</div>

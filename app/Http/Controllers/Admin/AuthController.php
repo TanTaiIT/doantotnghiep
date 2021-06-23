@@ -41,7 +41,7 @@ class AuthController extends Controller
         ]);
         // $data=$request->all();
         if(Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
-            return redirect()->route('pro_index');
+            return redirect()->route('trangchu');
         }else{
             return redirect()->back();
         }

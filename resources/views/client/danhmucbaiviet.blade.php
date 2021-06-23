@@ -7,7 +7,9 @@
                 BÀI VIẾT
                </h3>
             <div class="row">
-                <div class="agileinfo-ads-display col-lg-9">
+
+                <div class="agileinfo-ads-display col-lg-9 nen">
+
                     <div class="wrapper">
                         <div class="">
                             <div class="baophi">

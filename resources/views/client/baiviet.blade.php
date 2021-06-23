@@ -2,7 +2,7 @@
 @extends('client/layout_cli')
 @section('content')
     <div class="ads-grid py-sm-5 py-4">
-        <div class="container py-xl-4 py-lg-2">
+        <div class="container py-xl-4 py-lg-2 trang">
             <!-- tittle heading -->
             <h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
                 {{$meta_title}}

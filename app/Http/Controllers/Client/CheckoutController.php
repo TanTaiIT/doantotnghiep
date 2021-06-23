@@ -20,8 +20,9 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use PDF;
 use Mail;
-use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
+
 
 class CheckoutController extends Controller
 {
@@ -243,7 +244,10 @@ class CheckoutController extends Controller
          $order->order_code = $checkout_code;
 
          date_default_timezone_set('Asia/Ho_Chi_Minh');
-         $order->created_at = now();
+         $today=Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+         $order_date=Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+         $order->order_date=$order_date;
+         $order->created_at = $today;
          $order->save();
 
          if(Session::get('cart')==true){
@@ -261,7 +265,7 @@ class CheckoutController extends Controller
             }
          }
          Session::forget('coupon');
-         Session::forget('fee');
+         // Session::forget('fee');
          Session::forget('cart');
          // return view('client/thankyou');
     }
@@ -339,6 +343,8 @@ class CheckoutController extends Controller
     	$password=md5($req->password);
     	$result=DB::table('tbl_customers')->where('customer_email',$email)->where('customer_password',$password)->first();
     	if($result){
+            Session::put('fee',15000);
+            Session::save();
     		Session::put('customer_id',$result->customer_id);
     		Session::put('customer_name',$result->customer_name);
     		Session::flash('message','thanh cong');
@@ -501,23 +507,23 @@ class CheckoutController extends Controller
         $city = city::orderby('matp','ASC')->get();
         return view('client/cart',compact('cate','brand','com','url_canonical','meta_desc','meta_title','share_images','cate_post1'))->with('city',$city);
     }
-    public function calculate_fee(Request $request){
-        $data = $request->all();
-        if($data['matp']){
-            $feeship = Feeship::where('fee_matp',$data['matp'])->where('fee_maqh',$data['maqh'])->where('fee_xaid',$data['xaid'])->get();
-            if($feeship){
-                $count_feeship = $feeship->count();
-                if($count_feeship>0){
-                     foreach($feeship as $key => $fee){
-                        Session::put('fee',$fee->fee_feeship);
-                        Session::save();
-                    }
-                }else{ 
-                    Session::put('fee',25000);
-                    Session::save();
-                }
-            }
+    // public function calculate_fee(Request $request){
+    //     $data = $request->all();
+    //     if($data['matp']){
+    //         $feeship = Feeship::where('fee_matp',$data['matp'])->where('fee_maqh',$data['maqh'])->where('fee_xaid',$data['xaid'])->get();
+    //         if($feeship){
+    //             $count_feeship = $feeship->count();
+    //             if($count_feeship>0){
+    //                  foreach($feeship as $key => $fee){
+    //                     Session::put('fee',$fee->fee_feeship);
+    //                     Session::save();
+    //                 }
+    //             }else{ 
+    //                 Session::put('fee',25000);
+    //                 Session::save();
+    //             }
+    //         }
            
-        }
-    }
+    //     }
+    // }
 }

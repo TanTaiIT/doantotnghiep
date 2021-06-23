@@ -35,7 +35,9 @@
       <span class="contents"><span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span> sản phẩm</span>
     </a>
     <div class="cart">
-      <img class="img-thumbnail left1" width="60px" height="60px" src="../web/images/cart.jpg" alt="">
+
+      <img class=" left1" width="70px" height="60px" src="../web/images/so.jpg" alt="">
+
 
       <div class="cart-items">
         <ul>
@@ -60,6 +62,7 @@
             
             <span>Loại:{{$details['hot']}}</span>
 
+            
             </div>
             <div class="bu" style="margin-left:20px">
                 <button title="xóa khỏi giỏ hàng" style="font-size: 10px;" class="btn btn-danger btn remove-from-cart" data-id="{{ $id }}"><i class="fas fa-trash"></i></button> 

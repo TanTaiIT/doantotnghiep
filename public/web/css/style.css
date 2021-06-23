@@ -534,12 +534,19 @@ nav div:nth-child(2){
 .header-right ul{
     text-align: center;
 }
+button.btn.btn-default.pull-right.send-comment {
+    background: teal;
+}
+input.soluong.cart_product_sl {
+    width: 50px;
+}
 .bao{
     max-width: 1200px;
     margin: auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: -65px;
+    padding-bottom: 100px;
 }
 .form-vanchuyen{
     margin-top: 100px;
@@ -561,8 +568,8 @@ input.btn.btn-default.xemnhanh:hover{
 .giam2{
     margin-right:190px;
 }
-.phivanchuyen{
-    margin-right:150px;
+.coup{
+    width: 176px;
 }
 .nutgiamgia{
     margin-left:180px;
@@ -573,8 +580,9 @@ input.btn.btn-default.xemnhanh:hover{
     font-size: 13px;
     letter-spacing: 1px;
 }
-.thanh_tien span:nth-child(2){
-    margin-left: 183px;
+.giamgia {
+    display: flex;
+    justify-content: space-between;
 }
 .header-right ul li a {
     text-decoration: none;
@@ -610,13 +618,11 @@ text-transform: uppercase;
     
 margin: 17px 124px;
 }
-.tongtien{
-    
-max-width: 1200px;
-    
-margin: auto;
-    
-text-align: right;
+.tongtien {
+    max-width: 1200px;
+    margin: auto;
+    text-align: right;
+    padding-bottom: 50px;
 }
 /*-- modal login --*/
 .img-con{
@@ -632,11 +638,15 @@ text-align: right;
     font-size: 30px;
     color: #0879c9;
 }
-.quantity{
+.quantity {
     background: grey;
     width: 40px;
+    width: 50px;
 }
-
+.phi {
+    display: flex;
+    justify-content: space-between;
+}
 .modal-content {
     border: 10px solid rgb(85 203 90);
 }
@@ -644,10 +654,18 @@ text-align: right;
     border: 1px solid #80808061;
     /* padding: 21px 17px; */
     margin-top: 100px;
-    width: 33.33%;
+    width: 49%;
 }
-.tinhtien{
-    margin-top:86px;
+.thanh_tien{
+    display: flex;
+    justify-content: space-between;
+}
+div#paypal-button {
+    margin-top: 10px;
+}
+.tinhtien {
+    margin-top: 86px;
+    padding-bottom: 30px;
 }
 .check_out{
     background: #f1a2ff;
@@ -790,7 +808,7 @@ input[type="submit"] {
     padding: 26px 0 21px;
 }
 .bao-bang{
-    width: 33%;
+    width: 49%;
     margin-top: 101px;
     border: 1px solid #80808047;
 }
@@ -1174,16 +1192,19 @@ input.vanchuyen{
     text-transform: uppercase;
     color: white;
 }
-.giam{
-        background: cornflowerblue;
-        text-transform: uppercase;
-        color: white;
-        padding: 11px 21px;
-        margin-top: 14px;
+.giam {
+    background: #e85050;
+    text-transform: uppercase;
+    color: white;
+    font-size: 11px;
 }
-.giamgiatien{
+.nhapma{
+    display: flex;
+    justify-content: space-between;
+}
+/*.giamgiatien{
     text-align: center;
-}
+}*/
 #PPminicarts .minicarts-submit img {
     vertical-align: middle;
     padding: 4px 0 0 2px;
@@ -1215,10 +1236,10 @@ input.vanchuyen{
     color:white;
     text-transform: uppercase;
 }
-span.tongtien1{
-    margin-right:219px;
+.baotong {
+    display: flex;
+    justify-content: space-between;
 }
-
 .bang1 .timetable_sub th{
     background: #db58b3;
     color: #fff;

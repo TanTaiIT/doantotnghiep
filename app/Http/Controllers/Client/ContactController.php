@@ -6,13 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CatePost;
 use DB;
+use App\Models\category;
+use App\Models\slider;
 use App\Models\contact;
 
 class ContactController extends Controller
 {
     public function lien_he(Request $request){
           //category post
-        $category_post = CatePost::orderBy('cate_post_id','DESC')->get();
+        $cate_post1 = CatePost::orderBy('cate_post_id','DESC')->get();
+        $com='';
+        $cate=category::orderby('category_id','desc')->get();
 
         //slide
         $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
@@ -22,19 +26,17 @@ class ContactController extends Controller
         $meta_title = "Liên hệ chúng tôi";
         $url_canonical = $request->url();
         //--seo
-        
-        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get(); 
-        $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get(); 
-
         $contact = Contact::where('info_id',1)->get();
 
-        return view('pages.lienhe.contact')->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider)->with('category_post',$category_post)->with('contact',$contact);
+
+        return view('client.contact')->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider)->with('cate_post1',$cate_post1)->with('contact',$contact)->with('com',$com)->with('cate',$cate);
+
 
     }
     public function information(){
         $contact = contact::where('info_id',1)->get();
+        return view('admin.infomation.add_infomation',compact('contact'));
 
-        return view('admin.infomation.add_infomation')->with(compact('contact'));
     }
     public function update_info(Request $request,$info_id){
         $data = $request->all();
@@ -43,7 +45,7 @@ class ContactController extends Controller
         $contact->info_map = $data['info_map'];
         $contact->info_fanpage = $data['info_fanpage']; 
         $get_image = $request->file('info_image');
-        $path = 'public/uploads/contact/';
+        $path = 'uploads/contact/';
         if($get_image){
             unlink($path.$contact->info_logo);
             $get_name_image = $get_image->getClientOriginalName();
@@ -63,7 +65,7 @@ class ContactController extends Controller
         $contact->info_map = $data['info_map'];
         $contact->info_fanpage = $data['info_fanpage']; 
         $get_image = $request->file('info_image');
-        $path = 'public/uploads/contact/';
+        $path = 'uploads/contact/';
         if($get_image){
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.',$get_name_image));

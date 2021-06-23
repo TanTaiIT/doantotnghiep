@@ -39,6 +39,7 @@ class CartController extends Controller
                     "image"=>$product->product_image,
                     "size"=>$size,
                     "hot"=>$hot
+                   
                 ]
             ];
             
@@ -65,6 +66,7 @@ class CartController extends Controller
             "image"=>$product->product_image,
             "size"=>$size,
             "hot"=>$hot
+            
         ];
    
         session()->put('cart',$cart);

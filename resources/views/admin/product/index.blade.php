@@ -14,7 +14,8 @@
       <th scope="col" class="text-center">Loại sản phẩm</th>
       <th scope="col" class="text-center">Thương hiệu</th>
       <th scope="col" class="text-center">Mô tả</th>	
-      <th scope="col" class="text-center">Giá tiền</th>
+      <th scope="col" class="text-center">Giá bán</th>
+      <th scope="col" class="text-center">Giá gốc</th>
       <th scope="col" class="text-center">Giá khuyến mãi</th>
       <th scope="col" class="text-center">Hình ảnh</th>
       <th scope="col" class="text-center">Trạng thái</th>
@@ -32,8 +33,9 @@
      <td class="text-center">{{$p->category_id}}</td>
      <td class="text-center">{{$p->brand_id}}</td>
      <td class="text-center">{{$p->product_desc}}</td>
-     <td class="text-center">{{$p->product_price}}</td>
-     <td class="text-center">{{$p->gia_km}}</td>
+     <td class="text-center">{{number_format($p->product_price)}}đ</td>
+     <td class="text-center">{{($p->price_cost)}}đ</td>
+     <td class="text-center">{{number_format($p->gia_km)}}đ</td>
      <td class="text-center"><img src="{!! asset('images/'.$p->product_image)!!}" alt="" width="50px" height="50px"></td>
      <td class="text-center">
        <?php 

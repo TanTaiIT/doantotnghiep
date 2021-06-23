@@ -5,9 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\category;
+use App\Imports\Imports;
+use App\Exports\Export;
+use Excel;
 use Session;
 class CategoryController extends Controller
 {
+    public function trangchu(){
+        return view("admin.trangchu");
+    }
 	
     public function index(){
 		
@@ -57,4 +63,13 @@ class CategoryController extends Controller
     	}
     	return redirect()->route('cate_index');
     }
+
+    public function export_csv(){
+    return Excel::download(new Export , 'category.xlsx');
+    }
+    public function import_csv(Request $request){
+    $path = $request->file('file')->getRealPath();
+    Excel::import(new Imports, $path);
+    return back();
+}
 }

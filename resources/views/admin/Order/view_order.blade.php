@@ -1,6 +1,7 @@
 @extends('admin/layout_admin')
 @section('content')
-<div class="table-agile-info">
+<div class="baobang">
+<div class="table-agile-info left-table">
   
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -41,8 +42,15 @@
    
   </div>
 </div>
+
+
+
 <br>
-<div class="table-agile-info">
+
+
+
+
+<div class="table-agile-info right-table">
   
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -68,15 +76,11 @@
             <th>Email</th>
             <th>Ghi chú</th>
             <th>Hình thức thanh toán</th>
-          
-            
             <th style="width:30px;"></th>
           </tr>
         </thead>
         <tbody>
-        
           <tr>
-           
             <td>{{$shipping->shipping_name}}</td>
             <td>{{$shipping->shipping_address}}</td>
              <td>{{$shipping->shipping_phone}}</td>
@@ -94,7 +98,13 @@
    
   </div>
 </div>
-<br><br>
+
+
+</div>
+
+
+
+
 
 <div class="table-agile-info">
   
@@ -102,8 +112,8 @@
     <div class="panel-heading">
       Liệt kê chi tiết đơn hàng
     </div>
-   
-    <div class="table-responsive">
+   <div class="baochitiet">
+    <div class="table-responsive chitietdh">
                       <?php
                             $message = Session::get('message');
                             if($message){
@@ -111,13 +121,11 @@
                                 Session::put('message',null);
                             }
                             ?>
-      <table class="table table-striped b-t b-light">
-        <thead>
+      <table class="table table-striped ">
+        <thead style="background: #f5f5f5;">
           <tr>
             <th style="width:20px;">
-              <label class="i-checks m-b-none">
-                <input type="checkbox"><i></i>
-              </label>
+              STT
             </th>
             <th>Tên sản phẩm</th>
             <th>Số lượng sp trong kho</th>
@@ -155,7 +163,9 @@
                 @endif
             </td>
             <td>{{$details->product_size}}</td>
+           
             <td>{{number_format($details->product_feeship ,0,',','.')}}đ</td>
+          
             <td><input type="number" min="1" {{$order_status==2 ? 'disabled' : ''}} class="order_qty_{{$details->product_id}}" value="{{$details->product_sales_quantity}}" name="product_sales_quantity">
 
               <input type="hidden" name="order_qty_storage" class="order_qty_storage_{{$details->product_id}}" value="{{$details->product->product_quantity}}">
@@ -173,7 +183,7 @@
             <td>{{number_format($subtotal ,0,',','.')}}đ</td>
           </tr>
         @endforeach
-          <tr>
+          <tr style="text-align: right;">
             <td colspan="2">  
             @php 
                 $total_coupon = 0;
@@ -182,23 +192,39 @@
                   @php
                   $total_after_coupon = ($total*$coupon_number)/100;
                   echo 'Tổng giảm :'.number_format($total_after_coupon,0,',','.').'</br>';
+                  
+
+
+
+                  echo 'tai:$subtotal';
                   $total_coupon = $total + $total_after_coupon - $details->product_feeship;
+                 
                   @endphp
               @else 
                   @php
                   echo 'Tổng giảm :'.number_format($coupon_number,0,',','.').'k'.'</br>';
-                  $total_coupon = $total + $coupon_number - $details->product_feeship;
+                  if($subtotal > 200000){
+                  $total_coupon = $total + $coupon_number ;
+                  }else{
+                  $total_coupon=$total+$coupon_number- $details->product_feeship;
+                  }
+                 
 
                   @endphp
               @endif
+              @if($total_coupon > 200000)
+              Phí ship : 0đ (đơn hàng trên 200.000 đ);
+              @else
+              Phí ship : {{number_format($details->product_feeship,0,',','.')}}đ
+              @endif</br> 
 
-              Phí ship : {{number_format($details->product_feeship,0,',','.')}}đ</br> 
              Thanh toán: {{number_format($total_coupon,0,',','.')}}đ 
             </td>
           </tr>
         </tbody>
       </table>
       <a class="in" target="_blank" href="{{url('/print-order/'.$details->order_code)}}">In đơn hàng</a>
+    </div>
     </div>
    <td colspan="2">
               @foreach($getorder as $key => $or)

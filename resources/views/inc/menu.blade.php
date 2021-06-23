@@ -18,7 +18,7 @@
             <li><a class="transition " href="{{route('cli_index')}}" title=""><h2>Trang chủ</h2></a>
            </li>
             <li class="line"></li>
-            <li><a class="" href="" title=""><h2>Loại sản phẩm</h2></a>
+            <li><a class="" href="" title=""><h2>menu</h2></a>
             	 <ul>
             	 	@foreach($cate as $c)
                     <li><span></span><a href="{{route('list_pro',$c->category_id)}}">{{$c->category_name}}</a></li>
@@ -37,13 +37,13 @@
             </li>
             <li class="line"></li>
             <li>
-                <a class="transition" href="" title=""><h2>giới thiệu</h2></a>
+                <a class="transition" href="{{Route('gioithieu')}}" title="Gioi thieu"><h2>giới thiệu</h2></a>
                 
             </li>
             <li class="line"></li>
-            <li><a class="transition" href="" title=""><h2>sản phẩm</h2></a></li>
-            <li class="line"></li>
-            <li><a class="transition" href="" title=""><h2>liên hệ</h2></a></li>
+	            <!-- <li><a class="transition" href="" title=""><h2>sản phẩm</h2></a></li>
+	            <li class="line"></li> -->
+            <li><a class="transition" href="{{URL::to('/lien-he')}}" title=""><h2>liên hệ</h2></a></li>
             <li class="line"></li>
            <!--  <li><a class="transition" href="" title="Video"><h2>Video</h2></a></li>
             <li class="line"></li>
