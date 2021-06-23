@@ -90,29 +90,7 @@ thead tr th{
   text-transform: uppercase;
  
 }
-.chitietdh{
 
-}
-.baochitiet{
-  padding: 20px 20px;
-}
-.left-table{
-  width: 35%;
-}
-.right-table{
-  width: 60%;
-}
-.baobang{
-  display: flex;
-  margin-top: 50px;
-  justify-content: space-around;
-}
-.viet{
-
-}
-.pham{
-  
-}
 .pos {
     position: absolute;
     top: 33px;

@@ -129,6 +129,7 @@
 
                                                 </ul>
 
+
                     <div class="col-sm-12">
 								
 								<div style="text-align: center;background: #919191;width: 20%;color:white" class="active"><p>BÌNH LUẬN</p></div>

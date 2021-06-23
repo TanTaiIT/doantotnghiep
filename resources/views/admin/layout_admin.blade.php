@@ -89,7 +89,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <a href="{{route('pro_index')}}"><i class="fa fa-dashboard fa-fw nav_icon"></i>Bảng điều khiển</a>
                         </li>
                         <li>
-                            <a href="{{URL::to('/trangchu')}}"><i class="fa fa-dashboard fa-fw nav_icon"></i>Trang chủ</a>
+                           <a href="{{URL::to('/trangchu')}}"><i class="fa fa-dashboard fa-fw nav_icon"></i>Trang chủ</a>
                         </li>
                         <li>
                             <a href="{{URL::to('/introduce')}}">
@@ -103,6 +103,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <span>Thông tin website</span>
                             </a>
                         </li>
+
                         @hasrole(['admin'])
                         <li>
                             <a href="#"><i class="fa fa-laptop nav_icon"></i>Quản lý sản phẩm<span class="fa arrow"></span></a>

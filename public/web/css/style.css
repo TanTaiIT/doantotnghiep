@@ -128,18 +128,7 @@ body a {
 .product-men.mt-5.wid {
     width: 33.33%;
 }
-img.gioi{
-    width:100% ;
-}
-p.gioithieu_title{
-        text-align: center;
-    font-family: inherit;
-    font-size: 40px;
-    text-transform: uppercase;
-    color: tomato;
-    padding-bottom: 52px;
-    
-}
+
 h2.title{
     margin-top: 80px;
     margin-bottom: 80px;

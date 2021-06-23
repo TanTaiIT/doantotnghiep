@@ -98,11 +98,16 @@ Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
    
    Route::post('/search','ClientController@search')->name('cli_search');
    
+   //comment
+   Route::post('/load_comment','ClientController@load_comment')->name('load_comment');
+   Route::post('/send_comment','ClientController@send_comment')->name('send_comment');
+   
    Route::get('/dangxuat_kh','ClientController@dangxuatkh')->name('dangxuat_kh');
    Route::get('/delivery','CheckoutController@delivery');
    // Route::post('/select-delivery','DeliveryController@select_delivery');
    Route::post('/select-delivery-home','CheckoutController@select_delivery_home');
    Route::get('/checkout','CheckoutController@checkout')->name('checkout');
+
    Route::post('/load-comment','ClientController@load_comment');
    Route::post('/send-comment','ClientController@send_comment');
    Route::get('/gioithieu','ClientController@gioithieu')->name('gioithieu');
@@ -208,9 +213,8 @@ Route::get('impersonate-destroy','Admin\UserController@impersonate_destroy');
 Route::get('/lien-he','Client\ContactController@lien_he');
 Route::get('/information','Client\ContactController@information' );
 Route::post('/save-info','Client\ContactController@save_info' );
+
 Route::post('/update-info/{info_id}','Client\ContactController@update_info' );
-
-
 Route::get('/quangcao','Admin\AddvertisedController@addver')->name('list_addvertised');
 Route::get('/add_addvertised','Admin\AddvertisedController@add_addver')->name('add_addvertised');
 Route::post('/store','Admin\AddvertisedController@store')->name('store_addvertised');
@@ -221,6 +225,5 @@ Route::post('/update_addver','Admin\AddvertisedController@update')->name('update
 Route::get('/send-coupon/{condition}/{number}/{code}/{time}','Admin\MailController@send_mail')->name('send_mail');
 Route::get('/send-coupon-vip/{condition}/{number}/{code}/{time}','Admin\MailController@send_mail_vip')->name('send_mail_vip');
 Route::get('/mail-example','Admin\MailController@mail_example');
-
-
 Route::get('/send-mail','Admin\MailController@send')->name('send');
+

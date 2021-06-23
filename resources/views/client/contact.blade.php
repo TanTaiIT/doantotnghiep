@@ -1,6 +1,7 @@
 @extends('client/layout_cli')
 @section('content')
 
+
 <div class="page-head_agile_info_w3l">
 
     </div>

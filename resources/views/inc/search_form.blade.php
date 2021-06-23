@@ -35,7 +35,9 @@
       <span class="contents"><span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span> sản phẩm</span>
     </a>
     <div class="cart">
+
       <img class=" left1" width="70px" height="60px" src="../web/images/so.jpg" alt="">
+
 
       <div class="cart-items">
         <ul>

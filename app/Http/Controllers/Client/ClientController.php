@@ -17,10 +17,10 @@ use App\Models\binhluan;
 use App\Models\Post;
 use App\Models\quangcao;
 use App\Models\intro;
-use App\Models\thuoctinh;
 use DB;
 class ClientController extends Controller
 {
+    
     public function error_page(){
         return view('errors.404');
     }
@@ -113,7 +113,7 @@ class ClientController extends Controller
         $img_detail=pro_img::where('product_id',$id)->get();
         $cate=category::all();
         $brand=brand::all();
-    	$com='detail';
+    	  $com='detail';
         $rating=rating::where('product_id','=',$id)->avg('rating');
         $rating=round($rating);
         //  $detail = DB::table('tbl_product')
@@ -129,7 +129,7 @@ class ClientController extends Controller
          $meta_title = $detail->product_name;
          $url_canonical = $request->url();
          $share_images=url('images/'.$detail->product_name);
-       
+
     	return view('client/detail',compact('detail','com','cate','brand','img_detail','url_canonical','rating','size','hot','meta_desc'
         ,'meta_title','url_canonical','share_images','cate_post1'));
     }
@@ -367,6 +367,7 @@ class ClientController extends Controller
         echo $output;
 
     }
+    
 
   
     

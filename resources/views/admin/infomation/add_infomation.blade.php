@@ -36,6 +36,7 @@
                                     <label for="exampleInputEmail1">Hình ảnh logo</label>
                                     <input type="file" name="info_image" class="form-control" id="exampleInputEmail1">
                                     <img src="{{url('uploads/contact/'.$cont->info_logo)}}" height="100" width="100">
+
                                 </div>
                                 <button type="submit" name="add_info" class="btn btn-info">Cập nhật thông tin</button>
                                 </form>

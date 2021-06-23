@@ -65,6 +65,7 @@
     }
   }, '#paypal-button');
 </script>
+
       <script type="text/javascript">
         $(document).ready(function(){
             load_comment();

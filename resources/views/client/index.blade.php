@@ -35,9 +35,9 @@
 												@if($p->gia_km < $p->product_price && $p->gia_km >0)
 												<span class="badge badge-pill badge-danger ban">-{{ROUND($gia,1)}}%</span>
 												@endif
+
 											<img id="wishlist_productimage{{$p->product_id}}" class="pro_img" src="{!! asset('images/'.$p->product_image)!!}" alt="">
 
-										    <!--  -->
 										
 										    </div></a>
 
