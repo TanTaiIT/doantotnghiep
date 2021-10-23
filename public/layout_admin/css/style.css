@@ -286,6 +286,7 @@ thead tr th{
   text-transform: uppercase;
  
 }
+<<<<<<< HEAD
 .sol{
   width: 38%;
 }
@@ -317,6 +318,9 @@ thead tr th{
 .pham{
   
 }
+=======
+
+>>>>>>> cc64519572180068bc5cbf437c4d281b4f0f73f5
 .pos {
     position: absolute;
     top: 33px;

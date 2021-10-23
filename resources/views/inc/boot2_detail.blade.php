@@ -1,5 +1,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/css/formValidation.min.css"></script>
-	<script src="{!! asset('web/js/jquery-2.2.3.min.js')!!}"></script>
+    <script src="{!! asset('web/js/jquery-2.2.3.min.js')!!}"></script>
   
     <script src="{!! asset('web/js/jquery.simplyscroll.js')!!}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript" charset="utf-8" async defer></script>
@@ -299,7 +299,7 @@
 
 
     
-	<script type="text/javascript">
+    <script type="text/javascript">
         
    
 </script>
@@ -390,7 +390,7 @@
           
     });
     </script>
-	<script type="text/javascript">
+    <script type="text/javascript">
     $('#keywords').keyup(function(){
         var query = $(this).val();
 
@@ -419,24 +419,24 @@
         $('#search_ajax').fadeOut();  
     }); 
 </script>
-	<script>
-		$(function(){
-			$('.orderby').change(function(){
-				$('#form_order').submit();
-			});
-		});
-	</script>
-	<!-- nav smooth scroll -->
+    <script>
+        $(function(){
+            $('.orderby').change(function(){
+                $('#form_order').submit();
+            });
+        });
+    </script>
+    <!-- nav smooth scroll -->
 
-	<script src="{!! asset('web/js/amazingslider.js')!!}"></script>
-	<script src="{!! asset('web/js/initslider-1.js')!!}"></script>
-	<!-- <script>
-		$(document).ready(function(){
-			function thongbao(){
-				$.bootstrapGrowl("đã thêm sản phẩm vào giỏ hàng");
-			}
-		});
-	</script> -->
+    <script src="{!! asset('web/js/amazingslider.js')!!}"></script>
+    <script src="{!! asset('web/js/initslider-1.js')!!}"></script>
+    <!-- <script>
+        $(document).ready(function(){
+            function thongbao(){
+                $.bootstrapGrowl("đã thêm sản phẩm vào giỏ hàng");
+            }
+        });
+    </script> -->
   <!--   <script>
         
         function bao(){
@@ -445,52 +445,52 @@
         }
     
     </script> -->
-	<!-- //nav smooth scroll -->
+    <!-- //nav smooth scroll -->
 
-	<!-- popup modal (for location)-->
-	
-	<!-- //popup modal (for location)-->
+    <!-- popup modal (for location)-->
+    
+    <!-- //popup modal (for location)-->
 
-	<!-- cart-js -->
-	<script src="{!! asset('web/js/sweetalert.min.js')!!}"></script>
-	<script src="{!! asset('web/js/scroll.js')!!}"></script>
-	<script src="{!! asset('web/js/SmoothScroll.min.js')!!}"></script>
-	<!-- //smoothscroll -->
+    <!-- cart-js -->
+    <script src="{!! asset('web/js/sweetalert.min.js')!!}"></script>
+    <script src="{!! asset('web/js/scroll.js')!!}"></script>
+    <script src="{!! asset('web/js/SmoothScroll.min.js')!!}"></script>
+    <!-- //smoothscroll -->
 
-	<!-- start-smooth-scrolling -->
-	<script src="{!! asset('web/js/move-top.js')!!}"></script>
-	<script src="{!! asset('web/js/easing.js')!!}"></script>
-	<script>
-		jQuery(document).ready(function ($) {
-			$(".scroll").click(function (event) {
-				event.preventDefault();
+    <!-- start-smooth-scrolling -->
+    <script src="{!! asset('web/js/move-top.js')!!}"></script>
+    <script src="{!! asset('web/js/easing.js')!!}"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
 
-				$('html,body').animate({
-					scrollTop: $(this.hash).offset().top
-				}, 1000);
-			});
-		});
-	</script>
-	<!-- //end-smooth-scrolling -->
+                $('html,body').animate({
+                    scrollTop: $(this.hash).offset().top
+                }, 1000);
+            });
+        });
+    </script>
+    <!-- //end-smooth-scrolling -->
 
-	<!-- smooth-scrolling-of-move-up -->
-	<script>
-		$(document).ready(function () {
-			
-			var defaults = {
-				containerID: 'toTop', // fading element id
-				containerHoverID: 'toTopHover', // fading element hover id
-				scrollSpeed: 1200,
-				easingType: 'linear' 
-			};
-			
-			$().UItoTop({
-				easingType: 'easeOutQuart'
-			});
+    <!-- smooth-scrolling-of-move-up -->
+    <script>
+        $(document).ready(function () {
+            
+            var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear' 
+            };
+            
+            $().UItoTop({
+                easingType: 'easeOutQuart'
+            });
 
-		});
-	</script>
-	<script src="{!! asset('web/js/sweetalert.min.js')!!}"></script>
+        });
+    </script>
+    <script src="{!! asset('web/js/sweetalert.min.js')!!}"></script>
 <script type="text/javascript">
 
           $(window).load(function(){
@@ -567,10 +567,10 @@
     
 
     </script>
-	<!-- //smooth-scrolling-of-move-up -->
+    <!-- //smooth-scrolling-of-move-up -->
 
-	<!-- for bootstrap working -->
-	<script src="{!! asset('web/js/bootstrap.js')!!}"></script>
+    <!-- for bootstrap working -->
+    <script src="{!! asset('web/js/bootstrap.js')!!}"></script>
 
 
     <link rel="stylesheet" type="text/css" href="{!! asset('web/css/easy-responsive-tabs.css')!!} " />
@@ -602,4 +602,4 @@
 
 
 
-	
+    

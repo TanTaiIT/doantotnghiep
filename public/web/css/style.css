@@ -84,24 +84,12 @@ body a {
 .huy{
     background-color: #5e3b3e!important;
 }
-.canh{
-    height: 100%;
-}
 .active1{
     background: blue;
 }
 
 .amazingslider-wrapper{
     z-index: 99;
-}
-
-.side{
-    background: #f892c5;
-    border-radius: 20px;
-    box-shadow: 2px 3px 12px 2px grey;
-}
-.containe {
-    padding: 30px 23px;
 }
 .loader{
     position: fixed;
@@ -2186,7 +2174,7 @@ a.price-mar {
 }
 
 .box-scroll {
-    min-height: 15em;
+    min-height: 25em;
     position: relative;
     overflow: hidden;
 }

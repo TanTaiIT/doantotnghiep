@@ -12,7 +12,7 @@ use Mail;
 
 class MailController extends Controller
 {
-    
+
     public function send_mail($condition ,$number ,$code ,$time){
         $customer = Custommer::where('custommer_vip','=',NULL)->get();
 

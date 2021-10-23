@@ -292,8 +292,6 @@ class  CheckoutController extends Controller
         if(Session::get('cart')==true){
             foreach(Session::get('cart') as $key => $cart_email){
                $cart_array[] =array(
-                   'product_km'=>$cart_email['price_pro'],
-                   'product_size'=>$cart_email['size'],
                    'product_name' =>$cart_email['name'],
                    'product_price' =>$cart_email['price'],
                    'product_qty' =>$cart_email['quantity'],
@@ -316,10 +314,10 @@ class  CheckoutController extends Controller
             'coupon_code' => $coupon_email,
             'order_code' => $checkout_code
         );
-        Mail::send('admin.mail.email_order',['cart_array'=>$cart_array , 'shipping_array'=>$shipping_array, 'code'=>$ordercode_mail], function($message) use ($title_email, $data){
-            $message->to($data['email'])->subject($title_email);
-            $message->from($data['email'],$title_email);
-        });
+        // Mail::send('admin.mail.email_order',['cart_array'=>$cart_array , 'shipping_array'=>$shipping_array, 'code'=>$ordercode_mail], function($message) use ($title_email, $data){
+        //     $message->to($data['email'])->subject($title_email);
+        //     $message->from($data['email'],$title_email);
+        // });
 
          Session::forget('coupon');
          // Session::forget('fee');
@@ -424,10 +422,10 @@ class  CheckoutController extends Controller
             'coupon_code' => $coupon_email,
             'order_code' => $checkout_code
         );
-        Mail::send('admin.mail.email_order',['cart_array'=>$cart_array , 'shipping_array'=>$shipping_array, 'code'=>$ordercode_mail], function($message) use ($title_email, $data){
-            $message->to($data['email'])->subject($title_email);
-            $message->from($data['email'],$title_email);
-        });
+        // Mail::send('admin.mail.email_order',['cart_array'=>$cart_array , 'shipping_array'=>$shipping_array, 'code'=>$ordercode_mail], function($message) use ($title_email, $data){
+        //     $message->to($data['email'])->subject($title_email);
+        //     $message->from($data['email'],$title_email);
+        // });
 
          Session::forget('coupon');
          // Session::forget('fee');
@@ -458,15 +456,15 @@ class  CheckoutController extends Controller
             're_password.same'=>'+Password chưa đúng'
         ]);
 
-    	// $cus=array();
-    	// $cus['customer_name']=$req->name;
-    	// $cus['customer_email']=$req->email;
-    	// $cus['customer_password']=md5($req->password);
-    	// $cus['customer_phone']=$req->sdt;
-    	// $cus_id=DB::table('tbl_customers')->insertGetId($cus);
-    	// Session::put('customer_id',$cus_id);
-    	// Session::put('customer_name',$req->customer_name);
-    	// return redirect()->route('cli_index');
+        // $cus=array();
+        // $cus['customer_name']=$req->name;
+        // $cus['customer_email']=$req->email;
+        // $cus['customer_password']=md5($req->password);
+        // $cus['customer_phone']=$req->sdt;
+        // $cus_id=DB::table('tbl_customers')->insertGetId($cus);
+        // Session::put('customer_id',$cus_id);
+        // Session::put('customer_name',$req->customer_name);
+        // return redirect()->route('cli_index');
         $email = $req->email;
         $code = bcrypt(md5(time().$email));
         $url = route('xacnhanTK',['name'=>$req->name,'email'=>$req->email,'phone'=>$req->sdt,'password'=>md5($req->password),'code_active'=>$code]);
@@ -491,15 +489,15 @@ class  CheckoutController extends Controller
         //dd($email);
 
         $cus=array();
-    	$cus['customer_name']=$name;
-    	$cus['customer_email']=$email;
-    	$cus['customer_password']=$password;
-    	$cus['customer_phone']=$phone;
+        $cus['customer_name']=$name;
+        $cus['customer_email']=$email;
+        $cus['customer_password']=$password;
+        $cus['customer_phone']=$phone;
         $cus['code_active']=$code_active;
-    	$cus_id=DB::table('tbl_customers')->insertGetId($cus);
-    	Session::put('customer_id',$cus_id);
-    	Session::put('customer_name',$name);
-    	return redirect()->route('cli_index')->with('message','XÁC NHẬN TÀI KHOẢN THÀNH CÔNG!!');
+        $cus_id=DB::table('tbl_customers')->insertGetId($cus);
+        Session::put('customer_id',$cus_id);
+        Session::put('customer_name',$name);
+        return redirect()->route('cli_index')->with('message','XÁC NHẬN TÀI KHOẢN THÀNH CÔNG!!');
         
     }
     // public function getdoimk(){
@@ -515,25 +513,25 @@ class  CheckoutController extends Controller
             'password.required'=>'+Bạn chưa nhập password',
             'password.min'=>'password phải ít nhất 8 ký tự',
         ]);
-    	$email=$req->email;
-    	$password=  md5($req->password);
-    	$result=DB::table('tbl_customers')->where('customer_email',$email)->where('customer_password',$password)->first();
+        $email=$req->email;
+        $password=  md5($req->password);
+        $result=DB::table('tbl_customers')->where('customer_email',$email)->where('customer_password',$password)->first();
         //$re = custommer::where('customer_email',$email)->where('customer_password',$password)->first();
         //dd($result, $password);
         
         
-    	if($result){
+        if($result){
             Session::put('fee',15000);
             Session::save();
-    		Session::put('customer_id',$result->customer_id);
-    		Session::put('customer_name',$result->customer_name);
-    		Session::flash('message','ĐĂNG NHẬP THÀNH CÔNG');
-    		return redirect()->route('cli_index');
-    		
-    	}else{
-    		return redirect()->route('cli_index')->with('error','ĐĂNG NHẬP THẤT BẠI');
-    		
-    	}
+            Session::put('customer_id',$result->customer_id);
+            Session::put('customer_name',$result->customer_name);
+            Session::flash('message','ĐĂNG NHẬP THÀNH CÔNG');
+            return redirect()->route('cli_index');
+            
+        }else{
+            return redirect()->route('cli_index')->with('error','ĐĂNG NHẬP THẤT BẠI');
+            
+        }
 
     }
     //lấy lại mật khẩu
@@ -558,9 +556,9 @@ class  CheckoutController extends Controller
         ];
         //dd($data);
         Mail::send('email.reset_password',$data, function($message) use ($email){
-	        $message->to($email, 'Reset password')->subject('lấy lại mật khẩu!!');
+            $message->to($email, 'Reset password')->subject('lấy lại mật khẩu!!');
             $message->from($email);
-	    });
+        });
 
         return redirect()->route('cli_index')->with('message','BẠN VUI LÒNG VÀO CHECK MAIL ĐỂ LẤY LẠI MẬT KHẨU' );
     }
@@ -620,9 +618,9 @@ class  CheckoutController extends Controller
         $meta_title ="thanh toán";
         $chinh=chinhsach::limit(3)->get();
         $share_images = url('images/'.$request->product_image);   
-    	 $cate=category::all();
-    	 $com='';
-    	 return view('client.payment',compact('cate','com','url_canonical','meta_title','meta_desc','share_images','cate_post1','chinh'));
+         $cate=category::all();
+         $com='';
+         return view('client.payment',compact('cate','com','url_canonical','meta_title','meta_desc','share_images','cate_post1','chinh'));
     }
 
 

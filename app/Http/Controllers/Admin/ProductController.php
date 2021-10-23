@@ -53,7 +53,6 @@ class ProductController extends Controller
             return view('manager/product/add_product',compact('cate','attr1'));
     }
     public function themsp(Request $req){
-
         $this->validate($req, [
             'ten'=>'required',
             'mota'=>'required',
@@ -83,7 +82,6 @@ class ProductController extends Controller
         $product_price = filter_var($req->gia, FILTER_SANITIZE_NUMBER_INT);
         $price_cost = filter_var($req->gia_goc, FILTER_SANITIZE_NUMBER_INT);
         $km = filter_var($req->gia_km, FILTER_SANITIZE_NUMBER_INT);
-       
         $product=new Product();
         $product->product_name=$req->ten;
         $product->category_id=$req->loai;
@@ -107,12 +105,6 @@ class ProductController extends Controller
         }
         return redirect()->route('pro_index');
     }
-    // public function edit($id){
-    //     $cate=category::all();
-    //     $pro_edit=product::Find($id);
-        
-    //     return view('admin/product/product_edit',compact('pro_edit','cate'));
-    // }
      public function edit($id){
         $cate=category::all();
         $pro_edit=product::Find($id);
@@ -155,7 +147,6 @@ class ProductController extends Controller
         $pro['gia_km']=$km;
         $pro['product_status']=$req->status;
         $pro['soluong']=$req->soluong;
-        // $pro['product_image']=$this->imageUpload($req);
         $get_image = $req->file('hinh');
         if($get_image){
             //xoa anh cu
@@ -247,13 +238,13 @@ class ProductController extends Controller
 
         $product_id = $request->product_id;
         $product = Product::find($product_id);
-        // $size=DB::table('attribute')->join('product_attribute','attribute.attr_id','=','product_attribute.attr_id')->where('product_id',$product_id)->get();
         $size=product_attr::with('attribute')->where('product_id',$product_id)->get();
         $tien=$product->product_price;
         $km=$tien-$product->gia_km;
         $nho=number_format(($km-(($km*20)/100)),0,'.','.').' '.'VNĐ';
         $lon=number_format(($km+(($km*20)/100)),0,'.','.').' '.'VNĐ';
         $vua=number_format($km,0,'.','.').' '.'VNĐ';
+
         $com='';
         $galary=pro_img::where('product_id',$product_id)->get();
         foreach($size as $s){

@@ -40,7 +40,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{!!asset('layout_admin/ckeditor/ckeditor.js')!!}"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="{!! asset('layout_admin/js/simple.money.format.js')!!}"></script>
+<<<<<<< HEAD
 <script src="{!! asset('layout_admin/js/adminjs.js')!!}"></script>
+=======
+>>>>>>> cc64519572180068bc5cbf437c4d281b4f0f73f5
 
 </head>
 <body>
@@ -89,7 +92,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
+<<<<<<< HEAD
                             <a href="{{URL::to('/trangchu')}}"><i class="fa fa-dashboard fa-fw nav_icon"></i>Trang chủ</a>
+=======
+                            <a href="{{route('pro_index')}}"><i class="fa fa-dashboard fa-fw nav_icon"></i>Bảng điều khiển</a>
+                        </li>
+                        <li>
+                           <a href="{{URL::to('/trangchu')}}"><i class="fa fa-dashboard fa-fw nav_icon"></i>Trang chủ</a>
+>>>>>>> cc64519572180068bc5cbf437c4d281b4f0f73f5
                         </li>
                         <li>
                             <a href="{{URL::to('/introduce')}}">
@@ -103,7 +113,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <span>Liên hệ</span>
                             </a>
                         </li>
+<<<<<<< HEAD
                        
+=======
+
+                        @hasrole(['admin'])
+>>>>>>> cc64519572180068bc5cbf437c4d281b4f0f73f5
                         <li>
                             <a href="#"><i class="fa fa-laptop nav_icon"></i>Quản lý sản phẩm<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -303,6 +318,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     $('.price_format').simpleMoneyFormat();
 
 </script>
+<<<<<<< HEAD
 <script type="text/javascript">
             $('#search').on('keyup',function(){
                 $value = $(this).val();
@@ -342,6 +358,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
  
 </script>
 <!-- end coupon  -->
+=======
+
+
+>>>>>>> cc64519572180068bc5cbf437c4d281b4f0f73f5
 <script type="text/javascript">
  
     function ChangeToSlug()
@@ -533,6 +553,16 @@ $(document).ready(function(){
     });
 
 });
+<<<<<<< HEAD
+=======
+</script>
+<script src="{!! asset('layout_admin/js/validate.js')!!}"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script> -->
+<script>
+    $.validate({
+
+    });
+>>>>>>> cc64519572180068bc5cbf437c4d281b4f0f73f5
 </script>
 <script src="{!! asset('layout_admin/js/validate.js')!!}"></script>
 <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script> -->
