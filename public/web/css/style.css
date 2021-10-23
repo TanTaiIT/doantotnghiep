@@ -84,6 +84,9 @@ body a {
 .huy{
     background-color: #5e3b3e!important;
 }
+select.form-control:not([size]):not([multiple]) {
+height: unset;
+}
 .active1{
     background: blue;
 }

@@ -61,7 +61,7 @@ class ProductController extends Controller
             'gia_km'=>'required|numeric',
             'soluong'=>'required|numeric',
             'hinh'=>'required',
-            'attr_id[]'=>'required'
+            'attr_id'=>'required'
         ],[
             'ten.required'=>'+Ban chưa nhập tên ',
             'mota.required'=>'+Ban chưa nhập mô tả ',
@@ -76,7 +76,7 @@ class ProductController extends Controller
             'gia_goc.numeric'=>'+Giá gốc phải là số ',
             'gia_km.required'=>'+chưa nhập giá khuyến mãi ',
             'gia_km.numeric'=>'+giá khuyến mãi phải là số ',
-            'attr_id[].required'=>'+Bạn chưa chọn size',
+            'attr_id.required'=>'+Bạn chưa chọn size',
             
         ]);
         $product_price = filter_var($req->gia, FILTER_SANITIZE_NUMBER_INT);

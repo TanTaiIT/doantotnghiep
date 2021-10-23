@@ -292,6 +292,8 @@ class  CheckoutController extends Controller
         if(Session::get('cart')==true){
             foreach(Session::get('cart') as $key => $cart_email){
                $cart_array[] =array(
+                   'product_km'=>$cart_email['price_pro'],
+                   'product_size'=>$cart_email['size'],
                    'product_name' =>$cart_email['name'],
                    'product_price' =>$cart_email['price'],
                    'product_qty' =>$cart_email['quantity'],
@@ -314,10 +316,10 @@ class  CheckoutController extends Controller
             'coupon_code' => $coupon_email,
             'order_code' => $checkout_code
         );
-        // Mail::send('admin.mail.email_order',['cart_array'=>$cart_array , 'shipping_array'=>$shipping_array, 'code'=>$ordercode_mail], function($message) use ($title_email, $data){
-        //     $message->to($data['email'])->subject($title_email);
-        //     $message->from($data['email'],$title_email);
-        // });
+        Mail::send('admin.mail.email_order',['cart_array'=>$cart_array , 'shipping_array'=>$shipping_array, 'code'=>$ordercode_mail], function($message) use ($title_email, $data){
+            $message->to($data['email'])->subject($title_email);
+            $message->from($data['email'],$title_email);
+        });
 
          Session::forget('coupon');
          // Session::forget('fee');
@@ -400,6 +402,8 @@ class  CheckoutController extends Controller
         if(Session::get('cart')==true){
             foreach(Session::get('cart') as $key => $cart_email){
                $cart_array[] =array(
+                   'product_km'=>$cart_email['price_pro'],
+                   'product_size'=>$cart_email['size'],
                    'product_name' =>$cart_email['name'],
                    'product_price' =>$cart_email['price'],
                    'product_qty' =>$cart_email['quantity'],
@@ -422,10 +426,10 @@ class  CheckoutController extends Controller
             'coupon_code' => $coupon_email,
             'order_code' => $checkout_code
         );
-        // Mail::send('admin.mail.email_order',['cart_array'=>$cart_array , 'shipping_array'=>$shipping_array, 'code'=>$ordercode_mail], function($message) use ($title_email, $data){
-        //     $message->to($data['email'])->subject($title_email);
-        //     $message->from($data['email'],$title_email);
-        // });
+        Mail::send('admin.mail.email_order',['cart_array'=>$cart_array , 'shipping_array'=>$shipping_array, 'code'=>$ordercode_mail], function($message) use ($title_email, $data){
+            $message->to($data['email'])->subject($title_email);
+            $message->from($data['email'],$title_email);
+        });
 
          Session::forget('coupon');
          // Session::forget('fee');
