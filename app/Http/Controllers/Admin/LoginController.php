@@ -8,6 +8,7 @@ use Auth;
 use App\Models\User;
 use App\Models\admin;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Order;
 use DB;
 use Session;
 class LoginController extends Controller

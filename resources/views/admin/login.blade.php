@@ -45,7 +45,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                               <input type="password" name="txtpassword" id="password"  class="form-control" aria-describedby="emailHelp" placeholder="Enter Password">
                            </div>
                            <div class="col-md-12 text-center ">
-                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Login</button>
+                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Đăng nhập</button>
                            </div>
                            <div class="col-md-12 ">
                               <div class="login-or">

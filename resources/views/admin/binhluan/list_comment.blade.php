@@ -10,7 +10,7 @@
                       <?php
                             $message = Session::get('message');
                             if($message){
-                                echo '<span class="text-alert">'.$message.'</span>';
+                                echo '<span class="alert alert-success">'.$message.'</span>';
                                 Session::put('message',null);
                             }
                             ?>
@@ -23,7 +23,7 @@
             <th>Bình luận</th>
             <th>Ngày gửi</th>
             <th>Sản phẩm</th>
-            <th>Quản lý</th>
+            <!-- <th>Quản lý</th> -->
             <th style="width:30px;"></th>
           </tr>
         </thead>
@@ -68,14 +68,12 @@
 
             </td>
             <td>{{ $comm->comment_date }}</td>
-            <td><a href="{{url('/chi-tiet/'.$comm->product->product_slug)}}" target="_blank">{{ $comm->product->product_name }}</a></td>
-            <td>
-              <a href="" class="active styling-edit" ui-toggle-class="">
-                <i class="fa fa-pencil-square-o text-success text-active"></i></a>
+            <td><a target="_blank" href="{{URL::to('/detail/'.$comm->product->product_id)}}">{{ $comm->product->product_name }}</a></td>
+            <!-- <td>
               <a onclick="return confirm('Bạn có chắc là muốn xóa bình luận này ko?')" href="" class="active styling-edit" ui-toggle-class="">
                 <i class="fa fa-times text-danger text"></i>
               </a>
-            </td>
+            </td> -->
           </tr>
           @endforeach
         </tbody>

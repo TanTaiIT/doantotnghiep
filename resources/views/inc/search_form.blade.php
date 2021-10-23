@@ -14,70 +14,62 @@
 				<div class="col-md-9 header mt-4 mb-md-0 mb-4">
 					<div class="row">
 						<!-- search -->
-						<div class="col-10 agileits_search">
+						<div class="col-9 agileits_search">
 							<form class="form-inline" action="{{route('cli_search')}}" autocomplete="off" method="post">
 								{{csrf_field()}}
 								<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword" id="keywords" required>
                                 <div id="search_ajax"></div>
-								<button class="btn my-2 my-sm-0" type="submit">Tìm kiếm</button>
+								<button class="btn my-2 my-sm-0" type="submit">@lang('lang.seach')</button>
 							</form>
 						</div>
+            <!-- <div class="col-3 fl">
+              <div class="vn">
+                <a href="{{url('lang/vn')}}"><img src="{!! asset('download.jfif')!!}" width="50px" height="50px" alt=""></a>
+                
+              </div>
+              <div class="en">
+                <a href="{{url('lang/en')}}"><img src="{!! asset('images.png')!!}"  width="50px" height="50px" alt=""></a>
+              </div>
+            </div> -->
+						
+                            
+                            
+          </div>
 
 <?php $total = 0 ?>
 @foreach((array) session('cart') as $id => $details)
-    <?php $total += $details['price'] * $details['quantity'] ?>
+    <?php
+    $si=$details['size'];
+    $km=$details['price']-$details['price_pro'];
+    if($si=="Lớn")
+    {
+    	$sub=($km+(($km*20)/100))*$details['quantity'];
+    }elseif($si=="Nhỏ"){
+    	 $sub=($km-(($km*20)/100))*$details['quantity'];
+    }else{
+    	$sub=$km*$details['quantity'];
+    }
+          $total += $sub; 
+    ?>
 @endforeach
 <div id="wrapper">
-  <div class="cart-tab visible">      
-    <a href="#" title="View your shopping cart" class="cart-link">
-<!--     <i style="font-size: 20px"class="fas fa-shopping-cart"></i> -->
-      <span class="amount">{{ number_format($total) }}đ</span>
-      <span class="contents"><span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span> sản phẩm</span>
+  <div class="cart-tab visible">  
+     <div id="visible">
+     </div>    
+      
     </a>
-    <div class="cart">
-      <img class=" left1" width="70px" height="60px" src="../web/images/so.jpg" alt="">
-
-      <div class="cart-items">
-        <ul>
-@if(session('cart'))
-@foreach(session('cart') as $id => $details)
-<?php 
-    $gia=$details['price']-$details['price_pro'];
-    $sub=$details['price']*$details['quantity'];
-
-    
-                                                
-?>
-          <li class="clearfix">
-            <div class="img-con">
-            <img width="70px" height="150px" class="productimg img-thumbnail" src="{!! asset('images/'.$details['image'])!!}" />
-            </div>
-            <div class="detail">
-            <h5>{{ $details['name'] }}</h5>
-            <span class="item-price">Giá:{{number_format($gia)}} đ</span>
-            <span class="quantity1">Số lượng: {{ $details['quantity'] }}</span><br>
-            <span>Size:{{$details['size']}}</span><br><span>
-            
-            <span>Loại:{{$details['hot']}}</span>
-
-            </div>
-            <div class="bu" style="margin-left:20px">
-                <button title="xóa khỏi giỏ hàng" style="font-size: 10px;" class="btn btn-danger btn remove-from-cart" data-id="{{ $id }}"><i class="fas fa-trash"></i></button> 
-            </div>
-
-          </li>
-  
-          
-@endforeach
-@endif
-        </ul>
-      </div><!-- @end .cart-items -->
-
-      <a href="{{route('checkout')}}" class="checkout">Đi tới giỏ hàng →</a>
-    </div><!-- @end .cart -->
+    <div id="show"></div><!-- @end .cart -->
   </div><!-- @end .cart-tab -->
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+
+
+
+
+
+
+  

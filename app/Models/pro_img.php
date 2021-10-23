@@ -13,4 +13,5 @@ class pro_img extends Model
     	'product_id','images'
     ];
     protected $primaryKey='image_id';
+    
 }

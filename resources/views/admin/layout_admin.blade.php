@@ -4,6 +4,7 @@
 <head>
 <title>Trang quản lý</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="_token" content="{{ csrf_token() }}">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Modern Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
@@ -38,12 +39,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{!! asset('layout_admin/js/rickshaw.js')!!}"></script>
 <script src="{!!asset('layout_admin/ckeditor/ckeditor.js')!!}"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="{!! asset('layout_admin/js/simple.money.format.js')!!}"></script>
+<script src="{!! asset('layout_admin/js/adminjs.js')!!}"></script>
 
 </head>
 <body>
 <div id="wrapper">
      <!-- Navigation -->
-        <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+     
+        <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -56,7 +60,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <!-- /.navbar-header -->
             <ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
-	        		<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-comments-o"></i><span class="badge">4</span></a>
+	        		
 	        		<ul class="dropdown-menu">
 						<li class="dropdown-menu-header">
 							<strong>Messages</strong>
@@ -70,13 +74,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	        		</ul>
 	      		</li>
 			    <li class="dropdown">
-	        		<a href="#" class="dropdown-toggle avatar" data-toggle="dropdown"><img src="{!! asset('layout_admin/images/1.png')!!}"><span class="badge">9</span></a>
+	        		<a href="#" class="dropdown-toggle avatar" data-toggle="dropdown"><img src="{!! asset('public/uploads/post/767297506.jpg')!!}"></a>
 	        		<ul class="dropdown-menu">
 						<li class="dropdown-menu-header text-center">
 							<strong>{{Auth::User()->name}}</strong>
 						</li>
 						
-						<li class="m_2"><a href="#"><i class="fa fa-shield"></i> Lock Profile</a></li>
+						
 						<li class="m_2"><a href="{{route('logout_auth')}}"><i class="fa fa-lock"></i> Logout</a></li>	
 	        		</ul>
 	      		</li>
@@ -84,9 +88,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li>
-                            <a href="{{route('pro_index')}}"><i class="fa fa-dashboard fa-fw nav_icon"></i>Bảng điều khiển</a>
-                        </li>
                         <li>
                             <a href="{{URL::to('/trangchu')}}"><i class="fa fa-dashboard fa-fw nav_icon"></i>Trang chủ</a>
                         </li>
@@ -99,20 +100,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li>
                             <a href="{{URL::to('/information')}}">
                                 <i class="fa fa-dashboard"></i>
-                                <span>Thông tin website</span>
+                                <span>Liên hệ</span>
                             </a>
                         </li>
-                        @hasrole(['admin'])
+                       
                         <li>
                             <a href="#"><i class="fa fa-laptop nav_icon"></i>Quản lý sản phẩm<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="{{route('pro_index')}}">Sản phẩm</a>
                                 </li>
+                                <!-- <li>
+                                    <a href="{{route('pro_add')}}">thêm sản phẩm</a>
+                                </li> -->
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        @endhasrole
+                        
                         <li>
                             <a href="#"><i class="fa fa-indent nav_icon"></i>Quản lý loại sản phẩm<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -131,18 +135,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 </li>
                               
                             </ul>
-                            <!-- /.nav-second-level -->
+                            
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-envelope nav_icon"></i>Quản lý Thương hiệu<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="{{route('brand_index')}}">Thương hiệu<u></u></a>
-                                </li>
-                               
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+
+                        
+                        
 
                         <li>
                             <a href="#"><i class="fa fa-envelope nav_icon"></i>Slide show<span class="fa arrow"></span></a>
@@ -188,7 +185,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </li>
 
 
-                         <li>
+                         <!-- <li>
                             <a href="#"><i class="fa fa-envelope nav_icon"></i>Vận chuyển<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -197,8 +194,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 
                                
                             </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                            
+                        </li> -->
 
                          <li>
                             <a href="#"><i class="fa fa-envelope nav_icon"></i>quản lý bài viết<span class="fa arrow"></span></a>
@@ -231,6 +228,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                
                             </ul>
                             <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a href="{{route('chinh')}}"><i class="fa fa-envelope nav_icon"></i>Chính sách<span class="fa arrow"></span></a>
                         </li>
                         
 
@@ -272,13 +273,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div id="page-wrapper">
         <div class="graphs">
         	Xin chào Admin
-        <?php 
+        
+       </div>
+       <div class="tai22" >
+         <?php 
            $mes=Session::get('message');
            if(isset($mes)){
-           	echo $mes;
+            // echo $mes;
+          echo '<span  class="alert alert-success">'.$mes.'</span>';
+                                Session::put('message',null);
            }
         ?>
        </div>
+      
 
 
 
@@ -292,7 +299,83 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
        <div class="clearfix"> </div>
     </div>
 
+    <script type="text/javascript">
+    $('.price_format').simpleMoneyFormat();
 
+</script>
+<script type="text/javascript">
+            $('#search').on('keyup',function(){
+                $value = $(this).val();
+                $.ajax({
+                    type: 'get',
+                    url:'{{url('/search')}}',
+                    data: {
+                        search: $value
+                    },
+                    success:function(data){
+                        $('tbody').html(data);
+                    }
+                });
+            })
+            $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+        </script>
+
+<!-- coupon -->
+<script type="text/javascript">
+   
+  $( function() {
+    $( "#start_coupon" ).datepicker({
+        prevText:"Tháng trước",
+        nextText:"Tháng sau",
+        dateFormat:"yy/mm/dd",
+        dayNamesMin: [ "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật" ],
+        duration: "slow"
+    });
+    $( "#end_coupon" ).datepicker({
+        prevText:"Tháng trước",
+        nextText:"Tháng sau",
+        dateFormat:"yy/mm/dd",
+        dayNamesMin: [ "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật" ],
+        duration: "slow"
+    });
+  } );
+ 
+</script>
+<!-- end coupon  -->
+<script type="text/javascript">
+ 
+    function ChangeToSlug()
+        {
+            var slug;
+         
+            //Lấy text từ thẻ input title 
+            slug = document.getElementById("slug").value;
+            slug = slug.toLowerCase();
+            //Đổi ký tự có dấu thành không dấu
+                slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+                slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+                slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+                slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+                slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+                slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+                slug = slug.replace(/đ/gi, 'd');
+                //Xóa các ký tự đặt biệt
+                slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+                //Đổi khoảng trắng thành ký tự gạch ngang
+                slug = slug.replace(/ /gi, "-");
+                //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
+                //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
+                slug = slug.replace(/\-\-\-\-\-/gi, '-');
+                slug = slug.replace(/\-\-\-\-/gi, '-');
+                slug = slug.replace(/\-\-\-/gi, '-');
+                slug = slug.replace(/\-\-/gi, '-');
+                //Xóa các ký tự gạch ngang ở đầu và cuối
+                slug = '@' + slug + '@';
+                slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+                //In slug ra textbox có id “slug”
+            document.getElementById('convert_slug').value = slug;
+        }
+</script>
     <script src="{!! asset('layout_admin/js/bootstrap.min.js')!!}"></script>
     <script>
         $('#inputName').change(function(event){
@@ -361,16 +444,19 @@ $(document).ready(function(){
           //labelColor:"#cccccc", // text color
           //backgroundColor: '#333333', // border color
           data: [
-            {label:"San pham", value:<?php echo $app_product ?>},
-            {label:"Bai viet", value:<?php echo $app_post ?>},
-            {label:"Don hang", value:<?php echo $app_order ?>},
+            {label:"Sản phẩm", value:<?php echo $app_product ?>},
+            {label:"Bài viết", value:<?php echo $app_post ?>},
+            {label:"Đơn hàng", value:<?php echo $app_order ?>},
            
-            {label:"Khach hang", value:<?php echo $app_customer ?>} 
+            {label:"Khách hàng", value:<?php echo $app_customer ?>} 
           ]
         });
      
 });
 </script>
+
+
+
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -399,11 +485,10 @@ $(document).ready(function(){
                 method:"POST",
                 dataType:"JSON",
                 data:{_token:_token},
-                
                 success:function(data)
                     {
                         chart.setData(data);
-                    }   
+                    }
             });
         }
 
@@ -420,7 +505,8 @@ $(document).ready(function(){
             success:function(data)
                 {
                     chart.setData(data);
-                }   
+                }
+               
             });
 
     });
@@ -439,16 +525,22 @@ $(document).ready(function(){
             data:{from_date:from_date,to_date:to_date,_token:_token},
             
             success:function(data)
-                {
-                    chart.setData(data);
+                {        
+                 chart.setData(data); 
                 }   
         });
 
     });
 
 });
-    
 </script>
+<script src="{!! asset('layout_admin/js/validate.js')!!}"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script> -->
+<script type="text/javascript">
+        $.validate({
+            
+        });
+</script>   
 
     <script type="text/javascript">
    
@@ -470,6 +562,8 @@ $(document).ready(function(){
   } );
  
 </script>
+
+
     <script type="text/javascript">
     $('.update_quantity_order').click(function(){
         var order_product_id = $(this).data('product_id');
@@ -539,7 +633,7 @@ $(document).ready(function(){
                             method: 'POST',
                             data:{_token:_token, order_status:order_status ,order_id:order_id ,quantity:quantity, order_product_id:order_product_id},
                             success:function(data){
-                                alert('Thay đổi tình trạng đơn hàng thành công');
+                                alert('đơn hàng đã được xử lý');
                                 location.reload();
                             }
                 });
@@ -663,10 +757,6 @@ $(document).ready(function(){
            var wards = $('.wards').val();
            var fee_ship = $('.fee_ship').val();
             var _token = $('input[name="_token"]').val();
-           // alert(city);
-           // alert(province);
-           // alert(wards);
-           // alert(fee_ship);
             $.ajax({
                 url : '{{url('/insert-delivery')}}',
                 method: 'POST',
@@ -683,9 +773,6 @@ $(document).ready(function(){
             var ma_id = $(this).val();
             var _token = $('input[name="_token"]').val();
             var result = '';
-            // alert(action);
-            //  alert(matp);
-            //   alert(_token);
 
             if(action=='city'){
                 result = 'province';
@@ -739,5 +826,8 @@ $(document).ready(function(){
      
     
 </script>
+
+
+
 </body>
 </html>

@@ -11,11 +11,16 @@ use App\Models\product;
 use App\Models\Post;
 use App\Models\Order;
 use App\Models\custommer;
+use Session;
 class AdminController extends Controller
 {
     public function index(){
     	return view('admin/index');
     }
+
+    // public function index(){
+    //     return view('manager/admin/index');
+    // }
 
     public function filter_by_date(Request $request){
 
@@ -128,9 +133,7 @@ class AdminController extends Controller
    echo $data = json_encode($chart_data);
 }
 
-public function show_dashboard(Request $request){
-    // $this->AuthLogin();
-        //get ip address
+    public function show_dashboard(Request $request){
     $user_ip_address = $request->ip();  
 
     $early_last_month = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
@@ -177,13 +180,14 @@ public function show_dashboard(Request $request){
     // $video = Video::all()->count();
     $customer = Custommer::all()->count();
 
-    $product_views = Product::orderBy('product_view','DESC')->take(20)->get();
-    $post_views = Post::orderBy('post_views','DESC')->take(20)->get();
+    // $product_views = Product::orderBy('product_view','DESC')->take(10)->get();
+    $product_views=Product::orderBy('product_sold','DESC')->take(10)->get();
+    $post_views = Post::orderBy('post_views','DESC')->take(10)->get();
+    
+    
 
-
-    return view('admin.trangchu',compact('visitors_total','visitor_count','visitor_last_month_count','visitor_this_month_count','visitor_year_count','order','customer','product','post','post_views','product_views'));
-}
-
+    return view('manager.admin.trangchu',compact('visitors_total','visitor_count','visitor_last_month_count','visitor_this_month_count','visitor_year_count','order','customer','product','post','post_views','product_views'));
+   }
 
 
 

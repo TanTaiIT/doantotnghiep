@@ -28,10 +28,71 @@ body a{
 
 .title{
   background: #808080a1;
-  padding: 20px;
+  padding: 25px;
   text-align: center;
   text-transform: uppercase;
-  color: seashell;
+  color: rgb(0, 0, 0);
+  font-weight: 700;
+}
+
+/*div#donut {
+    width: 11%;
+    margin-top: -110px;
+}*/
+.dropbtn {
+  background-color: #ae3e58;
+  color: white;
+  padding: 7px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 239px;
+}
+/*button.dropbtn1 {
+    width: 239px;
+    border: 0.5px solid grey;
+}*/
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  width: 240px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #ae3e58;
+}
+
+#sel{
+  padding: 3px 10px;
+  box-shadow: 1px 2px 2px grey;
+}
+.modal-dialog{
+  width: 1000px!important;
+}
+.no{
+  text-align: left!important;
 }
 .function{
   background: #80808024;
@@ -40,6 +101,121 @@ body a{
 .but{background: #0000ff94;color: white;padding: 8px;border-radius: 6px;}
 .function a{
   text-decoration: none;
+}
+.chuthich{
+  /* display: flex;
+  justify-content: space-between; */
+  /* margin-left:10px; */
+  line-height: 24px;
+  display: flex;
+  /* margin: 0 39px; */
+  margin: auto;
+  justify-content: space-evenly;
+}
+.baochu{
+  display: flex;
+}
+.baochuthich{}
+/*.row2{
+  display: flex;
+  justify-content: space-around;
+}*/
+input.order_qty_46 {
+    width: 60px;
+}
+a.ao {
+    padding: 10px 10px;
+    background: #1996b2;
+    display: flex;
+    justify-content: center;
+    margin: 10px 10px;
+    color: white;
+}
+.tai22 {
+    height: 50px;
+    margin: 20px 0;
+}
+.hinh5{
+  width:20px;
+  height:20px;
+  background:rgb(90, 245, 66);
+
+}
+td.catchuoi4 {
+    overflow: scroll;
+}
+.ma{
+  margin-left:15px;
+}
+.wap-1200{
+  max-width: 1110px;
+  margin: auto;
+}
+.hinh6{
+  width:20px;
+  height:20px;
+  background:rgb(222, 232, 32);
+}
+.catchuoi5{-webkit-line-clamp:5;white-space:inherit; overflow:hidden; text-overflow:ellipsis; display:-webkit-box;-webkit-box-orient:vertical;}
+.catchuoi6{-webkit-line-clamp:6;white-space:inherit; overflow:hidden; text-overflow:ellipsis; display:-webkit-box;-webkit-box-orient:vertical;}
+.catchuoi7{-webkit-line-clamp:7;white-space:inherit; overflow:hidden; text-overflow:ellipsis; display:-webkit-box;-webkit-box-orient:vertical;}
+.catchuoi8{-webkit-line-clamp:8;white-space:inherit; overflow:hidden; text-overflow:ellipsis; display:-webkit-box;-webkit-box-orient:vertical;}
+.catchuoi4{-webkit-line-clamp:4;white-space:inherit; overflow:hidden; text-overflow:ellipsis; display:-webkit-box;-webkit-box-orient:vertical;}
+.hinh7{
+  width:20px;
+  height:20px;
+  background:rgb(32, 241, 245);
+}
+span.offline {
+    /*background: #b91414;
+    color: white;
+    padding: -1px 14px;
+    border-radius: 6px;
+    font-size: 12px;*/
+    color: #b91414;
+     font-weight: bold;
+}
+
+.panel-heading1{
+        padding: 20px;
+    overflow: hidden;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border: 0!important;
+    height: 55px;
+    font-size: 21px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    color: steelblue;
+}
+span.online {
+    font-weight: bold;
+    /*background: green;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 2px 6px;*/
+    color: green;
+}
+select.form-control.order_details {
+    width: 23%;
+    margin: auto;
+}
+.hinh8{
+  width:20px;
+  height:20px;
+  background:rgb(245, 66, 114);
+}
+.bao-form {
+    width: 50%;
+}
+.baotow {
+    display: flex;
+    justify-content: space-around;
+}
+.form-hinh {
+    width: 30%;
 }
 .but1{
   background: #dd0707;
@@ -68,16 +244,36 @@ body a{
   color: #fff;
   height: 32px;
 }
+input#search {
+    display: flex;
+    position: absolute;
+    right: 0;
+}
+.timsp{
+  margin: 20px 0;
+  padding: 10px 10px;
+}
 .cot_12{
   width: 100%;
 }
 .row .giua{
   text-align: center;
 }
+.nhieu a{
+  color: black;
+}
+p.title_thongke {
+  padding: 0 20px;
+    font-weight: 500;
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 59px;
+}
 a.cach {
     margin: 0 10px;
     width: 33.33%;
 }
+
 .icon1{
   color:red;
   font-size: 30px;
@@ -89,6 +285,9 @@ tbody tr td{
 thead tr th{
   text-transform: uppercase;
  
+}
+.sol{
+  width: 38%;
 }
 .chitietdh{
 
@@ -102,10 +301,15 @@ thead tr th{
 .right-table{
   width: 60%;
 }
-.baobang{
-  display: flex;
-  margin-top: 50px;
-  justify-content: space-around;
+.baobang {
+    display: flex;
+    margin-top: 50px;
+    justify-content: space-evenly;
+    padding-bottom: 50px;
+}
+.tieu{
+  font-size: 18px;
+    font-weight: bold;
 }
 .viet{
 
@@ -348,7 +552,7 @@ input.subanh {
 nav.top1.navbar.navbar-default.navbar-static-top {
   background-color:rgb(6, 217, 149);
   font-family: 'Roboto', sans-serif;
-  margin-top: -23px;
+  /* margin-top: -23px; */
 }
 .navbar-default .navbar-brand {
   color: #fff !important;
@@ -372,7 +576,7 @@ i.nav_icon {
 .form-control {
   background: none !important;
   border: 1px solid #1818182b !important;
-  border-radius: 20px !important;
+  /* border-radius: 20px !important; */
   box-shadow: none !important;
 }
 .navbar-form.navbar-right input[type="text"] {
@@ -840,8 +1044,10 @@ i.icon_13{
   border-top-right-radius: 0;
   border: 0!important;
   height: 55px;
-  font-size: 14px;
+  font-size: 21px;
   font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
 }
 .panel .panel-heading .panel-title {
   font-size: 14px;
@@ -986,7 +1192,8 @@ i.dollar1{
   background: #f2f4f8;
   font-family: 'Roboto', sans-serif;
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: 19px;
+  font-weight: 700;
 }
 canvas#doughnut, canvas#line, canvas#polarArea, #bar, #pie, #radar{
   background-color: rgb(255, 255, 255);
@@ -1208,14 +1415,16 @@ button.note-color-btn {
   overflow-y:auto !important;
 }
 .btn-primary{
-  background-color: rgb(0, 200, 135) !important;
+  background-color: rgb(0 200 172 / 86%) !important;
   border-color: rgb(0, 200, 135) !important;
   color: #fff;
 }
 .btn-primary:hover{
-  background-color: #fff !important;
+  background-color: #2d09f2 !important;
   border-color: #fff !important;
   color:rgb(6, 217, 149) !important;
+  margin-left: 4px;
+  margin-top: 5px;
 }
 h2.modal-title {
   font-size: 1.3em;
@@ -1263,8 +1472,8 @@ h2.modal-title {
   font-size: 0.85em;
 }
 .radio label, .checkbox label, label{
-  font-size: 0.85em;
-  font-weight:300;
+  font-size: 20px;
+  font-weight: 400;
   vertical-align: middle;
 }
 .checkbox1{
@@ -1602,8 +1811,10 @@ div.checker input {
   color: rgb(6, 217, 149);
 }
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
-  font-size: 0.85em;
-  color: #5a5757;
+  /* font-size: 0.85em;
+  color: #5a5757; */
+  font-size: 17px;
+    color: #000000;
 } 
 .mailbox-content table tbody tr:hover {
   background: #FAFAFA;
@@ -2824,7 +3035,9 @@ button.btn.btn-lg, button.btn {
 span.btn_6{
   font-size: 55%;
 }
-
+input.order_qty_46.order_qty_cr{
+  width: 98px;
+}
 span.btn_7{
   font-size: 64%;
 }

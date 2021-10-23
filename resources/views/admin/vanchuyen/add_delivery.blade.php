@@ -9,7 +9,7 @@
                          <?php
                             $message = Session::get('message');
                             if($message){
-                                echo '<span class="text-alert">'.$message.'</span>';
+                                echo '<span class="alert alert-success">'.$message.'</span>';
                                 Session::put('message',null);
                             }
                             ?>
@@ -60,4 +60,5 @@
                     </section>
 
             </div>
+        </div>
             @stop

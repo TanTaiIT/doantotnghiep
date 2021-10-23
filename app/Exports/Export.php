@@ -13,5 +13,7 @@ class Export implements FromCollection
     public function collection()
     {
         return category::all();
+        
+
     }
 }

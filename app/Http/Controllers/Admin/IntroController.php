@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\intro;
+use Session;
+use File;
 
 class IntroController extends Controller
 {
     public function intro_index(){
         $intro=intro::all();
-        return view('admin.gioithieu.index',compact('intro'));
+        return view('manager.gioithieu.index',compact('intro'));
     }
     public function store_intro(Request $req){
         $data=new intro();
@@ -27,15 +29,29 @@ class IntroController extends Controller
             $data->intro_image = $new_image;
         }
         $data->save();
+        Session::flash('message','Cập nhật thành công');
         return redirect()->back();
     }
     public function update_intro(Request $req,$id){
+        $this->validate($req, [
+            'ten'=>'required',
+            'mota'=>'required',
+            'noidung'=>'required',
+            // 'image'=>'required',
+        ],[
+            'ten.required'=>'+Ban chưa nhập tên ',
+            'mota.required'=>'+Ban chưa nhập mô tả ',
+            'noidung.required'=>'+ Bạn chưa nhập nội dung',
+            // 'image.required'=>'+ Bạn chưa chọn hình'
+            
+        ]);
         $data=intro::Find($id);
         $data->intro_title=$req->ten;
         $data->intro_desc=$req->mota;
         $data->intro_content=$req->noidung;
         $get_image=request('image');
         $path="uploads/intro";
+        File::delete('uploads/intro/'.$data->intro_image);
         if($get_image){
             // unlink($path.$data->intro_image);
             $get_name_image=$get_image->getClientOriginalName();
@@ -45,6 +61,7 @@ class IntroController extends Controller
             $data->intro_image = $new_image;
         }
         $data->save();
+        Session::flash('message','Cập nhật thành công');
         return redirect()->back();
     }
 }

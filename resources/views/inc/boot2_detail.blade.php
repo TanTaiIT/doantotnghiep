@@ -6,91 +6,301 @@
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
     <script src="{!! asset('web/js/slick.js')!!}"></script>
-     <script>
-        $('.run1').slick({
-            lazyLoad: 'progressive', infinite: true, accessibility:false, vertical:false, slidesToShow: 3,  
-            slidesToScroll: 1, autoplay:true,  autoplaySpeed:3000, speed:1000, arrows:true, 
-            centerMode:false,  dots:false,  draggable:true, variableWidth:false,
-        });
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script src="{!! asset('web/js/app.js')!!}"></script>    
+    <script src="{!! asset('layout_admin/admin/vendors/validator/validator.js')!!}"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script> -->
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 
-    </script>
+<script>
+    window.addEventListener('load',function(){
+        const load=document.querySelector('.loader');
+        load.className+=" hidden";
+    })
+</script>
+
+@yield('script')
+<script>
+    $('#login-form').validate({
+        rules: {
+        
+        email: {
+          required: true,
+          email: true
+        },
+        password: {
+            required:true,
+            minlength:8
+        }
+        
+    },
+    messages: {
+                       
+                        email: {
+                            required: "Vui lòng nhập email",
+                            email: "Vui lòng nhập đúng định dạng email"
+                        },
+                        password: {
+                            required: "Vui lòng nhập mật khẩu",
+                            minlength: "Vui lòng nhập ít nhất 8 kí tự",
+                        },
+                        
+                        
+                        
+                    }
+    });
+</script>
+
+<script>
+    $('#regis-form').validate({
+        rules: {
+        name: {
+            required: true,
+            minlength: 5
+        },
+        sdt: {
+          required: true,
+          number: true,
+          minlength: 9
+        },
+        email: {
+          required: true,
+          email: true
+        },
+        password: {
+            required:true,
+            minlength:8
+        },
+        re_password: {
+            required:true,
+            minlength:8,
+            equalTo: "#password"
+            
+        }
+    },
+        messages: {
+                        name: {
+                            required:"vui lòng nhập tên",
+                            minlength:"Vui lòng nhập ít nhất 5 ký tự",
+                        },
+                        sdt: {
+                            required: "Vui lòng nhập số điện thoại",
+                            minlength: "Số máy quý khách vừa nhập là số không có thực",
+                            number: "Số điện thoại phải là số nguyên dương",
+
+                        },
+                        email: {
+                            required: "Vui lòng nhập email",
+                            email: "Vui lòng nhập đúng định dạng email",
+                        },
+                        password: {
+                            required: "Vui lòng nhập mật khẩu",
+                            minlength: "Vui lòng nhập ít nhất 8 kí tự",
+                        },
+                        re_password: {
+                            required: "Vui lòng nhập lại mật khẩu",
+                            minlength: "Vui lòng nhập ít nhất 8 kí tự",
+                            equalTo: " Vui lòng nhập đúng mật khẩu ở trên",
+                        },
+                        
+                        
+                    }
+        
+      
+    });
+</script>
     <script>
-        $('.rundt').slick({
-            lazyLoad: 'progressive', infinite: true, accessibility:false, vertical:false, slidesToShow: 1,  
-            slidesToScroll: 1, autoplay:true,  autoplaySpeed:3000, speed:1000, arrows:true, 
-            centerMode:false,  dots:false,  draggable:true, variableWidth:true,
-        });
+    
+    $( "#pay-form" ).validate({
+      rules: {
+        shipping_name: {
+            required: true,
+            minlength: 5
+        },
+        shipping_email: {
+          required: true,
+          email: true
+        },
+        shipping_phone: {
+          required: true,
+          number: true,
+          minlength: 10
+        },
+        shipping_notes: {
+            required:false,
+        },
+        shipping_address: {
+            required:true,
+            minlength:5
+        }
+        
+      },
+      messages: {
+                        shipping_name:{
+                            required:"vui lòng nhập tên",
+                            minlength:"Vui lòng nhập ít nhất 5 ký tự"
+                        },
+                        shipping_email: {
+                            required: "Vui lòng nhập email",
+                            email: "Email không hợp lệ",
+
+                        },
+                        shipping_phone: {
+                            required: "Vui lòng nhập số điện thoại",
+                            minlength: "Số máy quý khách vừa nhập là số không có thực",
+                            number: "Số điện thoại phải là số nguyên dương",
+                        },
+                        shipping_address: {
+                            required: 'Vui lòng nhập địa chỉ',
+                            minlength: 'Vui lòng nhập ít nhất 5 kí tự'
+                        },
+                        
+                        
+                    }
+    });
+    </script>
+
+    <script>
+        // initialize a validator instance from the "FormValidator" constructor.
+        // A "<form>" element is optionally passed as an argument, but is not a must
+        var validator = new FormValidator({
+            "events": ['blur', 'input', 'change']
+        }, document.forms[0]);
+        // on form "submit" event
+        document.forms[0].onsubmit = function(e) {
+            var submit = true,
+                validatorResult = validator.checkAll(this);
+            console.log(validatorResult);
+            return !!validatorResult.valid;
+        };
+        // on form "reset" event
+        document.forms[0].onreset = function(e) {
+            validator.reset();
+        };
+        // stuff related ONLY for this demo page:
+        $('.toggleValidationTooltips').change(function() {
+            validator.settings.alerts = !this.checked;
+            if (this.checked)
+                $('form .alert').remove();
+        }).prop('checked', false);
 
     </script>
+   <script type="text/javascript">
+    $('#fo').on('submit',function(e){
+        e.preventDefault();
+        var formData=$(this).serialize();
+        var full=window.location.href;
+        var final=full+"&"+formData;
+        window.location.href=final;
+
+
+    })
+    </script>
+@yield('payment')
+<script>
+    show_comment();
+    
+    $('#commentForm').on('submit',function(e){
+        e.preventDefault();
+        var url=document.URL;
+        var url_arr=url.split('/');
+        var id=url_arr[url_arr.length-1];
+        var _token = $('input[name="_token"]').val();
+        var name=$('.name').val();
+        var comment=$('.comment').val();
+        var commentId=$('.commentId').val();
+        var pro_id=$('.pro_id').val();
+        $.ajax({
+            url:'{{url('/cli/send-comment')}}',
+            method:'POST',
+            data:{name:name,comment:comment,commentId:commentId,pro_id:pro_id,_token:_token},
+            success:function(data){
+                toastr.success('add comment success');
+                $('#commentForm').trigger('reset');
+                show_comment();
+                $('#commentId').val(0);
+               
+
+            }
+
+        });
+
+        
+    });
+    function add(){
+        let dia=document.getElementById('dia');
+        dia.classList.add('marl');
+    }
+    function show_comment(){
+        var url=document.URL;
+        var url_arr=url.split('/');
+        var id=url_arr[url_arr.length-1];
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url:'{{url('/cli/load-comment')}}',
+            method:'POST',
+            data:{id:id,_token:_token},
+            success:function(data){
+                $('#binhluan').html(data);
+            }
+        });
+    }
+
+    $(document).on('click', '.reply', function(){
+        var commentId = $(this).attr("id");
+        $('#commentId').val(commentId);
+        $('#name').focus();
+    });
+</script>
+  
+    <script src="{!! asset('layout_admin/js/validate.js')!!}"></script>
+
+
     
       <script type="text/javascript">
-        $(document).ready(function(){
-            load_comment();
-            function load_comment(){
-                var product_id = $('.comment_product_id').val();
-                var _token = $('input[name="_token"]').val();
-                $.ajax({
-                    url:'{{url("cli/load-comment")}}',
-                    method:"POST",
-                    data:{product_id:product_id,_token:_token},
-                    success:function(data){
-                        $('#comment_show').html(data);
-                    }
-                });
-             }
-             $('.send-comment').click(function(){
-                var product_id = $('.comment_product_id').val();
-                var comment_name = $('.comment_name').val();
-                var comment = $('.comment_content').val();
-                var _token = $('input[name="_token"]').val();
-                $.ajax({
-                    url:'{{url("cli/send-comment")}}',
-                    method:"POST",
-                    data:{product_id:product_id,comment_name:comment_name,comment:comment,_token:_token},
-                    success:function(data){
-                        
-                        $('#notify_comment').html('<span class="text text-success">Thêm bình luận thành công, bình luận đang chờ duyệt</span>');
-                        load_comment();
-                        $('#notify_comment').fadeOut(10000);
-                        $('.comment_name').val('');
-                        $('.comment').val('');
-                    }
-                });
-             });
+        function huydonhang(myid) {
+            var id = myid;
+            var lydo = $('.lydohuydon').val();
+            var order_status = 3;
+            var _token = $('input[name="_token"]').val();
+            swal({
+                  title: "Hủy đơn hàng",
+                  text: "Bạn có chắc muốn hủy đơn hàng này không?",
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonClass: "btn-danger",
+                  confirmButtonText: "Hủy",
+
+                    cancelButtonText: "Không hủy",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },function(isConfirm){
+                if(isConfirm){
+            $.ajax({
+            url:'../huy-don-hang',
+            method:"post",
+            data:{_token:_token, id:id, lydo:lydo, order_status:order_status},
+            success:function(data){
+               alert('Hủy đơn hàng thành công');
+               location.reload();
+            }
+           
+        });
+        }else{
+            swal("Đóng", "đơn hàng chưa bị hủy", "error");
+        }
     });
+            
+        }
+        
     </script> 
 
 
     
 	<script type="text/javascript">
-        $('.xemnhanh').click(function(){
-            var product_id = $(this).data('id_product');
-            var _token = $('input[name="_token"]').val();
-            $.ajax({
-            url:"{{url('/quickview')}}",
-            method:"POST",
-            dataType:"JSON",
-            data:{product_id:product_id, _token:_token},
-              success:function(data){
-                $('#product_quickview_title').html(data.product_name);
-                $('#product_quickview_id').html(data.product_id);
-                $('#product_quickview_price').html(data.product_price);
-                $('#product_quickview_image').html(data.product_image);
-                $('#product_quickview_gallery').html(data.product_gallery);
-                $('#product_quickview_desc').html(data.product_desc);
-                $('#product_quickview_content').html(data.product_content);
-                $('#product_quickview_value').html(data.product_quickview_value);
-                $('#product_quickview_button').html(data.product_button);
-                $('#product_soluong').html(data.product_soluong);
-                
-              }
-            });
-        });
-        $(document).on('click','.redirect-cart',function(){
-                window.location.href = "{{url('/cli/checkout')}}";
-            });
+        
    
 </script>
 
@@ -124,143 +334,12 @@
         });
     </script>
 
- <script type="text/javascript">
-        $(document).ready(function(){
-            $('.add-to-cart').click(function(){
-              
-                var id = $(this).data('id_product');
-                var size=$('input[name=size]:checked').val();
-                var hot=$('input[name=hot]:checked').val();
-                var soluong=$('.cart_product_sl').val();
-                var _token = $('input[name="_token"]').val();
-                var sl=$('.cart_soluong').val();
-                if(parseInt(soluong) > parseInt(sl)){
-                    toastr.warning("số lượng bạn đặt lớn hơn số sản phẩm mà chúng tôi có, làm ơn đặt số lượng nhỏ hơn" + " "+ sl);
-                }else{
-                if($("input:radio[name='size']").is(":checked") && $("input:radio[name='hot']").is(":checked")) {
-                    $.ajax({
-                        url: '{{url('/cart')}}',
-                        method: 'POST',
-                        data:{id:id,_token:_token,size:size,hot:hot,soluong:soluong},
-                        beforeSend: function(){
-                            $("#beforesend_quickview").html("<img width='30px' height='30px'src='../../web/images/Spinner-3.gif'>");
-                        },
-                        success:function(){
-                            
-                            $("#beforesend_quickview").html("<p class='text text-success'>Sản phẩm đã thêm vào giỏ hàng</p>");
-                            window.location.reload();
-                           
-                           
-                           
-                        }
-
-                    });
-              }else{
-                toastr.warning('bạn cần phải chọn đầy đủ thông tin trước khi mua hàng');
-              }
-                }
-                
-            });
-        });
-    </script>
-  <script type="text/javascript">
-       
-            $(document).on('click','.add-to-cart-quickview',function(){
-                var id = $(this).data('id_product');
-                var size=$('input[name=size]:checked').val();
-                var hot=$('input[name=hot]:checked').val();
-                var soluong=$('.cart_product_sl').val();
-                var _token = $('input[name="_token"]').val();
-                if($("input:radio[name='size']").is(":checked") && $("input:radio[name='hot']").is(":checked")) {
-                    $.ajax({
-                        url: '{{url('/cart')}}',
-                        method: 'POST',
-                        data:{id:id,_token:_token,size:size,hot:hot,soluong:soluong},
-                            success:function(error){
-                                // toastr.warning('sản phẩm bạn đặt quá lớn, vui lòng đặt với số lượng nhỏ hơn');
-                                window.location.reload();
-                        // beforeSend: function(){
-                        //     $("#beforesend_quickview").html("<img width='30px' height='30px' src='../public/web/images/Spinner-3.gif'>");
-                        // },
-                        // success:function(){
-                        //     $("#beforesend_quickview").html("<p class='text text-success'>Sản phẩm đã thêm vào giỏ hàng</p>");
-                        //     window.location.reload();
-
-                            
-
-                        }
-                        
-
-                    });
-                }else{
-                     toastr.warning('bạn cần phải chọn đầy đủ thông tin trước khi mua hàng');
-                }
-            });
-        
-    </script>
-	<script type="text/javascript">
-	$(".remove-from-cart").click(function (e) {
-            e.preventDefault();
-
-            var ele = $(this);
-
-            // if(confirm("bạn có chắc muốn xóa không")) {
-                $.ajax({
-                    url: '{{ url('remove-from-cart') }}',
-                    method: "DELETE",
-                    data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id")},
-                    success: function (response) {
-                        window.location.reload();
-
-                        // alert('đã xóa sản phẩm ra khỏi giỏ hàng');
-                    }
-                });
-            // }
-        });
-        </script>
-        <script type="text/javascript">
-
-        $(".update-cart").click(function (e) {
-           e.preventDefault();
-
-           var ele = $(this);
-
-            $.ajax({
-               url: '{{ url('update-cart') }}',
-               method: "patch",
-               data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: ele.parents('tr').find('.quantity').val()},
-               success: function (data) {
-                 window.location.reload();
-               }
-            });
-        });
-
-        $(".remove-from-cart").click(function (e) {
-            e.preventDefault();
-
-            var ele = $(this);
-
-            // if(confirm("bạn có chắc muốn xóa không")) {
-                $.ajax({
-                    url: '{{ url('remove-from-cart') }}',
-                    method: "DELETE",
-                    data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id")},
-                    success: function (response) {
-                        window.location.reload();
-
-                        // alert('đã xóa sản phẩm ra khỏi giỏ hàng');
-                    }
-                });
-            // }
-        });
-
-    </script>
-	   <script type="text/javascript">
+<script type="text/javascript">
     function remove_background(product_id)
      {
       for(var count = 1; count <= 5; count++)
       {
-       $('#'+product_id+'-'+count).css('color', '#ccc');
+       $('#'+product_id+'-'+count).css('color', 'grey');
       }
     }
     //hover chuột đánh giá sao
@@ -348,29 +427,24 @@
 		});
 	</script>
 	<!-- nav smooth scroll -->
-	<script>
-		$(document).ready(function () {
-			$(".dropdown").hover(
-				function () {
-					$('.dropdown-menu', this).stop(true, true).slideDown("fast");
-					$(this).toggleClass('open');
-				},
-				function () {
-					$('.dropdown-menu', this).stop(true, true).slideUp("fast");
-					$(this).toggleClass('open');
-				}
-			);
-		});
-	</script>
+
 	<script src="{!! asset('web/js/amazingslider.js')!!}"></script>
 	<script src="{!! asset('web/js/initslider-1.js')!!}"></script>
-	<script>
+	<!-- <script>
 		$(document).ready(function(){
 			function thongbao(){
 				$.bootstrapGrowl("đã thêm sản phẩm vào giỏ hàng");
 			}
 		});
-	</script>
+	</script> -->
+  <!--   <script>
+        
+        function bao(){
+            swal('Thông báo','Đơn hàng của bạn đã hoàn tất, chúng tôi sẽ giao hàng sớm nhất');
+            
+        }
+    
+    </script> -->
 	<!-- //nav smooth scroll -->
 
 	<!-- popup modal (for location)-->
@@ -379,38 +453,7 @@
 
 	<!-- cart-js -->
 	<script src="{!! asset('web/js/sweetalert.min.js')!!}"></script>
-	<script src="{!! asset('web/js/minicart.js')!!}"></script>
-	<script>
-		paypals.minicarts.render(); //use only unique class names other than paypals.minicarts.Also Replace same class name in css and minicart.min.js
-
-		paypals.minicarts.cart.on('checkout', function (evt) {
-			var items = this.items(),
-				len = items.length,
-				total = 0,
-				i;
-
-			// Count the number of each item in the cart
-			for (i = 0; i < len; i++) {
-				total += items[i].get('quantity');
-			}
-
-			if (total < 3) {
-				alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
-				evt.preventDefault();
-			}
-		});
-	</script>
-	<!-- //cart-js -->
-
-	<!-- password-script -->
-	
-	<!-- //password-script -->
-	
-	<!-- scroll seller -->
 	<script src="{!! asset('web/js/scroll.js')!!}"></script>
-	<!-- //scroll seller -->
-
-	<!-- smoothscroll -->
 	<script src="{!! asset('web/js/SmoothScroll.min.js')!!}"></script>
 	<!-- //smoothscroll -->
 
@@ -450,17 +493,31 @@
 	<script src="{!! asset('web/js/sweetalert.min.js')!!}"></script>
 <script type="text/javascript">
 
-          $(document).ready(function(){
+          $(window).load(function(){
             $('.send_order').click(function(){
+                var shipping_email = $('.shipping_email').val();
+                        var shipping_name = $('.shipping_name').val();
+                        var shipping_address = $('.shipping_address').val();
+                        var shipping_phone = $('.shipping_phone').val();
+                        var shipping_notes = $('.shipping_notes').val();
+                        var shipping_method = $('.payment_select').val();
+                        var shipping_address1=$('.shipping_address1').val();
+                        var order_fee = $('.order_fee').val();
+                        var order_coupon = $('.order_coupon').val();
+                        var _token = $('input[name="_token"]').val();
+                        if(shipping_name=='' || shipping_email=='' || shipping_address=='' ||  shipping_phone=='' || shipping_method=='' || shipping_address1==''){
+                            toastr.warning('làm ơn hoàn tất thông tin trước khi đặt');
+                        }else{
+                
                 swal({
                   title: "Xác nhận đơn hàng",
-                  text: "Đơn hàng sẽ không được hoàn trả khi đặt,bạn có muốn đặt không?",
+                  text: "Bạn có chắc muốn đặt hàng không?",
                   type: "warning",
                   showCancelButton: true,
                   confirmButtonClass: "btn-danger",
-                  confirmButtonText: "Cảm ơn, Mua hàng",
+                  confirmButtonText: "Đặt hàng",
 
-                    cancelButtonText: "Đóng,chưa mua",
+                    cancelButtonText: "Không đặt",
                     closeOnConfirm: false,
                     closeOnCancel: false
                 },
@@ -472,33 +529,40 @@
                         var shipping_phone = $('.shipping_phone').val();
                         var shipping_notes = $('.shipping_notes').val();
                         var shipping_method = $('.payment_select').val();
+                        var shipping_address1=$('.shipping_address1').val();
                         var order_fee = $('.order_fee').val();
                         var order_coupon = $('.order_coupon').val();
                         var _token = $('input[name="_token"]').val();
+                        
 
                         $.ajax({
                             url: '{{url('/confirm-order')}}',
                             method: 'POST',
-                            data:{shipping_email:shipping_email,shipping_name:shipping_name,shipping_address:shipping_address,shipping_phone:shipping_phone,shipping_notes:shipping_notes,_token:_token,order_fee:order_fee,order_coupon:order_coupon,shipping_method:shipping_method},
+                            data:{shipping_email:shipping_email,shipping_name:shipping_name,shipping_address:shipping_address,shipping_phone:shipping_phone,shipping_address1:shipping_address1,shipping_notes:shipping_notes,_token:_token,order_fee:order_fee,order_coupon:order_coupon,shipping_method:shipping_method},
                             success:function(){
-                               // swal("Đơn hàng", "Đơn hàng của bạn đã được gửi thành công", "success");
-                               window.location='{{url('/thankyou')}}';
+                               
+
                             }
                         });
+                    
 
                         // window.setTimeout(function(){ 
-                        //     location.reload();
+                        //     $('#infomodal').modal('show');
                         // } ,3000);
 
                       } else {
                         swal("Đóng", "Đơn hàng chưa được gửi, làm ơn hoàn tất đơn hàng", "error");
 
                       }
+
+                  
               
                 });
 
+}
                
             });
+
         });
     
 
@@ -507,56 +571,10 @@
 
 	<!-- for bootstrap working -->
 	<script src="{!! asset('web/js/bootstrap.js')!!}"></script>
-	<script type="text/javascript">
-        $(document).ready(function(){
-            $('.choose').on('change',function(){
-            var action = $(this).attr('id');
-            var ma_id = $(this).val();
-            var _token = $('input[name="_token"]').val();
-            var result = '';
-           
-            if(action=='city'){
-                result = 'province';
-            }else{
-                result = 'wards';
-            }
-            $.ajax({
-                url : '{{url('/select-delivery-home')}}',
-                method: 'POST',
-                data:{action:action,ma_id:ma_id,_token:_token},
-                success:function(data){
-                   $('#'+result).html(data);     
-                }
-            });
-        });
-        });
-          
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('.calculate_delivery').click(function(){
-                var matp = $('.city').val();
-                var maqh = $('.province').val();
-                var xaid = $('.wards').val();
-                var _token = $('input[name="_token"]').val();
-                if(matp == '' && maqh =='' && xaid ==''){
-                    alert('Làm ơn chọn để tính phí vận chuyển');
-                }else{
-                    $.ajax({
-                    url : '{{url('/calculate-fee')}}',
-                    method: 'POST',
-                    data:{matp:matp,maqh:maqh,xaid:xaid,_token:_token},
-                    success:function(){
-                       location.reload(); 
-                    }
-                    });
-                } 
-        });
-    });
-    </script>
+
 
     <link rel="stylesheet" type="text/css" href="{!! asset('web/css/easy-responsive-tabs.css')!!} " />
-    <script src="{!! asset('web/js/easyResponsiveTabs.js"></script>
+    <script src="{!! asset('web/js/easyResponsiveTabs.js')!!}"></script>
 
     <script>
         $(document).ready(function () {
@@ -577,27 +595,8 @@
         });
     </script>
 
-    <script>
-$(document).ready(function(){
-    if($(".newshome-scroll ul").exists())
-    {
-        $(".newshome-scroll ul").simplyScroll({
-            customClass: 'vert',
-            orientation: 'vertical',
-            // orientation: 'horizontal',
-            auto: true,
-            manualMode: 'auto',
-            pauseOnHover: 1,
-            speed: 1,
-            loop: 0
-        });
-    }
-
-});
-    
-    
-
-    </script>
+    @yield('paginate')
+ 
 
  
 

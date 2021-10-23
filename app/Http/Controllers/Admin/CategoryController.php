@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\category;
 use App\Imports\Imports;
 use App\Exports\Export;
+use App\Models\product;
 use Excel;
 use Session;
 class CategoryController extends Controller
@@ -15,16 +16,33 @@ class CategoryController extends Controller
         return view("admin.trangchu");
     }
 	
+    // public function index(){
+		
+    // 	$cate=category::all();
+    // 	return view('admin/loaisp/index',compact('cate'));
+    // }
     public function index(){
-		
-    	$cate=category::all();
-    	return view('admin/loaisp/index',compact('cate'));
+        
+        $cate=category::paginate(10);
+        return view('manager/cate_product/index',compact('cate'));
     }
-    public function addcate(){
+    // public function addcate(){
 		
-    	return view('admin/loaisp/add_category');
+    // 	return view('admin/loaisp/add_category');
+    // }
+     public function addcate(){
+        
+        return view('manager/cate_product/add_category');
     }
     public function themcat(Request $req){
+        $this->validate($req, [
+            'ten'=>'required',
+            'mota'=>'required',
+        ],[
+            'ten.required'=>'+Ban chưa nhập tên ',
+            'mota.required'=>'+Ban chưa nhập mô tả ',
+            
+        ]);
     	$cate=new category();
     	$cate->category_name=$req->ten;
     	$cate->category_desc=$req->mota;
@@ -36,10 +54,15 @@ class CategoryController extends Controller
     	}
     	return redirect()->route('cate_index');
     }
-    public function edit($id){
+    // public function edit($id){
 		
-    	$cate_edit=category::FindOrFail($id);
-    	return view('admin/loaisp/category_edit',compact('cate_edit'));
+    // 	$cate_edit=category::FindOrFail($id);
+    // 	return view('admin/loaisp/category_edit',compact('cate_edit'));
+    // }
+    public function edit($id){
+        
+        $cate_edit=category::FindOrFail($id);
+        return view('manager/cate_product/edit_category',compact('cate_edit'));
     }
     public function update(Request $req,$id){
     	$cat=category::FindOrFail($id);
@@ -56,10 +79,10 @@ class CategoryController extends Controller
     public function delete($id){
     	$cate=category::FindOrFail($id);
     	if($cate->delete()){
-    		Session::flash("message","Xóa sản phẩm thành công");
+    		Session::flash("message","Xóa loại sản phẩm thành công");
     	}
     	else{
-    		Session::flash("message","Xóa sản phẩm thất bại");
+    		Session::flash("message","Xóa loại sản phẩm thất bại");
     	}
     	return redirect()->route('cate_index');
     }
@@ -67,9 +90,13 @@ class CategoryController extends Controller
     public function export_csv(){
     return Excel::download(new Export , 'category.xlsx');
     }
-    public function import_csv(Request $request){
-    $path = $request->file('file')->getRealPath();
-    Excel::import(new Imports, $path);
-    return back();
+    public function import_csv() 
+    {
+        Excel::import(new Imports,request()->file('file')); 
+        return back();
+    }
+    
 }
-}
+
+
+

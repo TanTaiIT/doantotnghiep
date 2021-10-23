@@ -1,1 +1,1 @@
-<h2>Bấm vào đây để xác nhận mậy khẩu thằng lồn Click <a href="{{$route}}">vào đây</a> để lấy lại mật khẩu</h2>
+<h2>Vui lòng bấm vào đây để xác nhận mật khẩu. Click <a href="{{$route}}">vào đây</a> để lấy lại mật khẩu</h2>

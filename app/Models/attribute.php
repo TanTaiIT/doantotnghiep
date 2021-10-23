@@ -10,9 +10,11 @@ class attribute extends Model
     use HasFactory;
     protected $table='product_attribute';
     protected $fillable=[
-    	'product_id',
+    	'attr_id',
     	'name',
     	'value',
     	
     ];
+    protected $primaryKey='attr_id';
+    
 }

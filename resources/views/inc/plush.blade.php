@@ -1,146 +1,95 @@
-<script>
-		$('.value-plus').on('click', function () {
-			var divUpd = $(this).parent().find('.value'),
-				newVal = parseInt(divUpd.text(), 10) + 1;
-			divUpd.text(newVal);
-		});
+    <title>{{$meta_title}}</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="3;url=cli/index/" />
 
-		$('.value-minus').on('click', function () {
-			var divUpd = $(this).parent().find('.value'),
-				newVal = parseInt(divUpd.text(), 10) - 1;
-			if (newVal >= 1) divUpd.text(newVal);
-		});
-	</script>
-	<!--quantity-->
-	<script>
-		$(document).ready(function (c) {
-			$('.close1').on('click', function (c) {
-				$('.rem1').fadeOut('slow', function (c) {
-					$('.rem1').remove();
-				});
-			});
-		});
-	</script>
-	<script>
-		$(document).ready(function (c) {
-			$('.close2').on('click', function (c) {
-				$('.rem2').fadeOut('slow', function (c) {
-					$('.rem2').remove();
-				});
-			});
-		});
-	</script>
-	<script>
-		$(document).ready(function (c) {
-			$('.close3').on('click', function (c) {
-				$('.rem3').fadeOut('slow', function (c) {
-					$('.rem3').remove();
-				});
-			});
-		});
-	</script>
-    <script src="{!! asset('web/js/sweetalert.min.js')!!}"></script>
-	
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('.choose').on('change',function(){
-            var action = $(this).attr('id');
-            var ma_id = $(this).val();
-            var _token = $('input[name="_token"]').val();
-            var result = '';
-           
-            if(action=='city'){
-                result = 'province';
-            }else{
-                result = 'wards';
-            }
-            $.ajax({
-                url : '{{url('/select-delivery-home')}}',
-                method: 'POST',
-                data:{action:action,ma_id:ma_id,_token:_token},
-                success:function(data){
-                   $('#'+result).html(data);     
-                }
-            });
-        });
-        });
-          
+    <!-- <meta name="keywords" content="Electro Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"
+    /> -->
+    <meta name="title" content="{{$meta_title}}">
+    <meta name="description" content="{{$meta_desc}}">
+
+    <link  rel="icon" type="image/x-icon" href="" />
+    <meta name="robots" content="INDEX,FOLLOW"/>
+    <link  rel="canonical" href="{{$url_canonical}}" />
+    <meta name="author" content="">
+
+    <?php 
+      if($com=='detail'){ ?>
+    <meta property="og:url"            content="{{$url_canonical}}" />
+<meta property="og:type"               content="article" />
+<meta property="og:title"              content="{{$meta_title}}" />
+<meta property="og:description"        content="{{$meta_desc}}" />
+<meta property="og:image"              content="{{$share_images}}" />
+  
+      <?php }
+    ?>
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
     </script>
-    <script src="{!! asset('web/js/sweetalert.min.js')!!}"></script>
-    <script type="text/javascript">
-
-          $(document).ready(function(){
-            $('.send_order').click(function(){
-                swal({
-                  title: "Xác nhận đơn hàng",
-                  text: "Đơn hàng sẽ không được hoàn trả khi đặt,bạn có muốn đặt không?",
-                  type: "warning",
-                  showCancelButton: true,
-                  confirmButtonClass: "btn-danger",
-                  confirmButtonText: "Cảm ơn, Mua hàng",
-
-                    cancelButtonText: "Đóng,chưa mua",
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                },
-                function(isConfirm){
-                     if (isConfirm) {
-                        var shipping_email = $('.shipping_email').val();
-                        var shipping_name = $('.shipping_name').val();
-                        var shipping_address = $('.shipping_address').val();
-                        var shipping_phone = $('.shipping_phone').val();
-                        var shipping_notes = $('.shipping_notes').val();
-                        var shipping_method = $('.payment_select').val();
-                        var order_fee = $('.order_fee').val();
-                        var order_coupon = $('.order_coupon').val();
-                        var _token = $('input[name="_token"]').val();
-
-                        $.ajax({
-                            url: '{{url('/confirm-order')}}',
-                            method: 'POST',
-                            data:{shipping_email:shipping_email,shipping_name:shipping_name,shipping_address:shipping_address,shipping_phone:shipping_phone,shipping_notes:shipping_notes,_token:_token,order_fee:order_fee,order_coupon:order_coupon,shipping_method:shipping_method},
-                            success:function(){
-                               // swal("Đơn hàng", "Đơn hàng của bạn đã được gửi thành công", "success");
-                               window.location='{{url('thankyou')}}';
-                            }
-                        });
-
-                        window.setTimeout(function(){ 
-                            location.reload();
-                        } ,3000);
-
-                      } else {
-                        swal("Đóng", "Đơn hàng chưa được gửi, làm ơn hoàn tất đơn hàng", "error");
-
-                      }
-              
-                });
-
-               
-            });
-        });
+    <!-- //Meta tag Keywords -->
+    <link rel="stylesheet" href="{!! asset('web/css/sweetalert.css')!!}" type="text/css" media="all"/>
+    <!-- Custom-Files -->
+    <link href="{!! asset('web/css/bootstrap.css')!!}" rel="stylesheet" type="text/css" media="all" />
+    <!-- Bootstrap css -->
+    <link href="{!! asset('web/css/style.css')!!}" rel="stylesheet" type="text/css" media="all" />
+    <!-- Main css -->
+    <link rel="stylesheet" href="{!! asset('web/css/fontawesome-all.css')!!}">
+    <!-- Font-Awesome-Icons-CSS -->
+    <link href="{!! asset('web/css/popuo-box.css')!!}" rel="stylesheet" type="text/css" media="all" />
+    <!-- pop-up-box -->
+    <link href="{!! asset('web/css/menu.css')!!}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{!! asset('web/css/slick-theme.css')!!}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{!! asset('web/css/slick.css')!!}" rel="stylesheet" type="text/css" media="all" />
     
+    
+    <link href="{!! asset('web/css/jquery.simplyscroll-style.css')!!}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{!! asset('web/css/jquery.simplyscroll.css')!!}" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="{!! asset('web/css/owl_them.css')!!}">
+    <link rel="stylesheet" href="{!! asset('web/css/owl.css')!!}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
+    <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&amp;subset=latin-ext" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese"
+        rel="stylesheet">
 
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('.calculate_delivery').click(function(){
-                var matp = $('.city').val();
-                var maqh = $('.province').val();
-                var xaid = $('.wards').val();
-                var _token = $('input[name="_token"]').val();
-                if(matp == '' && maqh =='' && xaid ==''){
-                    alert('Làm ơn chọn để tính phí vận chuyển');
-                }else{
-                    $.ajax({
-                    url : '{{url('/calculate-fee')}}',
-                    method: 'POST',
-                    data:{matp:matp,maqh:maqh,xaid:xaid,_token:_token},
-                    success:function(){
-                       location.reload(); 
-                    }
-                    });
-                } 
+    <link href="{!! asset('layout_admin/admin/vendors/animate.css/animate.min.css')!!}" rel="stylesheet">
+
+
+    <!-- Messenger Plugin chat Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Plugin chat code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+ 
+
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "103770788636351");
+      chatbox.setAttribute("attribution", "biz_inbox");
+
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v11.0'
         });
-    });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
     </script>
+    <!-- //web fonts -->
+    

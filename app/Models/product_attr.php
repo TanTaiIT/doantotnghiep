@@ -13,5 +13,9 @@ class product_attr extends Model
         'product_id',
         'attr_id'
     ];
+    protected $primaryKey='id';
+    public function attribute(){
+        return $this->belongsTo('App\Models\attribute','attr_id');
+    }
     
 }

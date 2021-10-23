@@ -14,4 +14,7 @@ class Order extends Model
     ];
     protected $primaryKey = 'order_id';
  	protected $table = 'tbl_order';
+    public function shipping(){
+        return $this->belongsTo('App\Models\shipping','shipping_id');
+    }
 }

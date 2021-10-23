@@ -6,13 +6,6 @@
                 <li><a href="#" target="_blank" title=""><img src="{!! asset('uploads/slider/'.$s->slider_image)!!}" alt="" title=""/></a>
                 </li>
                 @endforeach
-                <!-- <li><a href="#" target="_blank" title=""><img src="{!! asset('web/images/y5.jpg')!!}" alt="" title=""/></a>
-                </li>
-                <li><a href="#" target="_blank" title=""><img src="{!! asset('web/images/y9.jpg')!!}" alt="" title=""/></a>
-                </li>
-                <li><a href="#" target="_blank" title=""><img src="{!! asset('web/images/y6.jpg')!!}" alt="" title=""/></a>
-                </li> -->
-               
             </ul>        
         </div>
     </div> 

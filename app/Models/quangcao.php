@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class quangcao extends Model
 {
     use HasFactory;
-    protected $table="tbl_quangcao";
+    protected $table="tbl_addvertised";
     protected $fillable=[
         'link','quangcao_name','hinh_quangcao','quangcao_status'
     ];

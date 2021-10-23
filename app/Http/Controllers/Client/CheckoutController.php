@@ -7,13 +7,9 @@ use Illuminate\Http\Request;
 use Session;
 use App\Models\custommer;
 use App\Models\category;
-use App\Models\city;
-use App\Models\province;
-use App\Models\wards;
-use App\Models\brand;
-use App\Models\Feeship;
 use App\Models\coupon;
 use App\Models\CatePost;
+use App\Models\chinhsach;
 use DB;
 use App\Models\shipping;
 use App\Models\Order;
@@ -22,9 +18,13 @@ use PDF;
 use Mail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Social; //sử dụng model Social
+use Socialite; //sử dụng Socialite
 
 
-class CheckoutController extends Controller
+
+
+class  CheckoutController extends Controller
 {
     public function print_order($checkout_code){
         $pdf = \App::make('dompdf.wrapper');
@@ -72,80 +72,80 @@ class CheckoutController extends Controller
         $output.='<style>body{
             font-family: DejaVu Sans;
         }
-        .table-styling{
-            border:1px solid #000;
+        .tieu{
+            font-size: 15px;
+            font-weight: bold;
         }
-        .table-styling tbody tr td{
-            border:1px solid #000;
+        .table-bordered{
+            border:0.5px solid #000;
+            width:100%;
+            margin-top:30px;
         }
+        .table-bordered tbody tr td{
+            border:0.5px solid #000;
+        }
+        .table-bordered th{
+            background:grey;
+            color:white;
+        }
+        .bold{
+            font-weight:bold;
+            width:50px;
+        }
+        .mart{
+            margin-top:20px;
+        }
+        .day{
+            text-align:right;
+            margin-top:20px;
+        }
+        .center{
+            text-align:center;
+        }
+
         </style>
-        <h1><centerCông ty TNHH một thành viên ABCD</center></h1>
-        <h4><center>Độc lập - Tự do - Hạnh phúc</center></h4>
-        <p>Người đặt hàng</p>
-        <table class="table-styling">
+
+
+
+        <h4><center style="font-size:18px">HÓA ĐƠN</center></h4>
+        <div class="khah">
+          <div class="heade">
+            <span class="panel-heading1">THÔNG TIN KHÁCH HÀNG</span>
+          </div>
+          <ul style="list-style-type: none; ">
+            <li><span class="tieu">Tên khách hàng:</span> '.$shipping->shipping_name.'</li>
+            <li><span class="tieu">Địa chỉ:</span> '.$shipping->shipping_address.'</li>
+            <li><span class="tieu">Số điện thoại:</span>'.$shipping->shipping_phone.'</li>
+            <li><span class="tieu">Quận: </span>'.$shipping->shipping_address2.'</li>
+            <li><span class="tieu">Email: </span>'.$shipping->shipping_email.'</li>
+            <li><span class="tieu">Ghi chú: </span>'.$shipping->shipping_notes.'</li>
+            <li><span class="tieu">Hình thức thanh toán: </span>';
+            if($shipping->shipping_method==0){
+
+                $output.='<span class="online">Chuyển khoản</span>';
+            }
+            else
+                $output.='<span class="offline">Tiền mặt</span></li>';
+          $output.='</ul>
+        </div>
+
+
+
+
+        
+
+        
+
+        
+
+        <table class="table table-bordered">
         <thead>
         <tr>
-        <th>Tên khách đặt</th>
-        <th>Số điện thoại</th>
-        <th>Email</th>
-        </tr>
-        </thead>
-        <tbody>';
-
-        $output.='      
-        <tr>
-        <td>'.$customer->customer_name.'</td>
-        <td>'.$customer->customer_phone.'</td>
-        <td>'.$customer->customer_email.'</td>
-
-        </tr>';
-
-
-        $output.='              
-        </tbody>
-
-        </table>
-
-        <p>Ship hàng tới</p>
-        <table class="table-styling">
-        <thead>
-        <tr>
-        <th>Tên người nhận</th>
-        <th>Địa chỉ</th>
-        <th>Sdt</th>
-        <th>Email</th>
-        <th>Ghi chú</th>
-        </tr>
-        </thead>
-        <tbody>';
-
-        $output.='      
-        <tr>
-        <td>'.$shipping->shipping_name.'</td>
-        <td>'.$shipping->shipping_address.'</td>
-        <td>'.$shipping->shipping_phone.'</td>
-        <td>'.$shipping->shipping_email.'</td>
-        <td>'.$shipping->shipping_notes.'</td>
-
-        </tr>';
-
-
-        $output.='              
-        </tbody>
-
-        </table>
-
-        <p>Đơn hàng đặt</p>
-        <table class="table-styling">
-        <thead>
-        <tr>
-        <th>Tên sản phẩm</th>
-        <th>Mã giảm giá</th>
+        <th>Tên</th>
         <th>Size</th>
-        <th>Phí ship</th>
         <th>Số lượng</th>
-        <th>Giá sản phẩm</th>
-        <th>Thành tiền</th>
+        <th>Giá</th>
+        <th>Tổng tiền</th>
         </tr>
         </thead>
         <tbody>';
@@ -165,16 +165,18 @@ class CheckoutController extends Controller
 
             $output.='      
             <tr>
-            <td>'.$product->product_name.'</td>
-            <td>'.$product_coupon.'</td>
-            <td>'.$product->product_size.'</td>
-            <td>'.number_format($product->product_feeship,0,',','.').'đ'.'</td>
-            <td>'.$product->product_sales_quantity.'</td>
-            <td>'.number_format($product->product_price,0,',','.').'đ'.'</td>
-            <td>'.number_format($subtotal,0,',','.').'đ'.'</td>
+            <td class="center">'.$product->product_name.'</td>
+            <td class="center">'.$product->product_size.'</td>
+            <td class="center">'.$product->product_sales_quantity.'</td>
+            <td class="center">'.number_format($product->product_price,0,',','.').'đ'.'</td>
+            <td class="center">'.number_format($subtotal,0,',','.').'đ'.'</td>
 
             </tr>';
         }
+        $output.='              
+        </tbody>
+
+        </table>';
 
         if($coupon_condition==1){
             $total_after_coupon = ($total*$coupon_number)/100;
@@ -183,20 +185,18 @@ class CheckoutController extends Controller
             $total_coupon = $total - $coupon_number;
         }
 
-        $output.= '<tr>
-        <td colspan="2">
-        <p>Tổng giảm: '.$coupon_echo.'</p>
-        <p>Phí ship: '.number_format($product->product_feeship,0,',','.').'đ'.'</p>
-        <p>Thanh toán : '.number_format($total_coupon + $product->product_feeship,0,',','.').'đ'.'</p>
-        </td>
-        </tr>';
-        $output.='              
-        </tbody>
+        $output.= '
+        <div class="phiship">
 
-        </table>
+        <p><span class="bold">Tổng giảm</span>:<span class="sp"> '.$coupon_echo.'</span></p>
+        <p><span class="bold">Phí ship</span>:<span class="sp"> '.number_format($product->product_feeship,0,',','.').'đ'.'</span></p>
+        <p><span class="bold">Thanh toán</span> :<span class="sp"> '.number_format($total_coupon + $product->product_feeship,0,',','.').'đ'.'</span></p>
+        </div>';
 
-        <p>Ký tên</p>
-        <table>
+        $output.='<div class="day">TP.HCM, ngày '.Carbon::now()->day.', tháng '.Carbon::now()->month.', năm '.Carbon::now()->year.'</div>';
+        $output.='
+        
+        <table class="mart">
         <thead>
         <tr>
         <th width="200px">Người lập phiếu</th>
@@ -217,18 +217,138 @@ class CheckoutController extends Controller
         return $output;
 
     }
-    public function confirm_order(Request $request){
+    public function confirm_order1(Request $request){
          $url_canonical = $request->url();  
          $cate=category::all();
-         $brand=brand::all();
-         $com='detail';
+         $com='';
          $data = $request->all();
+        if($data['order_coupon']!='no'){
+            $coupon =coupon::where('coupon_code',$data['order_coupon'])->first();
+            $coupon->coupon_used = $coupon->coupon_used.','.Session::get('customer_id');
+            $coupon->coupon_time = $coupon->coupon_time - 1;
+            $coupon_email = $coupon->coupon_code;
+            $coupon->save();
+        }else{
+            $coupon_email="Không có sử dụng";
+        }
 
+         //vận chuyển
          $shipping = new Shipping();
          $shipping->shipping_name = $data['shipping_name'];
          $shipping->shipping_email = $data['shipping_email'];
          $shipping->shipping_phone = $data['shipping_phone'];
          $shipping->shipping_address = $data['shipping_address'];
+         $shipping->shipping_address2 = $data['shipping_address1'];
+         $shipping->shipping_notes = $data['shipping_notes'];
+         $shipping->shipping_method = $data['payment_select'];
+         $shipping->save();
+         $shipping_id = $shipping->shipping_id;
+
+         $checkout_code = substr(md5(microtime()),rand(0,26),5);
+
+  
+         $order = new Order();
+         $order->customer_id = Session::get('customer_id');
+         $order->shipping_id = $shipping_id;
+         $order->order_status = 1;
+         $order->order_code = $checkout_code;
+         date_default_timezone_set('Asia/Ho_Chi_Minh');
+         $today=Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+         $order_date=Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+         $order->order_date=$order_date;
+         $order->created_at = $today;
+         $order->save();
+         $order_id=$order->order_id;
+
+
+        //send email comfirm
+        
+
+
+         if(Session::get('cart')==true){
+            foreach(Session::get('cart') as $key => $cart){
+                $order_details = new OrderDetail();
+                $order_details->order_code = $checkout_code;
+                $order_details->product_id = $cart['pro_id'];
+                $order_details->product_name = $cart['name'];
+                if($cart['price_pro']!=""){
+                    $order_details->product_price = $cart['price']-$cart['price_pro'];
+                }else{
+                    $order_details->product_price = $cart['price'];
+                }
+                $order_details->product_sales_quantity = $cart['quantity'];
+                $order_details->product_size=$cart['size'];
+                $order_details->product_coupon =  $data['order_coupon'];
+                $order_details->product_feeship = $data['order_fee'];
+                $order_details->order_id=$order_id;
+                $order_details->save();
+            }
+         }
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s');
+        $title_email = "Đơn hàng xác nhận ngày".' '.$now;
+        $cus =  custommer::find(Session::get('customer_id'));
+        $data['email'][] = $cus->customer_email;
+
+        if(Session::get('cart')==true){
+            foreach(Session::get('cart') as $key => $cart_email){
+               $cart_array[] =array(
+                   'product_km'=>$cart_email['price_pro'],
+                   'product_size'=>$cart_email['size'],
+                   'product_name' =>$cart_email['name'],
+                   'product_price' =>$cart_email['price'],
+                   'product_qty' =>$cart_email['quantity'],
+               );
+            }
+         }
+        //Lấy  shipping
+         $shipping_array = array(
+             'customer_name' => $cus->customer_name,
+             'shipping_name' =>$data['shipping_name'],
+             'shipping_email' =>$data['shipping_email'],
+             'shipping_phone' =>$data['shipping_phone'],
+             'shipping_address' =>$data['shipping_address'],
+             'shipping_notes' =>$data['shipping_notes'],
+             'shipping_method' =>$data['payment_select'],
+             'free' =>$data['order_fee']
+         );
+        //Lấy mã giảm giá
+        $ordercode_mail = array(
+            'coupon_code' => $coupon_email,
+            'order_code' => $checkout_code
+        );
+        Mail::send('admin.mail.email_order',['cart_array'=>$cart_array , 'shipping_array'=>$shipping_array, 'code'=>$ordercode_mail], function($message) use ($title_email, $data){
+            $message->to($data['email'])->subject($title_email);
+            $message->from($data['email'],$title_email);
+        });
+
+         Session::forget('coupon');
+         // Session::forget('fee');
+         Session::forget('cart');
+         Session::flash('thank','Cảm ơn bạn đã mua sản phẩm của chúng tôi, chúng tôi sẽ giao hàng sớm nhất cho bạn');
+         return redirect()->route('thank');
+    }
+    public function confirm_order(Request $request){
+         $url_canonical = $request->url();  
+         $cate=category::all();
+         $com='';
+         $data = $request->all();
+        if($data['order_coupon']!='no'){
+            $coupon =coupon::where('coupon_code',$data['order_coupon'])->first();
+            $coupon->coupon_used = $coupon->coupon_used.','.Session::get('customer_id');
+            $coupon->coupon_time = $coupon->coupon_time - 1;
+            $coupon_email = $coupon->coupon_code;
+            $coupon->save();
+        }else{
+            $coupon_email="Không có sử dụng";
+        }
+
+         //vận chuyển
+         $shipping = new Shipping();
+         $shipping->shipping_name = $data['shipping_name'];
+         $shipping->shipping_email = $data['shipping_email'];
+         $shipping->shipping_phone = $data['shipping_phone'];
+         $shipping->shipping_address = $data['shipping_address'];
+         $shipping->shipping_address2 = $data['shipping_address1'];
          $shipping->shipping_notes = $data['shipping_notes'];
          $shipping->shipping_method = $data['shipping_method'];
          $shipping->save();
@@ -242,13 +362,18 @@ class CheckoutController extends Controller
          $order->shipping_id = $shipping_id;
          $order->order_status = 1;
          $order->order_code = $checkout_code;
-
          date_default_timezone_set('Asia/Ho_Chi_Minh');
          $today=Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
          $order_date=Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
          $order->order_date=$order_date;
          $order->created_at = $today;
          $order->save();
+         $order_id=$order->order_id;
+
+
+        //send email comfirm
+        
+
 
          if(Session::get('cart')==true){
             foreach(Session::get('cart') as $key => $cart){
@@ -256,24 +381,66 @@ class CheckoutController extends Controller
                 $order_details->order_code = $checkout_code;
                 $order_details->product_id = $cart['pro_id'];
                 $order_details->product_name = $cart['name'];
-                $order_details->product_price = $cart['price'];
+                if($cart['price_pro']!=""){
+                    $order_details->product_price = $cart['price']-$cart['price_pro'];
+                }else{
+                    $order_details->product_price = $cart['price'];
+                }
                 $order_details->product_sales_quantity = $cart['quantity'];
                 $order_details->product_size=$cart['size'];
                 $order_details->product_coupon =  $data['order_coupon'];
                 $order_details->product_feeship = $data['order_fee'];
+                $order_details->order_id=$order_id;
                 $order_details->save();
             }
          }
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s');
+        $title_email = "Đơn hàng xác nhận ngày".' '.$now;
+        $cus =  custommer::find(Session::get('customer_id'));
+        $data['email'][] = $cus->customer_email;
+
+        if(Session::get('cart')==true){
+            foreach(Session::get('cart') as $key => $cart_email){
+               $cart_array[] =array(
+                   'product_name' =>$cart_email['name'],
+                   'product_price' =>$cart_email['price'],
+                   'product_qty' =>$cart_email['quantity'],
+               );
+            }
+         }
+        //Lấy  shipping
+         $shipping_array = array(
+             'customer_name' => $cus->customer_name,
+             'shipping_name' =>$data['shipping_name'],
+             'shipping_email' =>$data['shipping_email'],
+             'shipping_phone' =>$data['shipping_phone'],
+             'shipping_address' =>$data['shipping_address'],
+             'shipping_notes' =>$data['shipping_notes'],
+             'shipping_method' =>$data['shipping_method'],
+             'free' =>$data['order_fee']
+         );
+        //Lấy mã giảm giá
+        $ordercode_mail = array(
+            'coupon_code' => $coupon_email,
+            'order_code' => $checkout_code
+        );
+        Mail::send('admin.mail.email_order',['cart_array'=>$cart_array , 'shipping_array'=>$shipping_array, 'code'=>$ordercode_mail], function($message) use ($title_email, $data){
+            $message->to($data['email'])->subject($title_email);
+            $message->from($data['email'],$title_email);
+        });
+
          Session::forget('coupon');
-         Session::forget('fee');
+         // Session::forget('fee');
          Session::forget('cart');
          // return view('client/thankyou');
+         // Session::flash('thank','Cảm ơn bạn đã mua sản phẩm của chúng tôi, chúng tôi sẽ giao hàng sớm nhất cho bạn');
+         // return redirect()->route('cli_index');
     }
     public function dangky(Request $req){
         $this->validate($req, [
             'name'=>'required',
             'email'=>'required|email|unique:tbl_customers,customer_email',
-            'sdt' => 'required|regex:/(07)[0-9]{9}/|unique:tbl_customers,customer_phone',
+            'sdt' => 'required|regex:/(0)[0-9]{9}/|unique:tbl_customers,customer_phone',
             'password'=>'required|min:8|max:32',
             're_password'=>'required|same:password'
         ],[
@@ -282,9 +449,9 @@ class CheckoutController extends Controller
             'email.email'=>'+Email chưa đúng định dạng',
             'email.unique'=>'+Email đã tồn tại',
             'password.required'=>'+Bạn chưa nhập password',
-            'phone.required'=>'+Bạn chưa nhập số điện thoạt',
-            'phone.regex'=>'+Số Điện thoại chưa đúng định dạng',
-            'phone.unique'=>'+Số điện thoại đã tồn tại',
+            'sdt.required'=>'+Bạn chưa nhập số điện thoạt',
+            'sdt.regex'=>'+Số Điện thoại chưa đúng định dạng',
+            'sdt.unique'=>'+Số điện thoại đã tồn tại',
             're_password.required'=>'+Bạn chưa nhập lại password',
             'password.min'=>'+password lớn hơn 8',
             'password.max'=>'+Password lớn hơn 32',
@@ -302,15 +469,15 @@ class CheckoutController extends Controller
     	// return redirect()->route('cli_index');
         $email = $req->email;
         $code = bcrypt(md5(time().$email));
-        $url = route('xacnhanTK',['name'=>$req->name,'email'=>$req->email,'phone'=>$req->sdt,'password'=>Hash::make($req->password),'code_active'=>$code]);
+        $url = route('xacnhanTK',['name'=>$req->name,'email'=>$req->email,'phone'=>$req->sdt,'password'=>md5($req->password),'code_active'=>$code]);
         $data =[
             'route' =>$url
         ];
         Mail::send('email.xacnhantk',$data, function($message) use ($email){
-            $message->to($email, 'Verify password')->subject('Xác nhận mậy khẩu!!');
+            $message->to($email, 'Verify password')->subject('Xác nhận mật khẩu!!');
             $message->from($email);
         });
-        return redirect()->route('cli_index');
+        return redirect()->route('cli_index')->with('message','XIN BẠN HÃY CHECK MAIL ĐỂ XÁC NHẬN TÀI KHOẢN!!');;
     }
     public function xacnhanTK(Request $req){
         //dd($req->name);
@@ -332,24 +499,39 @@ class CheckoutController extends Controller
     	$cus_id=DB::table('tbl_customers')->insertGetId($cus);
     	Session::put('customer_id',$cus_id);
     	Session::put('customer_name',$name);
-    	return redirect()->route('cli_index')->with('thongbao','Xac nhan tai khoan thanh cong!!');
+    	return redirect()->route('cli_index')->with('message','XÁC NHẬN TÀI KHOẢN THÀNH CÔNG!!');
         
     }
     // public function getdoimk(){
     //     return view('email.layout_doimk');
     // }
     public function dangnhap(Request $req){
+        $this->validate($req, [
+            'email'=>'required|email',
+            'password'=>'required|min:8|max:32',
+        ],[
+            'email.required'=>'+Ban chưa nhập email',
+            'email.email'=>'+Email chưa đúng định dạng',
+            'password.required'=>'+Bạn chưa nhập password',
+            'password.min'=>'password phải ít nhất 8 ký tự',
+        ]);
     	$email=$req->email;
-    	$password=md5($req->password);
+    	$password=  md5($req->password);
     	$result=DB::table('tbl_customers')->where('customer_email',$email)->where('customer_password',$password)->first();
+        //$re = custommer::where('customer_email',$email)->where('customer_password',$password)->first();
+        //dd($result, $password);
+        
+        
     	if($result){
+            Session::put('fee',15000);
+            Session::save();
     		Session::put('customer_id',$result->customer_id);
     		Session::put('customer_name',$result->customer_name);
-    		Session::flash('message','thanh cong');
+    		Session::flash('message','ĐĂNG NHẬP THÀNH CÔNG');
     		return redirect()->route('cli_index');
     		
     	}else{
-    		return redirect()->route('cli_index');
+    		return redirect()->route('cli_index')->with('error','ĐĂNG NHẬP THẤT BẠI');
     		
     	}
 
@@ -360,7 +542,7 @@ class CheckoutController extends Controller
         $checkUser = DB::table('tbl_customers')->Where('customer_email', $email)->first();
 
         if(!$checkUser){
-            return redirect()->back()->with('thongbao','Không có email này');
+            return redirect()->back()->with('message','Không có email này');
             //return dd("khp6g tồn tại");
         }
         $code = bcrypt(md5(time().$email));
@@ -376,11 +558,11 @@ class CheckoutController extends Controller
         ];
         //dd($data);
         Mail::send('email.reset_password',$data, function($message) use ($email){
-	        $message->to($email, 'Reset password')->subject('lấy lại mậy khẩu!!');
+	        $message->to($email, 'Reset password')->subject('lấy lại mật khẩu!!');
             $message->from($email);
 	    });
 
-        return redirect()->route('cli_index')->with('thongbao1','Vào email để lấy lại mậy khẩu' );
+        return redirect()->route('cli_index')->with('message','BẠN VUI LÒNG VÀO CHECK MAIL ĐỂ LẤY LẠI MẬT KHẨU' );
     }
 
     public function getdoimk(Request $req){
@@ -417,11 +599,11 @@ class CheckoutController extends Controller
          ])->first();
          
          if(!$checkUser){
-            return redirect('cli_index')->with('danger','Xin lổi, đường dẩn không dúng, bạn vui lòng thử lại sao');
+            return redirect('cli_index')->with('error','Xin lổi, đường dẩn không dúng, bạn vui lòng thử lại sao');
         }
 
         DB::table('tbl_customers')->where('customer_email', $email)->update(['customer_password'=> md5($req->password)]);
-        return redirect()->route('cli_index')->with('thanhcong','Mật khẩu đăng nhập thành công, đăng nhập đi thằng mặt lồn');
+        return redirect()->route('cli_index')->with('message','ĐỔI MẬT KHẨU THÀNH CÔNG, MỜI BẠN ĐĂNG NHẬP');
     }
 
     //end doi may khau
@@ -436,92 +618,127 @@ class CheckoutController extends Controller
         // $meta_keywords = $value->product_slug;
         $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
         $meta_title ="thanh toán";
+        $chinh=chinhsach::limit(3)->get();
         $share_images = url('images/'.$request->product_image);   
     	 $cate=category::all();
-    	 $com='cart';
-         $brand=brand::all();
-         $city = city::orderby('matp','ASC')->get();
-    	 return view('client.payment',compact('cate','brand','city','com','url_canonical','meta_title','meta_desc','share_images','cate_post1'));
+    	 $com='';
+    	 return view('client.payment',compact('cate','com','url_canonical','meta_title','meta_desc','share_images','cate_post1','chinh'));
     }
 
 
 
-    public function select_delivery(Request $request){
-        $data = $request->all();
-        if($data['action']){
-            $output = '';
-            if($data['action']=="city"){
-                $select_province = Province::where('matp',$data['ma_id'])->orderby('maqh','ASC')->get();
-                    $output.='<option>---Chọn quận huyện---</option>';
-                foreach($select_province as $key => $province){
-                    $output.='<option value="'.$province->maqh.'">'.$province->name_quanhuyen.'</option>';
-                }
-
-            }else{
-
-                $select_wards = Wards::where('maqh',$data['ma_id'])->orderby('xaid','ASC')->get();
-                $output.='<option>---Chọn xã phường---</option>';
-                foreach($select_wards as $key => $ward){
-                    $output.='<option value="'.$ward->xaid.'">'.$ward->name_xaphuong.'</option>';
-                }
-            }
-            echo $output;
-        }
-    }
-        public function delivery_home(Request $request){
-        $data = $request->all();
-        if($data['action']){
-            $output = '';
-            if($data['action']=="city"){
-                $select_province = Province::where('matp',$data['ma_id'])->orderby('maqh','ASC')->get();
-                    $output.='<option>---Chọn quận huyện---</option>';
-                foreach($select_province as $key => $province){
-                    $output.='<option value="'.$province->maqh.'">'.$province->name_quanhuyen.'</option>';
-                }
-
-            }else{
-
-                $select_wards = Wards::where('maqh',$data['ma_id'])->orderby('xaid','ASC')->get();
-                $output.='<option>---Chọn xã phường---</option>';
-                foreach($select_wards as $key => $ward){
-                    $output.='<option value="'.$ward->xaid.'">'.$ward->name_xaphuong.'</option>';
-                }
-            }
-            echo $output;
-        }
-    }
+   
     public function checkout(Request $request){
+        
         $url_canonical = $request->url();
         $meta_desc = "giỏ hàng";
         $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
         // $meta_keywords = $value->product_slug;
+        $chinh=chinhsach::limit(3)->get();
         $meta_title ="giỏ hàng";
         $share_images = url('images/'.$request->product_image);  
-        $brand=brand::all();
         $cate=category::all();
-        $com='cart';
-        // $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
-     //    $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get(); 
-        $city = city::orderby('matp','ASC')->get();
-        return view('client/cart',compact('cate','brand','com','url_canonical','meta_desc','meta_title','share_images','cate_post1'))->with('city',$city);
+        $com='';
+        return view('client/cart',compact('cate','com','url_canonical','meta_desc','meta_title','share_images','cate_post1','chinh'));
+       
+    
     }
-    public function calculate_fee(Request $request){
-        $data = $request->all();
-        if($data['matp']){
-            $feeship = Feeship::where('fee_matp',$data['matp'])->where('fee_maqh',$data['maqh'])->where('fee_xaid',$data['xaid'])->get();
-            if($feeship){
-                $count_feeship = $feeship->count();
-                if($count_feeship>0){
-                     foreach($feeship as $key => $fee){
-                        Session::put('fee',$fee->fee_feeship);
-                        Session::save();
-                    }
-                }else{ 
-                    Session::put('fee',25000);
-                    Session::save();
-                }
+   
+    public function login_google(){
+        return Socialite::driver('google')->redirect();
+   }
+
+
+   public function callback_google(){
+    $users = Socialite::driver('google')->stateless()->user();
+    //dd($users); 
+    //return $users->id;
+    $authUser = $this->findOrCreateUser($users,'google');
+    if($authUser){
+        $account_name = custommer::where('customer_id',$authUser->user)->first();
+        Session::put('customer_name',$account_name->customer_name);
+        Session::put('customer_id',$account_name->customer_id);
+        Session::put('fee',15000);
+
+    }elseif($customer_new){
+        $account_name = custommer::where('customer_id',$authUser->user)->first();
+        Session::put('customer_name',$account_name->customer_name);
+        Session::put('customer_id',$account_name->customer_id);
+        Session::put('fee',15000);
+        
+    }
+   
+    return redirect()->route('cli_index')->with('message','ĐĂNG NHẬP BẰNG TÀI KHOẢN GOOGLE THÀNH CÔNG');
+  
+   
+}
+public function findOrCreateUser($users,$provider){
+    $authUser = Social::where('provider_user_id', $users->id)->first();
+    if($authUser){
+
+        return $authUser;
+    }else{
+        $customer_new = new Social([
+            'provider_user_id' => $users->id,
+            'provider_user_email' => $users->email,
+            'provider' => strtoupper($provider)
+        ]);
+        $customer = custommer::where('customer_email',$users->email)->first();
+    
+            if(!$customer){
+                $customer = custommer::create([
+                    'customer_name' => $users->name,
+                    'customer_email' => $users->email,
+                    'customer_password' => '',
+                    'customer_phone' => ''
+                ]);
             }
-           
+            $customer_new->login()->associate($customer);
+            $customer_new->save();
+            return $customer_new;
         }
-    }
+}
+public function login_facebook(){
+    return Socialite::driver('facebook')->redirect();
+}
+
+public function callback_facebook(){
+    $provider = Socialite::driver('facebook')->user();
+    dd($provider);
+    // $account = Social::where('provider','facebook')->where('provider_user_id',$provider->getId())->first();
+    // if($account){
+    //     //login in vao trang quan tri  
+    //     $account_name = Login::where('admin_id',$account->user)->first();
+    //     Session::put('admin_login',$account_name->admin_name);
+    //     Session::put('admin_id',$account_name->admin_id);
+    //     return redirect('/admin/dashboard')->with('message', 'Đăng nhập Admin thành công');
+    // }else{
+
+    //     $hieu = new Social([
+    //         'provider_user_id' => $provider->getId(),
+    //         'provider' => 'facebook'
+    //     ]);
+
+    //     $orang = Login::where('admin_email',$provider->getEmail())->first();
+
+    //     if(!$orang){
+    //         $orang = Login::create([
+    //             'admin_name' => $provider->getName(),
+    //             'admin_email' => $provider->getEmail(),
+    //             'admin_password' => '',
+    //             'admin_status' => 1
+
+    //         ]);
+    //     }
+    //     $hieu->login()->associate($orang);
+    //     $hieu->save();
+
+    //     $account_name = Login::where('admin_id',$account->user)->first();
+
+    //     Session::put('admin_login',$account_name->admin_name);
+    //      Session::put('admin_id',$account_name->admin_id);
+    //     return redirect('/admin/dashboard')->with('message', 'Đăng nhập Admin thành công');
+    // } 
+}
+
 }

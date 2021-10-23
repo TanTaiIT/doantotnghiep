@@ -13,10 +13,15 @@ class AddvertisedController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function addver()
+    // {
+    //     $quangcao=quangcao::all();
+    //     return view('admin.quangcao.all_quangcao',compact('quangcao'));
+    // }
     public function addver()
     {
         $quangcao=quangcao::all();
-        return view('admin.quangcao.all_quangcao',compact('quangcao'));
+        return view('manager.quangcao.index',compact('quangcao'));
     }
 
     /**
@@ -26,7 +31,7 @@ class AddvertisedController extends Controller
      */
     public function add_addver()
     {
-        return view('admin.quangcao.add_quangcao');
+        return view('manager.quangcao.add_quangcao');
     }
 
     /**
@@ -37,6 +42,15 @@ class AddvertisedController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'link'=>'required|active_url',
+            'hinh_quangcao'=>'required'
+        ],[
+            'link.required'=>'+Ban chưa nhập link ',
+            'hinh.required'=>'+Ban chưa chọn hình ',
+            'link.active_url'=>'+ đường link không phù hợp'
+            
+        ]);
         $data=$request->all();
         $get_image=request('hinh_quangcao');
         if($get_image){
@@ -51,7 +65,7 @@ class AddvertisedController extends Controller
             $quangcao->hinh_quangcao=$new_image;
             $quangcao->save();
             Session::flash('message','thêm quảng cáo thành công');
-            return redirect()->back();
+            return redirect()->route('list_addvertised');
         }
         else{
             Session::flash('message','làm ơn thêm hình vào');
@@ -77,9 +91,10 @@ class AddvertisedController extends Controller
      * @param  \App\Models\quangcao  $quangcao
      * @return \Illuminate\Http\Response
      */
-    public function edit(quangcao $quangcao)
+    public function edit_q($id)
     {
-        
+        $quangcao=quangcao::FindOrFail($id);
+        return view('manager.quangcao.edit_quangcao',compact('quangcao'));
     }
 
     /**
@@ -89,10 +104,39 @@ class AddvertisedController extends Controller
      * @param  \App\Models\quangcao  $quangcao
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, quangcao $quangcao)
+    public function update_addver(Request $request,$id)
     {
-        //
+        $this->validate($request, [
+            'link'=>'required|active_url',
+        ],[
+            'link.required'=>'+Ban chưa nhập link ',
+            
+            'link.active_url'=>'+ đường link không phù hợp'
+            
+        ]);
+        $data=$request->all();
+        $quangcao=quangcao::Find($id);
+
+        $quangcao->quangcao_name=$data['quangcao_name'];
+        $quangcao->link=$data['link'];
+        $quangcao->quangcao_status=$data['quangcao_status'];
+        $get_image=request('hinh_quangcao');
+        if($get_image){
+            $post_image_old = $quangcao->hinh_quangcao;
+            $path ='uploads/quangcao/'.$post_image_old;
+            unlink($path);
+            //cap nhat anh moi
+            $get_name_image = $get_image->getClientOriginalName(); //lay ten của hình ảnh
+            $name_image = current(explode('.',$get_name_image));
+            $new_image =  $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
+            $get_image->move('uploads/quangcao',$new_image);
+            $quangcao->hinh_quangcao = $new_image; 
+
     }
+    $quangcao->save();
+    Session::flash('message','sửa quảng cáo thành công');
+    return redirect()->route('list_addvertised');
+}
 
     /**
      * Remove the specified resource from storage.
@@ -105,7 +149,7 @@ class AddvertisedController extends Controller
         $quangcao=quangcao::find($id);
         if($quangcao->delete()){
             Session::flash('message','xóa quảng cáo thành công');
-            return redirect()->back();
+            return redirect()->route('list_addvertised');
         }else{
             Session::flash('message','xóa quảng cáo không thành công');
             return redirect()->back();

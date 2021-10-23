@@ -15,9 +15,10 @@ class Imports implements ToModel
     public function model(array $row)
     {
         return new category([
-            'category_name'=>$row[0],
-            'category_desc'=>$row[1],
-            'category_status'=>$row[2],
+            'category_id'=>$row[0],
+            'category_name'=>$row[1],
+            'category_desc'=>$row[2],
+            'category_status'=>$row[3],
         ]);
     }
 }

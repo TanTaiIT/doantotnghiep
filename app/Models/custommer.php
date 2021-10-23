@@ -17,5 +17,5 @@ class custommer extends Model
         'code',
         'code_time'
     ];
-    protected $primaryKey="custommer_id";
+    protected $primaryKey="customer_id";
 }

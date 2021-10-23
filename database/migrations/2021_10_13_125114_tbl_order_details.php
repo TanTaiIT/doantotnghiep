@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class TblOrderDetails extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('tbl_order_details', function (Blueprint $table) {
+            $table->Increments('order_details_id')->unsigned();
+            $table->Integer('product_id')->unsigned();
+            $table->strig('product_name');
+            $table->string('product_feeship');
+            $table->string('product_coupon');
+            $table->string('order_code');
+            $table->string('product_price');
+            $table->Integer('product_sales_quantity');
+            $table->string('product_size');
+            $table->Integer('order_id')->unsigned();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('tbl_order_details');
+    }
+}

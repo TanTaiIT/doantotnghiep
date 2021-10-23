@@ -7,26 +7,34 @@ use Illuminate\Http\Request;
 use App\Models\slider;
 use DB;
 use Session;
+use File;
 class SliderController extends Controller
 {
+    // public function manage_slider(){
+    //     $all_slide = slider::orderBy('slider_id','DESC')->paginate(4);
+    //     return view('admin.slider.list_slider')->with(compact('all_slide'));
+    // }
     public function manage_slider(){
         $all_slide = slider::orderBy('slider_id','DESC')->paginate(4);
-        return view('admin.slider.list_slider')->with(compact('all_slide'));
+        return view('manager.slideshow.index')->with(compact('all_slide'));
     }
+    // public function add_slider(){
+    //     return view('admin.slider.add_slider');
+    // }
     public function add_slider(){
-        return view('admin.slider.add_slider');
+        return view('manager.slideshow.insert_slideshow');
     }
     public function unactive_slide($slide_id){
         // $this->AuthLogin();
         DB::table('tbl_slider')->where('slider_id',$slide_id)->update(['slider_status'=>0]);
-        Session::put('message','Không kích hoạt slider thành công');
+        Session::flash('message','hủy kích hoạt slider thành công');
         return redirect()->route('manage_sli');
 
     }
     public function active_slide($slide_id){
         // $this->AuthLogin();
         DB::table('tbl_slider')->where('slider_id',$slide_id)->update(['slider_status'=>1]);
-        Session::put('message','Kích hoạt slider thành công');
+        Session::flash('message','Kích hoạt slider thành công');
         return redirect()->route('manage_sli');
 
     }
@@ -36,6 +44,16 @@ class SliderController extends Controller
         // $this->AuthLogin();
 
         $data = $request->all();
+        $this->validate($request, [
+            'slider_name'=>'required',
+            'slider_desc'=>'required',
+            'slider_image'=>'required'
+        ],[
+            'ten.required'=>'+Ban chưa nhập tên ',
+            'slider_desc.required'=>'+Ban chưa nhập mô tả ',
+            'slider_image.required'=>'+ Bạn chưa chọn hình'
+            
+        ]);
         $get_image = request('slider_image');
       
         if($get_image){
@@ -50,18 +68,20 @@ class SliderController extends Controller
             $slider->slider_status = $data['slider_status'];
             $slider->slider_desc = $data['slider_desc'];
             $slider->save();
-            Session::put('message','Thêm slider thành công');
-            return redirect()->route('add_sli');
+            Session::flash('message','Thêm slider thành công');
+            return redirect()->route('manage_sli');
         }else{
-            Session::put('message','Làm ơn thêm hình ảnh');
-            return redirect()->route('add-sli');
+            Session::flash('message','Làm ơn thêm hình ảnh');
+            return redirect()->route('manage_sli');
         }
         
     }
     public function delete_slide(Request $request, $slide_id){
         $slider = Slider::find($slide_id);
-        $slider->delete();
-        Session::put('message','Xóa slider thành công');
+        if($slider->delete()){
+            File::delete('uploads/slider/'.$slider->slider_image);
+        }
+        Session::flash('message','Xóa slider thành công');
         return redirect()->back();
 
     }

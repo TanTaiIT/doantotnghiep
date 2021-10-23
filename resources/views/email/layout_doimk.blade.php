@@ -28,15 +28,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<h1>Đổi mật khẩu</h1>
 						 </div>
 				     </div>
-                        <?php $t=Session::get('status');
+                     <?php 
+                        $t=Session::get('status');
                               if(isset($t)){
-                            echo $t;
-                          }
+                           echo $t;
+                        }
                        ?>
-              @php
-                           $email = $_GET['email'];
-                           $code = $_GET['code'];
-                        @endphp
+                       @if (count($errors)>0)
+                        <section class='alert alert-danger' style="text-align: center;">
+                        @foreach ($errors->all() as $err)
+                           {{$err}}
+                        @endforeach
+                        </section>
+                           
+                        @endif
+
+                     @php
+                        $email = $_GET['email'];
+                        $code = $_GET['code'];
+                     @endphp
                    <form action="{{route('postdoimk')}}" method="post">
                      {{csrf_field()}}
                      <input type="hidden" name="email" value="{{$email}}" />

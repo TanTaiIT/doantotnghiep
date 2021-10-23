@@ -12,16 +12,17 @@ use App\Models\attribute;
 use Session;
 class CartController extends Controller
 {
+
     public function addtocart(Request $req){
-        
         $id=$req->id;
         $product=product::find($id);
         $soluong_dat=$product->soluong;
         $soluong=$req->soluong;
         $size=$req->size;
         $hot=$req->hot;
+        $count=0;
         if($soluong>$soluong_dat){
-           return 'error';
+           Session::flash('message','sản phẩm trong kho không đủ, vui lòng đặt ít hơn');
         }else{
         if(!$product){
             abort(404);
@@ -38,20 +39,22 @@ class CartController extends Controller
                     "price_pro"=>$product->gia_km,
                     "image"=>$product->product_image,
                     "size"=>$size,
-                    "hot"=>$hot
+
+                    
                 ]
             ];
-            
             session()->put('cart',$cart);  
-        }
+            
+            }
+            
 
         elseif(isset($cart[$id])) {
 
             $cart[$id]['quantity']=$cart[$id]['quantity']+$soluong;
-
+            $so=$cart[$id]['quantity'];
             session()->put('cart', $cart);
 
-            return redirect()->back()->with('success', 'Product added to cart successfully!');
+            // return redirect()->back()->with('success', 'Product added to cart successfully!');
 
         }
         else{
@@ -64,15 +67,14 @@ class CartController extends Controller
             "price_pro"=>$product->gia_km,
             "image"=>$product->product_image,
             "size"=>$size,
-            "hot"=>$hot
+            
         ];
-   
         session()->put('cart',$cart);
+        
     }
 }
+}
 
-
-    }
 
      public function remove(Request $request)
     {
@@ -95,6 +97,7 @@ class CartController extends Controller
         $url_canonical = $request->url();
         $cate=category::all();
         $com='index';
+        $mes='';
         $slide=slider::limit(4)->get();  
         if($request->id and $request->quantity)
         {
@@ -104,12 +107,13 @@ class CartController extends Controller
                 $cart = session()->get('cart');
 
             $cart[$request->id]["quantity"] = $request->quantity;
-
             session()->put('cart', $cart);
             $cart=session()->get('cart');
-            
             }else{
-                Session::flash('message', 'số lượng sản phẩm đặt quá lớn');
+                Session::flash('message', 'số lượng sản phẩm đặt quá lớn,chỉ còn'.' '. $sl .' trong kho');
+                
+               
+                // return $req['message']='fail';
             }
             
         }

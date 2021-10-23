@@ -7,13 +7,20 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\admin;
 use App\Models\Roles;
+use Session;
 class AuthController extends Controller
 {
-    public function register_auth(){
-        return view('admin.custommer_authen.dangky_auth');
+    // public function register_auth(){
+    //     return view('admin.custommer_authen.dangky_auth');
+    // }
+     public function register_auth(){
+        return view('manager.user_auth.login');
     }
+    // public function login_auth(){
+    //     return view('admin.custommer_authen.dangnhap_auth');
+    // }
     public function login_auth(){
-        return view('admin.custommer_authen.dangnhap_auth');
+        return view('manager.user_auth.login');
     }
     public function register(Request $request){
         $this->validation($request);
@@ -29,20 +36,38 @@ class AuthController extends Controller
     public function validation(Request $request){
         return $this->validate($request,[
             'name'=>'required|max:255',
-            'phone'=>'required|max:255',
-            'email'=>'required|email|max:255',
-            'password'=>'required|max:255'
+            'phone' => 'required|regex:/(0)[0-9]{8}/|unique:tbl_admin,phone',
+            'email'=>'required|email|unique:tbl_admin,email',
+            'password'=>'required|max:255|min:5|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[@!$#%]).*$/'
+        ],[
+            'name.required'=>'+Ban chưa nhập tên',
+            'email.required'=>'+Ban chưa nhập email',
+            'email.email'=>'+Email chưa đúng định dạng',
+            'email.unique'=>'+Email đã tồn tại',
+            'password.required'=>'+Bạn chưa nhập password',
+            'phone.required'=>'+Bạn chưa nhập số điện thoạt',
+            'phone.regex'=>'+Số Điện thoại chưa đúng định dạng',
+            'sdt.unique'=>'+Số điện thoại đã tồn tại',
+            'password.regex'=>'+ Password phải có ít nhất 1 chữ in hoa,chữ số và và ký tự đặc biệt',
+            'password.min'=>'+ Password phải ít nhất 5 ký tự'
         ]);
     }
+  
     public function login1(Request $request){
         $this->validate($request,[
             'email'=>'required|email|max:255',
             'password'=>'required|max:255'
+        ],[
+            'email.required'=>'+Ban chưa nhập email',
+            'email.email'=>'+Email chưa đúng định dạng',
+            'password.required'=>'+Bạn chưa nhập password',
         ]);
         // $data=$request->all();
         if(Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
-            return redirect()->route('trangchu');
+            // Session::flash('thongbao','Đăng nhập thành công');
+            return redirect()->route('cli_trangchu');
         }else{
+            Session::flash('thongbao','email hoặc mật khẩu không đúng');
             return redirect()->back();
         }
 
