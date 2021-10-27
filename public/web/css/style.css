@@ -90,7 +90,31 @@ height: unset;
 .active1{
     background: blue;
 }
+a.unset {
+    position: absolute;
+    right: 11px;
+    opacity: 0;
+    color: red;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+a.unset1 {
+    position: absolute;
+    right: 7%;
+    opacity: 0;
+    color: red;
+    cursor: pointer;
+    transition: all .5s;
 
+}
+a.unset1:hover{
+    opacity: 1;
+    transform: translateY(-16px);
+}
+a.unset:hover{
+    opacity: 1;
+    transform: translateY(-16px);
+}
 .amazingslider-wrapper{
     z-index: 99;
 }
@@ -1078,6 +1102,7 @@ input.btn.btn-default.xemnhanh:hover{
 .giamgia {
     display: flex;
     justify-content: space-between;
+    position: relative;
 }
 .header-right ul li a {
     text-decoration: none;

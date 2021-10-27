@@ -89,6 +89,7 @@
 													@if($cou['coupon_condition']==1)
 													<div class="giamgia">
 														<span class="magiamgia" style="font-weight: bold;">MÃ GIẢM GIÁ : </span>-{{$cou['coupon_number']}} % @if(Session('coupon'))
+														<a href="{{url('/unset-coupon')}}" class="unset"><i class="fas fa-ban"></i></a>
 			<!-- <a class="btn btn-default check_out" href="{{url('/unset-coupon')}}" class="nutgiamgia">Xóa mã khuyến mãi</a> -->
 				                          </div>
 				                          	
@@ -106,10 +107,11 @@
 														</p>
 														
 													@elseif($cou['coupon_condition']==2)
+													<div class="giamgia">
 														<span class="giam2" style="font-weight: bold;">GIẢM GIÁ :</span> -{{number_format($cou['coupon_number'],0,',','.')}} VNĐ
 														 @if(Session::get('coupon'))
-<!-- <a class="btn btn-default check_out" href="{{url('/unset-coupon')}}" class="nutgiamgia">Xóa mã khuyến mãi</a> -->
-				                          
+														<a href="{{url('/unset-coupon')}}" class="unset1"><i class="fas fa-ban"></i></a>
+				                          </div>
 				                          	@endif
 
 														<p>
@@ -190,7 +192,7 @@
 														<form method="POST" action="{{url('/check-coupon')}}" class="nhapma">
 															@csrf
 
-																<input type="text" class="form-control coup" name="coupon" placeholder="@lang('lang.dis_code')">
+																<input type="text" class="form-control coup" name="coupon" placeholder="nhập mã khuyến mãi">
 																<input type="submit" class="btn btn-default check_coupon giam" name="check_coupon" value="Tính mã giảm giá">
 															
 															</form>

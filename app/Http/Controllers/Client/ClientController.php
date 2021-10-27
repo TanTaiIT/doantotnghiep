@@ -529,30 +529,7 @@ class ClientController extends Controller
     if($dem==0){
         Session::flash('thongbao','không có sản phẩm nào');
     }
-    
-        
 
-
-
-        // if($request->orderby){
-        //     $orderby=$request->orderby;
-        //     switch ($orderby) {
-        //         case 'desc':
-        //             $product_list=product::where('category_id',$id)->orderBy('product_id','DESC')->paginate(6)->appends(request()->query()); 
-        //             break;
-        //         case 'asc':
-        //             $product_list=product::where('category_id',$id)->orderBy('product_id','ASC')->paginate(6)->appends(request()->query()); 
-        //             break;
-        //         case 'primax':
-        //            $product_list=product::where('category_id',$id)->orderBy('product_price','DESC')->paginate(6)->appends(request()->query()); 
-        //             break;
-        //         case 'primin':
-        //            $product_list=product::where('category_id',$id)->orderBy('product_price','ASC')->paginate(6)->appends(request()->query()); 
-        //             break;    
-        //     }
-        // }
-
-        
         $cate1=category::where('category_id',$id)->take(1)->get();
         foreach($cate1 as $key => $cate2){
             //seo 
@@ -633,79 +610,7 @@ class ClientController extends Controller
         
    
     }
-    // public function load_comment(Request $request){
-    //     $product_id = $request->product_id;
-    //     $comment = binhluan::where('comment_product_id',$product_id)->where('comment_parent_comment','=',0)->where('comment_status',0)->get();
-    //     $comment_rep = binhluan::with('product')->where('comment_parent_comment','>',0)->get();
-    //     $output = '';
-    //     foreach($comment as $key => $comm){
-    //         $output.= ' 
-    //         <div class="row style_comment">
 
-    //                                     <div class="col-md-2">
-    //                                         <img width="50%"style="margin-top:10px" src="'.url('web/images/avatar.png').'" class="img img-responsive img-thumbnail">
-    //                                     </div>
-    //                                     <div class="col-md-10 back">
-    //                                         <p style="color:green;">@'.$comm->comment_name.'</p>
-    //                                         <p style="color:#000;">'.$comm->comment_date.'</p>
-    //                                         <p>'.$comm->comment.'</p>
-    //                                     </div>
-    //                                 </div><p></p>
-    //                                 ';
-
-    //                                 foreach($comment_rep as $key => $rep_comment)  {
-    //                                     if($rep_comment->comment_parent_comment==$comm->comment_id)  {
-    //                                  $output.= ' <div class="row style_comment" >
-
-    //                                     <div class="col-md-2 phai">
-    //                                         <img width="50%" src="'.url('web/images/76729750.jpg').'" class="img img-responsive ">
-    //                                     </div>
-    //                                     <div class="col-md-8 rep">
-    //                                         <p style="color:blue;">@Admin</p>
-    //                                         <p style="color:#000;">'.$rep_comment->comment.'</p>
-    //                                         <p></p>
-    //                                     </div>
-    //                                 </div><p></p>';
-    //                                     }
-    //                                 }
-    //     }
-    //     echo $output;
-
-    // }
-    // public function reply($parent=0,$magrin_left=0){
-    //     $html='';
-    //     $com=binhluan::where('comment_parent_comment',$parent)->get();
-    //     $count=count($com);
-    //     if($count == 0){
-    //         $margin_left=0;
-    //     }
-    //     else{
-    //         $margin_left+=80;
-    //     }
-    //     if($count > 0){
-    //         foreach($com as $c){
-    //             $html.='<div class="media1">
-    //                     <a class="pull-left mr-2" href="#!">
-    //                       <img class="media-object comment-avatar" src="'.url('web/images/avatar.png').'" alt="" width="29" height="29" />
-    //                     </a>
-    //                     <div class="media-body" id="comment">
-    //                     <div class="comment-info">
-    //                         <h4 class="comment-author">
-    //                            <a href="#!" style="color:black;list-style-type:none;font-size:15px;">'.$c['comment_name'].'</a>
-    //                         </h4>
-    //                         <time datetime="2013-04-06T13:53">'.$c['comment_date'].'</time>
-    //                         <a class="comment-button reply" href="#" id="'.$c['comment_product_id'].'"><i class="tf-ion-chatbubbles"></i>Reply</a>
-    //                     </div>
-    //                     <p>
-    //                         '.$c['comment'].'
-    //                     </p>
-    //                     </div></div>';
-    //                     $html.=reply($c['comment_id'],$margin_left);
-    //         }
-    //         return $html;
-    //     }
-
-    // }
     public function load_comment(Request $req){
         $id=$req->id;
         $row=binhluan::where('comment_parent_comment',0)->where('comment_product_id',$id)->orderBy('comment_id','desc')->get();
@@ -760,6 +665,8 @@ class ClientController extends Controller
         echo $html1;
 
     }
+
+   
     
 
   

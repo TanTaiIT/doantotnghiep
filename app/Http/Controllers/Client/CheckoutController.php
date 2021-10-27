@@ -519,9 +519,7 @@ class  CheckoutController extends Controller
         ]);
         $email=$req->email;
         $password=  md5($req->password);
-        $result=DB::table('tbl_customers')->where('customer_email',$email)->where('customer_password',$password)->first();
-        //$re = custommer::where('customer_email',$email)->where('customer_password',$password)->first();
-        //dd($result, $password);
+        $result=custommer::where('customer_email',$email)->where('customer_password',$password)->first();
         
         
         if($result){
@@ -541,7 +539,8 @@ class  CheckoutController extends Controller
     //lấy lại mật khẩu
     public function postSendcoderesetpassowrd(Request $req){
         $email = $req->email;
-        $checkUser = DB::table('tbl_customers')->Where('customer_email', $email)->first();
+        // $checkUser = DB::table('tbl_customers')->Where('customer_email', $email)->first();
+        $checkUser=custommer::where('customer_email',$email)->first();
 
         if(!$checkUser){
             return redirect()->back()->with('message','Không có email này');
@@ -550,8 +549,10 @@ class  CheckoutController extends Controller
         $code = bcrypt(md5(time().$email));
         $checkUser->code = $code;
         $checkUser->code_time = Carbon::now();
+        $checkUser->save();
         DB::table('tbl_customers')->where('customer_email', $email)->update(['code'=> $code]);
-        //$checkUser->save();
+        // custommer::where('customer_email',$email)->update(['code'=>$code]);
+        $checkUser->save();
 
         $url = route('getdoimk',['code'=>$checkUser->code, 'email'=>$email]);
 
@@ -570,10 +571,11 @@ class  CheckoutController extends Controller
     public function getdoimk(Request $req){
         $code = $req->code;
         $email = $req->email;
-        $checkUser = DB::table('tbl_customers')->where([
-           'code' => $code,
-           'customer_email' => $email
-        ])->first();
+        // $checkUser = DB::table('tbl_customers')->where([
+        //    'code' => $code,
+        //    'customer_email' => $email
+        // ])->first();
+        $checkUser=custommer::where(['code'=>$code,'customer_email'=>$email])->first();
         if(!$checkUser){
             return redirect('cli_index')->with('danger','Xin lổi, đường dẩn không dúng, bạn vui lòng thử lại sao');
         }
@@ -595,16 +597,18 @@ class  CheckoutController extends Controller
         $code = $req->code;
         $email = $req->email;
         //dd($data);
-        $checkUser = DB::table('tbl_customers')->where([
-            'code' => $code,
-            'customer_email' => $email
-         ])->first();
+        // $checkUser = DB::table('tbl_customers')->where([
+        //     'code' => $code,
+        //     'customer_email' => $email
+        //  ])->first();
+        $checkUser=custommer::where(['code'=>$code,'customer_email'=>$email])->first();
          
          if(!$checkUser){
             return redirect('cli_index')->with('error','Xin lổi, đường dẩn không dúng, bạn vui lòng thử lại sao');
         }
 
-        DB::table('tbl_customers')->where('customer_email', $email)->update(['customer_password'=> md5($req->password)]);
+        // DB::table('tbl_customers')->where('customer_email', $email)->update(['customer_password'=> md5($req->password)]);
+        custommer::where('customer_email',$email)->update(['customer_password'=>md5($req->password)]);
         return redirect()->route('cli_index')->with('message','ĐỔI MẬT KHẨU THÀNH CÔNG, MỜI BẠN ĐĂNG NHẬP');
     }
 
@@ -615,6 +619,9 @@ class  CheckoutController extends Controller
         return redirect()->back();
     }
     public function payment(Request $request){
+        if(!Session::get('customer_id')){
+            return redirect()->route('cli_index');
+        }else{
         $url_canonical = $request->url();
         $meta_desc = "thanh toán";
         // $meta_keywords = $value->product_slug;
@@ -625,6 +632,7 @@ class  CheckoutController extends Controller
          $cate=category::all();
          $com='';
          return view('client.payment',compact('cate','com','url_canonical','meta_title','meta_desc','share_images','cate_post1','chinh'));
+     }
     }
 
 

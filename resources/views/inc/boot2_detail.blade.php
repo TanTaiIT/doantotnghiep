@@ -217,7 +217,7 @@
             method:'POST',
             data:{name:name,comment:comment,commentId:commentId,pro_id:pro_id,_token:_token},
             success:function(data){
-                toastr.success('add comment success');
+                toastr.success('đã thêm bình luận');
                 $('#commentForm').trigger('reset');
                 show_comment();
                 $('#commentId').val(0);

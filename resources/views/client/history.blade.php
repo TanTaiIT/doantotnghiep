@@ -25,10 +25,12 @@
               <th style="width:30px;"></th>
             </tr>
           </thead>
+          @if($order)
           <tbody>
             @php 
             $i = 0;
             @endphp
+            
             @foreach($order as $key => $ord)
             @php 
             $i++;
@@ -73,7 +75,9 @@
               
             </tr>
             @endforeach
+           
           </tbody>
+          @endif
         </table>
       </div>
     </div>
@@ -95,7 +99,9 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                        @if(!$order)
                           <button type="button" id="{{$ord->order_code}}" onclick="huydonhang(this.id)" class="btn btn-success" >Gửi</button>
+                        @endif
                         </div>
                       </div>
                     </form>

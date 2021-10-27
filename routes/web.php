@@ -32,7 +32,6 @@ Route::group(['prefix'=>'login','namespace'=>'Admin'],function(){
 
 Route::post('/update_intro/{id}','Admin\IntroController@update_intro')->name('update_intro');
 Route::get('home','Client\ClientController@get_home')->name('home');
-
 Route::post('/quickview','Admin\ProductController@quickview');
 
 Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
