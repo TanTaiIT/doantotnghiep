@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Auth;
+use Session;
 use Illuminate\Support\Facades\Route;
 class permission
 {
@@ -19,6 +20,7 @@ class permission
     {
         if(Auth::user()){
         if(Auth::user()->hasRole('admin')){
+            
             return $next($request);
         }
         }

@@ -162,7 +162,7 @@ Route::post('/export-csv','CategoryController@export_csv')->middleware('check');
 Route::post('/import-csv','CategoryController@import_csv')->middleware('check');
 });
 ///// USER////////
-Route::get('users','Admin\UserController@index')->name('user')->middleware('check');
+Route::get('users','Admin\UserController@index')->name('user')->middleware('roles');
 Route::get('add-users','Admin\UserController@add_users')->middleware('check');
 Route::get('delete-user-roles/{admin_id}','Admin\UserController@delete_user_roles')->middleware('check');
 Route::post('store-users','Admin\UserController@store_users')->middleware('check');

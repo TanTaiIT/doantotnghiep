@@ -353,7 +353,8 @@ class ClientController extends Controller
         // $related_product = DB::table('tbl_product')
         // ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
         // ->where('tbl_category_product.category_id',$category_id)->whereNotIn('tbl_product.product_id',[$product_id])->orderby(DB::raw('RAND()'))->get();
-        $related_product=Product::with('category')->where('category_id',$category_id)->whereNotIn('product_id',[$product_id])->get();
+        /*$related_product=Product::with('category')->where('category_id',$category_id)->whereNotIn('product_id',[$product_id])->get();*/
+        $related_product=Product::with('category')->whereNotIn('product_id',[$product_id])->where('category_id',$category_id)->get();
         return view('client/detail',compact('detail','com','cate','img_detail','url_canonical','rating','size','hot','meta_desc'
         ,'meta_title','url_canonical','cate_post1','related_product','cate_id','product_cate','chinh','share_images'));
     }
@@ -376,7 +377,7 @@ class ClientController extends Controller
         }
         $dem=count($search);
         if(count($search)>0){
-            Session::flash('message','tìm thấy sản phẩm');
+            Session::flash('message','');
 
         }else{
             Session::flash('error','không tìm thấy sản phẩm');
@@ -571,30 +572,12 @@ class ClientController extends Controller
         $comment->save();
     }
 
-
-
-    // public function list_comment(){
-    //     $comment = binhluan::with('product')->where('comment_parent_comment','=',0)->orderBy('comment_id','DESC')->get();
-    //     $comment_rep = binhluan::with('product')->where('comment_parent_comment','>',0)->get();
-    //     return view('admin.binhluan.list_comment')->with(compact('comment','comment_rep'));
-    // }
     public function list_comment(){
         $comment = binhluan::with('product')->where('comment_parent_comment','=',0)->orderBy('comment_id','DESC')->paginate(10);
         $comment_rep = binhluan::with('product')->where('comment_parent_comment','>',0)->get();
         return view('manager.comment.index')->with(compact('comment','comment_rep'));
     }
-    // public function send_comment(Request $request){
-    //     $product_id = $request->product_id;
-    //     $comment_name = $request->comment_name;
-    //     $comment_content = $request->comment;
-    //     $comment = new binhluan();
-    //     $comment->comment = $comment_content;
-    //     $comment->comment_name = $comment_name;
-    //     $comment->comment_product_id = $product_id;
-    //     $comment->comment_status = 1;
-    //     $comment->comment_parent_comment = 0;
-    //     $comment->save();
-    // }
+
     public function send_comment(Request $request){
 
             $com_id=$request->commentId;

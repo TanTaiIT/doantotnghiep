@@ -45,20 +45,16 @@ class CartController extends Controller
             ];
             session()->put('cart',$cart);  
             
-            }
-            
-
-        elseif(isset($cart[$id])) {
+        }
+        elseif(isset($cart[$id]) && ($cart[$id]['size']==$size)){
 
             $cart[$id]['quantity']=$cart[$id]['quantity']+$soluong;
             $so=$cart[$id]['quantity'];
             session()->put('cart', $cart);
 
-            // return redirect()->back()->with('success', 'Product added to cart successfully!');
-
         }
-        else{
 
+        else{
         $cart[$id]=[
             "pro_id"=>$product->product_id,
             "name"=>$product->product_name,
@@ -72,11 +68,19 @@ class CartController extends Controller
         session()->put('cart',$cart);
         
     }
+
+
+
 }
 }
 
 
-     public function remove(Request $request)
+
+
+
+
+
+    public function remove(Request $request)
     {
         if($request->id) {
 

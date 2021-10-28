@@ -56,9 +56,12 @@ $(document).ready(function(e){
                         method: 'POST',
                         data:{id:id,_token:_token,size:size,hot:hot,soluong:soluong},
                             success:function(data){
-                            	toastr.success('Đã thêm sản phẩm vào giỏ hàng');
-                                show_cart();
-                                cart();
+                                
+                                    toastr.success('Đã thêm sản phẩm vào giỏ hàng');
+                                    show_cart();
+                                    cart();
+                                
+                            	
                         }
                         
 
