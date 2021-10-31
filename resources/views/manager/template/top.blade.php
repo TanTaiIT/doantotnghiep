@@ -17,7 +17,9 @@
                         <span>Settings</span>
                       </a> -->
                  <!--  <a class="dropdown-item"  href="javascript:;">Help</a> -->
+                    <a class="dropdown-item"  href="{{route('pro_file')}}"><i class="fa fa-sign-out pull-right"></i> Thông tin</a>
                     <a class="dropdown-item"  href="{{route('logout_auth')}}"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+
                   </div>
                 </li>
 
@@ -86,13 +88,19 @@
                     </li>
                   </ul>
                 </li> -->
-                <li class="mr-4">
+                
                   
                     @if(session()->has('message'))
-                      <span class='alert alert-success' style="text-align: center;">{{session('message')}}</span>
+                    <div class="alert alert-success alert-dismissible fade show notify" role="alert">
+                      <strong>thông báo! </strong>{{session::get('message')}}.
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                      <!-- <span class='alert alert-success' style="text-align: center;">{{session('message')}}</span> -->
                     @endif
                  
-                </li> 
+               
               </ul>
             </nav>
           </div>

@@ -250,17 +250,39 @@
 
 
 @if (session()->has('message'))
-	<section class='alert alert-success' style="text-align: center;">{{session('message')}}</section>
+<div class="alert alert-success alert-dismissible fade show notify" role="alert">
+  <strong>thông báo! </strong>{{session::get('message')}}.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+	<!-- <section class='alert alert-success' style="text-align: center;">{{session('message')}}</section> -->
 	@elseif (session()->has('error'))
-	<section class='alert alert-danger' style="text-align: center;">{{session('error')}}</section>
+
+	<div class="alert alert-warning alert-dismissible fade show notify" role="alert">
+  <strong>Cảnh báo! </strong>{{session::get('error')}}.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+	<!-- <section class='alert alert-danger' style="text-align: center;">{{session('error')}}</section> -->
 	@endif
 	@if (count($errors)>0)
-	<section class='alert alert-danger' style="text-align: center;">
-	@foreach ($errors->all() as $err)
-		{{$err}}
+
+
+<div class="alert alert-warning alert-dismissible fade show notify" role="alert">
+  <strong>Cảnh báo! </strong><br/>
+  @foreach ($errors->all() as $err)
+		{{$err}}<br/>
 	@endforeach
-	</section>		
-	@endif 
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+@endif
+
+
+
 
 
 

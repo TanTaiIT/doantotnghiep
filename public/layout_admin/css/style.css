@@ -39,6 +39,11 @@ body a{
     width: 11%;
     margin-top: -110px;
 }*/
+.prof{
+  height: 80vh;
+  margin: auto;
+  width: 50%;
+}
 .dropbtn {
   background-color: #ae3e58;
   color: white;

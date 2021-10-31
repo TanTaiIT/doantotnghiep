@@ -26,5 +26,7 @@ class permission
         }
         return redirect()->route('login_auth');
         
+
+        
     }
 }

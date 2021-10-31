@@ -73,30 +73,11 @@ $(document).ready(function(e){
             });
 
 
-    // $(".remove-from-cart").click(function (e) {
-    //         e.preventDefault();
-
-    //         var ele = $(this);
-    //         var _token = $('input[name="_token"]').val();
-    //         // if(confirm("bạn có chắc muốn xóa không")) {
-    //             $.ajax({
-    //                 url: '../remove-from-cart',
-    //                 method: "DELETE",
-    //                 data: {_token:_token, id: ele.attr("data-id")},
-    //                 success: function (response) {
-    //                     window.location.reload();
-
-    //                     // alert('đã xóa sản phẩm ra khỏi giỏ hàng');
-    //                 }
-    //             });
-    //         // }
-    //     });
+ 
     $(document).on('click','.remove-from-cart',function(e){
 	 e.preventDefault();
-
             var ele = $(this);
             var _token = $('input[name="_token"]').val();
-            // if(confirm("bạn có chắc muốn xóa không")) {
                 $.ajax({
                     url: '../remove-from-cart',
                     method: "DELETE",
@@ -106,13 +87,8 @@ $(document).ready(function(e){
                         show_cart();
                         shopping();
                         cart();
-
-
-                        // alert('đã xóa sản phẩm ra khỏi giỏ hàng');
                     }
                 });
-            // }
-
      });
 
     $(document).on('click','.update-cart',function (e) {
@@ -127,9 +103,15 @@ $(document).ready(function(e){
                method: "patch",
                data: {_token:_token, id: ele.attr("data-id"), quantity: ele.parents('tr').find('.quantity').val()},
                success: function (data) {
-                 shopping();
-                 show_cart();
-                 cart();
+                 if(data=='no'){
+                    toastr.warning('số lượng sản phẩm trong kho không đủ');
+                 }else{
+                    toastr.success('cập nhật thành công');
+                     shopping();
+                     show_cart();
+                     cart();
+                 }
+                 
              
                }
             });

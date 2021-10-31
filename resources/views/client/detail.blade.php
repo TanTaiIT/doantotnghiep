@@ -63,7 +63,7 @@
 						<div class="bo">
 						<span class="item_price"><span style="font-weight: bolder;"class="pri">Giá:  </span>{{number_format($value->product_price,0,'.','.')}} VNĐ</span>
 					    </div>
-						<span class="loai" style="font-family:unset;font-weight: 700;">Loại Sản phẩm:  </span><span>{{$value->category_name}}</span><br><br>
+						<span class="loai" style="font-family:unset;font-weight: 700;">Loại Sản phẩm:  </span><span>{{$value->category->category_name}}</span><br><br>
 						<span class="loai" style="font-family:unset;font-weight: 700;">Tồn Kho:  </span><span>{{$value->soluong}} sản phẩm</span>
 					</p>
 					<div class="single-infoagile duoi">

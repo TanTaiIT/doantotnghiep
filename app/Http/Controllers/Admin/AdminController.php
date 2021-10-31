@@ -11,6 +11,8 @@ use App\Models\product;
 use App\Models\Post;
 use App\Models\Order;
 use App\Models\custommer;
+use App\Models\Admin;
+use Auth;
 use Session;
 class AdminController extends Controller
 {
@@ -187,6 +189,11 @@ class AdminController extends Controller
     
 
     return view('manager.admin.trangchu',compact('visitors_total','visitor_count','visitor_last_month_count','visitor_this_month_count','visitor_year_count','order','customer','product','post','post_views','product_views'));
+   }
+
+   public function pro_file(){
+    $user=admin::with('roles')->Find(Auth::id());
+    return view('manager.profile.profile',compact('user'));
    }
 
 

@@ -93,7 +93,7 @@ class CartController extends Controller
                 session()->put('cart', $cart);
             }
 
-            session()->flash('success', 'Product removed successfully');
+            session()->flash('enter', 'Product removed successfully');
         }
     }
     public function update(Request $request)
@@ -102,25 +102,25 @@ class CartController extends Controller
         $cate=category::all();
         $com='index';
         $mes='';
-        $slide=slider::limit(4)->get();  
-        if($request->id and $request->quantity)
-        {
-            $pro=product::find($request->id);
-            $sl=$pro->soluong;
-            if($request->quantity<$sl){
-                $cart = session()->get('cart');
+        $slide=slider::limit(4)->get(); 
 
-            $cart[$request->id]["quantity"] = $request->quantity;
-            session()->put('cart', $cart);
-            $cart=session()->get('cart');
-            }else{
-                Session::flash('message', 'số lượng sản phẩm đặt quá lớn,chỉ còn'.' '. $sl .' trong kho');
+        $pro=Product::find($request->id);
+        $sl=$pro->soluong;
+        
+        if($request->quantity > $sl){
+            echo 'no';
+
+        } else{
+            if($request->id and $request->quantity)
+            {
+                $cart = session()->get('cart');
+                $cart[$request->id]["quantity"] = $request->quantity;
+                session()->put('cart', $cart);
+                $cart=session()->get('cart');
                 
-               
-                // return $req['message']='fail';
             }
-            
         }
+        
         
     }
     

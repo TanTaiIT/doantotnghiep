@@ -27,14 +27,6 @@ class OrderController extends Controller
 
 
 	}
-	// public function huy_don_hang(Request $req){
-	// 	$data = $req->all();
-	// 	$order = Order::where('order_code',$data['id'])->first();
-	// 	$order->order_destroy = $data['lydo'];
-	// 	$order->order_status = 3;
-	// 	$order->save();
-
-	// }
 	public function huy_don_hang(Request $req){
 		$data=$req->all();
 		$order=Order::where('order_code',$data['id'])->update(['order_status'=>3]);

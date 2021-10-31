@@ -164,7 +164,7 @@ class ClientController extends Controller
         <tr class="rem1">
         <td class="invert">'.$i++.'</td>
         <td class="invert-image">
-        <a href="../detail'.$details['pro_id'].'">
+        <a href="../detail/'.$details['pro_id'].'">
         <img src="../images/'.$details['image'].'" alt=" " class="img-responsive">
         </a>
         </td>
@@ -264,31 +264,26 @@ class ClientController extends Controller
             $url_canonical = $request->url();
         return view('client.profile',compact('meta_title','meta_desc','url_canonical','com','cate','cate_post1','chinh','cus'));
     }
-    public function update_pro(Request $req){
-        $cus_id=$req->cus_id;
+    public function update_pro(Request $req,$id){
         $this->validate($req, [
             'name'=>'required',
             'email'=>'required|email',
-            'phone' => 'required|regex:/(07)[0-9]{9}/',
-            'pass'=>'required|min:8|max:255',
+            'phone' => 'required|regex:/(0)[0-9]{9}/',
             
         ],[
-            'name.required'=>'+Ban chưa nhập tên',
-            'email.required'=>'+Ban chưa nhập email',
-            'email.email'=>'+Email chưa đúng định dạng',
-            'pass.required'=>'+Bạn chưa nhập password',
-            'phone.required'=>'+Bạn chưa nhập số điện thoại',
-            'phone.regex'=>'+Số Điện thoại chưa đúng định dạng',
-            'pass.min'=>'+password lớn hơn 8',
-            'pass.max'=>'+Password nhỏ hơn 255',
+            'name.required'=>'Ban chưa nhập tên',
+            'email.required'=>'Ban chưa nhập email',
+            'email.email'=>'Email chưa đúng định dạng',
+            'phone.required'=>'Bạn chưa nhập số điện thoại',
+            'phone.regex'=>'Số Điện thoại chưa đúng định dạng',
             
         ]);
-        $cus=custommer::Find($cus_id);
+        $cus=custommer::Find($id);
         $cus->customer_name=$req->name;
         $cus->customer_email=$req->email;
         $cus->customer_phone=$req->phone;
-        $cus->customer_password=md5($req->pass);
         $cus->update();
+        return redirect()->back()->with('message','Cập nhật thông tin thành công');
     }
     public function chinhsach(Request $request,$id){
         $com='';
@@ -326,7 +321,8 @@ class ClientController extends Controller
         $rating=rating::where('product_id','=',$id)->avg('rating');
         $rating=round($rating);
         $chinh=chinhsach::limit(3)->get();
-        $detail=DB::table('tbl_product')->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')->where("tbl_product.product_id",$id)->get();
+        // $detail=DB::table('tbl_product')->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')->where("tbl_product.product_id",$id)->get();
+        $detail=Product::with('category')->where('product_id',$id)->get();
 
        
 
@@ -335,7 +331,7 @@ class ClientController extends Controller
         foreach($detail as $key=>$value){
             $category_id=$value->category_id;
             $product_id=$value->product_id;
-            $product_cate = $value->category_name;
+            $product_cate = $value->category->category_name;
             $cate_id=$value->category_id;
              $meta_desc = $value->product_desc;
              $meta_title = $value->product_name;
@@ -347,13 +343,6 @@ class ClientController extends Controller
         $del=product::where("product_id",$id)->first();
         $del->product_view=$del->product_view+1;
         $del->save();
-
-
-
-        // $related_product = DB::table('tbl_product')
-        // ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
-        // ->where('tbl_category_product.category_id',$category_id)->whereNotIn('tbl_product.product_id',[$product_id])->orderby(DB::raw('RAND()'))->get();
-        /*$related_product=Product::with('category')->where('category_id',$category_id)->whereNotIn('product_id',[$product_id])->get();*/
         $related_product=Product::with('category')->whereNotIn('product_id',[$product_id])->where('category_id',$category_id)->get();
         return view('client/detail',compact('detail','com','cate','img_detail','url_canonical','rating','size','hot','meta_desc'
         ,'meta_title','url_canonical','cate_post1','related_product','cate_id','product_cate','chinh','share_images'));
@@ -377,7 +366,7 @@ class ClientController extends Controller
         }
         $dem=count($search);
         if(count($search)>0){
-            Session::flash('message','');
+            Session::flash('yes','');
 
         }else{
             Session::flash('error','không tìm thấy sản phẩm');

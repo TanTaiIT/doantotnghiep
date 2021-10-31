@@ -6,7 +6,7 @@
 		<!-- tittle heading -->
 		<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
 		@lang('lang.search')</h3>
-		<?php $message=Session::get('message');
+		<?php $message=Session::get('yes');
 		if(isset($message)){?>
 			<div class="alert alert-primary" role="alert">
 				Kết quả tìm kiếm: <?php echo $dem; ?> sản phẩm

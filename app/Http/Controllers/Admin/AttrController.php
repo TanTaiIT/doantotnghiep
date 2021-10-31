@@ -20,9 +20,11 @@ class AttrController extends Controller
     	attribute::create($req->all());
         return redirect()->route('add_attr')->with('message','Đã thêm thuộc tính mới');
     }
+
     public function del_attr($id){
         $att=attribute::Find($id);
         $att->delete();
         return redirect()->back();
     }
+    
 }

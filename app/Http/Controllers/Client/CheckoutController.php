@@ -446,18 +446,18 @@ class  CheckoutController extends Controller
             'password'=>'required|min:8|max:32',
             're_password'=>'required|same:password'
         ],[
-            'name.required'=>'+Ban chưa nhập tên',
-            'email.required'=>'+Ban chưa nhập email',
-            'email.email'=>'+Email chưa đúng định dạng',
-            'email.unique'=>'+Email đã tồn tại',
-            'password.required'=>'+Bạn chưa nhập password',
-            'sdt.required'=>'+Bạn chưa nhập số điện thoạt',
-            'sdt.regex'=>'+Số Điện thoại chưa đúng định dạng',
-            'sdt.unique'=>'+Số điện thoại đã tồn tại',
-            're_password.required'=>'+Bạn chưa nhập lại password',
-            'password.min'=>'+password lớn hơn 8',
-            'password.max'=>'+Password lớn hơn 32',
-            're_password.same'=>'+Password chưa đúng'
+            'name.required'=>'Ban chưa nhập tên',
+            'email.required'=>'Ban chưa nhập email',
+            'email.email'=>'Email chưa đúng định dạng',
+            'email.unique'=>'Email đã tồn tại',
+            'password.required'=>'Bạn chưa nhập password',
+            'sdt.required'=>'Bạn chưa nhập số điện thoạt',
+            'sdt.regex'=>'Số Điện thoại chưa đúng định dạng',
+            'sdt.unique'=>'Số điện thoại đã tồn tại',
+            're_password.required'=>'Bạn chưa nhập lại password',
+            'password.min'=>'password lớn hơn 8',
+            'password.max'=>'Password lớn hơn 32',
+            're_password.same'=>'Password chưa đúng'
         ]);
 
         // $cus=array();

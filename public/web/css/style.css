@@ -87,8 +87,23 @@ body a {
 select.form-control:not([size]):not([multiple]) {
 height: unset;
 }
+.btn-nut{
+    background: #9cded8!important;
+    color: #000 !important;
+    text-transform: uppercase;
+    font-weight: 400;
+}
 .active1{
     background: blue;
+}
+
+.notify{
+    position: absolute;
+    right: 0;
+    max-width: 300px;
+    margin-left: auto;
+    z-index: 999;
+    animation: notify 0.5s ease infinite alternate;
 }
 a.unset {
     position: absolute;
@@ -118,6 +133,7 @@ a.unset:hover{
 .amazingslider-wrapper{
     z-index: 99;
 }
+
 .loader{
     position: fixed;
     top: 0;
@@ -225,6 +241,12 @@ label.error:nth-child(4){
 li#binhluan {
     padding-left: 22px;
     padding-top: 20px;
+    height: 565px;
+    overflow: scroll;
+}
+li#binhluan::-webkit-scrollbar{
+    display: none;
+
 }
 .comment-info {
     background: mistyrose;
@@ -266,6 +288,7 @@ li#binhluan {
     border: none;
     width: 100px;
     color: black;
+    width: 100%;
 }
 .dropdown {
   position: relative;
@@ -385,9 +408,7 @@ span.online {
 div#size {
     position: relative;
 }
-a.chubv{
-color: black;
-}
+a.chubv{color: black;font-weight: bold;font-size: 18px;}
 .h{
 
 width: 32%;
@@ -419,6 +440,9 @@ width: 60%;
     padding-bottom: 145px;
     background: #3018b0;
     padding: 27px 33px;
+    box-shadow: 2px 1px 10px 5px grey;
+    border-radius: 15px;
+    background: #ffffff;
 }
 h3.tittle-w3l.text-center.mb-lg-5.mb-sm-4.mb-3.got {
     padding-top: 90px;
@@ -1777,6 +1801,10 @@ h3.tittle-w3l span {
 
 .men-pro-item {
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    flex-direction: column;
 }
 .checkout-left{
     padding:0 20px;
@@ -2937,23 +2965,6 @@ td.invert-image a img {
     position: relative;
 }
 
-.close1,
-.close2,
-.close3 {
-    background: url('../images/close_1.png') no-repeat 0px 0px;
-    cursor: pointer;
-    width: 28px;
-    height: 28px;
-    position: absolute;
-    right: 15px;
-    top: -13px;
-    -webkit-transition: color 0.2s ease-in-out;
-    -moz-transition: color 0.2s ease-in-out;
-    -o-transition: color 0.2s ease-in-out;
-    transition: color 0.2s ease-in-out;
-}
-
-/*-- quantity-starts --*/
 
 .value-minus,
 .value-plus {
@@ -4610,7 +4621,14 @@ div#testimonials h4.m-title {
         visibility: hidden;
     }
 }
-
+@keyframes notify{
+    0%{
+        transform: translateX(-10px);
+    }
+    100%{
+        transform: translateX(10px);
+    }
+}
 
 
 

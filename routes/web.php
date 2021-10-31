@@ -97,11 +97,11 @@ Route::get('/send-mail','Admin\MailController@send')->name('send');
 Route::post('/product-tabs','Admin\CategoryController@product_tabs');
 Route::get('/search', 'Admin\ProductController@tim');
 Route::get('profile','Client\ClientController@profile');
-Route::post('update_profile','Client\ClientController@update_pro');
+Route::post('update_profile/{id}','Client\ClientController@update_pro');
 Route::post('show-cart','Client\ClientController@show');
 Route::post('shop','Client\ClientController@shopping');
 Route::post('giohang','Client\ClientController@giohang');
-
+Route::get('profile_admin','Admin\AdminController@pro_file')->name('pro_file');
 Route::get('cli/fetch_data','Client\ClientController@fetch_data');
 
 

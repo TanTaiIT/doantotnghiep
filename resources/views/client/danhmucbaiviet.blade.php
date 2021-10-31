@@ -29,13 +29,13 @@
                                  @foreach($post_cate as $key => $p)
                                 <div class="flex">
                                     <div class="hinh1">
-                                            <a href=""><div class="scale-img">
+                                            <a href="{{url('/bai-viet/'.$p->post_slug)}}"><div class="scale-img">
                                             <img class='img-thumbnail' width="300px" height="200px" src="{!!asset('uploads/post/'.$p->post_image)!!}" alt="">
                                             </div></a>
                                         </div>
                                         <div class="content">
                                     <h4 class="pt-1">
-                                        <a class="title_baiviet" href="">{{$p->post_title}}</a>
+                                        <a class="title_baiviet" href="{{url('/bai-viet/'.$p->post_slug)}}">{{$p->post_title}}</a>
                                     </h4>
                                     <p ><?=htmlspecialchars_decode($p->post_desc)?></p>
                                     <a   href="{{url('/bai-viet/'.$p->post_slug)}}" class="btn btn-default btn-sm xem">Xem bài viết</a>

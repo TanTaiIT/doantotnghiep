@@ -23,6 +23,25 @@ a.btn-color{
 	padding: 10px 20px;
 	color: #fff;
 }
+span.tieun {
+    color: #dc6329;
+    font-size: 18px;
+    font-weight: 400;
+
+}
+li.fle-u {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 60px;
+}
+.notify{
+    position: absolute;
+    right: 0;
+    max-width: 300px;
+    margin-left: auto;
+    z-index: 999;
+    animation: notify 0.5s ease infinite alternate;
+}
 td.taiche {
     display: flex;
     justify-content: space-evenly;
@@ -43,6 +62,27 @@ td.taiche {
 	transition: 0.5s;
 	display: inline-block;
 
+}
+.prof{
+  height: 80vh;
+  margin: auto;
+  width: 50%;
+}
+ul.danhsach{
+	padding-left: 0;
+    list-style: none;
+    text-align: left;
+    line-height: 5;
+
+}
+span.tieud {
+    font-size: 17px;
+    font-weight: 500;
+    color: #000;
+}
+.card-header {
+    font-size: 27px;
+    color: #000;
 }
 .pos a:hover{
 	opacity: 1;
@@ -206,4 +246,13 @@ button.nhan.btn.btn-danger.px-5 {
 input.search {
     padding: 7px;
     width: 215px;
+}
+
+@keyframes notify{
+    0%{
+        transform: translateX(-10px);
+    }
+    100%{
+        transform: translateX(10px);
+    }
 }
