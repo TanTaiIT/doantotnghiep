@@ -36,7 +36,7 @@ li.fle-u {
 }
 .notify{
     position: absolute;
-    right: 0;
+    right: 13px;
     max-width: 300px;
     margin-left: auto;
     z-index: 999;

@@ -244,6 +244,9 @@
             success:function(data)
                 {
                     chart.setData(data);
+                },
+                error:function(){
+                  toastr.warning('không có dữ liệu');
                 }
                
             });

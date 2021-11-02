@@ -482,15 +482,11 @@ class  CheckoutController extends Controller
         return redirect()->route('cli_index')->with('message','XIN BẠN HÃY CHECK MAIL ĐỂ XÁC NHẬN TÀI KHOẢN!!');;
     }
     public function xacnhanTK(Request $req){
-        //dd($req->name);
-        //dd($req->all());
         $email = $req->email;
         $name = $req->name;
         $phone = $req->phone;
         $password = $req->password;
         $code_active = $req->code_active;
-        //$time_active = $req->time_active;
-        //dd($email);
 
         $cus=array();
         $cus['customer_name']=$name;
@@ -504,9 +500,6 @@ class  CheckoutController extends Controller
         return redirect()->route('cli_index')->with('message','XÁC NHẬN TÀI KHOẢN THÀNH CÔNG!!');
         
     }
-    // public function getdoimk(){
-    //     return view('email.layout_doimk');
-    // }
     public function dangnhap(Request $req){
         $this->validate($req, [
             'email'=>'required|email',
@@ -550,8 +543,9 @@ class  CheckoutController extends Controller
         $checkUser->code = $code;
         $checkUser->code_time = Carbon::now();
         $checkUser->save();
-        DB::table('tbl_customers')->where('customer_email', $email)->update(['code'=> $code]);
+        // DB::table('tbl_customers')->where('customer_email', $email)->update(['code'=> $code]);
         // custommer::where('customer_email',$email)->update(['code'=>$code]);
+        custommer::where('customer_email',$email)->update(['code'=>$code]);
         $checkUser->save();
 
         $url = route('getdoimk',['code'=>$checkUser->code, 'email'=>$email]);
@@ -596,18 +590,13 @@ class  CheckoutController extends Controller
         $data = $req->all();
         $code = $req->code;
         $email = $req->email;
-        //dd($data);
-        // $checkUser = DB::table('tbl_customers')->where([
-        //     'code' => $code,
-        //     'customer_email' => $email
-        //  ])->first();
         $checkUser=custommer::where(['code'=>$code,'customer_email'=>$email])->first();
          
          if(!$checkUser){
             return redirect('cli_index')->with('error','Xin lổi, đường dẩn không dúng, bạn vui lòng thử lại sao');
         }
 
-        // DB::table('tbl_customers')->where('customer_email', $email)->update(['customer_password'=> md5($req->password)]);
+        
         custommer::where('customer_email',$email)->update(['customer_password'=>md5($req->password)]);
         return redirect()->route('cli_index')->with('message','ĐỔI MẬT KHẨU THÀNH CÔNG, MỜI BẠN ĐĂNG NHẬP');
     }
