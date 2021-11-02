@@ -94,7 +94,7 @@
                           </a>
                           <?php 
                             if($d->order_status == 2){ ?>
-                              <a  href="{{URL::to('/move/'.$d->order_code)}}"><i class="glyphicon glyphicon-send"></i></a>
+                              <a  href="{{URL::to('/move/'.$d->order_code)}}"><i class="glyphicon glyphicon-send" style="color:green"></i></a>
                             <?php } ?>
                           
                           

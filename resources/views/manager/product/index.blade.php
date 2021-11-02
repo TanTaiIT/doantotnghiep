@@ -31,14 +31,14 @@
                         </form>
 
 
-                        <form action="{{url('/product/import-csv')}}" method="POST" enctype="multipart/form-data" class="love">
+                        <?php /*<form action="{{url('/product/import-csv')}}" method="POST" enctype="multipart/form-data" class="love">
                         @csrf
-                        <!-- <input type="file" name="file" accept=".xlsx" class="should"><br> -->
+                        
                         <span class="btn btn-default btn-file">
                         chọn file excel <input type="file" name="file" accept=".xlsx" >
                         </span>
                         <input type="submit" value="Nhập file excel" name="import_csv" class="btn btn-warning ">
-                        </form>
+                        </form>*/ ?>
 
                     </div>
 

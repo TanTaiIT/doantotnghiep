@@ -17,6 +17,14 @@ class CouponController extends Controller
             return redirect()->back()->with('message','Xóa mã khuyến mãi thành công');
         }
 	}
+    public function huy_coupon(Request $req,$cou_id){
+        $coupon=coupon::where('coupon_id',$cou_id)->update(['coupon_status'=>0]);
+        return redirect()->route('list_coupon')->with('message','tạm khóa mã khuyến mãi');
+    }
+    public function kich_hoat_coupon(Request $req,$cou_id){
+         coupon::where('coupon_id',$cou_id)->update(['coupon_status'=>1]);
+        return redirect()->back()->with('message','kích hoạt mã khuyến mãi');
+    }
     // public function insert_coupon(){
     // 	return view('admin.magiamgia.insert_coupon');
     // }

@@ -103,6 +103,8 @@ Route::post('shop','Client\ClientController@shopping');
 Route::post('giohang','Client\ClientController@giohang');
 Route::get('profile_admin','Admin\AdminController@pro_file')->name('pro_file');
 Route::get('cli/fetch_data','Client\ClientController@fetch_data');
+Route::get('/huy-coupon/{cou_id}','Client\CouponController@huy_coupon')->name('huy_coupon');
+Route::get('/kich-hoat-coupon/{cou_id}','Client\CouponController@kich_hoat_coupon')->name('kich-hoat-coupon');
 
 
 

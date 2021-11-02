@@ -47,7 +47,7 @@
 	<div class="coupon">
 
 		<div class="container">
-			<h3>Mã khuyến mãi từ shop <a target="_blank" href="https://hieutantutorial.com/tutorial_youtube/shopbanhanglaravel">https://hieutantutorial.com</a>
+			<h3>Mã khuyến mãi từ shop <a target="_blank" href="http://trasua.net/cli/index">https://hieutantutorial.com</a>
 			</h3>
 		</div>
 		<div class="container" style="background-color:white">
@@ -60,7 +60,7 @@
 				@endif
 			    cho tổng đơn hàng đặt mua</i></b></h2> 
 
-			<p>Quý khách đã từng mua hàng tại shop <a target="_blank" style="color:red" href="http://hieutantutorial.com/tutorial_youtube/shopbanhanglaravel">hieutantutorial.com</a> nếu đã có tài khoản xin vui lòng <a target="_blank" style="color:red"  href="http://hieutantutorial.com/tutorial_youtube/shopbanhanglaravel/dang-nhap">đăng nhập</a> vào tài khoản để mua hàng và nhập mã code phía dưới để được giảm giá mua hàng ,xin cảm ơn quý khách.Chúc quý khách thật nhiều sức khỏe và bình an trong cuộc sống. </p>
+			<p>Quý khách đã từng mua hàng tại shop <a target="_blank" style="color:red" href="http://trasua.net/cli/index">hieutantutorial.com</a> nếu đã có tài khoản xin vui lòng <a target="_blank" style="color:red"  href="http://trasua.net/cli/index">đăng nhập</a> vào tài khoản để mua hàng và nhập mã code phía dưới để được giảm giá mua hàng ,xin cảm ơn quý khách.Chúc quý khách thật nhiều sức khỏe và bình an trong cuộc sống. </p>
 		</div>
 		<div class="container">
 			<p class="code">Sử dụng Code sau: <span class="promo">{{$coupon['coupon_code']}}</span> Chỉ với {{$coupon['coupon_time']}} mã giảm giá,nhanh tay kẻo hết.</p>

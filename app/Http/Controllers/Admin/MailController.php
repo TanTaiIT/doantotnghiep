@@ -16,8 +16,10 @@ class MailController extends Controller
     public function send_mail($condition ,$number ,$code ,$time){
         $customer = Custommer::where('custommer_vip','=',NULL)->get();
 
-        $coupon = Coupon::where('coupon_code',$code)->first();
-        $start_coupon = $coupon->start_day;
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y/m/d');
+        $coupon = Coupon::where('coupon_code',$code)->where('coupon_status',1)->where('end_day','>',$today)->first();
+        if($coupon){
+            $start_coupon = $coupon->start_day;
         $end_coupon = $coupon->end_day;
 
         $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s');
@@ -42,6 +44,10 @@ class MailController extends Controller
     });
   
          return redirect()->back()->with('message','Gửi mã khuyến mãi khách thường thành công');
+     }else{
+        return redirect()->back()->with('message','Mã giảm giá chưa kích hoạt');
+     }
+        
     }
     public function send_mail_vip($condition ,$number ,$code ,$time){
         $customer = Custommer::where('custommer_vip','=',1)->get();

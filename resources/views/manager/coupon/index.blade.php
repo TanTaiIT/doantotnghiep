@@ -106,11 +106,11 @@
 				              <?php
 				               if($cou->coupon_status==1){
 				                ?>
-				                <span style="color:blue">Đang kích hoạt</span>
+				                <a href="{{route('huy_coupon',$cou->coupon_id)}}"><span style="color:blue">Đang kích hoạt</span></span>
 				                <?php
 				                 }else{
 				                ?>  
-				                 <span style="color:red">Không hoạt động</span>
+				                 <a href="{{route('kich-hoat-coupon',$cou->coupon_id)}}"><span style="color:red">Không hoạt động</span></a>
 				                <?php
 				               }
 				              ?>
