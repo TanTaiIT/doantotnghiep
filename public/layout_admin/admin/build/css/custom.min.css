@@ -97,6 +97,10 @@ span.tieud {
 .panel-heading1{
 	font-weight: bold;
 }
+.excel_form{
+	float: right;
+	margin-left: auto;
+}
 select#in {
 	background: #16b5bc;
 	width: 25%;

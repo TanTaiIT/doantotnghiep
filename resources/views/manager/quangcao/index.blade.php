@@ -59,11 +59,11 @@
                             <?php
                              if($q->quangcao_status==0){
                               ?>
-                              <a href="">Hiện</span></a>
+                              <a href="{{route('hkh_qc',$q->quangcao_id)}}">Hiện</span></a>
                               <?php
                                }else{
                               ?>  
-                               <a href="">Ẩn</span></a>
+                               <a href="{{route('kh_qc',$q->quangcao_id)}}">Ẩn</span></a>
                               <?php
                              }
                             ?>

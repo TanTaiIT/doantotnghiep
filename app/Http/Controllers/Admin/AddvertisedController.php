@@ -18,6 +18,15 @@ class AddvertisedController extends Controller
     //     $quangcao=quangcao::all();
     //     return view('admin.quangcao.all_quangcao',compact('quangcao'));
     // }
+
+    public function hkh_qc(Request $req,$qc_id){
+        quangcao::where('quangcao_id',$qc_id)->update(['quangcao_status'=>1]);
+        return redirect()->back()->with('mesage','hủy kích hoạt thành công');
+    }
+    public function kh_qc(Request $req,$qc_id){
+        quangcao::where('quangcao_id',$qc_id)->update(['quangcao_status'=>0]);
+        return redirect()->back()->with('message','kích hoạt thành công');
+    }
     public function addver()
     {
         $quangcao=quangcao::all();

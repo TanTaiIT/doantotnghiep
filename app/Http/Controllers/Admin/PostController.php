@@ -15,15 +15,14 @@ use DB;
 class PostController extends Controller
 {
     
-    //
-    // public function add_post(){
-    //     // $this->AuthLogin();
-    //     $cate_post = CatePost::orderBy('cate_post_id','DESC')->get(); 
-       
-    //     return view('admin.post.add_post')->with(compact('cate_post'));
-        
-
-    // }
+    public function kichhoat_post(Request $req,$post_id){
+        Post::where('post_id',$post_id)->update(['post_status'=>0]);
+        return redirect()->back()->with('message','kích hoạt bài viết thành công');
+    }
+    public function huykichhoat_post(Request $req,$post_id){
+        Post::where('post_id',$post_id)->update(['post_status'=>1]);
+        return redirect()->back()->with('message','kích hoạt bài viết thành công');
+    }
     public function add_post(){
         // $this->AuthLogin();
         $cate_post = CatePost::orderBy('cate_post_id','DESC')->get(); 

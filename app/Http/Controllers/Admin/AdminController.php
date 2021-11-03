@@ -13,6 +13,8 @@ use App\Models\Order;
 use App\Models\custommer;
 use App\Models\Admin;
 use Auth;
+use App\Exports\Export_statistical;
+use Excel;
 use Session;
 class AdminController extends Controller
 {
@@ -23,7 +25,10 @@ class AdminController extends Controller
     // public function index(){
     //     return view('manager/admin/index');
     // }
-
+    public function export_statis(){
+        return Excel::download(new Export_statistical,'thongke.xlsx');
+    }
+    
     public function filter_by_date(Request $request){
 
     $data = $request->all();

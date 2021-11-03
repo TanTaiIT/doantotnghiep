@@ -228,7 +228,7 @@ class ClientController extends Controller
         $hot=attribute::where('name','hot')->get();
         $cate=category::all();
         $chinh=chinhsach::limit(3)->get();
-        $quangcao=quangcao::orderBy('quangcao_id','desc')->get();
+        $quangcao=quangcao::where('quangcao_status',0)->orderBy('quangcao_id','desc')->get();
         $bestsell=product::orderBy('product_sold','DESC')->paginate(3);
         $sp=product::orderBy('product_sold','DESC')->limit(6)->get();
         $toping=product::where('category_id',10)->where('product_status',1)->get();

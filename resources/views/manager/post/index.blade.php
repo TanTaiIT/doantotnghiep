@@ -63,9 +63,9 @@
                           <td>{{ $post->cate_post->cate_post_name }}</td>
                           <td>
                             @if($post->post_status==0)
-                              Hiển thị
+                              <a href="{{route('hkh-post',$post->post_id)}}">Hiển thị</a>
                             @else 
-                              Ẩn
+                              <a href="{{route('kh-post',$post->post_id)}}">Ẩn</a>
                             @endif
                           </td>
 

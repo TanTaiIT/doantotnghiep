@@ -105,7 +105,10 @@ Route::get('profile_admin','Admin\AdminController@pro_file')->name('pro_file');
 Route::get('cli/fetch_data','Client\ClientController@fetch_data');
 Route::get('/huy-coupon/{cou_id}','Client\CouponController@huy_coupon')->name('huy_coupon');
 Route::get('/kich-hoat-coupon/{cou_id}','Client\CouponController@kich_hoat_coupon')->name('kich-hoat-coupon');
-
+Route::get('/hkh-post/{post_id}','Admin\PostController@huykichhoat_post')->name('hkh-post');
+Route::get('/kh-post/{post_id}','Admin\PostController@kichhoat_post')->name('kh-post');
+Route::get('/kh-qc/{qc_id}','Admin\AddvertisedController@kh_qc')->name('kh_qc');
+Route::get('/hkh-qc/{qc_id}','Admin\AddvertisedController@hkh_qc')->name('hkh_qc');
 
 
 
@@ -206,6 +209,7 @@ Route::post('/filter-by-date','Admin\AdminController@filter_by_date');
 Route::get('/order-date','Admin\AdminController@order_date');
 Route::post('/days-order','Admin\AdminController@days_order');
 Route::get('/404','Client\ClientController@error_page')->name('404_page');
+Route::post('/export-statis','Admin\AdminController@export_statis')->middleware('check');
 
 /////////////////COUPONE//////////////
 Route::post('/check-coupon','Client\CouponController@check_coupon');

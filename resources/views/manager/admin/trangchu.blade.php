@@ -74,10 +74,14 @@
       </div>
 
     </form>
-
-    
-
+    <div class="excel_form">
+  <form action="{{url('/export-statis')}}" method="POST" class="mr-4">
+  @csrf
+  <input type="submit" value="thống kê (excel) tháng này" name="export_csv" class="btn btn-success">
+  </form>
 </div>
+</div>
+
 
 
 
