@@ -10,11 +10,7 @@ use Auth;
 use Session;
 class UserController extends Controller
 {
-    // public function index()
-    // {
-    //     $admin = admin::with('roles')->orderBy('admin_id','DESC')->paginate(5);
-    //     return view('admin.users.all_user',compact('admin'));
-    // }
+    
     public function index()
     {
         $admin = admin::with('roles')->orderBy('admin_id','DESC')->get();

@@ -47,6 +47,9 @@ $(document).ready(function(e){
                 var soluong=$('.cart_product_sl').val();
                 var _token = $('input[name="_token"]').val();
                 var sl=$('input[name="sl"]').val();
+                if(parseInt(soluong) <= 0){
+                    toastr.warning('vui lòng chọn từ 1 sản phẩm trở lên');
+                }else{
                 if(parseInt(soluong) > parseInt(sl)){
                     toastr.warning("số lượng bạn đặt lớn hơn số sản phẩm mà chúng tôi có, làm ơn đặt số lượng nhỏ hơn" + " "+ sl);
                 }else{
@@ -70,6 +73,7 @@ $(document).ready(function(e){
                      toastr.warning('bạn cần phải chọn đầy đủ thông tin trước khi mua hàng');
                 }
             }
+        }
             });
 
 
@@ -93,7 +97,6 @@ $(document).ready(function(e){
 
     $(document).on('click','.update-cart',function (e) {
            e.preventDefault();
-
            var ele = $(this);
            var _token = $('input[name="_token"]').val();
            var quantity=ele.parents('tr').find('.quantity').val();
@@ -102,7 +105,7 @@ $(document).ready(function(e){
                url: '../update-cart',
                method: "patch",
                data: {_token:_token, id: ele.attr("data-id"), quantity: ele.parents('tr').find('.quantity').val()},
-               success: function (data) {
+               success: function(data) {
                  if(data=='no'){
                     toastr.warning('số lượng sản phẩm trong kho không đủ');
                  }else{
@@ -239,10 +242,13 @@ $(document).ready(function(e){
               
                 var id = $(this).data('id_product');
                 var size=$('input[name=size]:checked').val();
-                var hot=$('input[name=hot]:checked').val();
                 var soluong=$('.cart_product_sl').val();
                 var _token = $('input[name="_token"]').val();
                 var sl=$('.cart_soluong').val();
+
+                if(soluong < 0){
+                    toastr.warning('số lượng phải lớn hơn 0');
+                }else{
                 if(parseInt(soluong) > parseInt(sl)){
                     toastr.warning("số lượng bạn đặt lớn hơn số sản phẩm mà chúng tôi có, làm ơn đặt số lượng nhỏ hơn" + " "+ sl);
                 }else{
@@ -267,6 +273,12 @@ $(document).ready(function(e){
                 toastr.warning('bạn cần phải chọn đầy đủ thông tin trước khi mua hàng');
               }
                 }
+
+            }
+
+
+
+
                 
             });
 

@@ -96,7 +96,16 @@ height: unset;
 .active1{
     background: blue;
 }
-
+.nhan{
+    color: grey;
+    font-weight: bolder;
+    margin-bottom: 5px;
+}
+.nhan1{
+    color: grey;
+    font-weight: bolder;
+    margin-bottom: 20px;
+}
 .notify{
     position: absolute;
     right: 0;

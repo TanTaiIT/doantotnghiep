@@ -278,11 +278,17 @@ class ClientController extends Controller
             'phone.regex'=>'Số Điện thoại chưa đúng định dạng',
             
         ]);
+        
+        
+        
         $cus=custommer::Find($id);
         $cus->customer_name=$req->name;
         $cus->customer_email=$req->email;
         $cus->customer_phone=$req->phone;
-        $cus->update();
+        $email=$cus->customer_email;
+        // // $cus->save();
+        // // $data=$req->all();
+        $cus->update(['customer_name'=>$req->name,'customer_email'=>$req->email,'customer_phone'=>$req->phone]);
         return redirect()->back()->with('message','Cập nhật thông tin thành công');
     }
     public function chinhsach(Request $request,$id){

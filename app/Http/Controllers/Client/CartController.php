@@ -19,7 +19,6 @@ class CartController extends Controller
         $soluong_dat=$product->soluong;
         $soluong=$req->soluong;
         $size=$req->size;
-        $hot=$req->hot;
         $count=0;
         if($soluong>$soluong_dat){
            Session::flash('message','sản phẩm trong kho không đủ, vui lòng đặt ít hơn');
@@ -108,7 +107,9 @@ class CartController extends Controller
         $sl=$pro->soluong;
         
         if($request->quantity > $sl){
+            
             echo 'no';
+            
 
         } else{
             if($request->id and $request->quantity)
@@ -116,7 +117,7 @@ class CartController extends Controller
                 $cart = session()->get('cart');
                 $cart[$request->id]["quantity"] = $request->quantity;
                 session()->put('cart', $cart);
-                $cart=session()->get('cart');
+                
                 
             }
         }

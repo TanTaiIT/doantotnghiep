@@ -47,7 +47,7 @@
 	<div class="coupon">
 
 		<div class="container">
-			<h3>Mã khuyến mãi từ shop <a target="_blank" href="http://trasua.net/cli/index">https://hieutantutorial.com</a>
+			<h3>Mã khuyến mãi từ shop <a target="_blank" href="http://trasua.net/cli/index">http://trasua.net/cli/index</a>
 			</h3>
 		</div>
 		<div class="container" style="background-color:white">
