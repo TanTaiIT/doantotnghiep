@@ -232,7 +232,7 @@ class ProductController extends Controller
         $hinh=$gallary->images;
         if($hinh){
             $path='upload_img/'.$hinh;
-            // unlink($path);
+            unlink($path);
         }
         if($gallary->delete()){
             return redirect()->back()->with('message','xóa thành công');
