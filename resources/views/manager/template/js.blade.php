@@ -46,10 +46,9 @@
     <script src="{!!asset('layout_admin/ckeditor/ckeditor.js')!!}"></script>
 <!--     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
     <script src="{!! asset('layout_admin/js/simple.money.format.js')!!}"></script>
-    <!-- <script src="{!! asset('layout_admin/admin/vendors/morris.js/morris.min.js')!!}"></script>
-    <script src="{!! asset('layout_admin/admin/vendors/raphael/raphael.min.js')!!}"></script> -->
+    <!-- <script src="{!! asset('layout_admin/admin/vendors/morris.js/morris.min.js')!!}"></script> -->
+    <script src="{!! asset('layout_admin/admin/vendors/raphael/raphael.min.js')!!}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 
 <!--     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> -->
 
@@ -287,34 +286,7 @@
 
 
 
-<script type="text/javascript">
-$(document).ready(function(){
-      
-        //     });
-        var donut = Morris.Donut({
-          element: 'donut',
-          resize: true,
-          colors: [
-            '#2A3F54',
-            '#20c997',
-            '#17a2b8',
-            '#dc3545',
-            '#dc3545'
-            
-          ],
-          //labelColor:"#cccccc", // text color
-          //backgroundColor: '#333333', // border color
-          data: [
-            {label:"Đơn hàng mới", value:<?php echo $new ?>},
-            {label:"Đơn hàng đã bị hủy", value:<?php echo $destroy ?>},
-            {label:"Đang vận chuyển", value:<?php echo $move ?>},
-           
-            {label:"Đơn hàng đã xử lý", value:<?php echo $process ?>} 
-          ]
-        });
-     
-});
-</script>
+
 
 
 

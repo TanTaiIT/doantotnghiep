@@ -308,6 +308,35 @@
   } );
  
 </script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+      
+        //     });
+        var donut = Morris.Donut({
+          element: 'donut',
+          resize: true,
+          colors: [
+            '#2A3F54',
+            '#20c997',
+            '#17a2b8',
+            '#dc3545',
+            '#dc3545'
+            
+          ],
+          //labelColor:"#cccccc", // text color
+          //backgroundColor: '#333333', // border color
+          data: [
+            {label:"Đơn hàng mới", value:<?php echo $new ?>},
+            {label:"Đơn hàng đã bị hủy", value:<?php echo $destroy ?>},
+            {label:"Đang vận chuyển", value:<?php echo $move ?>},
+           
+            {label:"Đơn hàng đã xử lý", value:<?php echo $process ?>} 
+          ]
+        });
+     
+});
+</script>
          
 
         @endsection

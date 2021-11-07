@@ -153,7 +153,7 @@
                       </tbody>
                     </table>
                     <div class="pagination">
-                    
+                    {!! $coupon->links('pagination::bootstrap-4') !!}
                   </div>
                   </div>
                   </div>
