@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Session;
 use App\Models\CatePost;
 use DB;
+use App\Models\Post;
 use App\Models\Slider;
 class CategoryPost extends Controller
 {
@@ -97,9 +98,17 @@ class CategoryPost extends Controller
     }
     public function delete_category_post($cate_id){
         $category_post = CatePost::find($cate_id);
-        $category_post->delete();
-        Session::flash('message','Xóa danh mục bài viết thành công');
-        return redirect()->back();
+        $post=Post::where('cate_post_id',$cate_id)->get();
+        $dem=count($post);
+        if($dem==0){
+            $category_post->delete();
+            Session::flash('message','Xóa danh mục bài viết thành công');
+            return redirect()->back();
+        }
+        else{
+            return redirect()->back()->with('message','không thể xóa danh mục này');
+        }
+        
 
     }
 }

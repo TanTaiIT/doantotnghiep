@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\attribute;
+use App\Models\product_attr;
 class AttrController extends Controller
 {
     // public function add_attr(){
@@ -22,8 +23,16 @@ class AttrController extends Controller
 
     public function del_attr($id){
         $att=attribute::Find($id);
-        $att->delete();
-        return redirect()->back();
+        $pro_att=product_attr::where('attr_id',$id)->get();
+        $dem=count($pro_att);
+        if($dem==0){
+            $att->delete();
+            return redirect()->back()->with('message','xóa thuộc tính thành công');
+        }else{
+            return redirect()->back()->with('message','không thể xóa thuộc tính này');
+        }
+        
+        
     }
     
 }

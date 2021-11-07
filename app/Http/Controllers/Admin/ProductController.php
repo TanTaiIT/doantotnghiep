@@ -172,14 +172,21 @@ class ProductController extends Controller
     }
     public function delete($id){
         $pro=product::FindOrFail($id);
-        if($pro->delete()){
+        $a=OrderDetail::where('product_id',$id)->get();
+        $dem=count($a);
+        if($dem == 0){
+            if($pro->delete()){
             File::delete('images/'.$pro->product_image);
             Session::flash("message","Xóa sản phẩm thành công");
+            return redirect()->route('pro_index');
         }
-        else{
-            Session::flash("message","Xóa sản phẩm thất bại");
+        
+
+        }else{
+            return redirect()->route('pro_index')->with('message','không thể xóa');
         }
-        return redirect()->route('pro_index');
+
+        
     }
     public function kichhoat($id){
         $p=product::where('product_id',$id)->update(['product_status'=>1]);

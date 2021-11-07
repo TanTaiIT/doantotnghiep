@@ -256,7 +256,7 @@ $(document).ready(function(e){
                     $.ajax({
                         url: '../cart',
                         method: 'POST',
-                        data:{id:id,_token:_token,size:size,hot:hot,soluong:soluong},
+                        data:{id:id,_token:_token,size:size,soluong:soluong},
                         success:function(data){
                             toastr.success('đã thêm sản phẩm vào giỏ hàng');
                             show_cart();

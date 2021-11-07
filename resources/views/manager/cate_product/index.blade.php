@@ -57,7 +57,7 @@
                          
                           <td>
                           	  <a href="{{route('cat_edit',$c->category_id)}}" title="sữa sản phẩm"><i class="glyphicon glyphicon-pencil"></i></a>
-                          		<a onclick="return confirm('sản phẩm thuộc danh mục này sẽ bị xóa, bạn có chắc muốn xóa không?')" href="{{route('delete_cate',$c->category_id)}}" title="xóa sản phẩm"><i class="glyphicon glyphicon-trash"></i></a></td>
+                          		<a onclick="return confirm('bạn có chắc muốn xóa không?')" href="{{route('delete_cate',$c->category_id)}}" title="xóa sản phẩm"><i class="glyphicon glyphicon-trash"></i></a></td>
                         </tr>
                         @endforeach
                       </tbody>

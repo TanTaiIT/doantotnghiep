@@ -78,13 +78,20 @@ class CategoryController extends Controller
     }
     public function delete($id){
     	$cate=category::FindOrFail($id);
-    	if($cate->delete()){
-    		Session::flash("message","Xóa loại sản phẩm thành công");
-    	}
-    	else{
-    		Session::flash("message","Xóa loại sản phẩm thất bại");
-    	}
-    	return redirect()->route('cate_index');
+        $pro=Product::where('category_id',$id)->get();
+        $dem=count($pro);
+        if($dem == 0){
+            if($cate->delete()){
+            Session::flash("message","Xóa loại sản phẩm thành công");
+        }
+        else{
+            Session::flash("message","Xóa loại sản phẩm thất bại");
+        }
+        return redirect()->route('cate_index');
+    }else{
+        return redirect()->route('cate_index')->with('message','không thể xóa loại sản phẩm này');
+    }
+    	
     }
 
     public function export_csv(){
