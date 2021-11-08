@@ -59,12 +59,12 @@
                             <?php
                              if($s->slider_status==1){
                               ?>
-                              <a href="{{URL::to('/unactive-slide/'.$s->slider_id)}}"><span class="fa-thumb-styling fa fa-thumbs-down"></span></a>
+                              <a href="{{URL::to('/unactive-slide/'.$s->slider_id)}}"><!-- <span class="fa-thumb-styling fa fa-thumbs-down"></span> --> ẩn</a>
                               <?php
                                }else{
                               ?>  
                                <a href="{{URL::to('/active-slide/'.$s->slider_id)}}">
-                               <span class="fa-thumb-styling fa fa-thumbs-up"></span></a>
+                               <!-- <span class="fa-thumb-styling fa fa-thumbs-up"></span> -->hiển thị</a>
                               <?php
                              }
                             ?>

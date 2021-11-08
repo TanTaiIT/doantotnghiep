@@ -30,10 +30,10 @@
                           <td>{{$p->soluong}}</td>
                           <td>
                             @if($p->product_status==1)
-                              <a href="{{route('huykichhoat',$p->product_id)}}" title="Hiển thị"><i class="glyphicon glyphicon-eye-open success"></i></a>
+                              <a href="{{route('huykichhoat',$p->product_id)}}" title="Hiển thị"><!-- <i class="glyphicon glyphicon-eye-open success"></i> -->hiển thị</a>
                             
                             @elseif($p->product_status==0)
-                              <a href="{{route('kichhoat',$p->product_id)}}" title="ẩn"><i class="glyphicon glyphicon-eye-close"></i></a>
+                              <a href="{{route('kichhoat',$p->product_id)}}" title="ẩn"><!-- <i class="glyphicon glyphicon-eye-close"></i> -->ẩn</a>
                             
                             @endif
                           </td>

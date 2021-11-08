@@ -64,7 +64,7 @@
                           </td>           
                           <td>
                             <a href="{{URL::to('/edit-category-post/'.$cate_post->cate_post_id)}}" class="active styling-edit" ui-toggle-class="">
-                              <i class="fa fa-pencil-square-o text-success text-active"></i></a>
+                              <i class="glyphicon glyphicon-pencil"></i></a>
                             <a onclick="return confirm('Bạn có chắc là muốn xóa danh mục này không này ko?')" href="{{URL::to('/delete-category-post/'.$cate_post->cate_post_id)}}" class="active styling-edit" ui-toggle-class="">
                               <i class="fa fa-times text-danger text"></i>
                             </a>

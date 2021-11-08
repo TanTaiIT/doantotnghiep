@@ -71,7 +71,7 @@
 
                           <td>
                             <a href="{{URL::to('/edit-post/'.$post->post_id)}}" class="active styling-edit" ui-toggle-class="">
-                              <i class="fa fa-pencil-square-o text-success text-active"></i></a>
+                              <i class="glyphicon glyphicon-pencil"></i></a>
                             <a onclick="return confirm('Bạn có chắc là muốn xóa bài viết này ko?')" href="{{URL::to('/delete-post/'.$post->post_id)}}" class="active styling-edit" ui-toggle-class="">
                               <i class="fa fa-times text-danger text"></i>
                             </a>
