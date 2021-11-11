@@ -327,7 +327,10 @@ class ClientController extends Controller
         $rating=rating::where('product_id','=',$id)->avg('rating');
         $rating=round($rating);
         $chinh=chinhsach::limit(3)->get();
-        $detail=Product::with('category')->where('product_id',$id)->get();
+        $detail=Product::with('category')->where('product_id',$id)->where('product_status',1)->get();
+        if(count($detail)==0){
+           return redirect()->route('cli_index'); 
+       }else{
         if($detail){
             foreach($detail as $key=>$value){
             $category_id=$value->category_id;
@@ -341,12 +344,12 @@ class ClientController extends Controller
              
 
         }
-        $related_product=Product::with('category')->whereNotIn('product_id',[$product_id])->where('category_id',$category_id)->get();
+        $related_product=Product::with('category')->whereNotIn('product_id',[$product_id])->where('category_id',$category_id)->where('product_status',1)->get();
         return view('client/detail',compact('detail','com','cate','img_detail','url_canonical','rating','size','hot','meta_desc'
         ,'meta_title','url_canonical','cate_post1','related_product','cate_id','product_cate','chinh','share_images'));
-    }else{
-        return redirect()->route('cli_index');
-    }
+         }
+         }
+    
         
     }
    
@@ -624,60 +627,7 @@ class ClientController extends Controller
 
     }
 
-    // public function load_comment(Request $req){
-    //     $id=$req->id;
-    //     $row=binhluan::where('comment_parent_comment',0)->where('comment_product_id',$id)->orderBy('comment_id','desc')->get();
-    //     $row2=binhluan::where('comment_parent_comment','>',0)->get();
-    //     $html1='';
-    //     foreach($row as $r){
-    //     $html1.='<div class="media1">
-    //             <a class="pull-left mr-2" href="#!">
-    //               <img class="media-object comment-avatar" src="'.url('web/images/avatar.png').'" alt="" width="29" height="29" />
-    //             </a>
-    //             <div class="media-body" id="comment">
-    //             <div class="comment-info">
-    //                 <div class="pad">
-    //                 <h4  class="comment-author">
-    //                    <a href="#!" style="color:black;list-style-type:none;font-size:15px;">'.$r['comment_name'].'</a>
-    //                 </h4>
-    //                 <time  datetime="2013-04-06T13:53">'.$r['comment_date'].'</time>
-                    
-    //                 <a style="cursor:pointer;color:darkblue;font-size:13px;font-weight:bold" class="comment-button reply"  id="'.$r['comment_id'].'"><i class="tf-ion-chatbubbles"></i>Reply</a>
-    //                 </div>
-    //             </div>
-    //             <p style="font-weight: bold;color: firebrick;">
-    //                 '.$r['comment'].'
-    //             </p>
-    //             </div>
-    //             </div>';
-    //             foreach($row2 as $r2){
-    //                 if($r2->comment_parent_comment == $r->comment_id){
-    //                 $html1.='<div class="media1 marl">
-    //                         <a class="pull-left mr-2" href="#!">
-    //                           <img class="media-object comment-avatar" src="'.url('web/images/76729750.jpg').'" alt="" width="33" height="29" />
-    //                         </a>
-    //                         <div class="media-body" id="comment">
-    //                         <div class="comment-info">
-    //                         <div class="pad">
-    //                             <h4  class="comment-author">
-    //                                <a href="#!" style="color:black;list-style-type:none;font-size:15px;">'.$r2['comment_name'].'</a>
-    //                             </h4>
-    //                             <time  datetime="2013-04-06T13:53">'.$r2['comment_date'].'</time>
-    //                         </div>
-                                
-    //                         </div>
-    //                         <p style="font-weight: bold;color: firebrick;">
-    //                             '.$r2['comment'].'
-    //                         </p>
-    //                         </div>
-    //                         </div>';
-    //                     }
-    //             }
-    //             // $html1.= reply($r['comment_id']);
-    //         }
-    //     echo $html1;
-
-    // }
+    
 
    
     

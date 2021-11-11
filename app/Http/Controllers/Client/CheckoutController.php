@@ -514,22 +514,22 @@ class  CheckoutController extends Controller
         ]);
         $email=$req->email;
         $password=  md5($req->password);
-        // $result=custommer::where('customer_email',$email)->where('customer_password',$password)->where('status',1)->first();
-        if(Auth::attempt(['customer_email'=>$email,'customer_password'=>$password])){
+        $result=custommer::where('customer_email',$email)->where('customer_password',$password)->where('status',1)->first();
+        // if(Auth::attempt(['customer_email'=>$email,'customer_password'=>$password])){
+        //     Session::put('fee',15000);
+        //     return redirect()->route('cli_index')->with('message','ĐĂNG NHẬP THÀNH CÔNG');
+        // }
+        
+        
+        if($result){
             Session::put('fee',15000);
-            return redirect()->route('cli_index')->with('message','ĐĂNG NHẬP THÀNH CÔNG');
-        }
-        
-        
-        // if($result){
-        //     // Session::put('fee',15000);
-        //     // Session::save();
-        //     // Session::put('customer_id',$result->customer_id);
-        //     // Session::put('customer_name',$result->customer_name);
-        //     // Session::flash('message','ĐĂNG NHẬP THÀNH CÔNG');
-        //     // return redirect()->route('cli_index');
+            Session::save();
+            Session::put('customer_id',$result->customer_id);
+            Session::put('customer_name',$result->customer_name);
+            Session::flash('message','ĐĂNG NHẬP THÀNH CÔNG');
+            return redirect()->route('cli_index');
             
-        else{
+        }else{
             return redirect()->route('cli_index')->with('error','ĐĂNG NHẬP THẤT BẠI');
             
         }
@@ -626,7 +626,10 @@ class  CheckoutController extends Controller
         $share_images = url('images/'.$request->product_image);   
          $cate=category::all();
          $com='';
-         return view('client.payment',compact('cate','com','url_canonical','meta_title','meta_desc','share_images','cate_post1','chinh'));
+
+         $id=Session::get('customer_id');
+         $cus=custommer::where('customer_id',$id)->where('status',1)->first();
+         return view('client.payment',compact('cate','com','url_canonical','meta_title','meta_desc','share_images','cate_post1','chinh','cus'));
      }
     }
 

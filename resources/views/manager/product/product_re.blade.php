@@ -1,4 +1,45 @@
-<table class="table table-striped table-bordered" >
+@extends('manager.template.admin_layout')
+@section('content')
+
+<div class="right_col" role="main">
+<div class="">
+<div class="clearfix"></div>
+<div class="row">
+<div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>phục hồi sản phẩm</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                     
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                      <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                      
+                    </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="button d-flex justify-content-between">
+                    
+                    <div class="csv d-flex justify-content-center align-items-center">
+                    </div>
+
+
+
+
+                  </div>
+                 <!--  <div class="search text-right p-2">
+                        <input type="search" placeholder="search" class="search" id="search">
+                  </div> -->
+
+                  <div class="x_content">
+                      <div class="row">
+                          <div class="col-sm-12">
+                            <div class="card-box table-responsive" id="list-product">
+                            <table class="table table-striped table-bordered" >
                       <thead>
                         <tr>
                           <th class="text-center"></th>
@@ -37,14 +78,9 @@
                             
                             @endif
                           </td>
+                          <td><a href="{{route('pro_recovers',$p->product_id)}}" title="thêm thư viện"><i class="glyphicon glyphicon-refresh"></i></a></td>
                           
-                          <td>
-                            @hasrole(['admin'])
-                              <a href="{{route('add_img',$p->product_id)}}" title="thêm thư viện"><i class="glyphicon glyphicon-th"></i></a>
-                              <a href="{{route('product_edit',$p->product_id)}}" title="sữa sản phẩm"><i class="glyphicon glyphicon-pencil"></i></a>
-                              <a onclick="return confirm('bạn có chắc muốn xóa không?')" href="{{route('delete_pro',$p->product_id)}}" title="xóa sản phẩm"><i class="glyphicon glyphicon-trash"></i></a>
-                              @endhasrole
-                            </td>
+                          
                           
                         </tr>
                         @endforeach
@@ -52,27 +88,15 @@
                      
                     </table>
                      {!! $pro->links('pagination::bootstrap-4') !!}
-
-                <!--   <div class="Pagination d-flex justify-content-center"> -->
-                      
-                <!--   </div> -->
-
-
-@section('paginate')
-<script>
-    $(document).on('click','.pagination a',function(event){
-        event.preventDefault();
-        var page=$(this).attr('href').split('page=')[1];
-        fetch_data(page);
-    });
-    function fetch_data(page){
-        $.ajax({
-            url:"{{url('/pagination/fetch_data?page=')}}"+page,
-            success:function(data){
-                $('#list-product').html(data);
-            }
-        });
-    }
-</script>
-
+                    
+                    
+                  </div>
+                  </div>
+              </div>
+            </div>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
 @endsection

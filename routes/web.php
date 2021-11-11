@@ -156,6 +156,8 @@ Route::get('del_img/{id}','ProductController@del_img')->name('del_img');
 Route::post('/export-csv','ProductController@export_csv')->middleware('check');
 Route::post('/import-csv','ProductController@import_csv')->middleware('check');
 Route::get('/search','ProductController@search');
+Route::get('/product_recover','ProductController@pro_recover_view')->name('product_recover');
+Route::get('/product_phuchoi/{product_id}','ProductController@pro_recover')->name('pro_recovers');
 });
 
 

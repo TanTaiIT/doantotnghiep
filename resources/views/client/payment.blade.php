@@ -223,23 +223,23 @@
 							<div class="information-wrapper">
 								<div class="first-row">
 									<div class="controls form-group">
-										<input class="form-control shipping_name" type="text"  name="shipping_name"  placeholder="@lang('lang.cus_name')" required="">
+										<input class="form-control shipping_name" type="text"  name="shipping_name" value="{{$cus->customer_name}}"  placeholder="@lang('lang.cus_name')" required="">
 									</div>
 									
 										<div class="w3_agileits_card_number_grid_left form-group">
 											<div class="controls">
-												<input type="email"  class="form-control shipping_email" placeholder="@lang('lang.E_cus')" name="shipping_email" required="">
+												<input type="email" value="{{$cus->customer_email}}"  class="form-control shipping_email" placeholder="@lang('lang.E_cus')" name="shipping_email" required="">
 											</div>
 										</div>
 										<div class="w3_agileits_card_number_grid_right form-group">
 											<div class="controls">
-												<input type="text" class="form-control shipping_phone" placeholder="@lang('lang.num')" name="shipping_phone" required="required">
+												<input type="text" class="form-control shipping_phone" placeholder="@lang('lang.num')" name="shipping_phone" value="{{$cus->customer_phone}}" required="required">
 												<span id="status"></span>
 											</div>
 										</div>
 										<div class="w3_agileits_card_number_grid_left form-group1">
 											<div class="controls1">
-												<input  type="text" class="form-control shipping_address"  placeholder="@lang('lang.add')" name="shipping_address" required="">
+												<input  type="text" class="form-control shipping_address"  placeholder="chỉ giao hàng ở TP.HCM" name="shipping_address" required="">
 											</div>
 
 											<div class="controls2">

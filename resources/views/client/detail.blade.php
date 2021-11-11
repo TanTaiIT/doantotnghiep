@@ -93,27 +93,25 @@
 					
 							<li class="mb-3">
 								<p><span style="font-family:unset;font-weight: 700;">Chọn Size</span></p>
-								<div class="bao2">
-								@foreach($size as $id=>$data)
-								<div class="bao3">
-								<input type="radio" class="cart_product_size" name="size" value="{{$data->attribute->value}}">{{$data->attribute->value}}<br>
-								<?php 
-								$tien=$value->product_price-$value->gia_km;
-								    $n=$tien-(($tien*20)/100);
-								    $l=$tien+(($tien*20)/100);
-								  if($data->attribute->value=="Nhỏ"){?>
-								  	
-								  	(<span style="color:red;font-size:13px;font-weight: bold;">{{number_format($n,0,'.','.')}} <span style="font-size:9px"></span></span>)
-								  <?php }elseif($data->attribute->value=="Lớn"){?>
-								  	(<span style="color:red;font-size:13px;font-weight: bold;">{{number_format($l,0,'.','.')}} <span style="font-size:9px;"></span> </span>)
-								  
-								 <?php }else{?>
-								 	(<span style="color:red;font-size:13px;font-weight: bold;">{{number_format($tien,0,'.','.')}} <span style="font-size:9px;"></span></span>)
-								 <?php } ?>
 								
-							    </div>
-								@endforeach
-							   </div>
+								<div class="bao2">
+									<div class="bao3">
+									<input type="radio" class="cart_product_size" name="size" value="Nhỏ">nhỏ<br>
+									 <span style="color:darkred;font-weight: 500">{{(($value->product_price)-(($value->product_price)*20)/100)-$value->product_km}}</span>
+								</div>
+								<div class="bao3">
+									
+									<input type="radio" class="cart_product_size" name="size" value="Vừa">vừa<br>
+									<span style="color:darkred;font-weight: 500">{{$value->product_price-$value->product_km}}</span>
+								</div>
+								<div class="bao3">
+									
+									<input type="radio" class="cart_product_size" name="size" value="Lớn">lớn<br>
+									<span style="color:darkred;font-weight: 500">{{(($value->product_price)+(($value->product_price)*20)/100)-$value->product_km}}</span>
+								</div>
+								</div>
+								
+							  
 							</li>
 
 

@@ -20,13 +20,20 @@ use DB;
 class ProductController extends Controller
 {
     public function index(){
-        $pro=Product::with('category')->orderby('product_id','DESC')->Paginate(15);
+        $pro=Product::with('category')->where('product_status',1)->orderby('product_id','DESC')->Paginate(15);
         return view('manager.product.index',compact('pro'));
 
     }
-
+    public function pro_recover($product_id){
+        $pro=Product::with('category')->where('product_id',$product_id)->where('product_status',0)->update(['product_status'=>1]);
+        return redirect()->back()->with('message','phục hồi sản phẩm thành công');
+    }
+    public function pro_recover_view(){
+        $pro=Product::with('category')->where('product_status',0)->orderby('product_id','DESC')->Paginate(15);
+        return view('manager.product.product_re',compact('pro'));
+    }
     public function fetch_data(Request $req){
-             $pro=Product::with('category')->orderby('product_id','DESC')->Paginate(15);
+             $pro=Product::with('category')->orderby('product_id','DESC')->where('product_status',1)->Paginate(15);
             return view('manager.product.paginate_data',compact('pro'))->render();
         
     }
@@ -163,19 +170,21 @@ class ProductController extends Controller
     }
     public function delete($id){
         $pro=product::FindOrFail($id);
-        $a=OrderDetail::where('product_id',$id)->get();
-        $dem=count($a);
-        if($dem == 0){
-            if($pro->delete()){
-            File::delete('images/'.$pro->product_image);
-            Session::flash("message","Xóa sản phẩm thành công");
-            return redirect()->route('pro_index');
-        }
+        // $a=OrderDetail::where('product_id',$id)->get();
+        // $dem=count($a);
+        // if($dem == 0){
+        //     if($pro->delete()){
+        //     File::delete('images/'.$pro->product_image);
+        //     Session::flash("message","Xóa sản phẩm thành công");
+        //     return redirect()->route('pro_index');
+        // }
         
 
-        }else{
-            return redirect()->route('pro_index')->with('message','không thể xóa');
-        }
+        // }else{
+        //     return redirect()->route('pro_index')->with('message','không thể xóa');
+        // }
+        $pro->update(['product_status'=>0]);
+        return redirect()->back()->with('message','đã xóa sản phẩm');
 
         
     }
@@ -249,25 +258,28 @@ class ProductController extends Controller
         $lon=number_format(($km+(($km*20)/100)),0,'.','.').' '.'VNĐ';
         $vua=number_format($km,0,'.','.').' '.'VNĐ';
 
+
         $com='';
         $galary=pro_img::where('product_id',$product_id)->get();
-        foreach($size as $s){
+        
             $output['product_size']='<span class="ab">GIÁ:</span><div class="bao2">';
-                                foreach($size as $id=>$data){
                                 $output['product_size'].='
                                 <div class="bao3">
-                    <input type="radio" class="cart_product_size" name="size" value="'.$data->attribute->value.'">'.$data->attribute->value.'';
-                                   if($data->attribute->value=="Nhỏ"){
-                                    $output['product_size'].='<br><span style="color: brown;" class="product_nho">'.$nho.'</span>';
-                                        }elseif($data->attribute->value=="Lớn"){
-                                        $output['product_size'].='<br><span style="color: brown;" class="product_lon">'.$lon.'</span>';
-                                        }else{
-                                        $output['product_size'].='<br><span  style="color: brown;" class="product_vua">'.$vua.'</span>';
-                                        } 
-                               $output['product_size'].='</div>';
-                               }
-                              $output['product_size'].='</div>';
-        }
+                                <input type="radio" class="cart_product_size" name="size" value="Nhỏ">Nhỏ<br>
+                                <span style="color:darkred;font-weight:500">'.$nho.'</span>
+                                </div>
+                                
+                                <div class="bao3">
+                                <input type="radio" class="cart_product_size" name="size" value="Vừa">Vừa<br>
+                                <span style="color:darkred;font-weight:500">'.$vua.'</span>
+                                </div>
+                                <div class="bao3">
+                                <input type="radio" class="cart_product_size" name="size" value="Lớn">Lớn<br>
+                                <span style="color:darkred;font-weight:500">'.$lon.'</span>
+                                </div>
+                                
+                              </div>';
+        
         $output['product_nho']=$nho;
         $output['product_lon']=$lon;
         $output['product_vua']=$vua;
@@ -291,66 +303,28 @@ class ProductController extends Controller
         Excel::import(new Import_product,request()->file('file')); 
         return back();
     }
-    public function tim(Request $req){
-        if($req->ajax()){
-            $output='';
-            $product=DB::table('tbl_product')->where('product_name','LIKE','%'.$req->search.'%')->get();
-            if($product){
-                $i=1;
-                foreach($product as $pro){
-                    $output.='<tr>
-                    <td>'.$i++.'</td>
-                    <td>'.$pro->product_name.'</td>
-                    <td>'.$pro->category_id.'</td>
-                    <td>'.$pro->product_desc.'</td>
-                    <td>'.$pro->product_price.'</td>
-                    <td>'.$pro->price_cost.'</td>
-                    <td>'.$pro->gia_km.'</td>
-                    <td><img width="100%" src="../images/'.$pro->product_image.'" alt=""></td>
-                    <td>'.$pro->product_status.'</td>
-                    <td>'.$pro->soluong.'</td>
-                    <td class="text">
-                      <a class="cach" href="add_images/'.$pro->product_id.'" title="thêm ảnh"><i class="glyphicon glyphicon-folder-open lo"></i>
-                        </a>
-                        <a class="cach" href="edit_pro/'.$pro->product_id.'" title="sửa sản phẩm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16" style="color:blue">
-                          <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
-                          <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
-                        </svg>
-                        </a>
-
-                        <a class="cach" href="delete/'.$pro->product_id.'" title="xóa sản phẩm">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="color:red" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                          <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                          <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                        </svg>
-                       </a>
-                      
-                      </td>
-                    <tr>';
-                }
-            }
-            return Response($output);
-        }
-    }
+    
 
     public function xoanhieu(Request $req){
          $a = $req->value;
          $b= preg_split("/[,]/",$a);
          $gallery=DB::table('tbl_product')->join('product_images','tbl_product.product_id','=','product_images.product_id')->whereIn('tbl_product.product_id',$b)->get();
 
-        foreach($gallery as $ga){
+        // foreach($gallery as $ga){
 
-            File::delete('upload_img/'.$ga->images);
-            File::delete('images/'.$ga->product_image);
+        //     File::delete('upload_img/'.$ga->images);
+        //     File::delete('images/'.$ga->product_image);
             
-        }
-        $gallery=Product::destroy($b);
+        // }
+        // $gallery=Product::destroy($b);
+         $gallery=Product::whereIn('product_id',$b)->update(['product_status'=>0]);
+
 
     }
     public function search(Request $req){
         
         // $product=DB::table('tbl_product')->join('tbl_category_product','tbl_product.category_id','=','tbl_category_product.category_id')->where('product_name','LIKE','%'.$req->search.'%')->get();
-        $product=Product::with('category')->where('product_name','LIKE','%'.$req->search.'%')->get();
+        $product=Product::with('category')->where('product_name','LIKE','%'.$req->search.'%')->where('product_status',1)->get();
         $html='';
         if($product){
             $i=0;

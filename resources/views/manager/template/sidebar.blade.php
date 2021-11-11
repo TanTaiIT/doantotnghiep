@@ -42,9 +42,9 @@
                   <li><a href="{{route('custommer_manager')}}"><i class="fa fa-clone"></i>khách hàng</a>
                     
                   </li>
-                  <li><a href="{{route('add_attr')}}"><i class="fa fa-clone"></i>Thuộc tính</a>
+                  <!-- <li><a href="{{route('add_attr')}}"><i class="fa fa-clone"></i>Thuộc tính</a>
                     
-                  </li>
+                  </li> -->
                   <li><a href="{{route('list_coupon')}}"><i class="fa fa-clone"></i>Mã giảm giá</a>
                     
                   </li>

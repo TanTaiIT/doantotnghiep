@@ -15,14 +15,23 @@
                      
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
                       </li>
+                      <li class="dropdown">
+                       
+
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{route('product_recover')}}">phục hồi</a>
+                      </div>
+                    </li>
                     </ul>
                     <div class="clearfix"></div>
                   </div>
                   <div class="button d-flex justify-content-between">
                     <div class="add">
+                    @hasrole(['admin'])
                   	<a href="{{route('pro_add')}}" class="btn-color" type="button" >Thêm sản phẩm</a>
                     <button type="button" class="nhan btn btn-danger px-5">Xóa</button>
-                    
+                    @endhasrole
                     </div>
                     <div class="csv d-flex justify-content-center align-items-center">
                        <form action="{{url('/product/export-csv')}}" method="POST" class="mr-4">

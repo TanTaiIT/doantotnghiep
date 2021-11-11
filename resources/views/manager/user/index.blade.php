@@ -71,7 +71,7 @@
                           <td>
                              <p><input type="submit" value="Phân quyền" class="btn btn-sm btn-warning"></p>
                              <p><a style="margin:5px 0;font-size:13px" class="btn btn-sm btn-info" href="{{url('/delete-user-roles/'.$user->admin_id)}}" onclick="return confirm('Cbạn có chắc muốn xóa user này không')">Xóa user</a></p>
-                             <p><a style="margin:5px 0;font-size:13px" class="btn btn-sm btn-success" href="{{url('/impersonate/'.$user->admin_id)}}">Chuyển quyền</a></p>
+                             <!-- <p><a style="margin:5px 0;font-size:13px" class="btn btn-sm btn-success" href="{{url('/impersonate/'.$user->admin_id)}}">Chuyển quyền</a></p> -->
                             
                           </td> 
                         </tr>

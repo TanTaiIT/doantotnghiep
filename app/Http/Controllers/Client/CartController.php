@@ -15,7 +15,7 @@ class CartController extends Controller
 
     public function addtocart(Request $req){
         $id=$req->id;
-        $product=product::find($id);
+        $product=product::where('product_id',$id)->where('product_status',1)->first();
         $soluong=$req->soluong;
         $size=$req->size;
         $count=0;
