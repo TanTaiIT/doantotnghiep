@@ -14,10 +14,10 @@
                       </li>
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="{{URL::to('/coupon_re_view')}}">phục hồi</a>
+                        <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{{URL::to('/coupon_re_view')}}">Settings 1</a>
                             
-                          </div>
+                          </div> -->
                       </li>
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
                       </li>
@@ -57,15 +57,15 @@
 				          
 				            <th>Tình trạng</th>
 				            
-				            <th>Gửi mã</th>
-				            <th>xóa</th>
+				            <th>Khôi phục</th>
+				            
                         </tr>
                       </thead>
 
 
                       <tbody>
                         <?php $i=0; ?>
-                        @foreach($coupon as $key => $cou)
+                        @foreach($coupon_re as $key => $cou)
                         <?php $i++ ?>
                         <tr>
                           <!-- <td>{{$i}}</td> -->
@@ -130,27 +130,10 @@
 				              ?>
 				            </td>
 
-				            <td>
-				              <p><a style="font-size: 10px;" href="{{URL::to('/send-coupon',[
-				                
-				              'condition'=>$cou->coupon_condition,
-				              'number'=>$cou->coupon_number,
-				              'code'=>$cou->coupon_code,
-				              'time'=>$cou->coupon_time
-				              ])}}" class="btn btn-primary">Gửi mã giảm giá khách hàng</a></p>
-				            </td>
-
-				            <td>
-				             
-				              <a  href="{{URL::to('/edit_coupon/'.$cou->coupon_id)}}" class="active styling-edit" ui-toggle-class="">
-				                <i class="glyphicon glyphicon-pencil"></i>
-				              </a>
-
-				              <!-- <a onclick="return confirm('Bạn có chắc là muốn xóa mã này ko?')" href="{{URL::to('/delete-coupon/'.$cou->coupon_id)}}" class="active styling-edit" ui-toggle-class="">
-				                <i class="fa fa-trash text-danger text"></i>
-				              </a> -->
-				              <a onclick="return confirm('Bạn có chắc là muốn xóa mã này ko?')" href="{{URL::to('/xoa_coupon/'.$cou->coupon_id)}}" class="active styling-edit" ui-toggle-class="">
-				                <i class="fa fa-trash text-danger text"></i>
+				            
+				            <td> 
+				              <a href="{{URL::to('/coupon_recover/'.$cou->coupon_id)}}" class="active styling-edit" ui-toggle-class="">
+				                <i class="glyphicon glyphicon-refresh text-success text"></i>
 				              </a>
 				            </td>
                          
@@ -160,7 +143,7 @@
                       </tbody>
                     </table>
                     <div class="pagination">
-                    {!! $coupon->links('pagination::bootstrap-4') !!}
+                    {!! $coupon_re->links('pagination::bootstrap-4') !!}
                   </div>
                   </div>
                   </div>

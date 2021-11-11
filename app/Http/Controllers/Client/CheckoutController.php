@@ -16,6 +16,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use PDF;
 use Mail;
+use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Social; //sử dụng model Social
@@ -370,7 +371,6 @@ class  CheckoutController extends Controller
          $order->save();
          $order_id=$order->order_id;
 
-
         //send email comfirm
         
 
@@ -494,6 +494,8 @@ class  CheckoutController extends Controller
         $cus['customer_password']=$password;
         $cus['customer_phone']=$phone;
         $cus['code_active']=$code_active;
+        $cus['ngaytao']=Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+        $cus['status']=1;
         $cus_id=DB::table('tbl_customers')->insertGetId($cus);
         Session::put('customer_id',$cus_id);
         Session::put('customer_name',$name);
@@ -512,18 +514,22 @@ class  CheckoutController extends Controller
         ]);
         $email=$req->email;
         $password=  md5($req->password);
-        $result=custommer::where('customer_email',$email)->where('customer_password',$password)->first();
-        
-        
-        if($result){
+        // $result=custommer::where('customer_email',$email)->where('customer_password',$password)->where('status',1)->first();
+        if(Auth::attempt(['customer_email'=>$email,'customer_password'=>$password])){
             Session::put('fee',15000);
-            Session::save();
-            Session::put('customer_id',$result->customer_id);
-            Session::put('customer_name',$result->customer_name);
-            Session::flash('message','ĐĂNG NHẬP THÀNH CÔNG');
-            return redirect()->route('cli_index');
+            return redirect()->route('cli_index')->with('message','ĐĂNG NHẬP THÀNH CÔNG');
+        }
+        
+        
+        // if($result){
+        //     // Session::put('fee',15000);
+        //     // Session::save();
+        //     // Session::put('customer_id',$result->customer_id);
+        //     // Session::put('customer_name',$result->customer_name);
+        //     // Session::flash('message','ĐĂNG NHẬP THÀNH CÔNG');
+        //     // return redirect()->route('cli_index');
             
-        }else{
+        else{
             return redirect()->route('cli_index')->with('error','ĐĂNG NHẬP THẤT BẠI');
             
         }

@@ -15,6 +15,19 @@ class CouponController extends Controller
         return view('manager.coupon.edit_coupon',compact('coupon'));
 
     }
+    public function coupon_re_view(){
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y/m/d');
+        $coupon_re=coupon::where('coupon_status',0)->paginate(10);
+        return view('manager.coupon.coupon_review',compact('coupon_re','today'));
+    }
+    public function coupon_recover($coupon_id){
+        $coupon=coupon::where('coupon_id',$coupon_id)->update(['coupon_status'=>1]);
+        return redirect()->back()->with('message','đã khôi phục mã khuyến mãi');
+    }
+    public function xoa_coupon($coupon_id){
+        $coupon=coupon::where('coupon_id',$coupon_id)->update(['coupon_status'=>0]);
+        return redirect()->back()->with('message','đã xóa mã giảm giá');
+    }
     public function update_coupon(Request $request,$coupon_id){
         $this->validate($request, [
             'coupon_name'=>'required',
@@ -83,7 +96,7 @@ class CouponController extends Controller
     public function list_coupon(){
         $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y/m/d');
         //dd($today);
-        $coupon = Coupon::orderby('coupon_id','DESC')->paginate(5);
+        $coupon = Coupon::orderby('coupon_id','DESC')->where('coupon_status',1)->paginate(5);
         return view('manager.coupon.index')->with(compact('coupon','today'));
     }
     public function insert_coupon_code(Request $request){
@@ -93,9 +106,10 @@ class CouponController extends Controller
             'coupon_name'=>'required',
             'coupon_number'=>'required|numeric|gt:0',
             'coupon_time'=>'numeric|required|gt:0',
-            'coupon_code'=>'required',
+            'coupon_code'=>'required|unique:tbl_coupon',
             'coupon_date_start'=>'date|required',
-            'coupon_date_end'=>'date|required'
+            'coupon_date_end'=>'date|required',
+
 
         ],[
             'coupon_name.required'=>'+Ban chưa nhập tên ',
@@ -105,7 +119,8 @@ class CouponController extends Controller
             'coupon_date_end.date'=>'+ bạn phải nhập đúng định dạng ngày',
             'coupon_date_start.date'=>'+ Bạn phải nhập đúng định dạng ngày',
             'coupon_number.gt'=>'+Số tiền giảm hoặc phần trăm giảm phải lớn hơn 0',
-            'coupon_time.gt'=>'+Số lượng mã phải lớn hơn 0'
+            'coupon_time.gt'=>'+Số lượng mã phải lớn hơn 0',
+            'coupon_code.unique'=>'+Mã giảm giá bị trùng'
             
         ]);
 

@@ -113,6 +113,13 @@ Route::get('complete/{order_id}','Admin\OrderController@complete')->name('comple
 
 
 
+///////////////CUSTOMMER///////////////
+Route::get('/custommer','Admin\CustommerController@custommer_view')->name('custommer_manager');
+Route::get('/cus_delete/{cus_id}','Admin\CustommerController@cus_del');
+Route::get('/recover','Admin\CustommerController@recover_view')->name('recover');
+Route::get('/cus_recover/{cus_id}','Admin\CustommerController@cus_recover')->name('khoiphuc');
+
+
 
 
 
@@ -151,11 +158,7 @@ Route::post('/import-csv','ProductController@import_csv')->middleware('check');
 Route::get('/search','ProductController@search');
 });
 
-/////////////////////CUSTOMMER/////////////
-// Route::group(['prefix'=>'Custommer','namespace'=>'Admin'],function(){
-//    Route::get('/custommer_view','CustommerController@custommer_view')->name('custommer_manager');
-// });
-Route::get('custommer','Admin\CustommerController@custommer_view')->name('custommer_manager');
+
 ///////////CATEGORY//////////////
 Route::group(['prefix'=>'category','namespace'=>'Admin'],function(){
 Route::get('index','CategoryController@index')->name('cate_index')->middleware('check');
@@ -222,6 +225,9 @@ Route::get('/list-coupon','Client\CouponController@list_coupon')->name('list_cou
 Route::post('/insert-coupon-code','Client\CouponController@insert_coupon_code')->name('insert_coupon_code')->middleware('check');
 Route::get('edit_coupon/{coupon_id}','Client\CouponController@edit_view')->name('edit_view');
 Route::post('update_coupon/{coupon_id}','Client\CouponController@update_coupon')->name('coupon_update');
+Route::get('xoa_coupon/{coupon_id}','Client\CouponController@xoa_coupon');
+Route::get('coupon_re_view','Client\CouponController@coupon_re_view');
+Route::get('coupon_recover/{coupon_id}','Client\CouponController@coupon_recover');
 
 
 /////////////////POST///////////////
