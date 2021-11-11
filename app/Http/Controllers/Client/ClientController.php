@@ -327,14 +327,9 @@ class ClientController extends Controller
         $rating=rating::where('product_id','=',$id)->avg('rating');
         $rating=round($rating);
         $chinh=chinhsach::limit(3)->get();
-        // $detail=DB::table('tbl_product')->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')->where("tbl_product.product_id",$id)->get();
         $detail=Product::with('category')->where('product_id',$id)->get();
-
-       
-
-        
-
-        foreach($detail as $key=>$value){
+        if($detail){
+            foreach($detail as $key=>$value){
             $category_id=$value->category_id;
             $product_id=$value->product_id;
             $product_cate = $value->category->category_name;
@@ -346,12 +341,13 @@ class ClientController extends Controller
              
 
         }
-        $del=product::where("product_id",$id)->first();
-        $del->product_view=$del->product_view+1;
-        $del->save();
         $related_product=Product::with('category')->whereNotIn('product_id',[$product_id])->where('category_id',$category_id)->get();
         return view('client/detail',compact('detail','com','cate','img_detail','url_canonical','rating','size','hot','meta_desc'
         ,'meta_title','url_canonical','cate_post1','related_product','cate_id','product_cate','chinh','share_images'));
+    }else{
+        return redirect()->route('cli_index');
+    }
+        
     }
    
     public function search(Request $request){
@@ -558,8 +554,8 @@ class ClientController extends Controller
         $comment->comment_status = 0;
         $comment->comment_name = 'TeaMilkStore';
         $comment->save();
-
     }
+   
     public function allow_comment(Request $request){
         $data = $request->all();
         $comment = binhluan::find($data['comment_id']);
@@ -574,75 +570,114 @@ class ClientController extends Controller
     }
 
     public function send_comment(Request $request){
-
-            $com_id=$request->commentId;
-            $pro_id=$request->pro_id;
-            $data=new binhluan();
-            $data->comment_name=$request->name;
-            $data->comment_product_id=$pro_id;
-            $data->comment=$request->comment;
-            $data->comment_parent_comment=$request->commentId;
-            $data->comment_status=0;
-            $data->save();
+        $product_id = $request->product_id;
+        $comment_name = $request->comment_name;
+        $comment_content = $request->comment_content;
+        $comment = new binhluan();
+        $comment->comment = $comment_content;
+        $comment->comment_name = $comment_name;
+        $comment->comment_product_id = $product_id;
+        $comment->comment_status = 1;
+        $comment->comment_parent_comment = 0;
+        $comment->save();
             
         
    
     }
+    public function load_comment(Request $request){
+        $product_id = $request->product_id;
+        $comment = binhluan::where('comment_product_id',$product_id)->where('comment_parent_comment','=',0)->where('comment_status',0)->orderby('comment_id','desc')->get();
+        $comment_rep = binhluan::with('product')->where('comment_parent_comment','>',0)->get();
+        $output = '';
+        foreach($comment as $key => $comm){
+            $output.= ' 
+            <div class="row style_comment">
 
-    public function load_comment(Request $req){
-        $id=$req->id;
-        $row=binhluan::where('comment_parent_comment',0)->where('comment_product_id',$id)->orderBy('comment_id','desc')->get();
-        $row2=binhluan::where('comment_parent_comment','>',0)->get();
-        $html1='';
-        foreach($row as $r){
-        $html1.='<div class="media1">
-                <a class="pull-left mr-2" href="#!">
-                  <img class="media-object comment-avatar" src="'.url('web/images/avatar.png').'" alt="" width="29" height="29" />
-                </a>
-                <div class="media-body" id="comment">
-                <div class="comment-info">
-                    <div class="pad">
-                    <h4  class="comment-author">
-                       <a href="#!" style="color:black;list-style-type:none;font-size:15px;">'.$r['comment_name'].'</a>
-                    </h4>
-                    <time  datetime="2013-04-06T13:53">'.$r['comment_date'].'</time>
-                    
-                    <a style="cursor:pointer;color:darkblue;font-size:13px;font-weight:bold" class="comment-button reply"  id="'.$r['comment_id'].'"><i class="tf-ion-chatbubbles"></i>Reply</a>
-                    </div>
-                </div>
-                <p style="font-weight: bold;color: firebrick;">
-                    '.$r['comment'].'
-                </p>
-                </div>
-                </div>';
-                foreach($row2 as $r2){
-                    if($r2->comment_parent_comment == $r->comment_id){
-                    $html1.='<div class="media1 marl">
-                            <a class="pull-left mr-2" href="#!">
-                              <img class="media-object comment-avatar" src="'.url('web/images/76729750.jpg').'" alt="" width="33" height="29" />
-                            </a>
-                            <div class="media-body" id="comment">
-                            <div class="comment-info">
-                            <div class="pad">
-                                <h4  class="comment-author">
-                                   <a href="#!" style="color:black;list-style-type:none;font-size:15px;">'.$r2['comment_name'].'</a>
-                                </h4>
-                                <time  datetime="2013-04-06T13:53">'.$r2['comment_date'].'</time>
-                            </div>
-                                
-                            </div>
-                            <p style="font-weight: bold;color: firebrick;">
-                                '.$r2['comment'].'
-                            </p>
-                            </div>
-                            </div>';
-                        }
-                }
-                // $html1.= reply($r['comment_id']);
-            }
-        echo $html1;
+                                        <div class="col-md-2 comm d-flex justify-content-center align-items-center">
+                                            <img src="'.url('web/images/avatar.png').'" class="img img-responsive img-thumbnail">
+                                        </div>
+                                        <div class="col-md-10">
+                                            <p style="color:green;">@'.$comm->comment_name.'</p>
+                                            <p style="color:#000;">thời gian: '.$comm->comment_date.'</p>
+                                            <p>'.$comm->comment.'</p>
+                                        </div>
+                                    </div><p></p>
+                                    ';
+
+                                    foreach($comment_rep as $key => $rep_comment)  {
+                                        if($rep_comment->comment_parent_comment==$comm->comment_id)  {
+                                     $output.= ' <div class="row style_comment" style="margin:20px 94px;">
+
+                                        <div class="col-md-2 repl d-flex justify-content-center align-items-center">
+                                            <img  src="'.url('web/images/76729750.jpg').'" class="img img-responsive img-thumbnail">
+                                        </div>
+                                        <div class="col-md-10">
+                                            <p style="color:blue;">@Admin</p>
+                                            <p style="color:#000;">'.$rep_comment->comment.'</p>
+                                            <p></p>
+                                        </div>
+                                    </div><p></p>';
+                                        }
+                                    }
+        }
+        echo $output;
 
     }
+
+    // public function load_comment(Request $req){
+    //     $id=$req->id;
+    //     $row=binhluan::where('comment_parent_comment',0)->where('comment_product_id',$id)->orderBy('comment_id','desc')->get();
+    //     $row2=binhluan::where('comment_parent_comment','>',0)->get();
+    //     $html1='';
+    //     foreach($row as $r){
+    //     $html1.='<div class="media1">
+    //             <a class="pull-left mr-2" href="#!">
+    //               <img class="media-object comment-avatar" src="'.url('web/images/avatar.png').'" alt="" width="29" height="29" />
+    //             </a>
+    //             <div class="media-body" id="comment">
+    //             <div class="comment-info">
+    //                 <div class="pad">
+    //                 <h4  class="comment-author">
+    //                    <a href="#!" style="color:black;list-style-type:none;font-size:15px;">'.$r['comment_name'].'</a>
+    //                 </h4>
+    //                 <time  datetime="2013-04-06T13:53">'.$r['comment_date'].'</time>
+                    
+    //                 <a style="cursor:pointer;color:darkblue;font-size:13px;font-weight:bold" class="comment-button reply"  id="'.$r['comment_id'].'"><i class="tf-ion-chatbubbles"></i>Reply</a>
+    //                 </div>
+    //             </div>
+    //             <p style="font-weight: bold;color: firebrick;">
+    //                 '.$r['comment'].'
+    //             </p>
+    //             </div>
+    //             </div>';
+    //             foreach($row2 as $r2){
+    //                 if($r2->comment_parent_comment == $r->comment_id){
+    //                 $html1.='<div class="media1 marl">
+    //                         <a class="pull-left mr-2" href="#!">
+    //                           <img class="media-object comment-avatar" src="'.url('web/images/76729750.jpg').'" alt="" width="33" height="29" />
+    //                         </a>
+    //                         <div class="media-body" id="comment">
+    //                         <div class="comment-info">
+    //                         <div class="pad">
+    //                             <h4  class="comment-author">
+    //                                <a href="#!" style="color:black;list-style-type:none;font-size:15px;">'.$r2['comment_name'].'</a>
+    //                             </h4>
+    //                             <time  datetime="2013-04-06T13:53">'.$r2['comment_date'].'</time>
+    //                         </div>
+                                
+    //                         </div>
+    //                         <p style="font-weight: bold;color: firebrick;">
+    //                             '.$r2['comment'].'
+    //                         </p>
+    //                         </div>
+    //                         </div>';
+    //                     }
+    //             }
+    //             // $html1.= reply($r['comment_id']);
+    //         }
+    //     echo $html1;
+
+    // }
 
    
     

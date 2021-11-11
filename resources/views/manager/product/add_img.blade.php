@@ -49,15 +49,21 @@
                           <td>{{$product_detail->product_price}}</td>
                           <td><img src="{!! asset('images/'.$product_detail->product_image)!!}" alt="" width="100px" height="100px" ></td>
                           <td>
+                              <?php 
+                                if(count($img) >= 2){ ?>
+                                  
+                                  <div style="margin-top: 30px;display:flex;justify-content:center;align-items:center;font-size:20px">chỉ được tối đa 2 ảnh</div>
+                            </form>
+                                <?php }else{ ?>
                           		<form action="{{route('add_img1',$product_detail->product_id)}}" method="post" enctype="multipart/form-data">
                               <input type="hidden" name="product_id" value="{{$product_detail->product_id}}">
                               {{csrf_field()}}
-                              <!-- <input class="nutanh" type="file" required="required" name="image[]" multiple> -->
                               <span class="btn btn-default btn-file">
                               chọn hình <input type="file" name="image[]" required="required" multiple>
                               </span>
                               <input class="subanh" type="submit" value="thêm ảnh">
                             </form>
+                          <?php } ?>
                         </tr>
                       </tbody>
                     </table>

@@ -109,7 +109,7 @@ Route::get('/hkh-post/{post_id}','Admin\PostController@huykichhoat_post')->name(
 Route::get('/kh-post/{post_id}','Admin\PostController@kichhoat_post')->name('kh-post');
 Route::get('/kh-qc/{qc_id}','Admin\AddvertisedController@kh_qc')->name('kh_qc');
 Route::get('/hkh-qc/{qc_id}','Admin\AddvertisedController@hkh_qc')->name('hkh_qc');
-
+Route::get('complete/{order_id}','Admin\OrderController@complete')->name('complete');
 
 
 
@@ -148,12 +148,14 @@ Route::post('add_images1/{id}','ProductController@add_img1')->name('add_img1')->
 Route::get('del_img/{id}','ProductController@del_img')->name('del_img');
 Route::post('/export-csv','ProductController@export_csv')->middleware('check');
 Route::post('/import-csv','ProductController@import_csv')->middleware('check');
-// Route::get('/show_pro','ProductController@show_product')->middleware('check');
-// Route::get('pagination/fetch_data', 'PaginationController@fetch_data');
 Route::get('/search','ProductController@search');
-
-
 });
+
+/////////////////////CUSTOMMER/////////////
+// Route::group(['prefix'=>'Custommer','namespace'=>'Admin'],function(){
+//    Route::get('/custommer_view','CustommerController@custommer_view')->name('custommer_manager');
+// });
+Route::get('custommer','Admin\CustommerController@custommer_view')->name('custommer_manager');
 ///////////CATEGORY//////////////
 Route::group(['prefix'=>'category','namespace'=>'Admin'],function(){
 Route::get('index','CategoryController@index')->name('cate_index')->middleware('check');
@@ -218,6 +220,8 @@ Route::get('/insert-coupon','Client\CouponController@insert_coupon')->name('inse
 Route::get('/delete-coupon/{coupon_id}','Client\CouponController@delete_coupon')->name('delete_coupon')->middleware('check');
 Route::get('/list-coupon','Client\CouponController@list_coupon')->name('list_coupon')->middleware('check');
 Route::post('/insert-coupon-code','Client\CouponController@insert_coupon_code')->name('insert_coupon_code')->middleware('check');
+Route::get('edit_coupon/{coupon_id}','Client\CouponController@edit_view')->name('edit_view');
+Route::post('update_coupon/{coupon_id}','Client\CouponController@update_coupon')->name('coupon_update');
 
 
 /////////////////POST///////////////

@@ -479,7 +479,7 @@ class  CheckoutController extends Controller
             $message->to($email, 'Verify password')->subject('Xác nhận mật khẩu!!');
             $message->from($email);
         });
-        return redirect()->route('cli_index')->with('message','XIN BẠN HÃY CHECK MAIL ĐỂ XÁC NHẬN TÀI KHOẢN!!');;
+        return redirect()->route('cli_index')->with('message','XIN BẠN HÃY CHECK MAIL ĐỂ XÁC NHẬN TÀI KHOẢN!!');
     }
     public function xacnhanTK(Request $req){
         $email = $req->email;

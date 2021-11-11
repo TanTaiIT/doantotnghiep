@@ -43,38 +43,33 @@ $(document).ready(function(e){
     $(document).on('click','.add-to-cart-quickview',function(){
                 var id = $(this).data('id_product');
                 var size=$('input[name=size]:checked').val();
-                var hot=$('input[name=hot]:checked').val();
+                
                 var soluong=$('.cart_product_sl').val();
                 var _token = $('input[name="_token"]').val();
-                var sl=$('input[name="sl"]').val();
+                
                 if(parseInt(soluong) <= 0){
                     toastr.warning('vui lòng chọn từ 1 sản phẩm trở lên');
-                }else{
-                if(parseInt(soluong) > parseInt(sl)){
-                    toastr.warning("số lượng bạn đặt lớn hơn số sản phẩm mà chúng tôi có, làm ơn đặt số lượng nhỏ hơn" + " "+ sl);
+                }else if(parseInt(soluong) > 50){
+                    toastr.warning('vui lòng đặt ít hơn 50 sản phẩm');
                 }else{
                 if($("input:radio[name='size']").is(":checked")) {
                     $.ajax({
                         url: '../cart',
                         method: 'POST',
-                        data:{id:id,_token:_token,size:size,hot:hot,soluong:soluong},
+                        data:{id:id,_token:_token,size:size,soluong:soluong},
                             success:function(data){
                                 
                                     toastr.success('Đã thêm sản phẩm vào giỏ hàng');
                                     show_cart();
-                                    cart();
-                                
-                            	
+                                    cart();    	
                         }
-                        
-
                     });
                 }else{
                      toastr.warning('bạn cần phải chọn đầy đủ thông tin trước khi mua hàng');
                 }
             }
         }
-            });
+    );
 
 
  
@@ -101,6 +96,7 @@ $(document).ready(function(e){
            var _token = $('input[name="_token"]').val();
            var quantity=ele.parents('tr').find('.quantity').val();
            if(quantity > 0){
+            if(quantity <=50){
             $.ajax({
                url: '../update-cart',
                method: "patch",
@@ -118,6 +114,9 @@ $(document).ready(function(e){
              
                }
             });
+        }else{
+            toastr.warning('số lượng không được vượt quá 50 sản phẩm');
+        }
            }else{
             toastr.warning('số lượng không được nhỏ hơn 0');
            }
@@ -181,25 +180,7 @@ $(document).ready(function(e){
                     }
                 });
              }
-             $('.send-comment').click(function(){
-                var product_id = $('.comment_product_id').val();
-                var comment_name = $('.comment_name').val();
-                var comment = $('.comment_content').val();
-                var _token = $('input[name="_token"]').val();
-                $.ajax({
-                    url:'../cli/send-comment',
-                    method:"POST",
-                    data:{product_id:product_id,comment_name:comment_name,comment:comment,_token:_token},
-                    success:function(data){
-                        
-                        $('#notify_comment').html('<span class="text text-success">Thêm bình luận thành công, bình luận đang chờ duyệt</span>');
-                        load_comment();
-                        $('#notify_comment').fadeOut(10000);
-                        $('.comment_name').val('');
-                        $('.comment').val('');
-                    }
-                });
-             });
+             
 
 
 
@@ -242,15 +223,14 @@ $(document).ready(function(e){
               
                 var id = $(this).data('id_product');
                 var size=$('input[name=size]:checked').val();
-                var soluong=$('.cart_product_sl').val();
+                var soluong=$('.cart_product_sl1').val();
                 var _token = $('input[name="_token"]').val();
                 var sl=$('.cart_soluong').val();
 
-                if(soluong < 0){
+                if(soluong <= 0){
                     toastr.warning('số lượng phải lớn hơn 0');
-                }else{
-                if(parseInt(soluong) > parseInt(sl)){
-                    toastr.warning("số lượng bạn đặt lớn hơn số sản phẩm mà chúng tôi có, làm ơn đặt số lượng nhỏ hơn" + " "+ sl);
+                }else if(soluong >50){
+                    toastr.warning('số lượng đặt phải nhỏ hơn 50');
                 }else{
                 if($("input:radio[name='size']").is(":checked")) {
                     $.ajax({
@@ -274,13 +254,16 @@ $(document).ready(function(e){
               }
                 }
 
-            }
+            
 
 
 
 
                 
             });
+
+
+        
 
        
 

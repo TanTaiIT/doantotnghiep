@@ -200,59 +200,44 @@
     </script>
 @yield('payment')
 <script>
-    show_comment();
+    load_comment();
     
-    $('#commentForm').on('submit',function(e){
-        e.preventDefault();
-        var url=document.URL;
-        var url_arr=url.split('/');
-        var id=url_arr[url_arr.length-1];
-        var _token = $('input[name="_token"]').val();
-        var name=$('.name').val();
-        var comment=$('.comment').val();
-        var commentId=$('.commentId').val();
-        var pro_id=$('.pro_id').val();
-        $.ajax({
-            url:'{{url('/cli/send-comment')}}',
-            method:'POST',
-            data:{name:name,comment:comment,commentId:commentId,pro_id:pro_id,_token:_token},
-            success:function(data){
-                toastr.success('đã thêm bình luận');
-                $('#commentForm').trigger('reset');
-                show_comment();
-                $('#commentId').val(0);
-               
-
-            }
-
+    $('.send-comment').click(function(){
+            var product_id = $('.comment_product_id').val();
+            var comment_name = $('.comment_name').val();
+            var comment_content = $('.comment_content').val();
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+              url:"../cli/send-comment",
+              method:"POST",
+              data:{product_id:product_id,comment_name:comment_name,comment_content:comment_content, _token:_token},
+              success:function(data){
+                
+                $('#notify_comment').html('<span class="text text-success">Thêm bình luận thành công, bình luận đang chờ duyệt</span>');
+                load_comment();
+                $('#notify_comment').fadeOut(9000);
+                $('.comment_name').val('');
+                $('.comment_content').val('');
+              }
+            });
         });
-
-        
-    });
     function add(){
         let dia=document.getElementById('dia');
         dia.classList.add('marl');
     }
-    function show_comment(){
-        var url=document.URL;
-        var url_arr=url.split('/');
-        var id=url_arr[url_arr.length-1];
-        var _token = $('input[name="_token"]').val();
-        $.ajax({
-            url:'{{url('/cli/load-comment')}}',
-            method:'POST',
-            data:{id:id,_token:_token},
-            success:function(data){
-                $('#binhluan').html(data);
-            }
-        });
+    function load_comment(){
+            var product_id = $('.comment_product_id').val();
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+              url:"{{url('/load-comment')}}",
+              method:"POST",
+              data:{product_id:product_id, _token:_token},
+              success:function(data){
+              
+                $('#comment_show').html(data);
+              }
+            });
     }
-
-    $(document).on('click', '.reply', function(){
-        var commentId = $(this).attr("id");
-        $('#commentId').val(commentId);
-        $('#name').focus();
-    });
 </script>
   
     <script src="{!! asset('layout_admin/js/validate.js')!!}"></script>

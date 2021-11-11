@@ -8,7 +8,7 @@
                           <th>Loại sản phẩm</th>
                           <th>Giá</th>
                           <th>Giá khuyển mãi</th>
-                          <th>Số lượng</th>
+                          
                           <th>Tình trạng</th>
                           <th>Thao tác</th>
                         </tr>
@@ -27,7 +27,7 @@
                           <td>{{$p->category->category_name}}</td>
                           <td>{{$p->product_price}}</td>
                           <td>{{$p->gia_km}}</td>
-                          <td>{{$p->soluong}}</td>
+                         
                           <td>
                             @if($p->product_status==1)
                               <a href="{{route('huykichhoat',$p->product_id)}}" title="Hiển thị"><!-- <i class="glyphicon glyphicon-eye-open success"></i> -->hiển thị</a>

@@ -24,8 +24,10 @@ class OrderController extends Controller
 	public function move($code){
 		$order=Order::where('order_code',$code)->update(['order_status'=>4]);
 		return redirect()->back()->with('message','đơn hàng đang được vận chuyển');
-
-
+	}
+	public function complete($code){
+		$order=Order::where('order_code',$code)->update(['order_status'=>5]);
+		return redirect()->back()->with('message','đơn hàng đã giao thành công');
 	}
 	public function huy_don_hang(Request $req){
 		$data=$req->all();
@@ -64,10 +66,6 @@ class OrderController extends Controller
 			$coupon_condition = 2;
 			$coupon_number = 0;
 		}
-
-
-
-
 		$i = 0;
         $total = 0;
 		$output['kh']='';
@@ -214,6 +212,8 @@ class OrderController extends Controller
                 <option id="'.$or->order_id.'" selected value="2">đơn hàng đã xử lý</option>';
             }elseif($or->order_status==4){
             	$output['in'].='<option id="'.$or->order_id.'" selected value="2">đang vận chuyển</option>';
+            }elseif($or->order_status==5){
+            	$output['in']='<option id="'.$or->order_id.'" selected value="2">Đã giao</option>';
             }
           }
           $output['print']='';
@@ -343,9 +343,7 @@ class OrderController extends Controller
 			$title_mail = "Đơn hàng đã đặt được xác nhận".' '.$now;
 			$customer = Custommer::where('customer_id',$order->customer_id)->first();
 			$data['email'][] = $customer->customer_email;
-			$order_count=Order::where('order_status',1)->get();
-    	$count=count($order_count);
-    	Session::put('or-nu',$count);
+			
              
 			
 			
@@ -369,7 +367,7 @@ class OrderController extends Controller
 
 			
 		  	//lay shipping
-		  	$details = OrderDetail::where('order_code',$order->order_code)->first();
+		  $details = OrderDetail::where('order_code',$order->order_code)->first();
 
 			$fee_ship = $details->product_feeship;
 			$coupon_mail = $details->product_coupon;
@@ -418,7 +416,6 @@ class OrderController extends Controller
 				foreach($data['order_product_id'] as $key => $product_id){
 
 					$product = Product::find($product_id);
-					$product_quantity = $product->soluong;
 					$product_sold = $product->product_sold;
 					//them
 					$product_price = $product->product_price;
@@ -428,8 +425,8 @@ class OrderController extends Controller
 					foreach($data['quantity'] as $key2 => $qty){
 
 						if($key==$key2){
-							$pro_remain = $product_quantity - $qty;
-							$product->soluong = $pro_remain;
+							// $pro_remain = $product_quantity - $qty;
+							// $product->soluong = $pro_remain;
 							$product->product_sold = $product_sold + $qty;
 							$product->save();
 							//update doanh thu

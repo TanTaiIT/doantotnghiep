@@ -50,17 +50,17 @@
                         <?php $i++ ?>
                         <tr>
                           <td>{{$i}}</td>
-                          <td>
+                          <td class="d-flex justify-content-center align-item-center">
                               @if($comm->comment_status==1)
-                                <input type="button" data-comment_status="0" data-comment_id="{{$comm->comment_id}}" id="{{$comm->comment_product_id}}" class="btn btn-primary btn-xs comment_duyet_btn" value="Duyệt" >
+                                <input type="button" data-comment_status="0" data-comment_id="{{$comm->comment_id}}" id="{{$comm->comment_product_id}}" class="btn btn-style btn-xs comment_duyet_btn" value="Duyệt" >
                               @else 
-                                <input type="button" data-comment_status="1" data-comment_id="{{$comm->comment_id}}" id="{{$comm->comment_product_id}}" class="btn btn-danger btn-xs comment_duyet_btn" value="Bỏ Duyệt" >
+                                <input type="button" data-comment_status="1" data-comment_id="{{$comm->comment_id}}" id="{{$comm->comment_product_id}}" class="btn btn-style1 btn-xs comment_duyet_btn" value="Bỏ Duyệt" >
                               @endif
                             
                             </td>
                             <td>{{ $comm->comment_name }}</td>
 
-                            <td>{{ $comm->comment }}
+                            <td class="hay">{{ $comm->comment }}
                               <style type="text/css">
                                 ul.list_rep li {
                                   list-style-type: decimal;
@@ -79,8 +79,8 @@
 
                               </ul>
                               @if($comm->comment_status==0)
-                              <br/><textarea class="form-control reply_comment_{{$comm->comment_id}}" rows="5"></textarea>
-                              <br/><button class="btn btn-default btn-xs btn-reply-comment" data-product_id="{{$comm->comment_product_id}}"  data-comment_id="{{$comm->comment_id}}">Trả lời bình luận</button>
+                              <br/><textarea class="form-control text-rep reply_comment_{{$comm->comment_id}}" rows="5"></textarea>
+                              <div class="text-center mt-3"><button class="btn btn-default btn-xs btn-reply-comment" data-product_id="{{$comm->comment_product_id}}"  data-comment_id="{{$comm->comment_id}}">Trả lời bình luận</button></div>
                               
                               @endif
                              

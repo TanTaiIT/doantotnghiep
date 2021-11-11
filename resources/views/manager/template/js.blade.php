@@ -120,14 +120,6 @@
      
         
     </script>
-    
-  
-
-
-
-<!--     @yield('delete') -->
-  
- 
 <script>
         $('.nhan').on('click',function(){
             var value=$('input:checkbox:checked').map(function(){
@@ -437,12 +429,6 @@
         
 
         var comment_product_id = $(this).data('product_id');
-
-        
-        // alert(comment);
-        // alert(comment_id);
-        // alert(comment_product_id);
-        
           $.ajax({
                 url:"{{url('/reply-comment')}}",
                 method:"POST",
@@ -453,7 +439,9 @@
                 data:{comment:comment,comment_id:comment_id,comment_product_id:comment_product_id},
                 success:function(data){
                     $('.reply_comment_'+comment_id).val('');
-                   $('#notify_comment').html('<span class="text text-alert">Trả lời bình luận thành công</span>');
+                    window.location.reload();
+                   // $('#notify_comment').html('<span class="text text-alert">Trả lời bình luận thành công</span>');
+                   
 
                 }
             });

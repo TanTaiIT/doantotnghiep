@@ -40,24 +40,30 @@
               <td>{{ $ord->order_code }}</td>
               <td>{{ $ord->created_at }}</td>
               <td>@if($ord->order_status==1)
-                <div class="progress">
-                  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 35%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">Đơn hàng mới</div>
-                </div>
-                @elseif ($ord->order_status==2) 
-                <!-- <span style="color:green">Đã xử lý<i class="glyphicon glyphicon-check" style="margin-left:4px"></i></span> -->
-                <div class="progress">
-                  <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 65%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Đơn hàng đã xử lý</div>
-                </div>
-                @elseif($ord->order_status==4)
-                <!-- <span style="color:#e6b70d;">Đơn hàng đang được vận chuyển<i class="glyphicon glyphicon-send" style="margin-left:6px"></i></span> -->
-                <div class="progress">
-                  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Đơn hàng đã được vận chuyển</div>
-                </div>
-                @else
-                <!-- <span style="color:red">Đơn hàng đã hủy <i class="glyphicon glyphicon-ban-circle" style="margin-left:4px"></i></span> -->
-                <div class="progress">
-                  <div class="progress-bar progress-bar-striped bg-danger huy" role="progressbar" style="width: 100%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">đơn hàng bị hủy</div>
-                </div>
+                                  <!-- <span style="color:blue">Đơn hàng mới <i class="glyphicon glyphicon-plus-sign" style="margin-left:4px"></i></span> -->
+                                  <div class="progress">
+                                    <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 30%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">Đơn mới</div>
+                                  </div>
+                              @elseif ($ord->order_status==2) 
+                                  <!-- <span style="color:green">Đã xử lý<i class="glyphicon glyphicon-check" style="margin-left:4px"></i></span> -->
+                                  <div class="progress">
+                                  <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Đơn hàng đã xử lý</div>
+                                </div>
+                              @elseif($ord->order_status==4)
+                                  <!-- <span style="color:#e6b70d;">Đơn hàng đang được vận chuyển<i class="glyphicon glyphicon-send" style="margin-left:6px"></i></span> -->
+                                  <div class="progress">
+                                  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 75%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Đơn hàng đang vận chuyển</div>
+                                </div>
+                                @elseif($ord->order_status==5)
+                                  <!-- <span style="color:#e6b70d;">Đơn hàng đang được vận chuyển<i class="glyphicon glyphicon-send" style="margin-left:6px"></i></span> -->
+                                  <div class="progress">
+                                  <div class="progress-bar progress-bar-striped bg-primary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Đơn hàng đã giao thành công</div>
+                                </div>
+                              @else
+                                  <!-- <span style="color:red">Đơn hàng đã hủy <i class="glyphicon glyphicon-ban-circle" style="margin-left:4px"></i></span> -->
+                                  <div class="progress">
+                                  <div class="progress-bar progress-bar-striped bg-danger huy" role="progressbar" style="width: 100%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">đơn hàng bị hủy</div>
+                                </div>
                 @endif
               </td>
               

@@ -59,7 +59,6 @@ class ProductController extends Controller
             'gia' => 'required|numeric|min:4',
             'gia_goc'=>'required|numeric|min:4',
             'gia_km'=>'required|numeric',
-            'soluong'=>'required|numeric',
             'hinh'=>'required',
             'attr_id'=>'required'
         ],[
@@ -69,8 +68,6 @@ class ProductController extends Controller
             'gia.numeric'=>'+giá phải là số ',
             'gia.min'=>'+giá tiền phải ít nhất 4 ký tự ',
             'gia_km.required'=>'+Bạn chưa nhập giá khuyến mãi ',
-            'soluong.required'=>'+Bạn chưa nhập số lượng ',
-            'soluong.numeric'=>'+Số lượng phải là số ',
             'hinh.required'=>'+Bạn chưa nhập hình ',
             'gia_goc.required'=>'+chưa nhập giá gốc ',
             'gia_goc.numeric'=>'+Giá gốc phải là số ',
@@ -90,7 +87,6 @@ class ProductController extends Controller
         $product->price_cost=$price_cost;
         $product->gia_km=$km;
         $product->product_status=$req->status;
-        $product->soluong=$req->soluong;
         $product->product_image=$this->imageUpload($req);
         if($product->save()){
             Session::flash('message','thêm sản phẩm thành công');
@@ -117,7 +113,6 @@ class ProductController extends Controller
             'gia' => 'required|numeric|min:4',
             'gia_goc'=>'required|numeric|min:4',
             'gia_km'=>'required|numeric',
-            'soluong'=>'required|numeric',
             // 'hinh'=>'required',
         ],[
             'ten.required'=>'+Ban chưa nhập tên ',
@@ -126,9 +121,6 @@ class ProductController extends Controller
             'gia.numeric'=>'+giá phải là số ',
             'gia.min'=>'+giá tiền phải ít nhất 4 ký tự ',
             'gia_km.required'=>'+Bạn chưa nhập giá khuyến mãi ',
-            'soluong.required'=>'+Bạn chưa nhập số lượng ',
-            'soluong.numeric'=>'+Số lượng phải là số ',
-            // 'hinh.required'=>'+Bạn chưa nhập hình ',
             'gia_goc.required'=>'+chưa nhập giá gốc ',
             'gia_goc.numeric'=>'+Giá gốc phải là số ',
             'gia_km.required'=>'+chưa nhập giá khuyến mãi ',
@@ -146,7 +138,6 @@ class ProductController extends Controller
         $pro['price_cost']=$price_cost;
         $pro['gia_km']=$km;
         $pro['product_status']=$req->status;
-        $pro['soluong']=$req->soluong;
         $get_image = $req->file('hinh');
         if($get_image){
             //xoa anh cu
@@ -212,6 +203,10 @@ class ProductController extends Controller
         $data=$req->all();
         if($req->hasfile('image')){
             $files=$req->file('image');
+            $dem=count($files);
+            if($dem >= 3){
+                return redirect()->route('add_img',$id)->with('message','vui lòng chỉ chọn từ 2 hình trở xuống');
+            }else{
             foreach($files as $file){
                  $image=new pro_img;
                  $extension=$file->getClientOriginalExtension();
@@ -222,10 +217,12 @@ class ProductController extends Controller
                  $image->product_id=$data['product_id'];
                  $image->save();
             }
+            return redirect()->route('add_img',$id)->with('message','thêm hình ảnh thành công');
+        }
 
         }
         
-        return redirect()->route('add_img',$id)->with('message','thêm hình ảnh thành công');
+        
     }
     public function del_img(Request $req,$id){
         $gallary=pro_img::Find($id);

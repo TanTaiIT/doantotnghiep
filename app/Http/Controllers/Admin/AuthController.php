@@ -31,6 +31,7 @@ class AuthController extends Controller
         $admin->password=md5($data['password']);
         $admin->phone=$data['phone'];
         $admin->save();
+        $admin->roles()->attach(Roles::where('name','user')->first());
         return redirect()->route('regis')->with('message','đăng ký thành công');
     }
     public function validation(Request $request){
@@ -47,6 +48,7 @@ class AuthController extends Controller
             'password.required'=>'+Bạn chưa nhập password',
             'phone.required'=>'+Bạn chưa nhập số điện thoạt',
             'phone.regex'=>'+Số Điện thoại chưa đúng định dạng',
+            'phone.unique'=>'+Số điện thoại đã tồn tại',
             'sdt.unique'=>'+Số điện thoại đã tồn tại',
             'password.regex'=>'+ Password phải có ít nhất 1 chữ in hoa,chữ số và và ký tự đặc biệt',
             'password.min'=>'+ Password phải ít nhất 5 ký tự'
@@ -83,4 +85,5 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('login_auth');
     }
+
 }

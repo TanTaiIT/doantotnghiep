@@ -14,11 +14,9 @@
 	<!-- top-header -->
     @include('inc.topheader')
 
-	<?php 
-	if($com!=='detail'){ ?>
+	
 		@include('inc.modal')
-	<?php }
-	?>
+	
     
 	@include('inc.search_form')
 	@include('inc.menu')

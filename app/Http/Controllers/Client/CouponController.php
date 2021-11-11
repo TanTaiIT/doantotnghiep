@@ -9,6 +9,47 @@ use Session;
 use Carbon\Carbon;
 class CouponController extends Controller
 {
+
+    public function edit_view($coupon_id){
+        $coupon=coupon::Find($coupon_id);
+        return view('manager.coupon.edit_coupon',compact('coupon'));
+
+    }
+    public function update_coupon(Request $request,$coupon_id){
+        $this->validate($request, [
+            'coupon_name'=>'required',
+            'coupon_number'=>'required|numeric|gt:0',
+            'coupon_time'=>'numeric|required|gt:0',
+            'coupon_code'=>'required',
+            'coupon_date_start'=>'date|required',
+            'coupon_date_end'=>'date|required'
+
+        ],[
+            'coupon_name.required'=>'+Ban chưa nhập tên ',
+            'coupon_number.required'=>'+Ban chưa nhập số tiền giảm ',
+            'coupon_number.numeric'=>'+ Số tiền giảm phải là số',
+            'coupon_time.numeric'=>'+ Số lượng mã giảm phải là số',
+            'coupon_date_end.date'=>'+ bạn phải nhập đúng định dạng ngày',
+            'coupon_date_start.date'=>'+ Bạn phải nhập đúng định dạng ngày',
+            'coupon_number.gt'=>'+Số tiền giảm hoặc phần trăm giảm phải lớn hơn 0',
+            'coupon_time.gt'=>'+Số lượng mã phải lớn hơn 0'
+            
+        ]);
+        $data=$request->all();
+        $coupon=coupon::find($coupon_id);
+        if($coupon){
+        $coupon->coupon_name = $data['coupon_name'];
+        $coupon->coupon_number = $data['coupon_number'];
+        $coupon->coupon_code = $data['coupon_code'];
+        $coupon->coupon_time = $data['coupon_time'];
+        $coupon->coupon_condition = $data['coupon_condition'];
+        $coupon->start_day = $data['coupon_date_start'];
+        $coupon->end_day = $data['coupon_date_end'];
+        $coupon->save();
+        }
+        return redirect()->back()->with('message','cập nhật thành công');
+
+    }
     public function unset_coupon(){
 		$coupon = Session::get('coupon');
         if($coupon==true){
@@ -37,12 +78,7 @@ class CouponController extends Controller
     	Session::flash('message','Xóa mã giảm giá thành công');
         return redirect()->route('list_coupon');
     }
-    // public function list_coupon(){
-    //     $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y/m/d');
-    //     //dd($today);
-    // 	$coupon = Coupon::orderby('coupon_id','DESC')->paginate(5);
-    // 	return view('admin.magiamgia.list_coupon')->with(compact('coupon','today'));
-    // }
+  
 
     public function list_coupon(){
         $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y/m/d');
@@ -55,8 +91,8 @@ class CouponController extends Controller
 
         $this->validate($request, [
             'coupon_name'=>'required',
-            'coupon_number'=>'required|numeric',
-            'coupon_time'=>'numeric|required',
+            'coupon_number'=>'required|numeric|gt:0',
+            'coupon_time'=>'numeric|required|gt:0',
             'coupon_code'=>'required',
             'coupon_date_start'=>'date|required',
             'coupon_date_end'=>'date|required'
@@ -67,7 +103,9 @@ class CouponController extends Controller
             'coupon_number.numeric'=>'+ Số tiền giảm phải là số',
             'coupon_time.numeric'=>'+ Số lượng mã giảm phải là số',
             'coupon_date_end.date'=>'+ bạn phải nhập đúng định dạng ngày',
-            'coupon_date_start.date'=>'+ Bạn phải nhập đúng định dạng ngày'
+            'coupon_date_start.date'=>'+ Bạn phải nhập đúng định dạng ngày',
+            'coupon_number.gt'=>'+Số tiền giảm hoặc phần trăm giảm phải lớn hơn 0',
+            'coupon_time.gt'=>'+Số lượng mã phải lớn hơn 0'
             
         ]);
 

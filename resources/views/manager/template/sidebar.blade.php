@@ -39,6 +39,9 @@
                   @endhasrole
                   <li><a href="{{URL::to('/manage-order')}}"><i class="fa fa-bar-chart-o"></i> Đơn hàng <span class="badge badge-success">{{Session::get('or-nu')}}</span></a>
                   </li>
+                  <li><a href="{{route('custommer_manager')}}"><i class="fa fa-clone"></i>khách hàng</a>
+                    
+                  </li>
                   <li><a href="{{route('add_attr')}}"><i class="fa fa-clone"></i>Thuộc tính</a>
                     
                   </li>
@@ -64,9 +67,9 @@
                   <li><a href="{{route('chinh')}}"><i class="fa fa-clone"></i>Chính sách</a>
                     
                   </li>
-                 <!--  <li><a href="{{URL::to('/comment')}}"><i class="fa fa-clone"></i>Bình luận</a>
+                  <li><a href="{{URL::to('/comment')}}"><i class="fa fa-clone"></i>Bình luận</a>
                     
-                  </li> -->
+                  </li>
                   @chuyen
                   <li>
                       <a href="{{URL::to('impersonate-destroy')}}">ngừng chuyển quyền<u></u></a>

@@ -1,6 +1,6 @@
 @extends('admin/layout_admin')
 @section('content')
-    <div class="table-agile-info">
+<div class="table-agile-info">
   <div class="panel panel-default">
     <div class="panel-heading">
       Liệt kê bình luận
@@ -69,11 +69,7 @@
             </td>
             <td>{{ $comm->comment_date }}</td>
             <td><a target="_blank" href="{{URL::to('/detail/'.$comm->product->product_id)}}">{{ $comm->product->product_name }}</a></td>
-            <!-- <td>
-              <a onclick="return confirm('Bạn có chắc là muốn xóa bình luận này ko?')" href="" class="active styling-edit" ui-toggle-class="">
-                <i class="fa fa-times text-danger text"></i>
-              </a>
-            </td> -->
+           
           </tr>
           @endforeach
         </tbody>

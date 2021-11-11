@@ -64,7 +64,7 @@
 						<span class="item_price"><span style="font-weight: bolder;"class="pri">Giá:  </span>{{number_format($value->product_price,0,'.','.')}} VNĐ</span>
 					    </div>
 						<span class="loai" style="font-family:unset;font-weight: 700;">Loại Sản phẩm:  </span><span>{{$value->category->category_name}}</span><br><br>
-						<span class="loai" style="font-family:unset;font-weight: 700;">Tồn Kho:  </span><span>{{$value->soluong}} sản phẩm</span>
+						
 					</p>
 					<div class="single-infoagile duoi">
 						<ul>
@@ -123,7 +123,7 @@
 							<li>
 								<p><span>@lang('lang.soluong')</span></p>
 								<div class="sl">
-									<input type="number" class="soluong cart_product_sl" min=1 value="1" name="soluong">
+									<input type="number" class="soluong cart_product_sl1" min=1 value="1" name="soluong">
 								</div>
 							</li>
 							
@@ -142,7 +142,7 @@
 							</form>
 						</div>
 					</div>
-					<p style="font-size: 20px;color:#000000">@lang('lang.danggia_sao')</p>
+					<?php /*<p style="font-size: 20px;color:#000000">@lang('lang.danggia_sao')</p>
 					<ul class="list-inline rating"  title="Average Rating">
                                                 	@for($count=1; $count<=5; $count++)
                                                 		@php
@@ -159,13 +159,14 @@
                                                     @endfor
 
                                                 </ul>
+                                                */ ?>
 
                  
 				</div>
 			</div>
 		</div>
 
-		<!-- <div class="comment wrap-1200" id="reviews" >
+		<div class="comment wrap-1200" id="reviews" >
 								<div class="col-sm-12">
 									<form>
 									   @csrf
@@ -176,25 +177,32 @@
 								<div class="comment-form" style="background: transparent;">
 									<form action="#">
 									@csrf
-									  
-										<input style="width:100%;margin-left:0;background:transparent;"  class="form-control comment_name" type="text" placeholder="@lang('lang.Ten_bl')"/>
+									  @if(Session::has('customer_id'))
+										<input style="width:100%;margin-left:0;background:transparent;"  class="form-control comment_name" value="{{Session::get('customer_name')}}" type="text" placeholder="@lang('lang.Ten_bl')"/>
+									  @else
+									     <input style="width:100%;margin-left:0;background:transparent;"  class="form-control comment_name" value="" type="text" placeholder="@lang('lang.Ten_bl')"/>
+									  @endif
 										<textarea name="comment" style="background: transparent;" class="form-control comment_content" placeholder="@lang('lang.noidung')"></textarea>
 										
-										<button type="button" class="btn btn-default pull-right send-comment">
-											@lang('lang.guiBinhLuan')
+										<?php
+											if(Session::has('customer_id')){?>
+												<button type="button" class="btn btn-default pull-right send-comment">
+											Gửi bình luận
 										</button>
+										<?php }else{ ?>
+											<button type="button" disabled="true" class="btn btn-default1 pull-right send-comment">bạn cần đăng nhập để gửi bình luận</button>
+										<?php } ?>
+										 
 										<div id="notify_comment"></div>
 									</form>
 									<div id="comment_show"></div>
-								</div>
-								</div>
-							</div> -->
+							</div>
+					</div>
+		</div>
 
 
-							<div class="post-comments">
+							<!-- <div class="post-comments">
 						    	<ul class="media-list comments-list m-bot-50 clearlist">
-								    <!-- Comment Item start-->
-
 
 								    <form method="POST" id="commentForm">
 								    	@csrf
@@ -219,7 +227,7 @@
 								    </li>
 								   
 							</ul>
-							</div>
+							</div> -->
 						</div>
 		</div>
 		

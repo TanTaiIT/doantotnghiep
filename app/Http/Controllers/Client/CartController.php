@@ -16,13 +16,9 @@ class CartController extends Controller
     public function addtocart(Request $req){
         $id=$req->id;
         $product=product::find($id);
-        $soluong_dat=$product->soluong;
         $soluong=$req->soluong;
         $size=$req->size;
         $count=0;
-        if($soluong>$soluong_dat){
-           Session::flash('message','sản phẩm trong kho không đủ, vui lòng đặt ít hơn');
-        }else{
         if(!$product){
             abort(404);
         }
@@ -70,7 +66,7 @@ class CartController extends Controller
 
 
 
-}
+
 }
 
 
@@ -102,33 +98,12 @@ class CartController extends Controller
         $com='index';
         $mes='';
         $slide=slider::limit(4)->get(); 
-
         $pro=Product::find($request->id);
-        $sl=$pro->soluong;
-        
-        if($request->quantity > $sl){
-            
-            echo 'no';
-            
-
-        } else{
             if($request->id and $request->quantity)
             {
                 $cart = session()->get('cart');
                 $cart[$request->id]["quantity"] = $request->quantity;
                 session()->put('cart', $cart);
-                
-                
-            }
-        }
-        
-        
+            }  
     }
-    
-
-
-
-    
-    
-
 }

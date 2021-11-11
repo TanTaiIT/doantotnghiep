@@ -47,6 +47,7 @@ class AppServiceProvider extends ServiceProvider
         $destroy=Order::where('order_status',3)->count();
         $new=Order::where('order_status',1)->count();
         $process=Order::where('order_status',2)->count();
+        $complete=Order::where('order_status',5)->count();
 
         $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
         $dauthangnay = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
@@ -63,7 +64,7 @@ class AppServiceProvider extends ServiceProvider
         $order_count=Order::where('order_status',1)->get();
         $count=count($order_count);
         Session::put('or-nu',$count);
-        $view->with('app_product', $app_product )->with('app_post', $app_post )->with('app_order', $app_order )->with('app_customer', $app_customer )->with('category',$category)->with('cate_post1',$cate_post1)->with('move',$move)->with('new',$new)->with('process',$process)->with('destroy',$destroy)->with('app_admin',$app_admin)->with('app_cus',$app_cus)->with('tong',$tong)->with('tongo',$tongo)->with('seles',$seles);
+        $view->with('app_product', $app_product )->with('app_post', $app_post )->with('app_order', $app_order )->with('app_customer', $app_customer )->with('category',$category)->with('cate_post1',$cate_post1)->with('move',$move)->with('complete',$complete)->with('new',$new)->with('process',$process)->with('destroy',$destroy)->with('app_admin',$app_admin)->with('app_cus',$app_cus)->with('tong',$tong)->with('tongo',$tongo)->with('seles',$seles);
 
     });
 

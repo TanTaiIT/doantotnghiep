@@ -142,8 +142,12 @@
 
 				            <td>
 				             
+				              <a  href="{{URL::to('/edit_coupon/'.$cou->coupon_id)}}" class="active styling-edit" ui-toggle-class="">
+				                <i class="glyphicon glyphicon-pencil"></i>
+				              </a>
+
 				              <a onclick="return confirm('Bạn có chắc là muốn xóa mã này ko?')" href="{{URL::to('/delete-coupon/'.$cou->coupon_id)}}" class="active styling-edit" ui-toggle-class="">
-				                <i class="fa fa-times text-danger text"></i>
+				                <i class="fa fa-trash text-danger text"></i>
 				              </a>
 				            </td>
                          

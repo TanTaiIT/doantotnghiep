@@ -126,7 +126,7 @@
             <div id="donut" ></div>
             <div class="info">
               <table class="tile_info">
-                          <tr>
+                          <tr style="display:flex;flex-wrap:wrap">
                             <th class="exp">
                               <p><i class="fa fa-square pro"></i>Đơn hàng mới </p>
                             </th>
@@ -138,6 +138,9 @@
                             </th>
                             <th class="exp">
                               <p><i class="fa fa-square cus"></i>Đơn hàng đã xử lý </p>
+                            </th>
+                            <th class="exp" style="margin-left:11px">
+                              <p><i class="fa fa-square com"></i>Đơn hàng đã giao</p>
                             </th>
                             <!--  <th>
                               <p><i class="fa fa-square red"></i>Others </p>
@@ -321,6 +324,7 @@ $(document).ready(function(){
             '#20c997',
             '#17a2b8',
             '#dc3545',
+            '#A4ADD3',
             '#dc3545'
             
           ],
@@ -330,8 +334,9 @@ $(document).ready(function(){
             {label:"Đơn hàng mới", value:<?php echo $new ?>},
             {label:"Đơn hàng đã bị hủy", value:<?php echo $destroy ?>},
             {label:"Đang vận chuyển", value:<?php echo $move ?>},
-           
-            {label:"Đơn hàng đã xử lý", value:<?php echo $process ?>} 
+            
+            {label:"Đơn hàng đã xử lý", value:<?php echo $process ?>},
+            {label:"Đơn hàng đã giao",value:<?php echo $complete ?>}
           ]
         });
      

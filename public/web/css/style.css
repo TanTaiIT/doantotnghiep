@@ -101,10 +101,18 @@ height: unset;
     font-weight: bolder;
     margin-bottom: 5px;
 }
+.repl{
+    padding: 0;
+}
 .nhan1{
     color: grey;
     font-weight: bolder;
     margin-bottom: 20px;
+}
+.btn-default1{
+    color: #fff;
+    margin-top: 20px;
+    background: #a9a9aa80;
 }
 .notify{
     position: absolute;
@@ -220,7 +228,17 @@ label.error:nth-child(4){
     -webkit-transition: 0.15s ease-out;
     transition: 0.15s ease-out;
 }
-
+.comm{
+    padding: 0;
+}
+.comm img{
+    width: 60px;
+    height: 60px;
+}
+.repl img{
+    width: 60px;
+    height: 60px;
+}
 .item.bad .alert {
     left: 0;
     opacity: 1;
@@ -257,6 +275,10 @@ li#binhluan::-webkit-scrollbar{
     display: none;
 
 }
+
+/*.comment-form::-webkit-scrollbar{
+    display: none;
+}*/
 .comment-info {
     background: mistyrose;
     border-radius: 4px;
@@ -619,11 +641,11 @@ span.lai {
 }
 
 .comment-form {
-    border: 1px solid #cbbfbf;
+    
     padding: 30px;
     background: rgb(255, 255, 255);
-    height: 387px;
-    overflow: scroll;
+    height: 483px;
+    /*overflow: scroll;*/
     width: 70%;
 }
 .comment_content{
@@ -642,7 +664,17 @@ span.lai {
     margin-bottom: 20px ;
     border-radius: 3px;
 }
-
+#comment_show{
+    margin-top: 22px;
+    overflow: scroll;
+    height: 66%;
+}
+#comment_show::-webkit-scrollbar{
+    width: 10px;
+}
+/*#comment_show::-webkit-scrollbar{
+    di
+}*/
 
 .pro_img {
     height: 276px;
@@ -1073,7 +1105,8 @@ nav div:nth-child(2){
     text-align: center;
 }
 button.btn.btn-default.pull-right.send-comment {
-    background: teal;
+    background: #a9a9aac9;
+    margin-top: 22px;
 }
 input.soluong.cart_product_sl {
     width: 50px;
@@ -1081,6 +1114,9 @@ input.soluong.cart_product_sl {
     margin-left: 20px;
     color: black;
     background:#a4a4a4;
+}
+.cart_product_sl1{
+    width: 70px;
 }
 .bao{
     max-width: 1200px;
