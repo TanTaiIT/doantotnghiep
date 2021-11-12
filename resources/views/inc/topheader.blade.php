@@ -13,7 +13,7 @@
 					
 						<?php
 						$cus_id=Session::get('customer_id');
-						 if(isset($cus_id)){ ?> 
+						 if(Auth::guard('khachhang')->check()){ ?> 
 
 
 
@@ -61,7 +61,7 @@
 							</style>
 						</style>
 							<div class="dropdown">
-							  <button class="dropbtn2">{{Session::get('customer_name')}}</button>
+							  <button class="dropbtn2">{{Auth::guard('khachhang')->user()->customer_name}}</button>
 							  <div class="dropdown-content">
 							    <a class="profile1" href="{{URL::to('profile')}}">xem thông tin</a>
 							  </div>

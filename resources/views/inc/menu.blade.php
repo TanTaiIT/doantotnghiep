@@ -48,7 +48,7 @@
 
 			<?php
 				$cus_id=Session::get('customer_id');
-				if(isset($cus_id)){ ?>
+				if(Auth::guard('khachhang')->check()){ ?>
 				<li class="line"></li> 	
 			   <li class="link-menu"><a class="transition" href="{{url('/history')}}" title=""><h2>@lang('lang.orderhistory')</h2></a></li>
 			   <?php 

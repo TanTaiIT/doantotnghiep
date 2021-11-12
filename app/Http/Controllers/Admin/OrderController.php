@@ -18,6 +18,7 @@ use PDF;
 use Mail;
 use Session;
 use DB;
+use Auth;
 use App\Models\category;
 class OrderController extends Controller
 {
@@ -236,13 +237,13 @@ class OrderController extends Controller
 		// $meta_desc="trang chủ";
 		// $com='';
 		// $url_canonical = $request->url();
-		if(!Session::get('customer_id')){
+		if(!Auth::guard('khachhang')->check()){
 			return redirect()->Route('cli_index')->with('error','Vui lòng đăng nhập để xem lịch sử mua hàng!');
 		}else{
 			// $order = Order::where('customer_id',Session::get('customer_id'))->orderby('created_at','DESC')->get();
 			$now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
 			$sub7days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(7)->toDateString();
-			$order=Order::where('customer_id',Session::get('customer_id'))->whereBetween('order_date',[$sub7days,$now])->orderby('created_at','DESC')->get();
+			$order=Order::where('customer_id',Auth::guard('khachhang')->user()->customer_id)->whereBetween('order_date',[$sub7days,$now])->orderby('created_at','DESC')->get();
     	    return view('Client.history')->with(compact('order','cate','com','url_canonical','meta_desc','meta_title','share_images','cate_post1','chinh'));
 		}
 	}
@@ -287,7 +288,7 @@ class OrderController extends Controller
 			$coupon_number = 0;
 		}
 
-		if(!Session::get('customer_id')){
+		if(!Auth::guard('khachhang')->check()){
 			return redirect()->Route('cli_index')->with('error','Vui lòng đăng nhập để xem lịch sử mua hàng!');
 		}else{
 			$order = Order::where('customer_id',Session::get('customer_id'))->orderby('created_at','DESC')->get();

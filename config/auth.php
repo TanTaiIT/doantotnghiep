@@ -50,6 +50,10 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+        'khachhang' => [
+            'driver' =>'session',
+            'provider' => 'khachhang',
+        ]
     ],
 
     /*
@@ -83,6 +87,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\admin::class,
         ],
+        'khachhang' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\custommer::class,
+        ]
         
 
     ],
@@ -116,6 +124,12 @@ return [
             'expire' => 30,
             'throttle' => 60,
         ],
+        'khachhang' => [
+            'provider' => 'khachhang',
+            'table' => 'password_resets',
+            'expire' => 30,
+            'throttle' => 60,
+        ]
     ],
 
     /*

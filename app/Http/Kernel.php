@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'roles'=>\App\Http\Middleware\permission::class,
         'check'=>\App\Http\Middleware\chungthuc::class,
+        'kiemtra'=>\App\Http\Middleware\check_client::class,
 
 
     ];

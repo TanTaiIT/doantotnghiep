@@ -35,7 +35,7 @@ Route::get('home','Client\ClientController@get_home')->name('home');
 Route::post('/quickview','Admin\ProductController@quickview');
 
 Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
-   Route::get('/index','ClientController@index')->name('cli_index');
+   Route::get('/index','ClientController@index')->name('cli_index')->middleware('kiemtra');
    Route::post('/search/','ClientController@search')->name('cli_search');
    Route::get('/dangxuat_kh','ClientController@dangxuatkh')->name('dangxuat_kh');
    Route::get('/delivery','CheckoutController@delivery');

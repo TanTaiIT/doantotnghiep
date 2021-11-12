@@ -21,6 +21,7 @@ use App\Models\thuoctinh;
 use App\Models\custommer;
 use App\Models\chinhsach;
 use DB;
+use Auth;
 class ClientController extends Controller
 {
     public function error_page(){
@@ -385,8 +386,8 @@ class ClientController extends Controller
         return view('client/search',compact('search','com','dem','cate','url_canonical','meta_title','meta_desc','cate_post1','size','hot','bestsell','chinh'));
     }
     public function dangxuatkh(){
-        Session::forget('customer_id');
-        return redirect()->route('cli_index');
+        Auth::guard('khachhang')->logout();
+        return redirect()->route('cli_index')->with('message','ĐĂNG XUẤT THÀNH CÔNG');
     }
     public function thankyou(Request $request ){
         $meta_desc = "Cảm ơn";

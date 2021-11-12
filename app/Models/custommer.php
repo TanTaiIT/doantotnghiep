@@ -3,19 +3,30 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class custommer extends Model
+class custommer extends Authenticatable
 {
-    use HasFactory;
+    use Notifiable;
     protected $table="tbl_customers";
     protected $fillable=[
     	'customer_name',
-    	'customer_password',
+    	'password',
     	'customer_phone',
     	'customer_email',
         'code',
         'code_time'
     ];
+
+    public function change_status($status,$email){
+        return $this->where('customer_email',$email)->where('status',$status)->first();
+    }
+
+    // protected $hidden = [
+    //     'customer_password', 'remember_token',
+    // ];
     protected $primaryKey="customer_id";
 }
