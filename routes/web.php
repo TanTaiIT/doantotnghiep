@@ -112,9 +112,8 @@ Route::get('/custommer','Admin\CustommerController@custommer_view')->name('custo
 Route::get('/cus_delete/{cus_id}','Admin\CustommerController@cus_del');
 Route::get('/recover','Admin\CustommerController@recover_view')->name('recover');
 Route::get('/cus_recover/{cus_id}','Admin\CustommerController@cus_recover')->name('khoiphuc');
-
-
-
+Route::get('send-code/{cus_id}','Admin\CustommerController@send_code')->name('sendcode');
+Route::get('send-code-coupon/{condition}/{number}/{code}/{time}/{id}','Admin\MailController@send_code_coupon');
 Route::post('/filter','Client\ClientController@filter')->name('filter');
 
 

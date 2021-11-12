@@ -49,6 +49,7 @@
 													<th>ngày tạo</th>
 													<th>Tình trạng</th>
 													<th>xóa</th>
+													<th>Gửi mã giảm giá</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -66,7 +67,8 @@
 														<td>hoạt động</td>
 											    <?php } ?>
 
-													<td><a href="{{URL::to('cus_delete/'.$cou->customer_id)}}" title="xóa mã giảm giá"><i class="glyphicon glyphicon-trash"></i></a></td>
+													<td><a href="{{URL::to('cus_delete/'.$cou->customer_id)}}" title="xóa khách hàng"><i class="glyphicon glyphicon-trash"></i></a></td>
+													<td class="text-center"><a href="{{URL::to('send-code/'.$cou->customer_id)}}"><i class="glyphicon glyphicon-gift text-danger"></i></a></td>
 													</tr>
 													@endforeach
 												</tbody>
