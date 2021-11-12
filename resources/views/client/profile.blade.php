@@ -38,7 +38,7 @@
 										<div class="w3_agileits_card_number_grid_left form-group">
 											<label for="" class="nhan">Email:</label>
 											<div class="controls">
-												<input data-validation="email" data-validation-length="min5" data-validation-error-msg="vui lòng nhập đúng dịnh dạng email" type="email" class="form-control email" value="{{$c->customer_email}}" placeholder="E-mail khách hàng" name="email" required="" >
+												<input data-validation="email" data-validation-length="min5" data-validation-error-msg="vui lòng nhập đúng dịnh dạng email" type="email" class="form-control email" value="{{$c->customer_email}}" placeholder="E-mail khách hàng" name="email" required="" readonly="true">
 											</div>
 										</div>
 										<div class="w3_agileits_card_number_grid_right form-group">

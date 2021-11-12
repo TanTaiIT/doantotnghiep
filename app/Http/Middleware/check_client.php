@@ -21,7 +21,7 @@ class check_client
                 return $next($request);
             }
             Auth::guard('khachhang')->logout();
-            return redirect()->route('cli_index')->with('message','Tài khoản của bạn đã bị khóa');
+            return redirect()->route('cli_index')->with('error','Tài khoản của bạn đã bị khóa');
         }
         return $next($request);
 

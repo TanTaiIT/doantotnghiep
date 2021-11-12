@@ -36,54 +36,48 @@ Route::post('/quickview','Admin\ProductController@quickview');
 
 Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
    Route::get('/index','ClientController@index')->name('cli_index')->middleware('kiemtra');
-   Route::post('/search/','ClientController@search')->name('cli_search');
+   Route::post('/search/','ClientController@search')->name('cli_search')->middleware('kiemtra');
    Route::get('/dangxuat_kh','ClientController@dangxuatkh')->name('dangxuat_kh');
-   Route::get('/delivery','CheckoutController@delivery');
-   Route::post('/select-delivery-home','CheckoutController@select_delivery_home');
    Route::get('/checkout','CheckoutController@checkout')->name('checkout');
-   Route::post('/load-comment','ClientController@load_comment');
-   Route::post('/send-comment','ClientController@send_comment');
-   Route::get('/gioithieu','ClientController@gioithieu')->name('gioithieu');
+   Route::post('/load-comment','ClientController@load_comment')->middleware('kiemtra');
+   Route::post('/send-comment','ClientController@send_comment')->middleware('kiemtra');
+   Route::get('/gioithieu','ClientController@gioithieu')->name('gioithieu')->middleware('kiemtra');
    
 });
 
-Route::get('/detail/{id}','Client\ClientController@detail')->name('cli_detail');
-Route::get('/list-pro/{id}','Client\ClientController@list_pro')->name('list_pro');
-Route::post('/cart','Client\CartController@addtocart')->name('addtocart');
+Route::get('/detail/{id}','Client\ClientController@detail')->name('cli_detail')->middleware('kiemtra');
+Route::get('/list-pro/{id}','Client\ClientController@list_pro')->name('list_pro')->middleware('kiemtra');
+Route::post('/cart','Client\CartController@addtocart')->name('addtocart')->middleware('kiemtra');
  Route::patch('update-cart','Client\CartController@update');
  Route::delete('remove-from-cart','Client\CartController@remove');
- Route::post('/select-delivery-home','Client\CheckoutController@delivery_home');
+
 
 
 Route::group(['prefix'=>'cli_check','namespace'=>'Client'],function(){
    Route::post('/dangky','CheckoutController@dangky')->name('dangky');
    Route::get('xacnhantaikhoan','CheckoutController@xacnhanTK')->name('xacnhanTK');
    Route::post('/dangnhap','CheckoutController@dangnhap')->name('dangnhap');
-   Route::get('/payment','CheckoutController@payment')->name('payment');
+   Route::get('/payment','CheckoutController@payment')->name('payment')->middleware('kiemtra');
    Route::post('/postlaymk','CheckoutController@postSendcoderesetpassowrd')->name('postlaymk');
    Route::get('/getdoimk','CheckoutController@getdoimk')->name('getdoimk');
    Route::post('/postdoimk','CheckoutController@postdoimk')->name('postdoimk');
 });
 
-Route::get('/delivery','Client\DeliveryController@delivery');
-Route::post('/select-delivery','Client\DeliveryController@select_delivery');
-Route::post('/insert-delivery','Client\DeliveryController@insert_delivery');
-Route::post('/select-feeship','Client\DeliveryController@select_feeship');
-Route::post('/update-delivery','Client\DeliveryController@update_delivery');
+
 Route::post('/calculate-fee','Client\CheckoutController@calculate_fee');
-Route::get('/del-fee','Client\CheckoutController@del_fee');
-Route::post('/confirm-order','Client\CheckoutController@confirm_order');
-Route::post('/confirm-order1','Client\CheckoutController@confirm_order1');
+Route::get('/del-fee','Client\CheckoutController@del_fee')->middleware('kiemtra');
+Route::post('/confirm-order','Client\CheckoutController@confirm_order')->middleware('kiemtra')->middleware('kiemtra');
+Route::post('/confirm-order1','Client\CheckoutController@confirm_order1')->middleware('kiemtra')->middleware('kiemtra');
 Route::get('/thankyou','Client\ClientController@thankyou')->name('thank');
-Route::get('/history','Admin\OrderController@history');
-Route::get('/view-history-order/{order_code}','Admin\OrderController@view_history_order');
-Route::post('/tim-kiem','Client\ClientController@search');
-Route::post('/autocomplete-ajax','Client\ClientController@autocomplete_ajax');
+Route::get('/history','Admin\OrderController@history')->middleware('kiemtra');
+Route::get('/view-history-order/{order_code}','Admin\OrderController@view_history_order')->middleware('kiemtra');
+Route::post('/tim-kiem','Client\ClientController@search')->middleware('kiemtra');
+Route::post('/autocomplete-ajax','Client\ClientController@autocomplete_ajax')->middleware('kiemtra');
 Route::post('/insert-rating','Client\ClientController@insert_rating');
 Route::post('/add-cart-ajax','Client\CartController@add_cart_ajax');
-Route::get('/danh-muc-bai-viet/{id}','Admin\PostController@danh_muc_bai_viet')->name('dm_baiviet');
-Route::get('/bai-viet/{post_slug}','Admin\PostController@bai_viet');
-Route::get('/lien-he','Client\ContactController@lien_he');
+Route::get('/danh-muc-bai-viet/{id}','Admin\PostController@danh_muc_bai_viet')->name('dm_baiviet')->middleware('kiemtra');
+Route::get('/bai-viet/{post_slug}','Admin\PostController@bai_viet')->middleware('kiemtra');
+Route::get('/lien-he','Client\ContactController@lien_he')->middleware('kiemtra');
 //dang nhap gg
 Route::get('/login-google','Client\CheckoutController@login_google');
 Route::get('/google/callback','Client\CheckoutController@callback_google');
@@ -95,8 +89,8 @@ Route::get('/send-coupon-vip/{condition}/{number}/{code}/{time}','Admin\MailCont
 Route::get('/mail-example','Admin\MailController@mail_example');
 Route::get('/send-mail','Admin\MailController@send')->name('send');
 Route::post('/product-tabs','Admin\CategoryController@product_tabs');
-Route::get('/search', 'Admin\ProductController@tim');
-Route::get('profile','Client\ClientController@profile');
+Route::get('/search', 'Admin\ProductController@tim')->middleware('kiemtra');;
+Route::get('profile','Client\ClientController@profile')->middleware('kiemtra');;
 Route::post('update_profile/{id}','Client\ClientController@update_pro');
 Route::post('show-cart','Client\ClientController@show');
 Route::post('shop','Client\ClientController@shopping');

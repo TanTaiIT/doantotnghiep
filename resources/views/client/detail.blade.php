@@ -175,15 +175,15 @@
 								<div class="comment-form" style="background: transparent;">
 									<form action="#">
 									@csrf
-									  @if(Session::has('customer_id'))
-										<input style="width:100%;margin-left:0;background:transparent;"  class="form-control comment_name" value="{{Session::get('customer_name')}}" type="text" placeholder="@lang('lang.Ten_bl')"/>
+									  @if(Auth::guard('khachhang')->check())
+										<input style="width:100%;margin-left:0;background:transparent;"  class="form-control comment_name" value="{{Auth::guard('khachhang')->user()->customer_name}}" type="text" placeholder="@lang('lang.Ten_bl')"/>
 									  @else
 									     <input style="width:100%;margin-left:0;background:transparent;"  class="form-control comment_name" value="" type="text" placeholder="@lang('lang.Ten_bl')"/>
 									  @endif
 										<textarea name="comment" style="background: transparent;" class="form-control comment_content" placeholder="@lang('lang.noidung')"></textarea>
 										
 										<?php
-											if(Session::has('customer_id')){?>
+											if(Auth::guard('khachhang')->check()){?>
 												<button type="button" class="btn btn-default pull-right send-comment">
 											Gửi bình luận
 										</button>

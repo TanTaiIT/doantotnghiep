@@ -66,7 +66,7 @@ class AuthController extends Controller
             'password.required'=>'+Bạn chưa nhập password',
         ]);
         // $data=$request->all();
-        if(Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
+        if(Auth::attempt(['email'=>$request->email,'password'=>$request->password,'status'=>1])){
             // Session::flash('thongbao','Đăng nhập thành công');
             return redirect()->route('cli_trangchu');
         }else{

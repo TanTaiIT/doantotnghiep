@@ -219,6 +219,10 @@ class  CheckoutController extends Controller
 
     }
     public function confirm_order1(Request $request){
+
+        if(!Auth::guard('khachhang')->check()){
+            return redirect()->back()->with('message','bạn phải đăng nhập trước khi thanh toán');
+        }else{
          $url_canonical = $request->url();  
          $cate=category::all();
          $com='';
@@ -249,7 +253,7 @@ class  CheckoutController extends Controller
 
   
          $order = new Order();
-         $order->customer_id = Session::get('customer_id');
+         $order->customer_id = Auth::guard('khachhang')->user()->customer_id;
          $order->shipping_id = $shipping_id;
          $order->order_status = 1;
          $order->order_code = $checkout_code;
@@ -287,7 +291,7 @@ class  CheckoutController extends Controller
          }
         $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s');
         $title_email = "Đơn hàng xác nhận ngày".' '.$now;
-        $cus =  custommer::find(Session::get('customer_id'));
+        $cus =  custommer::find(Auth::guard('khachhang')->user()->customer_id);
         $data['email'][] = $cus->customer_email;
 
         if(Session::get('cart')==true){
@@ -327,6 +331,7 @@ class  CheckoutController extends Controller
          Session::forget('cart');
          Session::flash('thank','Cảm ơn bạn đã mua sản phẩm của chúng tôi, chúng tôi sẽ giao hàng sớm nhất cho bạn');
          return redirect()->route('thank');
+     }
     }
     public function confirm_order(Request $request){
          $url_canonical = $request->url();  
@@ -359,7 +364,7 @@ class  CheckoutController extends Controller
 
   
          $order = new Order();
-         $order->customer_id = Session::get('customer_id');
+         $order->customer_id = Auth::guard('khachhang')->user()->customer_id;
          $order->shipping_id = $shipping_id;
          $order->order_status = 1;
          $order->order_code = $checkout_code;
@@ -396,7 +401,7 @@ class  CheckoutController extends Controller
          }
         $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s');
         $title_email = "Đơn hàng xác nhận ngày".' '.$now;
-        $cus =  custommer::find(Session::get('customer_id'));
+        $cus =  custommer::find(Auth::guard('khachhang')->user()->customer_id);
         $data['email'][] = $cus->customer_email;
 
         if(Session::get('cart')==true){
@@ -604,7 +609,7 @@ class  CheckoutController extends Controller
         return redirect()->back();
     }
     public function payment(Request $request){
-        if(!Session::get('customer_id')){
+        if(!Auth::guard('khachhang')->check()){
             return redirect()->route('cli_index');
         }else{
         $url_canonical = $request->url();

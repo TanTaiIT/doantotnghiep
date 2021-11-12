@@ -201,10 +201,10 @@ class ClientController extends Controller
     <div class="tongtien">
         <p><span class="bold">Tổng tiền:</span><span class="tongt">&nbsp;'.number_format($total,0,'.','.').' VNĐ</span></p>';
         
-           if(Session::has('customer_id') && Session('cart')!=NULL){ 
+           if((Auth::guard('khachhang')->check()) && Session('cart')!=NULL){ 
             $output.='<a href="../cli/index" class="continute">Tiếp tục mua hàng</a>
             <a href="../cli_check/payment"  class="process">Tiến hành thanh toán</a>';
-            }elseif(Session::has('customer_id')==NULL){  
+            }elseif(!Auth::guard('khachhang')->check()){  
                 $output.='<a href="../cli/index" class="continute">Tiếp tục mua hàng</a>
                 <a href="../cli_check/payment" data-toggle="modal" class="process" data-target="#exampleModal">Tiến hành thanh toán</a>';
             
@@ -232,12 +232,12 @@ class ClientController extends Controller
         $quangcao=quangcao::where('quangcao_status',0)->orderBy('quangcao_id','desc')->get();
         $bestsell=product::orderBy('product_sold','DESC')->paginate(3);
         // $sp=product::orderBy('product_sold','DESC')->limit(6)->get();
-        $sp=DB::table('tbl_product')->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')->where('tbl_category_product.category_status','=',1)->orderBy('tbl_product.product_sold','desc')->limit(6)->get();
+        $sp=DB::table('tbl_product')->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')->where('tbl_category_product.category_status','=',1)->where('tbl_product.product_status',1)->orderBy('tbl_product.product_sold','desc')->limit(6)->get();
         // $toping=product::where('category_id',10)->where('product_status',1)->get();
         $com='index';
-        $toping=DB::table('tbl_product')->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')->where('tbl_category_product.category_status','=',1)->where('tbl_category_product.category_id',10)->get();
+        $toping=DB::table('tbl_product')->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')->where('tbl_product.product_status',1)->where('tbl_category_product.category_status','=',1)->where('tbl_category_product.category_id',10)->get();
         // $product=product::with('category')->whereNotIn('category_id',[10])->where('product_status',1)->orderBy('product_id','desc')->paginate(6);
-        $product=DB::table('tbl_product')->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')->where('tbl_category_product.category_status','=',1)->paginate(6);
+        $product=DB::table('tbl_product')->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')->where('tbl_category_product.category_status','=',1)->where('tbl_product.product_status',1)->paginate(6);
         // $product=product::where([
         //     'product_status'=>1,
 
@@ -259,7 +259,7 @@ class ClientController extends Controller
         $com='';
         $cate=category::orderby('category_id','desc')->get();
         $cate_post1=CatePost::where('cate_post_status',1)->get();
-        $cus_id=Session::get('customer_id');
+        $cus_id=Auth::guard('khachhang')->user()->customer_id;
         $cus=custommer::where('customer_id',$cus_id)->get();
         $chinh=chinhsach::limit(3)->get();
             //seo 
@@ -436,117 +436,6 @@ class ClientController extends Controller
         $product->save();
         echo 'done';
     }
-    // public function list_pro(Request $request,$id){
-    //     $com='';
-    //     $meta_desc = $request->product_desc;
-        
-    //     $url_canonical = $request->url();
-    //     $share_images = url('images/'.$request->product_image);
-    //     $slide=slider::limit(4)->get();  
-    //     $size=attribute::where('name','size')->get();
-    //     $color=attribute::where('name','color')->get();
-    //     $hot=attribute::where('name','hot')->get();
-    //     $url_canonical = $request->url(); 
-    //     $chinh=chinhsach::limit(3)->get();
-    //     $cate=category::where('category_status',1)->get();
-    //     $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
-    //     $bestsell=product::orderBy('product_sold','DESC')->limit(3)->get();
-
-
-    //     $product=product::where('category_id',$id);
-
-    //     if($request->orderby){
-    //         $orderby=$request->orderby;
-    //         switch ($orderby) {
-    //             case 'desc':
-    //                 // $product_list=product::where('category_id',$id)->orderBy('product_id','DESC')->paginate(6)->appends(request()->query()); 
-    //                 $product->orderby('product_id','DESC')->paginate(6);
-    //                 break;
-    //             case 'asc':
-    //                 // $product_list=product::where('category_id',$id)->orderBy('product_id','ASC')->paginate(6)->appends(request()->query()); 
-    //                 $product->orderby('product_id','ASC')->paginate(6);
-    //                 break;
-    //             case 'primax':
-    //                // $product_list=product::where('category_id',$id)->orderBy('product_price','DESC')->paginate(6)->appends(request()->query()); 
-    //                 $product->orderby('product_price','DESC')->paginate(6);
-    //                 break;
-    //             case 'primin':
-    //                // $product_list=product::where('category_id',$id)->orderBy('product_price','ASC')->paginate(6)->appends(request()->query()); 
-    //                 $product->orderby('product_price','ASC')->paginate(6);
-    //                 break;
-    //         // $product_list=$product->where('category_id',$id)->paginate(12);
-
-    //        }
-    // }
-    
-    //     if($request->price){
-    //         $price=$request->price;
-    //         switch ($price){
-    //             case '1':
-    //                 // $product_list=product::where('product_price','<',15000)->where('category_id',$id)->paginate(6)->appends(request()->query()); 
-    //                 $product->where('product_price','<',10000)->paginate(6);
-                   
-    //                 break;
-    //             case '2':
-    //                 // $product_list=product::whereBetween('product_price',[10000,15000])->where('category_id',$id)->paginate(6)->appends(request()->query());
-    //                 $product->whereBetween('product_price',[10000,15000])->paginate(6);
-    //                 break;
-    //             case '3':
-    //                 // $product_list=product::whereBetween('product_price',[15000,20000])->where('category_id',$id)->paginate(6)->appends(request()->query());
-    //                 $product->whereBetween('product_price',[15000,20000])->paginate(6);
-    //                 break; 
-    //             case '4':
-    //                 // $product_list=product::whereBetween('product_price',[20000,30000])->where('category_id',$id)->paginate(6)->appends(request()->query());
-    //                 $product->whereBetween('product_price',[20000,30000])->paginate(6);
-    //                 break;
-    //             case '5':
-    //                 // $product_list=product::whereBetween('product_price',[30000,40000])->where('category_id',$id)->paginate(6)->appends(request()->query());
-    //                 $product->whereBetween('product_price',[30000,40000])->paginate(6);
-    //                 break;
-    //             case '6':
-    //                 // $product_list=product::whereBetween('product_price',[40000,50000])->where('category_id',$id)->paginate(6)->appends(request()->query());
-    //                 $product->whereBetween('product_price',[40000,50000])->paginate(6);
-    //                 break;
-    //             case '7':
-    //                 // $product_list=product::where('product_price','>',50000)->where('category_id',$id)->paginate(6)->appends(request()->query());
-    //                 $product->where('product_price','>',50000)->paginate(6);
-    //                 break;
-                
-    //         }
-    //     }
-        
-    // if(!$request->price && !$request->orderby){
-    //     $product->where('category_id',$id)->paginate(6);
-    // }
-    // if($request->keyword){
-    //         $key=$request->keyword;
-    //         $product->where('product_name','like','%'.$key.'%')->paginate(6);
-    // }
-
-    // $product_list=$product->paginate(6);
-    // $dem=count($product_list);
-    // if($dem==0){
-    //     Session::flash('thongbao','không có sản phẩm nào');
-    // }
-
-    //     $cate1=category::where('category_id',$id)->take(1)->get();
-    //     foreach($cate1 as $key => $cate2){
-    //         //seo 
-    //         $meta_desc = $cate2->category_desc; 
-    //         // $meta_keywords = $cate2->cate_post_slug;
-    //         $meta_title=$cate2->category_name;
-    //         // $cate_id = $cate2->cate_post_id;
-    //         $url_canonical = $request->url();
-    //         // $share_image = url('public/frontend/images/share_news.png');
-        
-        
-    // }
-
-
-      
-
-    //     return view('client.list_pro',compact('product_list','cate','cate_post1','url_canonical','com','size','color','hot','slide','share_images','meta_title','meta_desc','bestsell','chinh'));
-    // }
 
 
     public function list_pro(Request $request,$id){
