@@ -3,9 +3,10 @@
   
     <script src="{!! asset('web/js/jquery.simplyscroll.js')!!}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript" charset="utf-8" async defer></script>
-    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    
+<!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+
     <script src="{!! asset('web/js/slick.js')!!}"></script>
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
     <script src="{!! asset('web/js/app.js')!!}"></script>    
@@ -13,6 +14,7 @@
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script> -->
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+    <script src="{!! asset('web/js/simple.money.format.js')!!}"></script>
 
 <script>
     window.addEventListener('load',function(){
@@ -21,6 +23,20 @@
     })
 </script>
 
+
+@yield('price_range')
+
+<script>
+    $('document').ready(function(){
+        $('#sort').on('change',function(){
+            var url=$(this).val();
+            if(url){
+                window.location=url;
+            }
+            return false;
+        })
+    })
+</script>
 @yield('script')
 <script>
     $('#login-form').validate({

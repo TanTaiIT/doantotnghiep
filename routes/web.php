@@ -121,6 +121,10 @@ Route::get('/cus_recover/{cus_id}','Admin\CustommerController@cus_recover')->nam
 
 
 
+Route::post('/filter','Client\ClientController@filter')->name('filter');
+
+
+
 
 
 

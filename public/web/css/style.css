@@ -101,6 +101,27 @@ height: unset;
     font-weight: bolder;
     margin-bottom: 5px;
 }
+#sort{
+    width: 100%;
+}
+#slider-range{
+    margin-bottom: 30px;
+}
+.style-range{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    overflow: hidden;
+}
+.customer-rev.border-bottom.left-side.py-2 {
+    margin-top: 70px;
+}
+.locgia{
+    padding: 6px 20px;
+}
+.baogia{
+    margin-top: 50px;
+}
 .repl{
     padding: 0;
 }

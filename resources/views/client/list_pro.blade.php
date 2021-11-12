@@ -114,126 +114,44 @@
 				<div class="col-lg-3 mt-lg-0 mt-4 p-lg-0">
 
 					<div class="side-bar p-sm-4 p-3">
-					<!-- 	<div class="sapxep">
-					<form class="tree-most" id="form_order" method="get">
-					<select name="orderby" class="boot orderby">
-						<option value="md" selected="selected" disabled="true">@lang('lang.SapXep')</option>
-						<option value="desc">@lang('lang.LatestProduct')</option>
-						<option value="asc">@lang('lang.oldestProduct')</option>
-					    <option value="primax">@lang('lang.giaGiam')</option>
-					    <option value="primin">@lang('lang.giaTang')</option>
-					</select>
-				  </form>
+		
+						<form>
+						@csrf
+						<select name="sort" id="sort">
+							<option value="{{Request::url()}}?sort_by=none">-------------Sắp xếp-----------</option>
+							<option value="{{Request::url()}}?sort_by=cunhat">cũ nhất</option>
+							<option value="{{Request::url()}}?sort_by=moinhat">mới nhất</option>
+							<option value="{{Request::url()}}?sort_by=tangdan">giá tăng dần</option>
+							<option value="{{Request::url()}}?sort_by=giamdan">giá giảm dần</option>
+						</select>
+					    </form>
+					    <div class="baogia">
+					    <label for="amount" class="text-white mb-2">Lọc theo giá</label>
+					    <form action="">
+					    	<div id="slider-range" ></div>
+                                        <!-- <style type="text/css">
+                                            .style-range p {
+                                                float: left;
+                                               /* width: 25%;*/
+                                            }
+                                        </style> -->
+                                        <div class="style-range">
+                                            <p><input type="text" id="amount_start" readonly style="border:0; color:#f6291f; font-weight:bold;"></p>
+                                            <p><input type="text" id="amount_end" readonly style="border:0; color:#f6931f; font-weight:bold;"></p>
+                                        </div>
+                                        <!-- <input type="text" id="amount" readonly style="border:0;color:#fff;font-weight: bold;"> -->
+                                        <input type="hidden" name="start_price" id="start_price">
+                                        <input type="hidden" name="end_price" id="end_price">
 
-
-
-				    
-
-
-
-				    </div> -->
-				    <div class="dropdown">
-						  <button class="dropbtn">Sắp xếp</button>
-						  <div class="dropdown-content">
-						  <a href="{{request()->fullUrlWithQuery(['orderby' => 'desc'])}}">Sản phẩm mới nhất</a>
-						  <a href="{{request()->fullUrlWithQuery(['orderby' => 'asc'])}}">Sản phẩm cũ nhất</a>
-						  <a href="{{request()->fullUrlWithQuery(['orderby' => 'primax'])}}">Giá giảm dần</a>
-						  <a href="{{request()->fullUrlWithQuery(['orderby' => 'primin'])}}">Giá tăng dần</a>
-						  </div>
-						</div>
-						<div class="search-hotel border-bottom py-2">
-							<h3 class="agileits-sear-head mb-3">@lang('lang.timKiem_yeuthich')</h3>
-							<form method="get" action="{{Request::fullUrl()}}" id="fo">
-								<input type="search" placeholder="Product name..." name="keyword" required="">
-								<input type="submit" value=" ">
-							</form>
-						</div>
-						<!-- price -->
-						<div class="range border-bottom py-2">
-							<h3 class="agileits-sear-head mb-3">@lang('lang.ProductPrice')</h3>
-							<div class="w3l-range join">
-								<ul>
-									<li>
-										<a class="giatri" href="{{request()->fullUrlWithQuery(['price' => 1])}}">dưới 10.000 VNĐ</a>
-									</li>
-									<li class="my-1">
-										<a class="giatri" href="{{request()->fullUrlWithQuery(['price' => 2])}}">10.000 VNĐ - 15.000 VNĐ</a>
-									</li>
-									<li>
-										<a class="giatri" href="{{request()->fullUrlWithQuery(['price' => 3])}}">15.000 VNĐ - 20.000 VNĐ</a>
-									</li>
-									<li class="my-1">
-										<a class="giatri" href="{{request()->fullUrlWithQuery(['price' => 4])}}">20.000 VNĐ - 30.000 VNĐ</a>
-									</li>
-									<li class="my-1">
-										<a href="{{request()->fullUrlWithQuery(['price' => 5])}}">30.000 VNĐ - 40.000 VNĐ</a>
-									</li>
-									<li class="my-1">
-										<a class="giatri" href="{{request()->fullUrlWithQuery(['price' => 6])}}">40.000 VNĐ - 50.000 VNĐ</a>
-									</li>
-									<li class="my-1">
-										<a class="giatri" href="{{request()->fullUrlWithQuery(['price' => 7])}}">trên 50.000 VNĐ</a>
-									</li>
-								</ul>
-							</div>
-						</div>
+                                         <br>
+                                         <div class="clearfix"></div>
+                                         <div class="loc text-center">
+                                         <input type="submit" name="filter_price" value="Lọc giá" class="btn btn-sm btn-default locgia">
+                                        </div>
+					    </form>
+					</div>
 						<div class="customer-rev border-bottom left-side py-2">
-							<!-- <h3 class="agileits-sear-head mb-3">Đánh giá của khách hàng</h3>
-							<ul> -->
-								<!-- <li>
-									<a href="{{request()->fullUrlWithQuery(['review' => 5])}}">
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<span>5.0</span>
-									</a>
-								</li>
-								<li>
-									<a href="{{request()->fullUrlWithQuery(['review' => 4])}}">
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<span>4.0</span>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star-half"></i>
-										<span>3.5</span>
-									</a>
-								</li>
-
-								<li>
-									<a href="{{request()->fullUrlWithQuery(['review' => 3])}}">
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<span>3.0</span>
-									</a>
-								</li>
-								<li>
-									<a href="{{request()->fullUrlWithQuery(['review' => 2])}}">
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<!-- <i class="fas fa-star-half"></i> -->
-									<!-- 	<span>2.0</span>
-									</a>
-								</li> -->
-								<!-- <li>
-									<a href="{{request()->fullUrlWithQuery(['review' =>1 ])}}">
-										<i class="fas fa-star"></i>
-										
-										<span>1.0</span>
-									</a>
-								</li>  -->
-							<!-- </ul>
-						</div> -->
+							
 
 						<div class="f-grid py-2">
 							<h3 class="agileits-sear-head mb-3">@lang('lang.SelleingProduct')</h3>
@@ -256,100 +174,7 @@
 								</div>
 							</div>
 						</div>
-
-
-						
-						<!-- //reviews -->
-						<!-- electronics -->
-						<!-- <div class="left-side border-bottom py-2">
-							<h3 class="agileits-sear-head mb-3">Electronics</h3>
-							<ul>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Accessories</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Cameras & Photography</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Car & Vehicle Electronics</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Computers & Accessories</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">GPS & Accessories</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Headphones</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Home Audio</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Home Theater, TV & Video</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Mobiles & Accessories</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Portable Media Players</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Tablets</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Telephones & Accessories</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Wearable Technology</span>
-								</li>
-							</ul>
-						</div> -->
-						<!-- //electronics -->
-						<!-- delivery -->
-						<?php /*<div class="left-side border-bottom py-2">
-							<h3 class="agileits-sear-head mb-3">Cash On Delivery</h3>
-							<ul>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Eligible for Cash On Delivery</span>
-								</li>
-							</ul>
-						</div>
-						<!-- //delivery -->
-						<!-- arrivals -->
-						<div class="left-side border-bottom py-2">
-							<h3 class="agileits-sear-head mb-3">New Arrivals</h3>
-							<ul>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Last 30 days</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Last 90 days</span>
-								</li>
-							</ul>
-						</div> */ ?>
-						<!-- //arrivals -->
-						<!-- best seller -->
-						
-						<!-- //best seller -->
 					</div>
-					<!-- //product right -->
 				</div>
 			</div>
 		</div>
@@ -361,3 +186,28 @@
 
 
 @stop
+
+@section('price_range')
+ <script>
+  $( function() {
+    $( "#slider-range" ).slider({
+      orientation: "horizontal",
+      range: true,
+      min:{{$min_price_range}},
+      max:{{$max_price_range}},
+      step:1000,
+      values: [ {{$min_price}}, {{$max_price}} ],
+      slide: function( event, ui ) {
+        // $( "#amount" ).val( "VNĐ" + ui.values[ 0 ] + " - VNĐ" + ui.values[ 1 ] );
+        $( "#amount_start" ).val(ui.values[ 0 ]).simpleMoneyFormat();
+        $( "#amount_end" ).val(ui.values[ 1 ]).simpleMoneyFormat();
+
+        $( "#start_price" ).val(ui.values[ 0 ]);
+        $( "#end_price" ).val(ui.values[ 1 ]);
+      }
+    });
+    $( "#amount_start" ).val($( "#slider-range" ).slider("values",0)).simpleMoneyFormat();
+    $( "#amount_end" ).val($( "#slider-range" ).slider("values",1)).simpleMoneyFormat();
+  } );
+  </script>
+@endsection
