@@ -45,7 +45,7 @@
                             </div>
                             <ul class="pagination pagination-sm m-t-none m-b-none">
                         
-                       {!!$post_cate->links()!!}
+                       {!!$post_cate->links('pagination::bootstrap-4')!!}
                       
                       </ul>
                         </div>

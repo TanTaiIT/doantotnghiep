@@ -57,8 +57,8 @@
 											<div class="col-md-6 col-sm-6 ">
 												<select name="cate_post_status" id="" class="form-control" >
 													 
-											      <option value="0">Hiện</option>
-											      <option value="1">Ẩn</option>
+											      <option value="1">Hiện</option>
+											      <option value="0">Ẩn</option>
 
 												</select>
 											</div>

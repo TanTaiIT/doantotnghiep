@@ -50,12 +50,7 @@
 							<li class="mb-3">
 								<a href="{{URL::to('lien-he')}}">@lang('lang.contact')</a>
 							</li>
-							<li class="mb-3">
-								<a href="help.html">@lang('lang.Menu')</a>
-							</li>
-							<li class="mb-3">
-								<a href="{{URL::to('danh-muc-bai-viet/'.$cate_post1[0]->cate_post_slug)}}">@lang('lang.post')</a>
-							</li>
+							
 							<li class="mb-3">
 								<a href="{{route('cli_index')}}">@lang('lang.home')</a>
 							</li>

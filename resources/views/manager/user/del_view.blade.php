@@ -15,7 +15,6 @@
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="{{route('user_del_view')}}">phục hồi</a>
                             
                           </div>
                       </li>
@@ -24,9 +23,7 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="button">
-                  	<a href="{{URL::to('/add-users')}}" class="btn-color" type="button" >Thêm User</a>
-                  </div>
+                 
                   
                   <div class="x_content">
                       <div class="row">
@@ -52,7 +49,7 @@
 
                       <tbody>
                         <?php $i=0; ?>
-                        @foreach($admin as $key => $user)
+                        @foreach($user1 as $key => $user)
                         <?php $i++ ?>
                         <form action="{{url('/assign-roles')}}" method="POST">
                         @csrf
@@ -69,8 +66,7 @@
                           <td><input type="checkbox" name="admin_role"  {{$user->hasRole('admin') ? 'checked' : ''}}></td>
                           <td><input type="checkbox" name="user_role"  {{$user->hasRole('user') ? 'checked' : ''}}></td>
                           <td>
-                             <p><input type="submit" value="Phân quyền" class="btn btn-sm btn-warning"></p>
-                             <p><a style="margin:5px 0;font-size:13px" class="btn btn-sm btn-info" href="{{url('/delete-user-roles/'.$user->admin_id)}}" onclick="return confirm('Cbạn có chắc muốn xóa user này không')">Xóa user</a></p>
+                             <p><a style="margin:5px 0;font-size:13px" class="btn btn-sm btn-info" href="{{url('/recover_user/'.$user->admin_id)}}"><i class="glyphicon glyphicon-refresh"></i></a></p>
                              <!-- <p><a style="margin:5px 0;font-size:13px" class="btn btn-sm btn-success" href="{{url('/impersonate/'.$user->admin_id)}}">Chuyển quyền</a></p> -->
                             
                           </td> 

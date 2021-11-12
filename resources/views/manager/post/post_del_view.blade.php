@@ -8,24 +8,21 @@
 <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Quản lý User</h2>
+                    <h2>Quản lý bài viết</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="{{route('user_del_view')}}">phục hồi</a>
                             
+                           
                           </div>
                       </li>
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
-                  </div>
-                  <div class="button">
-                  	<a href="{{URL::to('/add-users')}}" class="btn-color" type="button" >Thêm User</a>
                   </div>
                   
                   <div class="x_content">
@@ -36,52 +33,52 @@
                     
                     <table class="table table-striped table-bordered" >
                       <thead>
-
                         <tr>
                           <th>STT</th>
-                          <th>Tên user</th>
-                          <th>Email</th>
-                          <th>Phone</th>
-                          <th>Password</th>
-                          <th>Admin</th>
-                          <th>User</th>
-                          <th>Chức năng</th>
+                          <th>Tên bài viết</th>
+                          <th>Hình ảnh</th>
+                          <th>Slug</th>
+                          <th>Mô tả bài viết</th>
+                          <th>Từ khóa bài viết</th>
+                          <th>Danh mục bài viết</th>
+                          <th>Tình trạng</th>
+                          <th>Thao tác</th>
                         </tr>
                       </thead>
 
 
                       <tbody>
                         <?php $i=0; ?>
-                        @foreach($admin as $key => $user)
+                        @foreach($post1 as $key => $post)
                         <?php $i++ ?>
-                        <form action="{{url('/assign-roles')}}" method="POST">
-                        @csrf
                         <tr>
                           <td>{{$i}}</td>
-                          <td>{{ $user->name }}</td>
+                          <td>{{ $post->post_title }}</td>
+                          <td><img src="{{asset('uploads/post/'.$post->post_image)}}" height="100" width="100"></td>
+                          <td>{{ $post->post_slug }}</td>
+                          <td>{!! $post->post_desc !!}</td>
+                          <td>{{ $post->post_meta_keywords }}</td>
+                          <td>{{ $post->cate_post->cate_post_name }}</td>
                           <td>
-                            {{ $user->email }} 
-                            <input type="hidden" name="admin_email" value="{{ $user->email }}">
-                            <input type="hidden" name="admin_id" value="{{ $user->admin_id }}">
+                            @if($post->post_status==0)
+                              <a href="{{route('hkh-post',$post->post_id)}}">Hiển thị</a>
+                            @else 
+                              <a href="{{route('kh-post',$post->post_id)}}">Ẩn</a>
+                            @endif
                           </td>
-                          <td>{{ $user->phone }}</td>
-                          <td>{{ $user->password }}</td>
-                          <td><input type="checkbox" name="admin_role"  {{$user->hasRole('admin') ? 'checked' : ''}}></td>
-                          <td><input type="checkbox" name="user_role"  {{$user->hasRole('user') ? 'checked' : ''}}></td>
+
                           <td>
-                             <p><input type="submit" value="Phân quyền" class="btn btn-sm btn-warning"></p>
-                             <p><a style="margin:5px 0;font-size:13px" class="btn btn-sm btn-info" href="{{url('/delete-user-roles/'.$user->admin_id)}}" onclick="return confirm('Cbạn có chắc muốn xóa user này không')">Xóa user</a></p>
-                             <!-- <p><a style="margin:5px 0;font-size:13px" class="btn btn-sm btn-success" href="{{url('/impersonate/'.$user->admin_id)}}">Chuyển quyền</a></p> -->
+                            <a href="{{URL::to('/recover_post/'.$post->post_id)}}" class="active styling-edit" ui-toggle-class="">
+                              <i class="glyphicon glyphicon-refresh"></i></a>
                             
-                          </td> 
+                          </td>
                         </tr>
-                      </form>
                         @endforeach
                       </tbody>
                     </table>
-                    <!-- <div class="pagination">
-                    
-                  </div> -->
+                    <div class="Pagination d-flex justify-content-center">
+                    {!! $post1->links() !!}
+                  </div>
                   </div>
                   </div>
               </div>

@@ -10,10 +10,19 @@ use Auth;
 use Session;
 class UserController extends Controller
 {
-    
+    public function user_del_view(){
+        $user1=admin::where('status',0)->orderBy('admin_id','desc')->get();
+        return view('manager.user.del_view',compact('user1'));
+    }
+    public function user_recover($admin_id){
+        $admin=admin::where('admin_id',$admin_id)->update(['status'=>1]);
+        $user=admin::where('admin_id',$admin_id)->first();
+        $user->roles()->attach(Roles::where('name','user')->first());
+        return redirect()->back()->with('message','user đã được phục hồi');
+    }
     public function index()
     {
-        $admin = admin::with('roles')->orderBy('admin_id','DESC')->get();
+        $admin = admin::with('roles')->where('status',1)->orderBy('admin_id','DESC')->get();
         return view('manager.user.index',compact('admin'));
     }
     public function impersonate($admin_id){
@@ -27,9 +36,7 @@ class UserController extends Controller
         session()->forget('chuyen');
         return redirect()->route('user');
     }
-    // public function add_users(){
-    //     return view('admin.users.add_user');
-    // }
+    
     public function add_users(){
         return view('manager.user.add_user');
     }
@@ -41,7 +48,8 @@ class UserController extends Controller
 
         if($admin){
             $admin->roles()->detach();
-            $admin->delete();
+            // $admin->delete();
+            $admin->update(['status'=>0]);
         }
         return redirect()->back()->with('message','Xóa user thành công');
 
@@ -88,7 +96,8 @@ class UserController extends Controller
         $admin->phone = $data['admin_phone'];
         $admin->email = $data['admin_email'];
         $admin->password = md5($data['admin_password']);
-         $admin->save();
+        $admin->status=1;
+        $admin->save();
         $admin->roles()->attach(Roles::where('name','user')->first());
        
         Session::flash('message','Thêm users thành công');

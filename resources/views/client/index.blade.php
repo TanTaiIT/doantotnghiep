@@ -78,7 +78,7 @@
 													@csrf
 													<fieldset> 
 													    
-							<input type="button" data-toggle="modal" data-target="#xemnhanh"  value="@lang('lang.quickview')" style="background: tomato" class="btn btn-default xemnhanh" data-id_soluong="{{$p->soluong}}" data-id_product="{{$p->product_id}}">
+							<input type="button" data-toggle="modal" data-target="#xemnhanh"  value="@lang('lang.quickview')" style="background: tomato" class="btn btn-default xemnhanh" data-id_product="{{$p->product_id}}">
 
 													</fieldset>
 												</form>
@@ -155,7 +155,7 @@
 													@csrf
 													<fieldset> 
 													    
-														<input type="button" data-toggle="modal" data-target="#xemnhanh"  value="@lang('lang.quickview')" class="btn btn-default panhanh xemnhanh" data-id_soluong="{{$t->soluong}}" data-id_product="{{$t->product_id}}">
+														<input type="button" data-toggle="modal" data-target="#xemnhanh"  value="@lang('lang.quickview')" class="btn btn-default panhanh xemnhanh" data-id_product="{{$t->product_id}}">
 
 													</fieldset>
 												</form> 
@@ -299,7 +299,7 @@
 													@csrf
 													<fieldset> 
 													    
-														<input type="button" data-toggle="modal" data-target="#xemnhanh" style="background: tomato" value="@lang('lang.quickview')" class="btn btn-default xemnhanh" data-id_soluong="{{$b->soluong}}" data-id_product="{{$b->product_id}}">
+														<input type="button" data-toggle="modal" data-target="#xemnhanh" style="background: tomato" value="@lang('lang.quickview')" class="btn btn-default xemnhanh"  data-id_product="{{$b->product_id}}">
 
 													</fieldset>
 												</form> 

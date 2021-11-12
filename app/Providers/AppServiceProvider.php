@@ -33,8 +33,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('*',function($view){
-        $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
-        $category=category::orderby('category_id','desc')->get();
+        
+        $category=category::orderby('category_id','desc')->where('category_status',1)->get();
         $app_product = Product::all()->count();
         $app_post = Post::all()->count();
         $app_order = Order::all()->count();
@@ -64,7 +64,7 @@ class AppServiceProvider extends ServiceProvider
         $order_count=Order::where('order_status',1)->get();
         $count=count($order_count);
         Session::put('or-nu',$count);
-        $view->with('app_product', $app_product )->with('app_post', $app_post )->with('app_order', $app_order )->with('app_customer', $app_customer )->with('category',$category)->with('cate_post1',$cate_post1)->with('move',$move)->with('complete',$complete)->with('new',$new)->with('process',$process)->with('destroy',$destroy)->with('app_admin',$app_admin)->with('app_cus',$app_cus)->with('tong',$tong)->with('tongo',$tongo)->with('seles',$seles);
+        $view->with('app_product', $app_product )->with('app_post', $app_post )->with('app_order', $app_order )->with('app_customer', $app_customer )->with('category',$category)->with('move',$move)->with('complete',$complete)->with('new',$new)->with('process',$process)->with('destroy',$destroy)->with('app_admin',$app_admin)->with('app_cus',$app_cus)->with('tong',$tong)->with('tongo',$tongo)->with('seles',$seles);
 
     });
 

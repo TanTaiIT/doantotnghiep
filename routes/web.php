@@ -173,9 +173,10 @@ Route::post('themcat','CategoryController@themcat')->name('themcat')->middleware
 Route::get('edit_cat/{id}','CategoryController@edit')->name('cat_edit')->middleware('roles');
 Route::post('update/{id}','CategoryController@update')->name('cate_update')->middleware('roles');
 Route::get('delete/{id}','CategoryController@delete')->name('delete_cate')->middleware('roles');
-
 Route::post('/export-csv','CategoryController@export_csv')->middleware('check');
 Route::post('/import-csv','CategoryController@import_csv')->middleware('check');
+Route::get('/category_del_view','CategoryController@del_view')->name('del_view');
+Route::get('/category_recover/{category_id}','CategoryController@category_recover');
 });
 ///// USER////////
 Route::get('users','Admin\UserController@index')->name('user')->middleware('roles');
@@ -185,6 +186,8 @@ Route::post('store-users','Admin\UserController@store_users')->middleware('check
 Route::post('assign-roles','Admin\UserController@assign_roles')->middleware('check');
 Route::get('impersonate/{admin_id}','Admin\UserController@impersonate')->middleware('check');
 Route::get('impersonate-destroy','Admin\UserController@impersonate_destroy');
+Route::get('user_del_view','Admin\UserController@user_del_view')->name('user_del_view');
+Route::get('/recover_user/{user_id}','Admin\UserController@user_recover')->name('user_recover');
 
 
 ////////////ORDER////////////
@@ -244,6 +247,8 @@ Route::get('/delete-post/{post_id}','Admin\PostController@delete_post')->middlew
 Route::get('/edit-post/{post_id}','Admin\PostController@edit_post')->middleware('check');
 Route::post('/save-post','Admin\PostController@save_post')->middleware('check');
 Route::post('/update-post/{post_id}','Admin\PostController@update_post')->middleware('check');
+Route::get('/post_del_view','Admin\PostController@del_view')->name('del_view');
+Route::get('/recover_post/{post_id}','Admin\PostController@post_recover')->name('post_recover');
 
 
 //////////////SLIDESHOW///////////////
@@ -268,6 +273,8 @@ Route::get('/edit-category-post/{category_post_id}','Admin\CategoryPost@edit_cat
 Route::post('/save-category-post','Admin\CategoryPost@save_category_post')->middleware('check');
 Route::post('/update-category-post/{cate_id}','Admin\CategoryPost@update_category_post')->middleware('check');
 Route::get('/delete-category-post/{cate_id}','Admin\CategoryPost@delete_category_post')->middleware('check');
+Route::get('/delete_catepost_view','Admin\CategoryPost@cate_post_delview');
+Route::get('/recover_cate_postview/{cate_id}','Admin\CategoryPost@recover');
 
 
 ///////////////QUANG CAO//////////////////

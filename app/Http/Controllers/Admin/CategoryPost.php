@@ -55,7 +55,7 @@ class CategoryPost extends Controller
     public function all_category_post(){
        
 
-        $category_post = CatePost::orderBy('cate_post_id','DESC')->paginate(5);
+        $category_post = CatePost::orderBy('cate_post_id','DESC')->where('cate_post_status',1)->paginate(5);
 
         return view('manager.category_post.index')->with(compact('category_post'));
 
@@ -96,18 +96,30 @@ class CategoryPost extends Controller
         Session::flash('message','Cập nhật danh mục bài viết thành công');
         return redirect('/all-category-post');
     }
+    public function cate_post_delview(){
+        $cate=CatePost::where('cate_post_status',0)->orderby('cate_post_id','desc')->paginate(10);
+        return view('manager.category_post.cate_del_post_view',compact('cate'));
+    }
+
+    public function recover($cate_id){
+        $cate=CatePost::where('cate_post_id',$cate_id)->update(['cate_post_status'=>1]);
+        return redirect()->back()->with('message','phục hồi thành công');
+    }
+
     public function delete_category_post($cate_id){
         $category_post = CatePost::find($cate_id);
-        $post=Post::where('cate_post_id',$cate_id)->get();
-        $dem=count($post);
-        if($dem==0){
-            $category_post->delete();
-            Session::flash('message','Xóa danh mục bài viết thành công');
-            return redirect()->back();
-        }
-        else{
-            return redirect()->back()->with('message','không thể xóa danh mục này');
-        }
+        $category_post->update(['cate_post_status'=>0]);
+        return redirect()->back()->with('message','xóa thành công');
+        // $post=Post::where('cate_post_id',$cate_id)->get();
+        // $dem=count($post);
+        // if($dem==0){
+        //     $category_post->delete();
+        //     Session::flash('message','Xóa danh mục bài viết thành công');
+        //     return redirect()->back();
+        // }
+        // else{
+        //     return redirect()->back()->with('message','không thể xóa danh mục này');
+        // }
         
 
     }

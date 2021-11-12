@@ -15,8 +15,8 @@
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Settings 1</a>
-                            <a class="dropdown-item" href="#">Settings 2</a>
+                            <a class="dropdown-item" href="{{URL::to('/category/category_del_view')}}">Phục hồi</a>
+                            
                           </div>
                       </li>
                       <li><a class="close-link"><i class="fa fa-close"></i></a>

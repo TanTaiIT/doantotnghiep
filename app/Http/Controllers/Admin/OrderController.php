@@ -110,7 +110,6 @@ class OrderController extends Controller
               STT
             </th>
             <th>Tên sản phẩm</th>
-            <th>Số lượng sp trong kho</th>
             <th>Mã giảm giá</th>
             <th>Size</th>
             <th>Phí ship hàng</th>
@@ -139,8 +138,7 @@ class OrderController extends Controller
           $output['detail'].='<tr>
            
             <td><i>'.$i.'</i></td>
-            <td>'.$details->product_name.'</td>
-            <td>'.$details->product->soluong.'</td>';
+            <td>'.$details->product_name.'</td>';
             if($details->product_coupon!='no'){
                  $output['detail'].='<td>'.$details->product_coupon.'</td>';
             }else{
@@ -228,10 +226,10 @@ class OrderController extends Controller
 		$meta_desc = "Lịch sữ mua hàng";
         // $meta_keywords = $value->product_slug;
         $meta_title = "Lịch sử mua hàng";
-        $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
+        $cate_post1=CatePost::where('cate_post_status',1)->get();
         $url_canonical = $request->url();
         $share_images = url('images/'.$request->product_image);
-        $cate=category::all();
+        $cate=category::orderby('category_id','desc')->where('category_status',1)->get();
         $chinh=chinhsach::limit(3)->get();
         $com='';
 		// $meta_title="giới thiệu";
@@ -253,10 +251,10 @@ class OrderController extends Controller
 		$meta_desc = "Lịch sử mua hàng";
         // $meta_keywords = $value->product_slug;
         $meta_title = "Chi tiết lịch sử mua hàng";
-        $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
+        $cate_post1=CatePost::orderBy('cate_post_id','DESC')->where('cate_post_status',1)->get();
         $url_canonical = $request->url();
         $share_images = url('images/'.$request->product_image);
-        $cate=category::all();
+        $cate=category::orderby('category_id','desc')->where('category_status',1)->get();
         $chinh=chinhsach::limit(3)->get();
         $com='';
 		// $meta_title="giới thiệu";
@@ -318,6 +316,9 @@ class OrderController extends Controller
 		  }
 		  if($data=="move"){
 		  	$order=Order::where('order_status',4)->orderby('created_at','DESC')->paginate(10);
+		  }
+		  if($data=="complete"){
+		  	$order=Order::where('order_status',5)->orderby('created_at','DESC')->paginate(10);
 		  }
 		  // $order=Order::orderby('created_at','DESC')->get();
 		  

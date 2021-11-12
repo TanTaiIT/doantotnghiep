@@ -15,9 +15,9 @@ class ContactController extends Controller
 {
     public function lien_he(Request $request){
           //category post
-        $cate_post1 = CatePost::orderBy('cate_post_id','DESC')->get();
+        $cate_post1=CatePost::where('cate_post_status',1)->get();
         $com='';
-        $cate=category::orderby('category_id','desc')->get();
+        $cate=category::orderby('category_id','desc')->where('category_status',1)->get();
 
         //slide
         $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();

@@ -23,6 +23,14 @@ class PostController extends Controller
         Post::where('post_id',$post_id)->update(['post_status'=>1]);
         return redirect()->back()->with('message','kích hoạt bài viết thành công');
     }
+    public function del_view(){
+        $post1=Post::where('post_status',0)->orderby('post_id','desc')->paginate(10);
+        return view('manager.post.post_del_view',compact('post1'));
+    }
+    public function post_recover($post_id){
+        $post=Post::where('post_id',$post_id)->update(['post_status'=>1]);
+        return redirect()->back()->with('message','bài viết đã được phục hồi');
+    }
     public function add_post(){
         // $this->AuthLogin();
         $cate_post = CatePost::orderBy('cate_post_id','DESC')->get(); 
@@ -93,20 +101,21 @@ class PostController extends Controller
 
     public function all_post(){
         // $all_post=DB::table('tbl_post')->join('tbl_category_post','tbl_category_post.cate_post_id','=','tbl_post.cate_post_id')->paginate(10);
-        $all_post=Post::with('cate_post')->Paginate(10);
+        $all_post=Post::with('cate_post')->where('post_status',1)->Paginate(10);
         return view('manager.post.index')->with(compact('all_post',$all_post));
 
     }
     public function delete_post($post_id){
         // $this->AuthLogin();
         $post = Post::find($post_id);
-        $post_image = $post->post_image;
+        $post->update(['post_status'=>0]);
+        // $post_image = $post->post_image;
 
-        if($post_image){
-            $path ='uploads/post/'.$post_image;
-            unlink($path);
-        }
-        $post->delete();
+        // if($post_image){
+        //     $path ='uploads/post/'.$post_image;
+        //     unlink($path);
+        // }
+        // $post->delete();
         
        
         Session::flash('message','Xóa bài viết thành công');
@@ -176,15 +185,16 @@ class PostController extends Controller
         //category post
         $cate=category::all();
         $com='';
-        $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
-        $category_post = CatePost::orderBy('cate_post_id','DESC')->get();
+        $cate_post1=CatePost::orderBy('cate_post_id','DESC')->where('cate_post_status',1)->get();
+        $category_post = CatePost::orderBy('cate_post_id','DESC')->where('cate_post_status',1)->get();
         $chinh=chinhsach::limit(3)->get();
         //slide
-        $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
+        $slider = Slider::orderBy('slider_id','DESC')->where('slider_status',1)->take(4)->get();
         $catepost = CatePost::where('cate_post_slug',$id)->take(1)->get();
 
             foreach($catepost as $key => $cate2){
             //seo 
+            
             $meta_desc = $cate2->cate_post_desc; 
             $meta_keywords = $cate2->cate_post_slug;
             $meta_title = $cate2->cate_post_name;
@@ -196,7 +206,8 @@ class PostController extends Controller
         }
       
         
-        $post_cate = Post::with('cate_post')->where('post_status',0)->where('cate_post_id',$cate_id)->paginate(5);
+        $post_cate = Post::where('post_status',1)->where('cate_post_id',$cate_id)->paginate(5);
+        // $post_cate = DB::table('tbl_category_post')->join('tbl_post','tbl_post.cate_post_id','=','tbl_category_post.cate_post_id')->where('tbl_post.post_status',1)->where('tbl_category_post.cate_post_status',1)->paginate(10);
        
         return view('client.danhmucbaiviet',compact('meta_desc','meta_keywords','meta_title','url_canonical','slider','post_cate','category_post','share_image','com','cate','cate_post1','chinh','cate_id','post_name'));
     }
@@ -211,14 +222,15 @@ class PostController extends Controller
 
         //category post
         $com='';
-        $cate_post = CatePost::orderBy('cate_post_id','DESC')->get();
+         $cate_post1=CatePost::orderBy('cate_post_id','DESC')->where('cate_post_status',1)->get();
+        $cate_post = CatePost::orderBy('cate_post_id','DESC')->where('cate_post_status',1)->get();
         //slide
         $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
         $chinh=chinhsach::limit(3)->get();
 
         $cate =category::orderBy('category_id','DESC')->get(); 
         // $post_by_id = Post::with('cate_post')->where('post_status',0)->where('post_slug',$post_slug)->get();
-        $post_by_id=DB::table('tbl_post')->join('tbl_category_post','tbl_post.cate_post_id','=','tbl_category_post.cate_post_id')->where('post_slug',$post_slug)->where('post_status',0)->get();
+        $post_by_id=DB::table('tbl_post')->join('tbl_category_post','tbl_post.cate_post_id','=','tbl_category_post.cate_post_id')->where('post_slug',$post_slug)->where('post_status',1)->get();
         foreach($post_by_id as $key => $p){
             //seo 
             $meta_desc = $p->post_meta_desc; 
@@ -243,8 +255,8 @@ class PostController extends Controller
         // $rl=Post::with('cate_post')->where('cate_post_id',$cate_post_id)->where('post_slug',$post_slug)->where('post_status',0)->get();
        
         // dd($rl);
-        $related = Post::with('cate_post')->where('post_status',0)->where('cate_post_id',$cate_post_id)->whereNotIn('post_slug',[$post_slug])->take(5)->get();
+        $related = Post::with('cate_post')->where('post_status',1)->where('cate_post_id',$cate_post_id)->whereNotIn('post_slug',[$post_slug])->take(5)->get();
        
-        return view('client.baiviet',compact('cate','meta_desc','meta_keywords','meta_title','url_canonical','slider','com','chinh','cate_id','name','post_by_id','related','cate_post','cate_post_id','slug'));
+        return view('client.baiviet',compact('cate','meta_desc','meta_keywords','meta_title','url_canonical','slider','com','chinh','cate_id','name','post_by_id','related','cate_post','cate_post1','cate_post_id','slug'));
     }
 }

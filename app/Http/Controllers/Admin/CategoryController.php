@@ -15,15 +15,17 @@ class CategoryController extends Controller
     public function trangchu(){
         return view("admin.trangchu");
     }
-	
-    // public function index(){
-		
-    // 	$cate=category::all();
-    // 	return view('admin/loaisp/index',compact('cate'));
-    // }
+	public function del_view(){
+        $cate=category::where('category_status',0)->orderby('category_id','desc')->paginate(10);
+        return view('manager.cate_product.cate_del_view',compact('cate'));
+    }
+    public function category_recover($category_id){
+        $cate=category::where('category_id',$category_id)->update(['category_status'=>1]);
+        return redirect()->back()->with('message','phục hồi thành công');
+    }
     public function index(){
         
-        $cate=category::paginate(10);
+        $cate=category::where('category_status',1)->paginate(10);
         return view('manager/cate_product/index',compact('cate'));
     }
     // public function addcate(){
@@ -78,19 +80,21 @@ class CategoryController extends Controller
     }
     public function delete($id){
     	$cate=category::FindOrFail($id);
-        $pro=Product::where('category_id',$id)->get();
-        $dem=count($pro);
-        if($dem == 0){
-            if($cate->delete()){
-            Session::flash("message","Xóa loại sản phẩm thành công");
-        }
-        else{
-            Session::flash("message","Xóa loại sản phẩm thất bại");
-        }
-        return redirect()->route('cate_index');
-    }else{
-        return redirect()->route('cate_index')->with('message','không thể xóa loại sản phẩm này');
-    }
+        $cate->update(['category_status'=>0]);
+        return redirect()->back()->with('message','xóa danh mục thành công');
+        // $pro=Product::where('category_id',$id)->get();
+        // $dem=count($pro);
+        // if($dem == 0){
+        //     if($cate->delete()){
+        //     Session::flash("message","Xóa loại sản phẩm thành công");
+        // }
+        // else{
+        //     Session::flash("message","Xóa loại sản phẩm thất bại");
+        // }
+        // return redirect()->route('cate_index');
+    // }else{
+    //     return redirect()->route('cate_index')->with('message','không thể xóa loại sản phẩm này');
+    // }
     	
     }
 

@@ -620,11 +620,11 @@ class  CheckoutController extends Controller
         $url_canonical = $request->url();
         $meta_desc = "thanh toán";
         // $meta_keywords = $value->product_slug;
-        $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
+        $cate_post1=CatePost::where('cate_post_status',1)->get();
         $meta_title ="thanh toán";
         $chinh=chinhsach::limit(3)->get();
         $share_images = url('images/'.$request->product_image);   
-         $cate=category::all();
+         $cate=category::orderby('category_id','desc')->where('category_status',1)->get();
          $com='';
 
          $id=Session::get('customer_id');
@@ -640,12 +640,12 @@ class  CheckoutController extends Controller
         
         $url_canonical = $request->url();
         $meta_desc = "giỏ hàng";
-        $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
+        $cate_post1=CatePost::where('cate_post_status',1)->get();
         // $meta_keywords = $value->product_slug;
         $chinh=chinhsach::limit(3)->get();
         $meta_title ="giỏ hàng";
         $share_images = url('images/'.$request->product_image);  
-        $cate=category::all();
+        $cate=category::orderby('category_id','desc')->where('category_status',1)->get();
         $com='';
         return view('client/cart',compact('cate','com','url_canonical','meta_desc','meta_title','share_images','cate_post1','chinh'));
        

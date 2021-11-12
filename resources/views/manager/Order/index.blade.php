@@ -33,6 +33,7 @@
                       <a href="{{request()->fullUrlWithQuery(['order' => 'done'])}}">Đơn hàng đã xử lý</a>
                       <a href="{{request()->fullUrlWithQuery(['order' => 'cancel'])}}">Đơn hàng đã hủy</a>
                       <a href="{{request()->fullUrlWithQuery(['order' => 'move'])}}">Đơn hàng đang được vận chuyển</a>
+                      <a href="{{request()->fullUrlWithQuery(['order' => 'complete'])}}">Đơn hàng đã giao</a>
                       </div>
                     </div>
                   <div class="x_content">

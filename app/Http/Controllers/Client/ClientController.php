@@ -26,49 +26,6 @@ class ClientController extends Controller
     public function error_page(){
         return view('errors.404');
     }
-
-    // public function filter(Request $request){
-
-    //     $com='';
-    //     $meta_desc = $request->product_desc;
-        
-    //     $url_canonical = $request->url();
-    //     $share_images = url('images/'.$request->product_image);
-    //     $slide=slider::limit(4)->get();  
-    //     $size=attribute::where('name','size')->get();
-    //     $color=attribute::where('name','color')->get();
-    //     $hot=attribute::where('name','hot')->get();
-    //     $url_canonical = $request->url(); 
-    //     $chinh=chinhsach::limit(3)->get();
-    //     $cate=category::where('category_status',1)->get();
-    //     $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
-    //     $bestsell=product::orderBy('product_sold','DESC')->limit(3)->get();
-
-    //      $data=$request->all();
-    //      $cate1=category::where('category_id',$data['id'])->take(1)->get();
-    //     foreach($cate1 as $key => $cate2){
-    //         //seo 
-    //         $meta_desc = $cate2->category_desc; 
-    //         // $meta_keywords = $cate2->cate_post_slug;
-    //         $meta_title=$cate2->category_name;
-    //         // $cate_id = $cate2->cate_post_id;
-    //         $url_canonical = $request->url();
-    //         // $share_image = url('public/frontend/images/share_news.png');
-    //     }
-
-
-
-        
-    //     $product=product::where('category_id',$data['id'])->get();
-    //     switch($data['price']){
-    //         case '1': $product->where('product_price','<',10000)->Paginate(6);
-    //         break;
-    //     }
-    //     $product_list=$product->paginate(6);
-    //     return view('client.list_pro',compact('product_list','cate','cate_post1','url_canonical','com','size','color','hot','slide','share_images','meta_title','meta_desc','bestsell','chinh'));
-        
-
-    // }
     public function fetch_data(Request $req){
         $product=product::whereNotIn('category_id',[10])->where('product_status',1)->orderBy('product_id','desc')->paginate(6);
         return view('client.paginate_index',compact('product'))->render();
@@ -263,20 +220,23 @@ class ClientController extends Controller
         echo $output;
     }
     public function index(Request $request){
-        $cate_post1=CatePost::all();
+        $cate_post1=CatePost::where('cate_post_status',1)->get();
         $url_canonical = $request->url();
         $slide=slider::orderBy('slider_id','desc')->where('slider_status',0)->get();  
         $size=attribute::where('name','size')->get();
         $color=attribute::where('name','color')->get();
         $hot=attribute::where('name','hot')->get();
-        $cate=category::all();
+        $cate=category::where('category_status',1)->get();
         $chinh=chinhsach::limit(3)->get();
         $quangcao=quangcao::where('quangcao_status',0)->orderBy('quangcao_id','desc')->get();
         $bestsell=product::orderBy('product_sold','DESC')->paginate(3);
-        $sp=product::orderBy('product_sold','DESC')->limit(6)->get();
-        $toping=product::where('category_id',10)->where('product_status',1)->get();
+        // $sp=product::orderBy('product_sold','DESC')->limit(6)->get();
+        $sp=DB::table('tbl_product')->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')->where('tbl_category_product.category_status','=',1)->orderBy('tbl_product.product_sold','desc')->limit(6)->get();
+        // $toping=product::where('category_id',10)->where('product_status',1)->get();
         $com='index';
-        $product=product::whereNotIn('category_id',[10])->where('product_status',1)->orderBy('product_id','desc')->paginate(6);
+        $toping=DB::table('tbl_product')->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')->where('tbl_category_product.category_status','=',1)->where('tbl_category_product.category_id',10)->get();
+        // $product=product::with('category')->whereNotIn('category_id',[10])->where('product_status',1)->orderBy('product_id','desc')->paginate(6);
+        $product=DB::table('tbl_product')->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')->where('tbl_category_product.category_status','=',1)->paginate(6);
         // $product=product::where([
         //     'product_status'=>1,
 
@@ -297,7 +257,7 @@ class ClientController extends Controller
     public function profile(Request $request){
         $com='';
         $cate=category::orderby('category_id','desc')->get();
-        $cate_post1=CatePost::orderBy('cate_post_id','desc')->get();
+        $cate_post1=CatePost::where('cate_post_status',1)->get();
         $cus_id=Session::get('customer_id');
         $cus=custommer::where('customer_id',$cus_id)->get();
         $chinh=chinhsach::limit(3)->get();
@@ -337,8 +297,8 @@ class ClientController extends Controller
     public function chinhsach(Request $request,$id){
         $com='';
         $chinh1=chinhsach::FindOrFail($id);
-        $cate=category::orderby('category_id','desc')->get();
-        $cate_post1=CatePost::orderBy('cate_post_id','desc')->get();
+        $cate=category::orderby('category_id','desc')->where('category_status',1)->get();
+        $cate_post1=CatePost::where('cate_post_status',1)->get();
         $chinh=chinhsach::limit(3)->get();
             //seo 
             $meta_desc =""; 
@@ -352,8 +312,8 @@ class ClientController extends Controller
     public function gioithieu(Request $request){
         $com='';
         $gioithieu=intro::all();
-        $cate=category::orderby('category_id','desc')->get();
-        $cate_post1=CatePost::orderBy('cate_post_id','desc')->get();
+        $cate=category::orderby('category_id','desc')->where('category_status',1)->get();
+        $cate_post1=CatePost::where('cate_post_status',1)->get();
         $meta_title="giới thiệu";
         $meta_desc="về chúng tôi";
         $chinh=chinhsach::limit(3)->get();
@@ -363,9 +323,9 @@ class ClientController extends Controller
     public function detail(Request $request,$id){
         $size=product_attr::with('attribute')->where('product_id',$id)->get();
         $hot=attribute::where('name','hot')->get();
-        $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
+        $cate_post1=CatePost::where('cate_post_status',1)->get();
         $img_detail=pro_img::where('product_id',$id)->limit(2)->get();
-        $cate=category::all();
+        $cate=category::orderby('category_id','desc')->where('category_status',1)->get();
         $com='detail';
         $rating=rating::where('product_id','=',$id)->avg('rating');
         $rating=round($rating);
@@ -400,13 +360,13 @@ class ClientController extends Controller
         $size=attribute::where('name','size')->get();
         $hot=attribute::where('name','hot')->get();
         $url_canonical = $request->url();  
-        $cate=category::all();
+        $cate=category::orderby('category_id','desc')->where('category_status',1)->get();
         $key=$request->keyword;
         $chinh=chinhsach::limit(3)->get();
         $bestsell=product::orderBy('product_sold','DESC')->limit(3)->get();
-        $cate_post1=CatePost::orderBy('cate_post_id','desc')->get();
+        $cate_post1=CatePost::where('cate_post_status',1)->get();
         $com='';
-        $search=product::where('product_name','like','%'.$key.'%')->get();
+        $search=product::where('product_name','like','%'.$key.'%')->where('product_status',1)->get();
         foreach($search as $s){
         $meta_desc = $s->product_desc;
         $meta_title = $s->product_name;
@@ -432,11 +392,11 @@ class ClientController extends Controller
         $meta_desc = "Cảm ơn";
         // $meta_keywords = $value->product_slug;
         $meta_title = "Cảm ơn";
-        $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
+        $cate_post1=CatePost::where('cate_post_status',1)->get();
         $url_canonical = $request->url();
         $share_images = url('images/'.$request->product_image);
         $chinh=chinhsach::limit(3)->get();
-        $cate=category::all();
+        $cate=category::orderby('category_id','desc')->where('category_status',1)->get();
         $com='';
         return view('Client/thankyou',compact('cate','com','url_canonical','meta_desc','meta_title','share_images','cate_post1','chinh'));
     } 
@@ -601,7 +561,7 @@ class ClientController extends Controller
         $url_canonical = $request->url(); 
         $chinh=chinhsach::limit(3)->get();
         $cate=category::where('category_status',1)->get();
-        $cate_post1=CatePost::orderBy('cate_post_id','DESC')->get();
+        $cate_post1=CatePost::where('cate_post_status',1)->get();
         $bestsell=product::orderBy('product_sold','DESC')->limit(3)->get();
         $sp=product::where('category_id',$id)->get();
 
@@ -619,15 +579,15 @@ class ClientController extends Controller
         if(isset($_GET['sort_by'])){
             $sortby=$_GET['sort_by'];
             if($sortby=='cunhat'){
-                $product_list=product::where('category_id',$id)->orderBy('product_id',"ASC")->paginate(6)->appends(request()->query());
+                $product_list=product::where('category_id',$id)->orderBy('product_id',"ASC")->where('product_status',1)->paginate(6)->appends(request()->query());
             }elseif($sortby=="moinhat"){
-                $product_list=product::where('category_id',$id)->orderBy('product_id',"DESC")->paginate(6)->appends(request()->query());
+                $product_list=product::where('category_id',$id)->orderBy('product_id',"DESC")->where('product_status',1)->paginate(6)->appends(request()->query());
             }elseif($sortby=="giamdan"){
                 // $pro=Product::where('category',$id)->get();
 
-                $product_list=product::where('category_id',$id)->orderBy('product_price',"DESC")->paginate(6)->appends(request()->query());
+                $product_list=product::where('category_id',$id)->orderBy('product_price',"DESC")->where('product_status',1)->paginate(6)->appends(request()->query());
             }elseif($sortby=="tangdan"){
-                $product_list=product::where('category_id',$id)->orderBy('product_price',"ASC")->paginate(6)->appends(request()->query());
+                $product_list=product::where('category_id',$id)->orderBy('product_price',"ASC")->where('product_status',1)->paginate(6)->appends(request()->query());
             }
         }
 
@@ -636,7 +596,7 @@ class ClientController extends Controller
             $max_price=$_GET['end_price'];
             $product_list=product::where('category_id',$id)->whereBetween('product_price',[$min_price,$max_price])->orderBy('product_price',"ASC")->paginate(6);
         }else{
-            $product_list=product::where('category_id',$id)->orderBy('product_id',"DESC")->paginate(6);
+            $product_list=product::where('category_id',$id)->orderBy('product_id',"DESC")->where('product_status',1)->paginate(6);
         }
     
       

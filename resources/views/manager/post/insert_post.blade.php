@@ -98,8 +98,8 @@
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Trạng thái</label>
 											<div class="col-md-6 col-sm-6 ">
 												<select name="post_status" id="" class="form-control" >
-													<option value="0">Hiển thị</option>
-                                            		<option value="1">Ẩn</option>
+													<option value="1">Hiển thị</option>
+                                            		<option value="0">Ẩn</option>
 
 												</select>
 											</div>
