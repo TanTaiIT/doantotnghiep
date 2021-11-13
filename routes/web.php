@@ -115,6 +115,7 @@ Route::get('/cus_recover/{cus_id}','Admin\CustommerController@cus_recover')->nam
 Route::get('send-code/{cus_id}','Admin\CustommerController@send_code')->name('sendcode');
 Route::get('send-code-coupon/{condition}/{number}/{code}/{time}/{id}','Admin\MailController@send_code_coupon');
 Route::post('/filter','Client\ClientController@filter')->name('filter');
+Route::get('view-list-coupon','Admin\CustommerController@view_list');
 
 
 
@@ -252,6 +253,8 @@ Route::get('/delete-slide/{slide_id}','Admin\SliderController@delete_slide')->mi
 Route::post('/insert-slider','Admin\SliderController@insert_slider')->middleware('check');
 Route::get('/unactive-slide/{slide_id}','Admin\SliderController@unactive_slide')->middleware('check');
 Route::get('/active-slide/{slide_id}','Admin\SliderController@active_slide')->middleware('check');
+Route::get('/edit-slide/{slide_id}','Admin\SliderController@edit_slide')->middleware('check');
+Route::post('/update-slider/{slide_id}','Admin\SliderController@update_slide')->middleware('check');
 
 ////////////////INFOMATION////////////////////
 Route::get('/information','Client\ContactController@information' )->middleware('check');

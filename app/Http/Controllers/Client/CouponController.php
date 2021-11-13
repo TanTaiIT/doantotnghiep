@@ -33,7 +33,7 @@ class CouponController extends Controller
             'coupon_name'=>'required',
             'coupon_number'=>'required|numeric|gt:0',
             'coupon_time'=>'numeric|required|gt:0',
-            'coupon_code'=>'required',
+            'coupon_code'=>'required|unique:tbl_coupon',
             'coupon_date_start'=>'date|required',
             'coupon_date_end'=>'date|required'
 
@@ -45,7 +45,8 @@ class CouponController extends Controller
             'coupon_date_end.date'=>'+ bạn phải nhập đúng định dạng ngày',
             'coupon_date_start.date'=>'+ Bạn phải nhập đúng định dạng ngày',
             'coupon_number.gt'=>'+Số tiền giảm hoặc phần trăm giảm phải lớn hơn 0',
-            'coupon_time.gt'=>'+Số lượng mã phải lớn hơn 0'
+            'coupon_time.gt'=>'+Số lượng mã phải lớn hơn 0',
+            'coupon_code.unique'=>'+Mã không được trùng'
             
         ]);
         $data=$request->all();

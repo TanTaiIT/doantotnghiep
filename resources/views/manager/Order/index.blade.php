@@ -91,7 +91,7 @@
                           </td>
                           <td>
                           <?php
-                          if($d->order_status==1 || $d->order_status==2 || $d->order_status==4 || $d->order_status==5){?>
+                          if($d->order_status==1 || $d->order_status==2 || $d->order_status==4 || $d->order_status==5 || $d->order_status==3){?>
                           <button type="button" data-toggle="modal" class="chitiet" data-target="#exampleModalLong" data-id="{{$d->order_code}}"><i class="fa fa-eye text-success"></i></button>
                           <?php }
                           ?>

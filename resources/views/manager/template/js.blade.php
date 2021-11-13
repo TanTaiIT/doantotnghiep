@@ -120,6 +120,26 @@
      
         
     </script>
+   
+
+    <script>
+        $(document).ready(function(){
+            $('.chitietma').on('click',function(){
+                var cus_id=$(this).data('cus_id');
+                $.ajax({
+                    url:"view-list-coupon",
+                    method:"GET",
+                    data:{cus_id:cus_id},
+                    success:function(data){
+                        $('.list_cou').html(data);
+                    }
+                })
+            })
+            $('.khuyenmai').on('click',function(){
+                alert('thanh cong');
+            })
+        })
+    </script>
 <script>
         $('.nhan').on('click',function(){
             var value=$('input:checkbox:checked').map(function(){

@@ -12,11 +12,11 @@
     <div class ="container" style="background: #222; border-radius: 12px; padding :15px;">
         <div class="col-md-12">
               <p style="text-align:center; color:#FFF">Đây là email tự động khách hàng không trả lời email này.</p>
-              <div class="row" style="background: #cccc00; padding: 15px;">
+              <div class="row" style="background: cadetblue; padding: 15px;">
 
                   <div class="col-md-6" style="text-align: center; color:#FFF; font-weight: bold; font-size: 30px;">
-                     <h4 style="magrin :0">CỦA HÀNG TRÀ SỮA MILK TEAK</h4>
-                     <h4 style="magrin :0">CHUYÊN BÁN CÁC LOẠI TRÀ SỮA THƠN NGON CHẤT LƯỢNG CAO</h4>
+                     <h4 style="magrin :0">CỬA HÀNG TRÀ SỮA MILK TEAK</h4>
+                     <h4 style="magrin :0">CHUYÊN BÁN CÁC LOẠI TRÀ SỮA THƠM NGON CHẤT LƯỢNG CAO</h4>
                   </div>
 
                   <div class="col-md-6 logo" style="color:#FFF;">
@@ -27,7 +27,7 @@
                     <p style="color:#fff; font-size: 17px; ">Bạn hoặc ai đó vừa đăng ký dịch vụ  tại shop  với thông tin như sao:</p>
                     <h4 style="color:#000; text-transform: uppercase;">Thông tin đơn hàng</h4>
                     <p>Mã đơn hàng: <strong style="text-transform:uppercase; color:#FFF">{{$code['order_code']}}</strong></p>
-                    <p>Mã khuến mãi áp dụng: <strong style="text-transform:uppercase; color:#fff">{{$code['coupon_code']}}</strong></p>
+                    <p>Mã khuyến mãi áp dụng: <strong style="text-transform:uppercase; color:#fff">{{$code['coupon_code']}}</strong></p>
                     <p>Phí giao hàng: <strong style="text-transform:uppercase; color:#fff">{{number_format($shipping_array['free'],0,',','.')}}VND</strong></p>
                     <p>Dịch vụ: <strong style="text-transform:uppercase; color:#fff">Đặt hàng trực tuyến</strong></p>
 

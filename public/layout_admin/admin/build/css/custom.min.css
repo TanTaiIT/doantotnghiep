@@ -182,6 +182,14 @@ p.title_thongke {
     margin-top: 50px;
     font-weight: 500;
 }
+.chitietma{
+	padding: 4px 15px;
+    border: 2px dashed orangered;
+    background: none;
+    color: red;
+    font-size: 34px;
+    transform: translateX(51px) translateY(-3px);
+}
 
 .nav-md .container.body .right_col {
     min-height: 1523px !important;

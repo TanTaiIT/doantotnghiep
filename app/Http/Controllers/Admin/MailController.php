@@ -43,7 +43,7 @@ class MailController extends Controller
             $message->from($data['customer_email'],$title_mail);//send from this mail
     });
   
-         return redirect()->back()->with('message','Gửi mã khuyến mãi khách thường thành công');
+         return redirect()->back()->with('message','Gửi mã khuyến mãi thành công');
      }else{
         return redirect()->back()->with('message','Mã giảm giá chưa kích hoạt');
      }

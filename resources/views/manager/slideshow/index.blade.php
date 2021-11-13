@@ -71,6 +71,9 @@
                           </span></td>
                          
                           <td>
+                            <a onclick="return confirm('Bạn có chắc là muốn xóa slide này ko?')" href="{{URL::to('/edit-slide/'.$s->slider_id)}}" class="active styling-edit" ui-toggle-class="">
+                              <i class="fa fa-pencil text-default text"></i>
+                            </a>
                           	  <a onclick="return confirm('Bạn có chắc là muốn xóa slide này ko?')" href="{{URL::to('/delete-slide/'.$s->slider_id)}}" class="active styling-edit" ui-toggle-class="">
                               <i class="fa fa-times text-danger text"></i>
                             </a>

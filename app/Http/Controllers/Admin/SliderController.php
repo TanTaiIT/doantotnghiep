@@ -85,4 +85,43 @@ class SliderController extends Controller
         return redirect()->back();
 
     }
+    public function edit_slide(Request $req,$slide_id){
+        $slide=Slider::where('slider_id',$slide_id)->first();
+        return view('manager.slideshow.edit_slide',compact('slide'));
+    }
+    public function update_slide(Request $request,$slide_id){
+        
+        $data = $request->all();
+        $this->validate($request, [
+            'slider_name'=>'required',
+            'slider_desc'=>'required',
+            
+        ],[
+            'ten.required'=>'+Ban chưa nhập tên ',
+            'slider_desc.required'=>'+Ban chưa nhập mô tả ',
+            
+            
+        ]);
+        $get_image = request('slider_image');
+      
+        if($get_image){
+            $get_name_image = $get_image->getClientOriginalName();
+            $name_image = current(explode('.',$get_name_image));
+            $new_image =  $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
+            $get_image->move('uploads/slider', $new_image);
+
+            $slider=Slider::where('slider_id',$slide_id)->first();
+            $slider->slider_name = $data['slider_name'];
+            $slider->slider_image = $new_image;
+            $slider->slider_status = $data['slider_status'];
+            $slider->slider_desc = $data['slider_desc'];
+            $slider->save();
+            Session::flash('message','Sửa slider thành công');
+            return redirect()->route('manage_sli');
+        }else{
+            Session::flash('message','Làm ơn thêm hình ảnh');
+            return redirect()->route('manage_sli');
+        }
+
+    }
 }

@@ -484,7 +484,7 @@ class ClientController extends Controller
         elseif(isset($_GET['start_price']) && $_GET['end_price']){
             $min_price=$_GET['start_price'];
             $max_price=$_GET['end_price'];
-            $product_list=product::where('category_id',$id)->whereBetween('product_price',[$min_price,$max_price])->orderBy('product_price',"ASC")->paginate(6);
+            $product_list=product::where('category_id',$id)->whereBetween('product_price',[$min_price,$max_price])->where('product_status',1)->orderBy('product_price',"ASC")->paginate(6);
         }else{
             $product_list=product::where('category_id',$id)->orderBy('product_id',"DESC")->where('product_status',1)->paginate(6);
         }
@@ -539,6 +539,9 @@ class ClientController extends Controller
     }
 
     public function send_comment(Request $request){
+        if(!Auth::guard('khachhang')->check()){
+            return redirect()->route('cli_index')->with('error','tài khoản của bạn đang bị khóa');
+        }else{
         $product_id = $request->product_id;
         $comment_name = $request->comment_name;
         $comment_content = $request->comment_content;
@@ -549,6 +552,7 @@ class ClientController extends Controller
         $comment->comment_status = 1;
         $comment->comment_parent_comment = 0;
         $comment->save();
+    }
             
         
    

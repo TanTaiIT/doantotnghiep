@@ -214,6 +214,9 @@ class OrderController extends Controller
             }elseif($or->order_status==5){
             	$output['in']='<option id="'.$or->order_id.'" selected value="2">Đã giao</option>';
             }
+            elseif($or->order_status==3){
+            	$output['in']='<option id="'.$or->order_id.'" selected value="2">Đã hủy</option>';
+            }
           }
           $output['print']='';
           $output['print'].='<a href="print-order/'.$details->order_code.'" type="button" class="btn btn-danger">In đơn hàng</a>';
