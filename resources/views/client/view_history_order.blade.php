@@ -132,7 +132,6 @@
                 STT
               </th>
               <th>@lang('lang.product_name')</th>
-              <th>@lang('lang.kho')</th>
               <th>@lang('lang.gia')</th>
               <th>Size</th>
               <th>@lang('lang.fee_s')</th>
@@ -167,7 +166,6 @@
              
               <td><i>{{$i}}</i></td>
               <td>{{$details->product_name}}</td>
-              <td>{{$details->product->soluong}}</td>
               <td>@if($details->product_coupon!='no')
                 {{$details->product_coupon}}
                 @else 

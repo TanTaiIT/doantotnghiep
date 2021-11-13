@@ -387,8 +387,13 @@ var usd=document.getElementById("vnd_to_usd").value;
             method: 'POST',
             data:{shipping_email:shipping_email,shipping_name:shipping_name,shipping_address:shipping_address,shipping_phone:shipping_phone,shipping_address1:shipping_address1,shipping_notes:shipping_notes,_token:_token,order_fee:order_fee,order_coupon:order_coupon,shipping_method:shipping_method},
             success:function(data){
-                alert('thanh toán thành công');
-                window.location='{{url('/thankyou')}}';
+            	if(data=="Không"){
+                alert('thanh toán không thể hoàn tất');
+                window.location.reload();
+              }else{
+              	alert('thanh toán thành công');
+              	window.location='{{url('/thankyou')}}';
+              }
             }
 
         });

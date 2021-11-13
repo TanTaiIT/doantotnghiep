@@ -219,11 +219,11 @@ class  CheckoutController extends Controller
 
     }
     public function confirm_order1(Request $request){
-
         if(!Auth::guard('khachhang')->check()){
             return redirect()->back()->with('message','bạn phải đăng nhập trước khi thanh toán');
         }else{
-         $url_canonical = $request->url();  
+            if(Session::get('cart')){
+                $url_canonical = $request->url();  
          $cate=category::all();
          $com='';
          $data = $request->all();
@@ -331,9 +331,17 @@ class  CheckoutController extends Controller
          Session::forget('cart');
          Session::flash('thank','Cảm ơn bạn đã mua sản phẩm của chúng tôi, chúng tôi sẽ giao hàng sớm nhất cho bạn');
          return redirect()->route('thank');
-     }
+            }else{
+                return redirect()->back()->with("message","bạn không thể thanh toán bây giờ");
+            }
+         
+         }
     }
     public function confirm_order(Request $request){
+        if(!Auth::guard('khachhang')->check()){
+            return redirect()->back()->with('message','bạn phải đăng nhập trước khi thanh toán');
+        }else{
+        if(Session::get('cart')){
          $url_canonical = $request->url();  
          $cate=category::all();
          $com='';
@@ -439,6 +447,10 @@ class  CheckoutController extends Controller
          Session::forget('coupon');
          // Session::forget('fee');
          Session::forget('cart');
+         }else{
+                echo 'Không';
+         }
+     }
          // return view('client/thankyou');
          // Session::flash('thank','Cảm ơn bạn đã mua sản phẩm của chúng tôi, chúng tôi sẽ giao hàng sớm nhất cho bạn');
          // return redirect()->route('cli_index');
@@ -656,14 +668,10 @@ class  CheckoutController extends Controller
     $authUser = $this->findOrCreateUser($users,'google');
     if($authUser){
         $account_name = custommer::where('customer_id',$authUser->user)->first();
-        Session::put('customer_name',$account_name->customer_name);
-        Session::put('customer_id',$account_name->customer_id);
         Session::put('fee',15000);
 
     }elseif($customer_new){
         $account_name = custommer::where('customer_id',$authUser->user)->first();
-        Session::put('customer_name',$account_name->customer_name);
-        Session::put('customer_id',$account_name->customer_id);
         Session::put('fee',15000);
         
     }
