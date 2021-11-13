@@ -4689,10 +4689,10 @@ div#testimonials h4.m-title {
 }
 @keyframes notify{
     0%{
-        transform: translateX(-10px);
+        transform: translateX(-15px);
     }
     100%{
-        transform: translateX(10px);
+        transform: translateX(0px);
     }
 }
 

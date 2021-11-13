@@ -15,8 +15,7 @@
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Settings 1</a>
-                            <a class="dropdown-item" href="#">Settings 2</a>
+                           
                           </div>
                       </li>
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -71,7 +70,7 @@
                           </span></td>
                          
                           <td>
-                            <a onclick="return confirm('Bạn có chắc là muốn xóa slide này ko?')" href="{{URL::to('/edit-slide/'.$s->slider_id)}}" class="active styling-edit" ui-toggle-class="">
+                            <a  href="{{URL::to('/edit-slide/'.$s->slider_id)}}" class="active styling-edit" ui-toggle-class="">
                               <i class="fa fa-pencil text-default text"></i>
                             </a>
                           	  <a onclick="return confirm('Bạn có chắc là muốn xóa slide này ko?')" href="{{URL::to('/delete-slide/'.$s->slider_id)}}" class="active styling-edit" ui-toggle-class="">

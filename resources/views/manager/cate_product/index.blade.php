@@ -8,7 +8,7 @@
 <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Quản lý sản phẩm</h2>
+                    <h2>Quản lý sản danh mục sản phẩm</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -24,9 +24,11 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
+                  @hasrole(['admin'])
                   <div class="button">
                   	<a href="{{route('cate_add')}}" class="btn-color" type="button" >Thêm loại sản phẩm</a>
                   </div>
+                  @endhasrole
                   <div class="x_content">
                       <div class="row">
                           <div class="col-sm-12">
@@ -56,8 +58,11 @@
                           <td>{{$c->category_status}}</td>
                          
                           <td>
+                            @hasrole(['admin'])
                           	  <a href="{{route('cat_edit',$c->category_id)}}" title="sữa sản phẩm"><i class="glyphicon glyphicon-pencil"></i></a>
-                          		<a onclick="return confirm('bạn có chắc muốn xóa không?')" href="{{route('delete_cate',$c->category_id)}}" title="xóa sản phẩm"><i class="glyphicon glyphicon-trash"></i></a></td>
+                          		<a onclick="return confirm('bạn có chắc muốn xóa không?')" href="{{route('delete_cate',$c->category_id)}}" title="xóa sản phẩm"><i class="glyphicon glyphicon-trash"></i></a>
+                             @endhasrole</td>
+                         
                         </tr>
                         @endforeach
                       </tbody>

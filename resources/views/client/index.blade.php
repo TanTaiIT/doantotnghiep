@@ -37,7 +37,7 @@
 										
 										    </div></a>
 
-						 <?php
+						 <?php /*<?php
 
 						   $tong=0;
 						   if($p->pro_rating){
@@ -57,7 +57,7 @@
 										
 										@endfor
 								</li>
-							</ul>
+							</ul> */?>
 
 										</div>
 										<div class="item-info-product text-center border-top mt-4">
@@ -253,12 +253,9 @@
 												<span class="badge badge-pill badge-danger ban">-{{ROUND($gia,1)}}%</span>
 												@endif
 											<img class="pro_img" src="{!! asset('images/'.$b->product_image)!!}" alt="">
-
-										    <!--  -->
-										
 										    </div></a>
 
-						 <?php
+						 <?php /*<?php
 
 						   $tong=0;
 						   if($b->pro_rating){
@@ -278,7 +275,7 @@
 										
 										@endfor
 								</li>
-							</ul>
+							</ul> */ ?>
 
 										</div>
 										<div class="item-info-product text-center border-top mt-4">

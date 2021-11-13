@@ -566,10 +566,7 @@ class  CheckoutController extends Controller
     public function getdoimk(Request $req){
         $code = $req->code;
         $email = $req->email;
-        // $checkUser = DB::table('tbl_customers')->where([
-        //    'code' => $code,
-        //    'customer_email' => $email
-        // ])->first();
+        
         $checkUser=custommer::where(['code'=>$code,'customer_email'=>$email])->first();
         if(!$checkUser){
             return redirect('cli_index')->with('danger','Xin lổi, đường dẩn không dúng, bạn vui lòng thử lại sao');
@@ -598,7 +595,7 @@ class  CheckoutController extends Controller
         }
 
         
-        custommer::where('customer_email',$email)->update(['customer_password'=>md5($req->password)]);
+        custommer::where('customer_email',$email)->update(['password'=>md5($req->password)]);
         return redirect()->route('cli_index')->with('message','ĐỔI MẬT KHẨU THÀNH CÔNG, MỜI BẠN ĐĂNG NHẬP');
     }
 
@@ -708,40 +705,7 @@ public function login_facebook(){
 public function callback_facebook(){
     $provider = Socialite::driver('facebook')->user();
     dd($provider);
-    // $account = Social::where('provider','facebook')->where('provider_user_id',$provider->getId())->first();
-    // if($account){
-    //     //login in vao trang quan tri  
-    //     $account_name = Login::where('admin_id',$account->user)->first();
-    //     Session::put('admin_login',$account_name->admin_name);
-    //     Session::put('admin_id',$account_name->admin_id);
-    //     return redirect('/admin/dashboard')->with('message', 'Đăng nhập Admin thành công');
-    // }else{
-
-    //     $hieu = new Social([
-    //         'provider_user_id' => $provider->getId(),
-    //         'provider' => 'facebook'
-    //     ]);
-
-    //     $orang = Login::where('admin_email',$provider->getEmail())->first();
-
-    //     if(!$orang){
-    //         $orang = Login::create([
-    //             'admin_name' => $provider->getName(),
-    //             'admin_email' => $provider->getEmail(),
-    //             'admin_password' => '',
-    //             'admin_status' => 1
-
-    //         ]);
-    //     }
-    //     $hieu->login()->associate($orang);
-    //     $hieu->save();
-
-    //     $account_name = Login::where('admin_id',$account->user)->first();
-
-    //     Session::put('admin_login',$account_name->admin_name);
-    //      Session::put('admin_id',$account_name->admin_id);
-    //     return redirect('/admin/dashboard')->with('message', 'Đăng nhập Admin thành công');
-    // } 
+    
 }
 
 }
