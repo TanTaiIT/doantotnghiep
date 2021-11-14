@@ -204,8 +204,9 @@ class ProductController extends Controller
 
     public function add_img(Request $req,$id){
         $img=pro_img::where('product_id',$id)->get();
+        $dem=count($img);
         $product_detail=product::Find($id);
-        return view('manager.product.add_img',compact('product_detail','img'));
+        return view('manager.product.add_img',compact('product_detail','img','dem'));
     }
     public function add_img1(Request $req,$id){
         $product_detail=product::Find($id);
@@ -213,7 +214,7 @@ class ProductController extends Controller
         if($req->hasfile('image')){
             $files=$req->file('image');
             $dem=count($files);
-            if($dem >= 3){
+            if($dem > 2){
                 return redirect()->route('add_img',$id)->with('message','vui lòng chỉ chọn từ 2 hình trở xuống');
             }else{
             foreach($files as $file){

@@ -229,7 +229,7 @@ class  CheckoutController extends Controller
          $data = $request->all();
         if($data['order_coupon']!='no'){
             $coupon =coupon::where('coupon_code',$data['order_coupon'])->first();
-            $coupon->coupon_used = $coupon->coupon_used.','.Session::get('customer_id');
+            $coupon->coupon_used = $coupon->coupon_used.','.Auth::guard('khachhang')->user()->customer_id;
             $coupon->coupon_time = $coupon->coupon_time - 1;
             $coupon_email = $coupon->coupon_code;
             $coupon->save();
@@ -668,15 +668,25 @@ class  CheckoutController extends Controller
     $authUser = $this->findOrCreateUser($users,'google');
     if($authUser){
         $account_name = custommer::where('customer_id',$authUser->user)->first();
-        Session::put('fee',15000);
+        $password='';
+        if(Auth::guard('khachhang')->attempt(['customer_email'=>$account_name->customer_email,'password'=>$password])){
+            Session::put('fee',15000);
+            return redirect()->back()->with('message','ĐĂNG NHẬP BẰNG TÀI KHOẢN GOOGLE THÀNH CÔNG');
+        }
+        
 
     }elseif($customer_new){
         $account_name = custommer::where('customer_id',$authUser->user)->first();
-        Session::put('fee',15000);
+        $password='';
+        if(Auth::guard('khachhang')->attempt(['customer_email'=>$account_name->customer_email,'password'=>$password])){
+            Session::put('fee',15000);
+            return redirect()->back()->with('message','ĐĂNG NHẬP BẰNG TÀI KHOẢN GOOGLE THÀNH CÔNG');
+        }
+        
         
     }
    
-    return redirect()->route('cli_index')->with('message','ĐĂNG NHẬP BẰNG TÀI KHOẢN GOOGLE THÀNH CÔNG');
+   
   
    
 }
@@ -697,8 +707,9 @@ public function findOrCreateUser($users,$provider){
                 $customer = custommer::create([
                     'customer_name' => $users->name,
                     'customer_email' => $users->email,
-                    'customer_password' => '',
-                    'customer_phone' => ''
+                    'password' => md5(''),
+                    'customer_phone' => '',
+                    'status'=>1
                 ]);
             }
             $customer_new->login()->associate($customer);

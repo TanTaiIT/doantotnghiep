@@ -38,7 +38,7 @@ Route::group(['prefix'=>'cli','namespace'=>'Client'],function(){
    Route::get('/index','ClientController@index')->name('cli_index')->middleware('kiemtra');
    Route::post('/search/','ClientController@search')->name('cli_search')->middleware('kiemtra');
    Route::get('/dangxuat_kh','ClientController@dangxuatkh')->name('dangxuat_kh');
-   Route::get('/checkout','CheckoutController@checkout')->name('checkout');
+   Route::get('/checkout','CheckoutController@checkout')->name('checkout')->middleware('kiemtra');
    Route::post('/load-comment','ClientController@load_comment')->middleware('kiemtra');
    Route::post('/send-comment','ClientController@send_comment')->middleware('kiemtra');
    Route::get('/gioithieu','ClientController@gioithieu')->name('gioithieu')->middleware('kiemtra');
@@ -115,7 +115,7 @@ Route::get('/cus_recover/{cus_id}','Admin\CustommerController@cus_recover')->nam
 Route::get('send-code/{cus_id}','Admin\CustommerController@send_code')->name('sendcode');
 Route::get('send-code-coupon/{condition}/{number}/{code}/{time}/{id}','Admin\MailController@send_code_coupon');
 Route::post('/filter','Client\ClientController@filter')->name('filter');
-Route::get('view-list-coupon','Admin\CustommerController@view_list');
+
 
 
 

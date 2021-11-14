@@ -11,14 +11,7 @@ use App\Models\Post;
 use App\Models\Slider;
 class CategoryPost extends Controller
 {
-   
-
-    // public function add_category_post(){
-    //     // $this->AuthLogin();
-    //     return view('admin.category_post.add_category');
-    // }
     public function add_category_post(){
-        // $this->AuthLogin();
         return view('manager.category_post.insert_cate_post');
     }
     public function save_category_post(Request $request){
@@ -31,7 +24,6 @@ class CategoryPost extends Controller
             'cate_post_desc.required'=>'+Ban chưa mô tả ',
             
         ]);
-        // $this->AuthLogin();
         $data = $request->all();
         $category_post = new CatePost();
         $category_post->cate_post_name = $data['cate_post_name'];
@@ -42,16 +34,6 @@ class CategoryPost extends Controller
         Session::flash('message','Thêm danh mục bài viết thành công');
         return redirect()->route('all_cate_post');
     }
-    
-    // public function all_category_post(){
-       
-
-    //     $category_post = CatePost::orderBy('cate_post_id','DESC')->paginate(5);
-
-    //     return view('admin.category_post.list_category')->with(compact('category_post'));
-
-
-    // }
     public function all_category_post(){
        
 
@@ -61,14 +43,6 @@ class CategoryPost extends Controller
 
 
     }
-  
-    // public function edit_category_post($category_post_id){
-        
-
-    //     $category_post = CatePost::find($category_post_id);
-
-    //     return view('admin.category_post.edit_category')->with(compact('category_post'));
-    // }
     public function edit_category_post($category_post_id){
         
 
@@ -103,24 +77,14 @@ class CategoryPost extends Controller
 
     public function recover($cate_id){
         $cate=CatePost::where('cate_post_id',$cate_id)->update(['cate_post_status'=>1]);
+        $with_cate=DB::table('tbl_category_post')->join('tbl_post','tbl_category_post.cate_post_id','=','tbl_post.cate_post_id')->where('tbl_category_post.cate_post_id',$cate_id)->update(['tbl_post.post_status'=>1]);
         return redirect()->back()->with('message','phục hồi thành công');
     }
 
     public function delete_category_post($cate_id){
         $category_post = CatePost::find($cate_id);
+        $with_cate=DB::table('tbl_category_post')->join('tbl_post','tbl_category_post.cate_post_id','=','tbl_post.cate_post_id')->where('tbl_category_post.cate_post_id',$cate_id)->update(['tbl_post.post_status'=>0]);
         $category_post->update(['cate_post_status'=>0]);
         return redirect()->back()->with('message','xóa thành công');
-        // $post=Post::where('cate_post_id',$cate_id)->get();
-        // $dem=count($post);
-        // if($dem==0){
-        //     $category_post->delete();
-        //     Session::flash('message','Xóa danh mục bài viết thành công');
-        //     return redirect()->back();
-        // }
-        // else{
-        //     return redirect()->back()->with('message','không thể xóa danh mục này');
-        // }
-        
-
     }
 }

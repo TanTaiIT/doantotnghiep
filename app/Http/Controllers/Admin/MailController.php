@@ -14,9 +14,11 @@ class MailController extends Controller
 {
 
     public function send_mail($condition ,$number ,$code ,$time){
-        $customer = Custommer::where('custommer_vip','=',NULL)->get();
+        $customer = Custommer::where('custommer_vip','=',NULL)->where('status',1)->get();
+        $dem=count($customer);
+        if($dem > 0){
 
-        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y/m/d');
+            $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y/m/d');
         $coupon = Coupon::where('coupon_code',$code)->where('coupon_status',1)->where('end_day','>',$today)->first();
         if($coupon){
             $start_coupon = $coupon->start_day;
@@ -45,13 +47,19 @@ class MailController extends Controller
   
          return redirect()->back()->with('message','Gửi mã khuyến mãi thành công');
      }else{
-        return redirect()->back()->with('message','Mã giảm giá chưa kích hoạt');
+        return redirect()->back()->with('message','Mã giảm giá chưa được gửi');
      }
+
+        }else{
+            return redirect()->back()->with('message','không có khách hàng nào nhận được mã');
+        }
+
+        
         
     }
 
     public function send_code_coupon($condition ,$number ,$code ,$time,$id){
-        $customer = Custommer::where('customer_id','=',$id)->first();
+        $customer = Custommer::where('customer_id','=',$id)->where('status',1)->first();
         $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y/m/d');
         $coupon = Coupon::where('coupon_code',$code)->where('coupon_status',1)->where('end_day','>',$today)->first();
         if($coupon){

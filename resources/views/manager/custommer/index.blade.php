@@ -48,7 +48,7 @@
 													<th>số điện thoại</th>
 													<th>ngày tạo</th>
 													<th>Tình trạng</th>
-													<th>xóa</th>
+													<th>khóa</th>
 													<th>Gửi mã giảm giá</th>
 												</tr>
 											</thead>
@@ -67,7 +67,7 @@
 														<td>hoạt động</td>
 											    <?php } ?>
 
-													<td><a href="{{URL::to('cus_delete/'.$cou->customer_id)}}" title="xóa khách hàng"><i class="glyphicon glyphicon-trash"></i></a></td>
+													<td><a href="{{URL::to('cus_delete/'.$cou->customer_id)}}" title="xóa khách hàng"><i class="glyphicon glyphicon-remove"></i></a></td>
 													<td class="text-center"><a href="{{URL::to('send-code/'.$cou->customer_id)}}"><i class="glyphicon glyphicon-gift text-danger"></i></a></td>
 													<!-- <td class="text-center"><button type="button" data-toggle="modal" class="chitietma" data-cus_id="{{$cou->customer_id}}" data-target="#exampleModalLong1"><i class="glyphicon glyphicon-gift text-danger"></i></button></td>
 													</tr> -->

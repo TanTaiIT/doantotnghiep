@@ -54,8 +54,17 @@
                                   
                                   <div style="margin-top: 30px;display:flex;justify-content:center;align-items:center;font-size:20px">chỉ được tối đa 2 ảnh</div>
                             </form>
-                                <?php }else{ ?>
+                                <?php }elseif(count($img)==1){ ?>
                           		<form action="{{route('add_img1',$product_detail->product_id)}}" method="post" enctype="multipart/form-data">
+                              <input type="hidden" name="product_id" value="{{$product_detail->product_id}}">
+                              {{csrf_field()}}
+                              <span class="btn btn-default btn-file">
+                              chọn hình <input type="file" name="image[]" required="required">
+                              </span>
+                              <input class="subanh" type="submit" value="thêm ảnh">
+                            </form>
+                          <?php }else{?>
+                            <form action="{{route('add_img1',$product_detail->product_id)}}" method="post" enctype="multipart/form-data">
                               <input type="hidden" name="product_id" value="{{$product_detail->product_id}}">
                               {{csrf_field()}}
                               <span class="btn btn-default btn-file">
@@ -63,7 +72,7 @@
                               </span>
                               <input class="subanh" type="submit" value="thêm ảnh">
                             </form>
-                          <?php } ?>
+                         <?php  } ?>
                         </tr>
                       </tbody>
                     </table>

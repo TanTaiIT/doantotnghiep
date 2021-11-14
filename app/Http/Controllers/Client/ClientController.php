@@ -231,27 +231,13 @@ class ClientController extends Controller
         $chinh=chinhsach::limit(3)->get();
         $quangcao=quangcao::where('quangcao_status',0)->orderBy('quangcao_id','desc')->get();
         $bestsell=product::orderBy('product_sold','DESC')->paginate(3);
-        // $sp=product::orderBy('product_sold','DESC')->limit(6)->get();
-        $sp=DB::table('tbl_product')->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')->where('tbl_category_product.category_status','=',1)->where('tbl_product.product_status',1)->orderBy('tbl_product.product_sold','desc')->limit(6)->get();
-        // $toping=product::where('category_id',10)->where('product_status',1)->get();
+        $sp=Product::where('product_status',1)->orderBy('product_sold','DESC')->limit(6)->get();
+        $toping=product::where('category_id',10)->where('product_status',1)->get();
         $com='index';
-        $toping=DB::table('tbl_product')->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')->where('tbl_product.product_status',1)->where('tbl_category_product.category_status','=',1)->where('tbl_category_product.category_id',10)->get();
-        // $product=product::with('category')->whereNotIn('category_id',[10])->where('product_status',1)->orderBy('product_id','desc')->paginate(6);
-        $product=DB::table('tbl_product')->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')->where('tbl_category_product.category_status','=',1)->where('tbl_product.product_status',1)->paginate(6);
-        // $product=product::where([
-        //     'product_status'=>1,
-
-
-        // ]);
+        $product=Product::where('product_status',1)->orderBy('product_id','DESC')->paginate(6);
         $meta_title="trang chủ";
         $meta_desc="trang chủ";
-        // foreach($product as $p){
-        //     $pro_id=$p->product_id;
-            
-        // }
-        // $product_id = $request->product_id;
         $post=Post::orderBy('post_id','desc')->where('post_status',0)->get();
-        // $product=$product->orderBy('product_id','DESC')->paginate(6);
         return view('client/index',compact('product','com','cate','url_canonical','size','color','hot','slide','bestsell','meta_title','meta_desc','cate_post1','post','quangcao','sp','toping','chinh'));
 
     }

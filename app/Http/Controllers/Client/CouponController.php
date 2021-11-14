@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\coupon;
 use Session;
+use Auth;
 use Carbon\Carbon;
 class CouponController extends Controller
 {
@@ -146,8 +147,8 @@ class CouponController extends Controller
     public function check_coupon(Request $request){
         $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y/m/d');
         $data = $request->all();
-        if(Session::get('customer_id')){
-             $coupon = Coupon::where('coupon_code',$data['coupon'])->where('coupon_status',1)->where('end_day','>=', $today)->where('coupon_used','LIKE','%'.Session::get('customer_id').'%')->first();
+        if(Auth::guard('khachhang')->check()){
+             $coupon = Coupon::where('coupon_code',$data['coupon'])->where('coupon_status',1)->where('end_day','>=', $today)->where('coupon_used','LIKE','%'.Auth::guard('khachhang')->user()->customer_id.'%')->first();
             if($coupon){
                 return redirect()->back()->with('error','Mã giảm giá đã sử dụng, hoặc đã hết hạn!');
             }else{

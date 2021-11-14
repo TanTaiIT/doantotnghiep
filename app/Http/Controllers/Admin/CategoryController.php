@@ -10,6 +10,7 @@ use App\Exports\Export;
 use App\Models\product;
 use Excel;
 use Session;
+use DB;
 class CategoryController extends Controller
 {
     public function trangchu(){
@@ -20,6 +21,7 @@ class CategoryController extends Controller
         return view('manager.cate_product.cate_del_view',compact('cate'));
     }
     public function category_recover($category_id){
+        $with_pro=DB::table('tbl_category_product')->join('tbl_product','tbl_product.category_id','=','tbl_category_product.category_id')->where('tbl_category_product.category_id','=',$category_id)->update(['tbl_product.product_status'=>1]);
         $cate=category::where('category_id',$category_id)->update(['category_status'=>1]);
         return redirect()->back()->with('message','phục hồi thành công');
     }
@@ -80,7 +82,9 @@ class CategoryController extends Controller
     }
     public function delete($id){
     	$cate=category::FindOrFail($id);
+        $with_pro=DB::table('tbl_category_product')->join('tbl_product','tbl_product.category_id','=','tbl_category_product.category_id')->where('tbl_category_product.category_id','=',$id)->update(['tbl_product.product_status'=>0]);
         $cate->update(['category_status'=>0]);
+        // $with_pro->update(['product_status'=>0]);
         return redirect()->back()->with('message','xóa danh mục thành công');
         // $pro=Product::where('category_id',$id)->get();
         // $dem=count($pro);

@@ -53,6 +53,7 @@
 					<h3 class="mb-3">{{$value->product_name}}</h3>
 					<?php 
 												  $gia=($value->gia_km *100)/$value->product_price;
+												  $tienkm=$value->product_price-$value->gia_km;
 												?>
 												@if($value->gia_km < $value->product_price && $value->gia_km >0)
 
@@ -61,7 +62,7 @@
 									</div>
 					<p class="mb-3">
 						<div class="bo">
-						<span class="item_price"><span style="font-weight: bolder;"class="pri">Giá:  </span>{{number_format($value->product_price,0,'.','.')}} VNĐ</span>
+						<span class="item_price"><span style="font-weight: bolder;"class="pri">Giá:  </span>{{number_format($tienkm,0,'.','.')}} VNĐ</span>
 					    </div>
 						<span class="loai" style="font-family:unset;font-weight: 700;">Loại Sản phẩm:  </span><span>{{$value->category->category_name}}</span><br><br>
 						
