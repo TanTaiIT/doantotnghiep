@@ -98,17 +98,17 @@
 								<div class="bao2">
 									<div class="bao3">
 									<input type="radio" class="cart_product_size" name="size" value="Nhỏ">nhỏ<br>
-									 <span style="color:darkred;font-weight: 500">{{(($value->product_price)-(($value->product_price)*20)/100)-$value->product_km}}</span>
+									 <span style="color:darkred;font-weight: 500">{{(($value->product_price)-(($value->product_price)*20)/100)-$value->gia_km}}</span>
 								</div>
 								<div class="bao3">
 									
 									<input type="radio" class="cart_product_size" name="size" value="Vừa">vừa<br>
-									<span style="color:darkred;font-weight: 500">{{$value->product_price-$value->product_km}}</span>
+									<span style="color:darkred;font-weight: 500">{{$value->product_price-$value->gia_km}}</span>
 								</div>
 								<div class="bao3">
 									
 									<input type="radio" class="cart_product_size" name="size" value="Lớn">lớn<br>
-									<span style="color:darkred;font-weight: 500">{{(($value->product_price)+(($value->product_price)*20)/100)-$value->product_km}}</span>
+									<span style="color:darkred;font-weight: 500">{{(($value->product_price)+(($value->product_price)*20)/100)-$value->gia_km}}</span>
 								</div>
 								</div>
 								

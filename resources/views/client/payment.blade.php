@@ -394,6 +394,9 @@ var usd=document.getElementById("vnd_to_usd").value;
               	alert('thanh toán thành công');
               	window.location='{{url('/thankyou')}}';
               }
+            },
+            error:function(){
+            	alert('vui lòng điền thông tin đầy đủ');
             }
 
         });

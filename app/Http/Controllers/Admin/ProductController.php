@@ -25,8 +25,15 @@ class ProductController extends Controller
 
     }
     public function pro_recover($product_id){
-        $pro=Product::with('category')->where('product_id',$product_id)->where('product_status',0)->update(['product_status'=>1]);
-        return redirect()->back()->with('message','phục hồi sản phẩm thành công');
+        
+        $with_pro=DB::table('tbl_product')->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')->where('tbl_category_product.category_status',1)->where('tbl_product.product_id',$product_id)->first();
+        if($with_pro){
+            $pro=Product::with('category')->where('product_id',$product_id)->where('product_status',0)->update(['product_status'=>1]);
+            return redirect()->back()->with('message','phục hồi sản phẩm thành công');
+        }else{
+            return redirect()->back()->with('message','không thể khôi phục sản phẩm này');
+        }
+        
     }
     public function pro_recover_view(){
         $pro=Product::with('category')->where('product_status',0)->orderby('product_id','DESC')->Paginate(15);
@@ -67,7 +74,6 @@ class ProductController extends Controller
             'gia_goc'=>'required|numeric|min:4',
             'gia_km'=>'required|numeric',
             'hinh'=>'required',
-            'attr_id'=>'required'
         ],[
             'ten.required'=>'+Ban chưa nhập tên ',
             'mota.required'=>'+Ban chưa nhập mô tả ',
@@ -80,7 +86,6 @@ class ProductController extends Controller
             'gia_goc.numeric'=>'+Giá gốc phải là số ',
             'gia_km.required'=>'+chưa nhập giá khuyến mãi ',
             'gia_km.numeric'=>'+giá khuyến mãi phải là số ',
-            'attr_id.required'=>'+Bạn chưa chọn size',
             
         ]);
         $product_price = filter_var($req->gia, FILTER_SANITIZE_NUMBER_INT);
@@ -100,12 +105,7 @@ class ProductController extends Controller
         }else{
             Session::flash('message','thêm sản phẩm thất bại');
         }   
-        foreach($req->attr_id as $value){
-            product_attr::create([
-                'product_id'=>$product->product_id,
-                'attr_id'=>$value
-            ]);
-        }
+        
         return redirect()->route('pro_index');
     }
      public function edit($id){

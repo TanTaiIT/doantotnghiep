@@ -79,7 +79,7 @@
 										
 
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Loại sản phẩm <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Trạng thái <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
 												<select name="status" id="" class="form-control" >
@@ -92,23 +92,9 @@
 											</div>
 										</div>
 
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align">Số lượng <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" class="form-control price_format" name="soluong" required="required"  placeholder="Nhập số lượng">
-											</div>
-										</div>
+										
 
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align">Kích thước <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												 @foreach($attr1 as $size)
-												  <input type="checkbox" value="{{$size->attr_id}}" name="attr_id[]">{{$size->value}}&nbsp;&nbsp;&nbsp;&nbsp;
-												  @endforeach
-											</div>
-										</div>
+										
 
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align">Hình ảnh <span class="required">*</span>

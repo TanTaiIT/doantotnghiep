@@ -12,16 +12,13 @@
 						</li>
 					
 						<?php
-						$cus_id=Session::get('customer_id');
+						
 						 if(Auth::guard('khachhang')->check()){ ?> 
 
 
 
 						<li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2 text-black">
-							<!-- <a style="color: black" class="nav-link text-black" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								{{Session::get('customer_name')}}
-								
-							</a> -->
+							
 							<style>
 							.dropbtn2 {
 							    background-color: #e3f4eb;

@@ -20,6 +20,8 @@
 <meta property="og:title"              content="{{$meta_title}}" />
 <meta property="og:description"        content="{{$meta_desc}}" />
 <meta property="og:image"              content="{{$share_images}}" />
+
+
   
 	  <?php }
 	?>

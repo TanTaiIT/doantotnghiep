@@ -68,6 +68,9 @@ class UserController extends Controller
         if($request->admin_role){
            $user->roles()->attach(Roles::where('name','admin')->first());     
         }
+        else{
+            $user->roles()->attach(Roles::where('name','user')->first());
+        }
         return redirect()->back()->with('message','Cấp quyền thành công');
     }
 
