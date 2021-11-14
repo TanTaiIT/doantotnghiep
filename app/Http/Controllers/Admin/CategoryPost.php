@@ -82,9 +82,17 @@ class CategoryPost extends Controller
     }
 
     public function delete_category_post($cate_id){
+
+
+        $cate=Post::where('cate_post_id',$cate_id)->get();
+        $dem=count($cate);
+        if($dem == 0){
         $category_post = CatePost::find($cate_id);
         $with_cate=DB::table('tbl_category_post')->join('tbl_post','tbl_category_post.cate_post_id','=','tbl_post.cate_post_id')->where('tbl_category_post.cate_post_id',$cate_id)->update(['tbl_post.post_status'=>0]);
         $category_post->update(['cate_post_status'=>0]);
         return redirect()->back()->with('message','xóa thành công');
+        }else{
+            return redirect()->back()->with('message','xóa không thành công');
+        }
     }
 }

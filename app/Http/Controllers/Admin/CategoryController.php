@@ -81,24 +81,18 @@ class CategoryController extends Controller
     	return redirect()->route('cate_index');
     }
     public function delete($id){
-    	$cate=category::FindOrFail($id);
+    	
+        $pro=Product::where('category_id',$id)->get();
+        $dem=count($pro);
+        if($dem == 0){
+           $cate=category::FindOrFail($id);
         $with_pro=DB::table('tbl_category_product')->join('tbl_product','tbl_product.category_id','=','tbl_category_product.category_id')->where('tbl_category_product.category_id','=',$id)->update(['tbl_product.product_status'=>0]);
         $cate->update(['category_status'=>0]);
-        // $with_pro->update(['product_status'=>0]);
         return redirect()->back()->with('message','xóa danh mục thành công');
-        // $pro=Product::where('category_id',$id)->get();
-        // $dem=count($pro);
-        // if($dem == 0){
-        //     if($cate->delete()){
-        //     Session::flash("message","Xóa loại sản phẩm thành công");
-        // }
-        // else{
-        //     Session::flash("message","Xóa loại sản phẩm thất bại");
-        // }
-        // return redirect()->route('cate_index');
-    // }else{
-    //     return redirect()->route('cate_index')->with('message','không thể xóa loại sản phẩm này');
-    // }
+        }
+        else{
+            return redirect()->route('cate_index')->with('message','không thể xóa loại sản phẩm này');
+        }
     	
     }
 
