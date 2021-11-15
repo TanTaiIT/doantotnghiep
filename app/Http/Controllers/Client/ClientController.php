@@ -526,7 +526,7 @@ class ClientController extends Controller
 
     public function send_comment(Request $request){
         if(!Auth::guard('khachhang')->check()){
-            return redirect()->route('cli_index')->with('error','tài khoản của bạn đang bị khóa');
+            echo "No";
         }else{
         $product_id = $request->product_id;
         $comment_name = $request->comment_name;

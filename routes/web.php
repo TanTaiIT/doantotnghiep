@@ -79,8 +79,8 @@ Route::get('/danh-muc-bai-viet/{id}','Admin\PostController@danh_muc_bai_viet')->
 Route::get('/bai-viet/{post_slug}','Admin\PostController@bai_viet')->middleware('kiemtra');
 Route::get('/lien-he','Client\ContactController@lien_he')->middleware('kiemtra');
 //dang nhap gg
-Route::get('/login-google','Client\CheckoutController@login_google');
-Route::get('/google/callback','Client\CheckoutController@callback_google');
+Route::get('/login-google','Client\CheckoutController@login_google')->middleware('kiemtra');
+Route::get('/google/callback','Client\CheckoutController@callback_google')->middleware('kiemtra');
 //dang nhap face
 Route::get('/login-facebook','Client\CheckoutController@login_facebook');
 Route::get('/customer/facebook/callback','Client\CheckoutController@callback_facebook');
@@ -89,16 +89,16 @@ Route::get('/send-coupon-vip/{condition}/{number}/{code}/{time}','Admin\MailCont
 Route::get('/mail-example','Admin\MailController@mail_example');
 Route::get('/send-mail','Admin\MailController@send')->name('send');
 Route::post('/product-tabs','Admin\CategoryController@product_tabs');
-Route::get('/search', 'Admin\ProductController@tim')->middleware('kiemtra');;
-Route::get('profile','Client\ClientController@profile')->middleware('kiemtra');;
-Route::post('update_profile/{id}','Client\ClientController@update_pro');
+Route::get('/search', 'Admin\ProductController@tim')->middleware('kiemtra');
+Route::get('profile','Client\ClientController@profile')->middleware('kiemtra');
+Route::post('update_profile/{id}','Client\ClientController@update_pro')->middleware('kiemtra');
 Route::post('show-cart','Client\ClientController@show');
 Route::post('shop','Client\ClientController@shopping');
 Route::post('giohang','Client\ClientController@giohang');
 Route::get('profile_admin','Admin\AdminController@pro_file')->name('pro_file');
 Route::get('cli/fetch_data','Client\ClientController@fetch_data');
 Route::get('/huy-coupon/{cou_id}','Client\CouponController@huy_coupon')->name('huy_coupon');
-Route::get('/kich-hoat-coupon/{cou_id}','Client\CouponController@kich_hoat_coupon')->name('kich-hoat-coupon');
+Route::get('/kich-hoat-coupon/{cou_id}','Client\CouponController@kich_hoat_coupon')->name('kich-hoat-coupon')->middleware('kiemtra');
 Route::get('/hkh-post/{post_id}','Admin\PostController@huykichhoat_post')->name('hkh-post');
 Route::get('/kh-post/{post_id}','Admin\PostController@kichhoat_post')->name('kh-post');
 Route::get('/kh-qc/{qc_id}','Admin\AddvertisedController@kh_qc')->name('kh_qc');

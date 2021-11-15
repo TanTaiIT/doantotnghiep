@@ -62,6 +62,9 @@ $(document).ready(function(e){
                                     toastr.success('Đã thêm sản phẩm vào giỏ hàng');
                                     show_cart();
                                     cart();    	
+                        },
+                        error:function(){
+                            toastr.warning('không thể thêm vào giỏ hàng');
                         }
                     });
                 }else{
@@ -246,6 +249,9 @@ $(document).ready(function(e){
                            
                            
                            
+                        },
+                        error:function(){
+                            toastr.warning('không thể thêm vào giỏ hàng sản phẩm này')
                         }
 
                     });

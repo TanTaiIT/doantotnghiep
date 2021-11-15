@@ -228,12 +228,15 @@
               method:"POST",
               data:{product_id:product_id,comment_name:comment_name,comment_content:comment_content, _token:_token},
               success:function(data){
-                
+                if(data=="No"){
+                    toastr.warning('bạn không thể thêm bình luận');
+                }else{
                 $('#notify_comment').html('<span class="text text-success">vui lòng chờ bình luận của bạn được duyệt</span>');
                 load_comment();
                 $('#notify_comment').fadeOut(9000);
                 // $('.comment_name').val('');
                 $('.comment_content').val('');
+            }
               }
             });
         });

@@ -511,7 +511,7 @@ class  CheckoutController extends Controller
         $cus['password']=$password;
         $cus['customer_phone']=$phone;
         $cus['code_active']=$code_active;
-        $cus['ngaytao']=Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+        $cus['ngaytao']=Carbon::now('Asia/Ho_Chi_Minh');
         $cus['status']=1;
         $cus_id=DB::table('tbl_customers')->insertGetId($cus);
         // Session::put('customer_id',$cus_id);
@@ -680,7 +680,7 @@ class  CheckoutController extends Controller
         $password='';
         if(Auth::guard('khachhang')->attempt(['customer_email'=>$account_name->customer_email,'password'=>$password])){
             Session::put('fee',15000);
-            return redirect()->back()->with('message','ĐĂNG NHẬP BẰNG TÀI KHOẢN GOOGLE THÀNH CÔNG');
+            return redirect()->route('cli_index')->with('message','ĐĂNG NHẬP BẰNG TÀI KHOẢN GOOGLE THÀNH CÔNG');
         }
         
         
@@ -709,7 +709,8 @@ public function findOrCreateUser($users,$provider){
                     'customer_email' => $users->email,
                     'password' => md5(''),
                     'customer_phone' => '',
-                    'status'=>1
+                    'status'=>1,
+                    'ngaytao' => Carbon::now('Asia/Ho_Chi_Minh')
                 ]);
             }
             $customer_new->login()->associate($customer);

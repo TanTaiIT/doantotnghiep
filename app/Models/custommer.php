@@ -18,7 +18,9 @@ class custommer extends Authenticatable
     	'customer_phone',
     	'customer_email',
         'code',
-        'code_time'
+        'code_time',
+        'status',
+        'ngaytao'
     ];
 
     public function change_status($status,$email){
